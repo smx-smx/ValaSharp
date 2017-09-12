@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1181BFC0-DDE0-430E-B7DA-540464D5DC59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCodeGen</RootNamespace>
+    <AssemblyName>CCodeGen</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CCodeAttribute.cs" />
+    <Compile Include="ClassRegisterFunction.cs" />
+    <Compile Include="CType.cs" />
+    <Compile Include="EnumRegisterFunction.cs" />
+    <Compile Include="InterfaceRegisterFunction.cs" />
+    <Compile Include="Modules\CCodeArrayModule.cs" />
+    <Compile Include="Modules\CCodeAssignmentModule.cs" />
+    <Compile Include="Modules\CCodeBaseModule.cs" />
+    <Compile Include="CCodeCompiler.cs" />
+    <Compile Include="Modules\CCodeControlFlowModule.cs" />
+    <Compile Include="Modules\CCodeDelegateModule.cs" />
+    <Compile Include="Modules\CCodeMemberAccessModule.cs" />
+    <Compile Include="Modules\CCodeMethodCallModule.cs" />
+    <Compile Include="Modules\CCodeMethodModule.cs" />
+    <Compile Include="Modules\CCodeStructModule.cs" />
+    <Compile Include="Modules\GAsyncModule.cs" />
+    <Compile Include="Modules\GDBusClientModule.cs" />
+    <Compile Include="Modules\GDBusModule.cs" />
+    <Compile Include="Modules\GDBusServerModule.cs" />
+    <Compile Include="Modules\GErrorModule.cs" />
+    <Compile Include="Modules\GObjectModule.cs" />
+    <Compile Include="Modules\GSignalModule.cs" />
+    <Compile Include="Modules\GtkModule.cs" />
+    <Compile Include="Modules\GTypeModule.cs" />
+    <Compile Include="Modules\GVariantModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StructRegisterFunction.cs" />
+    <Compile Include="TypeRegisterFunction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CLanguage\CLanguage.csproj">
+      <Project>{96b87914-b19e-44d9-8dab-d0a06230907e}</Project>
+      <Name>CLanguage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GLibPorts\GLib.csproj">
+      <Project>{98F2E413-19EA-4254-AB56-683D9901E5D7}</Project>
+      <Name>GLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lang\Lang.csproj">
+      <Project>{d1ab3ac4-3939-4970-81ee-a6ea1ef2c4aa}</Project>
+      <Name>Lang</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Expressions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

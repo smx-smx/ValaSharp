@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1AB3AC4-3939-4970-81EE-A6EA1EF2C4AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vala.Lang</RootNamespace>
+    <AssemblyName>Lang</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Genie\" />
+    <Folder Include="Gir\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArrayLengthField.cs" />
+    <Compile Include="BasicBlock.cs" />
+    <Compile Include="Block.cs" />
+    <Compile Include="CCodeEnum.cs" />
+    <Compile Include="CodeNodes\Callable.cs" />
+    <Compile Include="CodeNodes\CatchClause.cs" />
+    <Compile Include="CodeNodes\MemberInitializer.cs" />
+    <Compile Include="CodeNodes\SwitchLabel.cs" />
+    <Compile Include="CodeNodes\UsingDirective.cs" />
+    <Compile Include="Code\CodeContext.cs" />
+    <Compile Include="Code\CodeGenerator.cs" />
+    <Compile Include="Code\CodeNode.cs" />
+    <Compile Include="Code\CodeVisitor.cs" />
+    <Compile Include="CodeNodes\ValaAttribute.cs" />
+    <Compile Include="Code\CodeWriter.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="Constructor.cs" />
+    <Compile Include="Destructor.cs" />
+    <Compile Include="DynamicProperty.cs" />
+    <Compile Include="DynamicSignal.cs" />
+    <Compile Include="EnumValue.cs" />
+    <Compile Include="Expressions\AddressofExpression.cs" />
+    <Compile Include="Expressions\ArrayCreationExpression.cs" />
+    <Compile Include="Expressions\Assignment.cs" />
+    <Compile Include="Expressions\BaseAccess.cs" />
+    <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\CastExpression.cs" />
+    <Compile Include="Expressions\ConditionalExpression.cs" />
+    <Compile Include="Expressions\ElementAccess.cs" />
+    <Compile Include="Expressions\Expression.cs" />
+    <Compile Include="Expressions\InitializerList.cs" />
+    <Compile Include="Expressions\LambdaExpression.cs" />
+    <Compile Include="Expressions\MemberAccess.cs" />
+    <Compile Include="Expressions\MethodCall.cs" />
+    <Compile Include="Expressions\NamedArgument.cs" />
+    <Compile Include="Expressions\ObjectCreationExpression.cs" />
+    <Compile Include="Expressions\PointerIndirection.cs" />
+    <Compile Include="Expressions\PostfixExpression.cs" />
+    <Compile Include="Expressions\ReferenceTransferExpression.cs" />
+    <Compile Include="Expressions\SizeofExpression.cs" />
+    <Compile Include="Expressions\SliceExpression.cs" />
+    <Compile Include="Expressions\Template.cs" />
+    <Compile Include="Expressions\Tuple.cs" />
+    <Compile Include="Expressions\TypeCheck.cs" />
+    <Compile Include="Expressions\TypeofExpression.cs" />
+    <Compile Include="Expressions\UnaryExpression.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="FlowAnalyzer.cs" />
+    <Compile Include="Literals\BooleanLiteral.cs" />
+    <Compile Include="Literals\CharacterLiteral.cs" />
+    <Compile Include="Literals\IntegerLiteral.cs" />
+    <Compile Include="Literals\Literal.cs" />
+    <Compile Include="Literals\NullLiteral.cs" />
+    <Compile Include="Literals\RealLiteral.cs" />
+    <Compile Include="Literals\RegexLiteral.cs" />
+    <Compile Include="Literals\StringLiteral.cs" />
+    <Compile Include="LocalVariable.cs" />
+    <Compile Include="Lockable.cs" />
+    <Compile Include="Methods\ArrayCopyMethod.cs" />
+    <Compile Include="Methods\ArrayMoveMethod.cs" />
+    <Compile Include="Methods\ArrayResizeMethod.cs" />
+    <Compile Include="Methods\CreationMethod.cs" />
+    <Compile Include="Methods\DynamicMethod.cs" />
+    <Compile Include="Methods\Method.cs" />
+    <Compile Include="Namespace.cs" />
+    <Compile Include="Parameter.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\Scanner.cs" />
+    <Compile Include="PhiFunction.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="PropertyAccessor.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="Scope.cs" />
+    <Compile Include="SemanticAnalyzer.cs" />
+    <Compile Include="Parser\SourceFile.cs" />
+    <Compile Include="Parser\SourceLocation.cs" />
+    <Compile Include="Parser\SourceReference.cs" />
+    <Compile Include="Statements\BreakStatement.cs" />
+    <Compile Include="Statements\ContinueStatement.cs" />
+    <Compile Include="Statements\DeclarationStatement.cs" />
+    <Compile Include="Statements\DeleteStatement.cs" />
+    <Compile Include="Statements\DoStatement.cs" />
+    <Compile Include="Statements\EmptyStatement.cs" />
+    <Compile Include="Statements\ExpressionStatement.cs" />
+    <Compile Include="Statements\ForeachStatement.cs" />
+    <Compile Include="Statements\ForStatement.cs" />
+    <Compile Include="Statements\IfStatement.cs" />
+    <Compile Include="Statements\LockStatement.cs" />
+    <Compile Include="Statements\Loop.cs" />
+    <Compile Include="Statements\ReturnStatement.cs" />
+    <Compile Include="Statements\Statement.cs" />
+    <Compile Include="Statements\StatementList.cs" />
+    <Compile Include="Statements\SwitchStatement.cs" />
+    <Compile Include="Statements\ThrowStatement.cs" />
+    <Compile Include="Statements\TryStatement.cs" />
+    <Compile Include="Statements\UnlockStatement.cs" />
+    <Compile Include="Statements\WhileStatement.cs" />
+    <Compile Include="Statements\YieldStatement.cs" />
+    <Compile Include="SwitchSection.cs" />
+    <Compile Include="SymbolResolver.cs" />
+    <Compile Include="Symbols\Constant.cs" />
+    <Compile Include="Symbols\MemberBinding.cs" />
+    <Compile Include="Symbols\ObjectTypeSymbol.cs" />
+    <Compile Include="Symbols\Signal.cs" />
+    <Compile Include="Symbols\Subroutine.cs" />
+    <Compile Include="Symbols\Symbol.cs" />
+    <Compile Include="Symbols\SymbolAccessibility.cs" />
+    <Compile Include="Symbols\TypeParameter.cs" />
+    <Compile Include="Symbols\TypeSymbol.cs" />
+    <Compile Include="Symbols\UnresolvedSymbol.cs" />
+    <Compile Include="Symbols\Variable.cs" />
+    <Compile Include="TargetValue.cs" />
+    <Compile Include="TypeSymbols\Class.cs" />
+    <Compile Include="TypeSymbols\ErrorCode.cs" />
+    <Compile Include="TypeSymbols\ErrorDomain.cs" />
+    <Compile Include="TypeSymbols\Interface.cs" />
+    <Compile Include="TypeSymbols\Struct.cs" />
+    <Compile Include="TypeSymbols\ValaDelegate.cs" />
+    <Compile Include="TypeSymbols\ValaEnum.cs" />
+    <Compile Include="Types\ArrayType.cs" />
+    <Compile Include="Types\BooleanType.cs" />
+    <Compile Include="Types\ClassType.cs" />
+    <Compile Include="Types\DataType.cs" />
+    <Compile Include="Types\DelegateType.cs" />
+    <Compile Include="Types\EnumValueType.cs" />
+    <Compile Include="Types\ErrorType.cs" />
+    <Compile Include="Types\FieldPrototype.cs" />
+    <Compile Include="Types\FloatingType.cs" />
+    <Compile Include="Types\GenericType.cs" />
+    <Compile Include="Types\IntegerType.cs" />
+    <Compile Include="Types\InterfaceType.cs" />
+    <Compile Include="Types\InvalidType.cs" />
+    <Compile Include="Types\MethodType.cs" />
+    <Compile Include="Types\NullType.cs" />
+    <Compile Include="Types\ObjectType.cs" />
+    <Compile Include="Types\PointerType.cs" />
+    <Compile Include="Types\ReferenceType.cs" />
+    <Compile Include="Types\SignalType.cs" />
+    <Compile Include="Types\StructValueType.cs" />
+    <Compile Include="Types\TokenType.cs" />
+    <Compile Include="Types\UnresolvedType.cs" />
+    <Compile Include="Types\ValaValueType.cs" />
+    <Compile Include="Types\VoidType.cs" />
+    <Compile Include="UsedAttr.cs" />
+    <Compile Include="VersionAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CLanguage\CLanguage.csproj">
+      <Project>{96B87914-B19E-44D9-8DAB-D0A06230907E}</Project>
+      <Name>CLanguage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GLibPorts\GLib.csproj">
+      <Project>{98f2e413-19ea-4254-ab56-683d9901e5d7}</Project>
+      <Name>GLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValaConfig\ValaConfig.csproj">
+      <Project>{96077E7E-75A0-451D-943D-326215399F3C}</Project>
+      <Name>ValaConfig</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
