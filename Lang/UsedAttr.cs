@@ -85,8 +85,9 @@ namespace Vala.Lang
 		/**
 		 * Mark the attribute or attribute argument as used by the compiler
 		 */
-		public void mark(string attribute, string argument) {
-			var set = marked[attribute];
+		public void mark(string attribute, string argument)
+		{
+			marked.TryGetValue(attribute, out var set);
 			if (set == null) {
 				set = new HashSet<string>();
 				marked[attribute] = set;

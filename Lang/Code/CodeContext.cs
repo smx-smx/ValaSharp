@@ -491,7 +491,12 @@ namespace Vala.Lang.CodeNodes
 		}
 
 		public string get_vapi_path(string pkg) {
-			var path = get_file_path(pkg + ".vapi", "vala" + Config.PACKAGE_SUFFIX + "/vapi", "vala/vapi", vapi_directories);
+			var path = get_file_path(
+				pkg + ".vapi",
+				"vala" + Config.PACKAGE_SUFFIX + "/vapi",
+				"vala/vapi",
+				vapi_directories
+			);
 
 			if (path == null) {
 				/* last chance: try the package compiled-in vapi dir */

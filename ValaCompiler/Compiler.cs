@@ -614,7 +614,8 @@ namespace ValaCompiler
 			string[] new_args = new string[args.Length + 1];
 			args.CopyTo(new_args, 1);
 			new_args[0] = "valac";
-			return run_source(new_args);
+			int result = run_source(new_args);
+			return result;
 
 			try {
 				var opt_context = new OptionContext("- Vala Compiler");

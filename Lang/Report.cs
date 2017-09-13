@@ -261,7 +261,8 @@ namespace Vala.Lang
 			int start = 0;
 			int cur = 0;
 
-			while (message[cur] != '\0') {
+			int length = message.Length;
+			while (cur < length) {
 				if (message[cur] == '\'' || message[cur] == '`') {
 					string end_chars = (message[cur] == '`') ? "`'" : "'";
 					stderr.puts(message.Substring(start, cur - start));
@@ -389,7 +390,7 @@ namespace Vala.Lang
 
 			IntPtr _func;
 			module.symbol("isatty", out _func);
-			if (_func == null) {
+			if (_func == IntPtr.Zero) {
 				return false;
 			}
 

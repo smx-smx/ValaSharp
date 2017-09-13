@@ -184,12 +184,17 @@ namespace Vala.Lang.Symbols
 		private Scope _scope;
 		public Block block;
 
+		public Symbol()
+		{
+			
+		}
+
 		public Symbol(string name, SourceReference source_reference, Comment comment = null) {
 			this.name = name;
 			this.source_reference = source_reference;
 			this.comment = comment;
 			_scope = new Scope(this);
-			block = new Block(source_reference);
+			block = new Block(this);
 		}
 
 		/**
