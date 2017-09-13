@@ -10,7 +10,6 @@ namespace GLibPorts
 	{
 		public abstract class OptionEntry
 		{
-			
 		}
 
 		public delegate bool OptionDelegate(string option_name, string val);

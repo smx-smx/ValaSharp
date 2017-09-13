@@ -17,7 +17,6 @@ namespace Vala.Lang.Symbols
 	/// </summary>
 	public class Symbol : CodeNode
 	{
-		public Block block;
 	/**
 	 * The parent of this symbol.
 	 */
@@ -183,6 +182,7 @@ namespace Vala.Lang.Symbols
 
 		private Scope _owner;
 		private Scope _scope;
+		public Block block;
 
 		public Symbol(string name, SourceReference source_reference, Comment comment = null) {
 			this.name = name;

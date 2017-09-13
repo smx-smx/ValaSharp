@@ -507,16 +507,17 @@ namespace ValaCompiler
 			int i = 1;
 			if (args[i] != null && args[i].StartsWith("-")) {
 				try {
-					string[] compile_args;
-					/*
-					Shell.parse_argv("valac " + args[1], out compile_args);
+					string[] compile_args = new string[args.Length + 1];
+					compile_args[0] = "valac";
+					args.CopyTo(compile_args, 1);
+
+					//Shell.parse_argv("valac " + args[1], out compile_args);
 
 					var opt_context = new OptionContext("- Vala");
 					opt_context.set_help_enabled(true);
 					opt_context.add_main_entries(options, null);
 					string[] temp_args = compile_args;
 					opt_context.parse(ref temp_args);
-					*/
 				} catch (Exception e) {
 					stdout.printf("%s\n", e.Message);
 					return 1;
@@ -609,6 +610,11 @@ namespace ValaCompiler
 				return run_source(args);
 			}
 #endif
+			//SMX
+			string[] new_args = new string[args.Length + 1];
+			args.CopyTo(new_args, 1);
+			new_args[0] = "valac";
+			return run_source(new_args);
 
 			try {
 				var opt_context = new OptionContext("- Vala Compiler");

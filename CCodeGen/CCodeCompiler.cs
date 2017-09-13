@@ -10,7 +10,6 @@ using Vala.Lang;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using static GLibPorts.GLib;
-using static GLibPorts.GLib;
 
 namespace CCodeGen
 {

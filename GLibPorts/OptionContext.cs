@@ -10,18 +10,30 @@ namespace GLibPorts
 	{
 		public class OptionContext
 		{
+			private bool help_enabled = false;
+			private Dictionary<string, OptionEntry> entries = new Dictionary<string, OptionEntry>();
+
 			public OptionContext(string parameter_string) { }
 
-			public void set_help_enabled(bool help_enabled) {
-				throw new NotImplementedException();
+			public void set_help_enabled(bool help_enabled)
+			{
+				this.help_enabled = help_enabled;
 			}
 
-			public void add_main_entries(OptionEntry[] entries, string translation_domain) {
-				throw new NotImplementedException();
+			public void add_main_entries(object[] entries, string translation_domain)
+			{
+				foreach (object entry in entries)
+				{
+					if(!(entry is OptionEntry))
+						throw new ArgumentException("Invalid type");
+					Type t = entry.GetType().GetGenericTypeDefinition();
+				}
 			}
 
 			public void parse(ref string[] args) {
-				throw new NotImplementedException();
+				foreach (string arg in args)
+				{
+				}
 			}
 		}
 	}
