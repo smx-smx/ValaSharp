@@ -20,6 +20,8 @@ namespace Vala.Lang.Parser
 
 		TokenType previous;
 		MemoryStream current;
+
+		long begin = 0;
 		long end = 0;
 
 		int line;
@@ -36,7 +38,7 @@ namespace Vala.Lang.Parser
 			public bool skip_section;
 		}
 
-		List<State> state_stack;
+		List<State> state_stack = new List<State>();
 
 		enum State
 		{
@@ -53,6 +55,9 @@ namespace Vala.Lang.Parser
 
 			byte[] contents = source_file.get_mapped_contents();
 			MemoryStream mem = new MemoryStream(contents);
+
+			begin = 0;
+			end = contents.Length;
 
 			reader = mem;
 			current = mem;
@@ -93,7 +98,7 @@ namespace Vala.Lang.Parser
 			);
 		}
 
-		public TokenType read_regex_token(out SourceLocation token_begin/*, out SourceLocation token_end*/) {
+		public TokenType read_regex_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			TokenType type;
 			MemoryStream begin = current.Clone();
 			token_begin = new SourceLocation(current, current.Position, line, column);
@@ -261,7 +266,7 @@ namespace Vala.Lang.Parser
 						if (current.Position >= end || current.PeekChar() == '\n') {
 							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
 							state_stack.RemoveAt(state_stack.Count - 1);
-							return read_token(out token_begin/*, out token_end*/);
+							return read_token(out token_begin, out token_end);
 						}
 						break;
 				}
@@ -273,7 +278,7 @@ namespace Vala.Lang.Parser
 				column += token_length_in_chars;
 			}
 
-			//token_end = new SourceLocation(current, line, column - 1);
+			token_end = new SourceLocation(current, line, column - 1);
 
 			return type;
 		}
@@ -648,7 +653,7 @@ namespace Vala.Lang.Parser
 			return type;
 		}
 
-		public TokenType read_template_token(out SourceLocation token_begin/*, out SourceLocation token_end*/) {
+		public TokenType read_template_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			TokenType type;
 			MemoryStream begin = current.Clone();
 			token_begin = new SourceLocation(begin, line, column);
@@ -679,14 +684,14 @@ namespace Vala.Lang.Parser
 							current.Position++;
 							column += 2;
 							state_stack.Add(State.PARENS);
-							return read_token(out token_begin/*, out token_end*/);
+							return read_token(out token_begin, out token_end);
 						} else if (current.PeekChar() == '$') {
 							type = TokenType.TEMPLATE_STRING_LITERAL;
 							current.Position++;
 							state_stack.Add(State.TEMPLATE_PART);
 						} else {
 							Report.error(get_source_reference(1), "unexpected character");
-							return read_template_token(out token_begin/*, out token_end*/);
+							return read_template_token(out token_begin, out token_end);
 						}
 						break;
 					default:
@@ -766,7 +771,7 @@ namespace Vala.Lang.Parser
 						if (current.Position >= end) {
 							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
 							state_stack.RemoveAt(state_stack.Count - 1);
-							return read_token(out token_begin/*, out token_end*/);
+							return read_token(out token_begin, out token_end);
 						}
 						state_stack.Add(State.TEMPLATE_PART);
 						break;
@@ -779,23 +784,23 @@ namespace Vala.Lang.Parser
 				column += token_length_in_chars;
 			}
 
-			//token_end = new SourceLocation(current, line, column - 1);
+			token_end = new SourceLocation(current, line, column - 1);
 
 			return type;
 		}
 
-		public TokenType read_token(out SourceLocation token_begin/*, out SourceLocation token_end*/) {
+		public TokenType read_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			if (in_template()) {
-				return read_template_token(out token_begin/*, out token_end*/);
+				return read_template_token(out token_begin, out token_end);
 			} else if (in_template_part()) {
 				state_stack.RemoveAt(state_stack.Count - 1);
 
 				token_begin = new SourceLocation(current, line, column);
-				//token_end = new SourceLocation(current, line, column - 1);
+				token_end = new SourceLocation(current, line, column - 1);
 
 				return TokenType.COMMA;
 			} else if (in_regex_literal()) {
-				return read_regex_token(out token_begin/*, out token_end*/);
+				return read_regex_token(out token_begin, out token_end);
 			}
 
 			space();
@@ -1226,7 +1231,7 @@ namespace Vala.Lang.Parser
 
 
 						column++;
-						return read_token(out token_begin/*, out token_end*/);
+						return read_token(out token_begin, out token_end);
 				}
 			}
 
@@ -1236,7 +1241,7 @@ namespace Vala.Lang.Parser
 				column += token_length_in_chars;
 			}
 
-			//token_end = new SourceLocation(current, line, column - 1);
+			token_end = new SourceLocation(current, line, column - 1);
 			previous = type;
 
 			return type;

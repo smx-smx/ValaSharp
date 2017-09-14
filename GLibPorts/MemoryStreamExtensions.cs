@@ -17,9 +17,12 @@ namespace GLibPorts
 			return Convert.ToChar(@this.PeekByteAt(offset, loc));
 		}
 
-		public static MemoryStream Clone(this MemoryStream @this) {
+		public static MemoryStream Clone(this MemoryStream @this)
+		{
+			long prevPos = @this.Position;
 			var newStream = new MemoryStream();
 			@this.CopyTo(newStream);
+			@this.Position = prevPos;
 			newStream.Position = @this.Position;
 			return newStream;
 		}

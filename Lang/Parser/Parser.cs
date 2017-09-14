@@ -40,11 +40,13 @@ namespace Vala.Lang.Parser
 		class TokenInfo
 		{
 			public TokenType type;
-			public SourceLocation location;
+			public SourceLocation begin;
+			public SourceLocation end;
 
-			public TokenInfo(TokenType type, SourceLocation location) {
+			public TokenInfo(TokenType type, SourceLocation begin, SourceLocation end) {
 				this.type = type;
-				this.location = location;
+				this.begin = begin;
+				this.end = end;
 			}
 		}
 
@@ -88,10 +90,11 @@ namespace Vala.Lang.Parser
 		bool next() {
 			index = (index + 1) % BUFFER_SIZE;
 			size--;
-			if (size <= 0) {
-				SourceLocation token_loc;
-				TokenType type = scanner.read_token(out token_loc);
-				tokens[index] = new TokenInfo(type, token_loc);
+			if (size <= 0)
+			{
+				SourceLocation begin, end;
+				TokenType type = scanner.read_token(out begin, out end);
+				tokens[index] = new TokenInfo(type, begin, end);
 				size = 1;
 			}
 			return (tokens[index].type != TokenType.EOF);
@@ -130,18 +133,18 @@ namespace Vala.Lang.Parser
 		}
 
 		SourceLocation get_location() {
-			return tokens[index].location;
+			return tokens[index].begin;
 		}
 
 		string get_current_string() {
 			var token = tokens[index];
-			return token.location.content;
+			return token.begin.content;
 		}
 
 		string get_last_string() {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
-			return token.location.content;
+			return token.begin.content;
 		}
 
 		SourceReference get_src(SourceLocation location) {
@@ -151,18 +154,18 @@ namespace Vala.Lang.Parser
 
 		SourceReference get_current_src() {
 			var token = tokens[index];
-			return new SourceReference(scanner.source_file, token.location);
+			return new SourceReference(scanner.source_file, token.begin);
 		}
 
 		SourceReference get_last_src() {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
-			return new SourceReference(scanner.source_file, token.location);
+			return new SourceReference(scanner.source_file, token.begin);
 		}
 
 		void rollback(SourceLocation location) {
 			var token = tokens[index];
-			long start_pos = token.location.start_pos;
+			long start_pos = token.begin.start_pos;
 			while (start_pos != location.start_pos) {
 				index = (index - 1 + BUFFER_SIZE) % BUFFER_SIZE;
 				size++;
@@ -1224,10 +1227,10 @@ namespace Vala.Lang.Parser
 						break;
 					// don't use OP_SHIFT_RIGHT to support >> for nested generics
 					case TokenType.OP_GT:
-						long first_gt_pos = tokens[index].location.start_pos;
+						long first_gt_pos = tokens[index].begin.start_pos;
 						next();
 						// only accept >> when there is no space between the two > signs
-						if (current() == TokenType.OP_GT && tokens[index].location.start_pos == first_gt_pos + 1) {
+						if (current() == TokenType.OP_GT && tokens[index].begin.start_pos == first_gt_pos + 1) {
 							next();
 							var _right = parse_additive_expression();
 							left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, _right, get_src(begin));
@@ -1485,10 +1488,10 @@ namespace Vala.Lang.Parser
 					var rhs = parse_expression();
 					expr = new Assignment(expr, rhs, _operator, get_src(begin));
 				} else if (current() == TokenType.OP_GT) { // >>=
-					long first_gt_pos = tokens[index].location.start_pos;
+					long first_gt_pos = tokens[index].begin.start_pos;
 					next();
 					// only accept >>= when there is no space between the two > signs
-					if (current() == TokenType.OP_GE && tokens[index].location.start_pos == first_gt_pos + 1) {
+					if (current() == TokenType.OP_GE && tokens[index].begin.start_pos == first_gt_pos + 1) {
 						next();
 						var rhs = parse_expression();
 						expr = new Assignment(expr, rhs, AssignmentOperator.SHIFT_RIGHT, get_src(begin));
