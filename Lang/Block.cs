@@ -35,8 +35,7 @@ namespace Vala.Lang
 		 *
 		 * @param source_reference  reference to source code
 		 */
-		public Block(SourceReference source_reference){
-			symbol = new Symbol(null, source_reference);
+		public Block(SourceReference source_reference): base(null, source_reference){
 		}
 
 		public Block(Symbol symbol)
