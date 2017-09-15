@@ -20,8 +20,6 @@ namespace Vala.Lang.Statements
 	 */
 	public class ForeachStatement : Block //Statement
 	{
-		public Statement statement;
-
 		/**
 		 * Specifies the element type.
 		 */
