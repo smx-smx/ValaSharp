@@ -36,7 +36,7 @@ namespace Vala.Lang.CodeNodes
 		/**
 		 * Contains all attributes that have been specified for this code node.
 		 */
-		public List<ValaAttribute> attributes;
+		public List<ValaAttribute> attributes = new List<ValaAttribute>();
 
 		public string type_name {
 			get { return this.GetType().Name; }
