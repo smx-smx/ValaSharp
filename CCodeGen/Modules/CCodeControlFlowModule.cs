@@ -325,7 +325,7 @@ namespace CCodeGen.Modules
 				ccode.close();
 			}
 
-			foreach (LocalVariable local in stmt.block.get_local_variables()) {
+			foreach (LocalVariable local in stmt.get_local_variables()) {
 				if (requires_destroy(local.variable_type)) {
 					ccode.add_expression(destroy_local(local));
 				}

@@ -182,7 +182,6 @@ namespace Vala.Lang.Symbols
 
 		private Scope _owner;
 		private Scope _scope;
-		public Block block;
 
 		public Symbol()
 		{
@@ -194,7 +193,6 @@ namespace Vala.Lang.Symbols
 			this.source_reference = source_reference;
 			this.comment = comment;
 			_scope = new Scope(this);
-			block = new Block(this);
 		}
 
 		/**

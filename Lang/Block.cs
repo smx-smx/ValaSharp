@@ -28,19 +28,12 @@ namespace Vala.Lang
 		private List<LocalVariable> local_variables = new List<LocalVariable>();
 		private List<Constant> local_constants = new List<Constant>();
 
-		public Symbol symbol;
-
 		/**
 		 * Creates a new block.
 		 *
 		 * @param source_reference  reference to source code
 		 */
 		public Block(SourceReference source_reference): base(null, source_reference){
-		}
-
-		public Block(Symbol symbol)
-		{
-			this.symbol = symbol;
 		}
 
 		/**
@@ -84,7 +77,7 @@ namespace Vala.Lang
 		 * @param local a variable declarator
 		 */
 		public void add_local_variable(LocalVariable local) {
-			var parent_block = symbol.parent_symbol;
+			var parent_block = parent_symbol;
 			while (parent_block is Block || parent_block is Method || parent_block is PropertyAccessor) {
 				if (parent_block.scope.lookup(local.name) != null) {
 					Report.error(local.source_reference, "Local variable `%s' conflicts with a local variable or constant declared in a parent scope".printf(local.name));
@@ -109,7 +102,7 @@ namespace Vala.Lang
 		}
 
 		public void add_local_constant(Constant constant) {
-			var parent_block = symbol.parent_symbol;
+			var parent_block = parent_symbol;
 			while (parent_block is Block || parent_block is Method || parent_block is PropertyAccessor) {
 				if (parent_block.scope.lookup(constant.name) != null) {
 					Report.error(constant.source_reference, "Local constant `%s' conflicts with a local variable or constant declared in a parent scope".printf(constant.name));
@@ -118,7 +111,7 @@ namespace Vala.Lang
 				parent_block = parent_block.parent_symbol;
 			}
 			local_constants.Add(constant);
-			symbol.scope.add(constant.name, constant);
+			scope.add(constant.name, constant);
 		}
 
 		public override void accept(CodeVisitor visitor) {
@@ -138,11 +131,11 @@ namespace Vala.Lang
 
 			is_checked = true;
 
-			symbol.owner = context.analyzer.current_symbol.scope;
+			owner = context.analyzer.current_symbol.scope;
 
 			var old_symbol = context.analyzer.current_symbol;
 			var old_insert_block = context.analyzer.insert_block;
-			context.analyzer.current_symbol = symbol;
+			context.analyzer.current_symbol = this;
 			context.analyzer.insert_block = this;
 
 			for (int i = 0; i < statement_list.Count; i++) {

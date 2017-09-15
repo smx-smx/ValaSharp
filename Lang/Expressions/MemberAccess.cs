@@ -467,7 +467,7 @@ namespace Vala.Lang.Expressions
 
 			if (member is LocalVariable) {
 				var local = (LocalVariable)member;
-				var block = local.parent_symbol.block as Block;
+				var block = local.parent_symbol as Block;
 				if (block != null && context.analyzer.find_parent_method_or_property_accessor(block) != context.analyzer.current_method_or_property_accessor) {
 					// mark all methods between current method and the captured
 					// block as closures (to support nested closures)
