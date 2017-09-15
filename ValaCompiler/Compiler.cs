@@ -472,7 +472,7 @@ namespace ValaCompiler
 				target_args.AddRange(opts.unparsed.Take(1));
 
 			try {
-				int pid;
+				//int pid;
 				//var loop = new MainLoop();
 				int child_status = 0;
 

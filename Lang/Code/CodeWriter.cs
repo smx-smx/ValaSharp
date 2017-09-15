@@ -1513,7 +1513,7 @@ namespace Vala.Lang.Code
 			try {
 				if (fix_indent_regex == null)
 					fix_indent_regex = new Regex("\\n[\\t ]*");
-			} catch (Exception e) {
+			} catch (Exception) {
 				assert_not_reached();
 			}
 
@@ -1521,7 +1521,7 @@ namespace Vala.Lang.Code
 			string fixed_content = "";
 			try {
 				fixed_content = fix_indent_regex.Replace(comment.content, replacement);
-			} catch (Exception e) {
+			} catch (Exception) {
 				assert_not_reached();
 			}
 
