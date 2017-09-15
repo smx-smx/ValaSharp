@@ -16,8 +16,6 @@ namespace Vala.Lang.Parser
 	{
 		public SourceFile source_file { get; private set; }
 
-		MemoryStream reader;
-
 		TokenType previous;
 		MemoryStream current;
 
@@ -53,13 +51,10 @@ namespace Vala.Lang.Parser
 		public Scanner(SourceFile source_file) {
 			this.source_file = source_file;
 
-			byte[] contents = source_file.get_mapped_contents();
+			begin = 0;
+			byte[] contents = source_file.get_mapped_contents(out end);
 			MemoryStream mem = new MemoryStream(contents);
 
-			begin = 0;
-			end = contents.Length;
-
-			reader = mem;
 			current = mem;
 
 			line = 1;
@@ -108,8 +103,7 @@ namespace Vala.Lang.Parser
 			if (begin.Position >= end) {
 				type = TokenType.EOF;
 			} else {
-				string data = token_begin.content;
-				switch (data[0]) {
+				switch (current.PeekChar()) {
 					case '/':
 						type = TokenType.CLOSE_REGEX_LITERAL;
 						current.Position++;
@@ -118,8 +112,8 @@ namespace Vala.Lang.Parser
 						var fl_s = false;
 						var fl_m = false;
 						var fl_x = false;
-						while (data[0] == 'i' || data[0] == 's' || data[0] == 'm' || data[0] == 'x') {
-							switch (data[0]) {
+						while (current.PeekChar() == 'i' || current.PeekChar() == 's' || current.PeekChar() == 'm' || current.PeekChar() == 'x') {
+							switch (current.PeekChar()) {
 								case 'i':
 									if (fl_i) {
 										Report.error(get_source_reference(token_length_in_chars), "modifier 'i' used more than once");
@@ -670,7 +664,7 @@ namespace Vala.Lang.Parser
 						state_stack.RemoveAt(state_stack.Count - 1);
 						break;
 					case '$':
-						token_begin.start_pos++; // $ is not part of following token
+						token_begin.pos++; // $ is not part of following token
 						current.Position++;
 						if (Char.IsLetter(current.PeekChar()) || current.PeekChar() == '_') {
 							int len = 0;
@@ -826,7 +820,7 @@ namespace Vala.Lang.Parser
 					current.Position += 2;
 					state_stack.Add(State.TEMPLATE);
 				} else {
-					token_begin.start_pos++; // @ is not part of the identifier
+					token_begin.pos++; // @ is not part of the identifier
 					current.Position++;
 					int len = 0;
 					while (current.Position < end && is_ident_char(current.PeekChar())) {
@@ -1195,7 +1189,7 @@ namespace Vala.Lang.Parser
 								column = 1;
 								token_length_in_chars = 1;
 							} else {
-								char _u = current.PeekCharAt((int)(end - current.Position));
+								//char _u = current.PeekCharAt((int)(end - current.Position), SeekOrigin.Begin);
 								/*if (u != (char)(-1)) {
 									current.Position += u.to_utf8(null);
 									token_length_in_chars++;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GLibPorts
@@ -21,8 +22,12 @@ namespace GLibPorts
 		{
 			long prevPos = @this.Position;
 			var newStream = new MemoryStream();
+			@this.Seek(0, SeekOrigin.Begin);
+
 			@this.CopyTo(newStream);
 			@this.Position = prevPos;
+			newStream.SetLength(@this.Length);
+
 			newStream.Position = @this.Position;
 			return newStream;
 		}
@@ -48,7 +53,9 @@ namespace GLibPorts
 			return Encoding.Default.GetString(bytes);
 		}
 
-		public static byte PeekByte(this MemoryStream @this) {
+		public static byte PeekByte(this MemoryStream @this)
+		{
+			@this.Seek(@this.Position, SeekOrigin.Begin);
 			int bint = @this.ReadByte();
 			if(bint < 0) {
 				throw new EndOfStreamException();

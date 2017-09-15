@@ -6524,7 +6524,7 @@ namespace CCodeGen.Modules
 			postcondition.emit(this);
 
 			//string message = ((string)postcondition.source_reference.begin.pos).Substring(0, (int)(postcondition.source_reference.end.pos - postcondition.source_reference.begin.pos));
-			string message = postcondition.source_reference.begin.content;
+			string message = SourceFragment.get_content(postcondition.source_reference.begin, postcondition.source_reference.end);
 			cassert.add_argument(get_cvalue(postcondition));
 			cassert.add_argument(new CCodeConstant("\"%s\"".printf(message.Replace("\n", " ").escape(""))));
 			requires_assert = true;

@@ -138,13 +138,13 @@ namespace Vala.Lang.Parser
 
 		string get_current_string() {
 			var token = tokens[index];
-			return token.begin.content;
+			return SourceFragment.get_content(token.begin, token.end);
 		}
 
 		string get_last_string() {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
-			return token.begin.content;
+			return SourceFragment.get_content(token.begin, token.end);
 		}
 
 		SourceReference get_src(SourceLocation location) {
@@ -165,8 +165,7 @@ namespace Vala.Lang.Parser
 
 		void rollback(SourceLocation location) {
 			var token = tokens[index];
-			long start_pos = token.begin.start_pos;
-			while (start_pos != location.start_pos) {
+			while (token.begin.pos != location.pos) {
 				index = (index - 1 + BUFFER_SIZE) % BUFFER_SIZE;
 				size++;
 				if (size > BUFFER_SIZE) {
@@ -1227,10 +1226,10 @@ namespace Vala.Lang.Parser
 						break;
 					// don't use OP_SHIFT_RIGHT to support >> for nested generics
 					case TokenType.OP_GT:
-						long first_gt_pos = tokens[index].begin.start_pos;
+						long first_gt_pos = tokens[index].begin.pos;
 						next();
 						// only accept >> when there is no space between the two > signs
-						if (current() == TokenType.OP_GT && tokens[index].begin.start_pos == first_gt_pos + 1) {
+						if (current() == TokenType.OP_GT && tokens[index].begin.pos == first_gt_pos + 1) {
 							next();
 							var _right = parse_additive_expression();
 							left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, _right, get_src(begin));
@@ -1488,10 +1487,10 @@ namespace Vala.Lang.Parser
 					var rhs = parse_expression();
 					expr = new Assignment(expr, rhs, _operator, get_src(begin));
 				} else if (current() == TokenType.OP_GT) { // >>=
-					long first_gt_pos = tokens[index].begin.start_pos;
+					long first_gt_pos = tokens[index].begin.pos;
 					next();
 					// only accept >>= when there is no space between the two > signs
-					if (current() == TokenType.OP_GE && tokens[index].begin.start_pos == first_gt_pos + 1) {
+					if (current() == TokenType.OP_GE && tokens[index].begin.pos == first_gt_pos + 1) {
 						next();
 						var rhs = parse_expression();
 						expr = new Assignment(expr, rhs, AssignmentOperator.SHIFT_RIGHT, get_src(begin));

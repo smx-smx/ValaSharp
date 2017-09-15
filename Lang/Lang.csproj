@@ -116,6 +116,7 @@
     <Compile Include="Parameter.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\Scanner.cs" />
+    <Compile Include="Parser\SourceFragment.cs" />
     <Compile Include="PhiFunction.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

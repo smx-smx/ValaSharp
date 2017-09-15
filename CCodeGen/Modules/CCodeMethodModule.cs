@@ -1170,7 +1170,7 @@ namespace CCodeGen.Modules
 			ccheck.add_argument(get_cvalue(precondition));
 
 			//string message = ((string)precondition.source_reference.begin.pos).substring(0, (int)(precondition.source_reference.end.pos - precondition.source_reference.begin.pos));
-			string message = precondition.source_reference.begin.content;
+			string message = SourceFragment.get_content(precondition.source_reference.begin, precondition.source_reference.end);
 			ccheck.add_argument(new CCodeConstant("\"%s\"".printf(message.Replace("\n", " ").escape(""))));
 			requires_assert = true;
 
