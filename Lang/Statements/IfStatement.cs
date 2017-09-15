@@ -63,7 +63,7 @@ namespace Vala.Lang.Statements
 		 * @param false_stmt statement to be evaluated if condition is false
 		 * @return           newly created if statement
 		 */
-		public IfStatement(Expression cond, Block true_stmt, Block false_stmt, SourceReference source) : base(source) {
+		public IfStatement(Expression cond, Block true_stmt, Block false_stmt, SourceReference source) {
 			condition = cond;
 			true_statement = true_stmt;
 			false_statement = false_stmt;

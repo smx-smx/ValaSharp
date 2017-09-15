@@ -20,7 +20,7 @@ namespace Vala.Lang.Statements
 		 * @param source reference to source code
 		 * @return       newly created break statement
 		 */
-		public BreakStatement(SourceReference source) : base(source) {
+		public BreakStatement(SourceReference source) {
 		}
 
 		public override void accept(CodeVisitor visitor) {

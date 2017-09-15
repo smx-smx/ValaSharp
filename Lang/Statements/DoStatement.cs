@@ -52,7 +52,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created do statement
 		 */
-		public DoStatement(Block body, Expression condition, SourceReference source_reference = null) : base(source_reference) {
+		public DoStatement(Block body, Expression condition, SourceReference source_reference = null){
 			this.condition = condition;
 			this.body = body;
 		}

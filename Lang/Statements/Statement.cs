@@ -12,10 +12,10 @@ namespace Vala.Lang.Statements
 	* Interface for all statement types.
 	*/
 	public class Statement : CodeNode {
-		public Block block;
+		public Statement() { }
+
 		public Statement(SourceReference source_reference) {
 			this.source_reference = source_reference;
-			block = new Block(source_reference);
 		}
 	}
 }

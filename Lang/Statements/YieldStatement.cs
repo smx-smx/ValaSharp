@@ -37,7 +37,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created yield statement
 		 */
-		public YieldStatement(Expression yield_expression, SourceReference source_reference = null) : base(source_reference) {
+		public YieldStatement(Expression yield_expression, SourceReference source_reference = null){
 			this.yield_expression = yield_expression;
 		}
 
