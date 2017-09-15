@@ -361,19 +361,21 @@ namespace Vala.Lang.Parser
 				return Encoding.Default.GetBytes(content);
 			}*/
 
+			length = new FileInfo(filename).Length;
+
 			if (mapped_file == null) {
 				try {
 					mapped_file = MemoryMappedFile.CreateFromFile(filename);
-				} catch (Exception e) {
-					Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
+				} catch (Exception e)
+				{
 					length = 0;
+					Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
 					return null;
 				}
 			}
 
 			var stream = mapped_file.CreateViewStream();
 			BinaryReader binReader = new BinaryReader(stream);
-			length = stream.Length;
 
 			return binReader.ReadBytes((int)stream.Length);
 		}

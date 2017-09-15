@@ -242,7 +242,7 @@ namespace Vala.Lang.Parser
 							} else if (current.PeekChar() == '\n') {
 								break;
 							} else {
-								char u = current.PeekCharAt((int)(end - current.Position));
+								//char u = current.PeekCharAt((int)(end - current.Position));
 								//TODO: check unicode valid character
 								current.Position++;
 								token_length_in_chars++;
@@ -1109,7 +1109,7 @@ namespace Vala.Lang.Parser
 									column = 1;
 									token_length_in_chars = 3;
 								} else {
-									char _u = current.PeekCharAt((int)(end - current.Position));
+									//char _u = current.PeekCharAt((int)(end - current.Position));
 									/*if (u != (char)(-1)) {
 										current.Position += u.to_utf8(null);
 										token_length_in_chars++;
@@ -1214,7 +1214,7 @@ namespace Vala.Lang.Parser
 						break;
 					default:
 						//char u = ((string)char).get_char_validated((long)(end - current));
-						char u = current.PeekCharAt((int)(end - current.Position));
+						//char u = current.PeekCharAt((int)(end - current.Position));
 						/*if (u != (char)(-1)) {
 							current.Position += u.to_utf8(null);
 							Report.error(get_source_reference(0), "syntax error, unexpected character");
