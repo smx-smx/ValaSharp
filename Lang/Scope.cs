@@ -80,7 +80,8 @@ namespace Vala.Lang
 			if (symbol_table == null) {
 				return null;
 			}
-			Symbol sym = symbol_table[name];
+			Symbol sym;
+			symbol_table.TryGetValue(name, out sym);
 			if (sym != null && !sym.active) {
 				sym = null;
 			}
