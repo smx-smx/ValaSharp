@@ -46,6 +46,7 @@
     <Compile Include="FileUtils.cs" />
     <Compile Include="GChar.cs" />
     <Compile Include="GEnvironment.cs" />
+    <Compile Include="GProcess.cs" />
     <Compile Include="gstring.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="MemoryStreamExtensions.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TrackingTextReader.cs" />
     <Compile Include="TwoWayEnumerator.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="WeakReferenceExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

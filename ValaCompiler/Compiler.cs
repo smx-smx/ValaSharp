@@ -108,6 +108,7 @@ namespace ValaCompiler
 			context.verbose_mode = opts.verbose_mode;
 			context.version_header = !opts.disable_version_header;
 
+			context.path = opts.path;
 			context.ccode_only = opts.ccode_only;
 			if (opts.ccode_only && opts.cc_options != null) {
 				Report.warning(null, "-X has no effect when -C or --ccode is set");

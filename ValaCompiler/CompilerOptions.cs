@@ -7,6 +7,13 @@ namespace ValaCompiler
 {
 	class CompilerOptions
 	{
+		[Option("path",
+			Required = false,
+			HelpText = "Look for required binaries in DIRECTORY",
+			MetaValue = "DIRECTORY..."
+		)]
+		public string path { get; set; }
+
 		[OptionList("vapidir",
 			Required = false,
 			HelpText = "Look for package bindings in DIRECTORY",

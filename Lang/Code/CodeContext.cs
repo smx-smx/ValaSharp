@@ -179,6 +179,8 @@ namespace Vala.Lang.CodeNodes
 			get { return save_temps; }
 		}
 
+		public string path { get; set; }
+
 		public Report report { get; set; } = new Report();
 
 		public Method entry_point { get; set; }
