@@ -66,8 +66,8 @@ namespace Vala.Lang.Parser
 			line = location.line;
 			column = location.column;
 
-			conditional_stack = null;
-			state_stack = null;
+			conditional_stack = new List<Conditional>();
+			state_stack = new List<State>();
 		}
 
 		bool in_template() {
