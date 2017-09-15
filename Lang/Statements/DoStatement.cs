@@ -54,6 +54,7 @@ namespace Vala.Lang.Statements
 		 */
 		public DoStatement(Block body, Expression condition, SourceReference source_reference = null){
 			this.condition = condition;
+			this.source_reference = source_reference;
 			this.body = body;
 		}
 

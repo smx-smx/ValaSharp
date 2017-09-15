@@ -21,6 +21,7 @@ namespace Vala.Lang.Statements
 		 * @return       newly created break statement
 		 */
 		public BreakStatement(SourceReference source) {
+			source_reference = source;
 		}
 
 		public override void accept(CodeVisitor visitor) {

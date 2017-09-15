@@ -67,6 +67,7 @@ namespace Vala.Lang.Statements
 			condition = cond;
 			true_statement = true_stmt;
 			false_statement = false_stmt;
+			source_reference = source;
 		}
 
 		public override void accept(CodeVisitor visitor) {
