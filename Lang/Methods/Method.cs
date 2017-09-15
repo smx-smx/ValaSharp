@@ -260,7 +260,7 @@ namespace Vala.Lang.Methods
 				param.accept(visitor);
 			}
 
-			foreach (DataType error_type in get_error_types()) {
+			foreach (DataType error_type in get_error_types().ToList()) {
 				error_type.accept(visitor);
 			}
 

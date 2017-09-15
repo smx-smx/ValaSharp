@@ -448,7 +448,7 @@ namespace Vala.Lang.TypeSymbols
 		}
 
 		public override void accept_children(CodeVisitor visitor) {
-			foreach (DataType type in base_types) {
+			foreach (DataType type in base_types.ToList()) {
 				type.accept(visitor);
 			}
 

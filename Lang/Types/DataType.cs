@@ -94,7 +94,7 @@ namespace Vala.Lang.Types
 
 		public override void accept_children(CodeVisitor visitor) {
 			if (type_argument_list != null && type_argument_list.Count > 0) {
-				foreach (DataType type_arg in type_argument_list) {
+				foreach (DataType type_arg in type_argument_list.ToList()) {
 					type_arg.accept(visitor);
 				}
 			}
