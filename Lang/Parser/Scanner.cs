@@ -19,7 +19,6 @@ namespace Vala.Lang.Parser
 		TokenType previous;
 		MemoryStream current;
 
-		long begin = 0;
 		long end = 0;
 
 		int line;
@@ -51,11 +50,10 @@ namespace Vala.Lang.Parser
 		public Scanner(SourceFile source_file) {
 			this.source_file = source_file;
 
-			begin = 0;
 			byte[] contents = source_file.get_mapped_contents(out end);
-			MemoryStream mem = new MemoryStream(contents);
+			MemoryStream begin = new MemoryStream(contents);
 
-			current = mem;
+			current = begin;
 
 			line = 1;
 			column = 1;
@@ -87,21 +85,21 @@ namespace Vala.Lang.Parser
 			return (Char.IsLetterOrDigit(c) || c == '_');
 		}
 
-		SourceReference get_source_reference(int offset, long length = 0) {
+		SourceReference get_source_reference(int offset, int length = 0) {
 			return new SourceReference(source_file,
 				new SourceLocation(current, line, column + offset),
-				new SourceLocation(current, current.Position + length, line, (int)(column + offset + length))
+				new SourceLocation(current, current.Position + length, line, column + offset + length)
 			);
 		}
 
 		public TokenType read_regex_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			TokenType type;
 			MemoryStream begin = current.Clone();
-			token_begin = new SourceLocation(current, current.Position, line, column);
+			token_begin = new SourceLocation(begin, line, column);
 
 			int token_length_in_chars = -1;
 
-			if (begin.Position >= end) {
+			if (current.Position >= end) {
 				type = TokenType.EOF;
 			} else {
 				switch (current.PeekChar()) {
@@ -814,7 +812,7 @@ namespace Vala.Lang.Parser
 					current.Position++;
 					len++;
 				}
-				type = get_identifier_or_keyword(current, len);
+				type = get_identifier_or_keyword(begin, len);
 			} else if (current.PeekChar() == '@') {
 				if (current.Position < end - 1 && current.PeekCharAt(1) == '"') {
 					type = TokenType.OPEN_TEMPLATE;
