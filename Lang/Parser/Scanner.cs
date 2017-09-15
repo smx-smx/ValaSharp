@@ -61,8 +61,9 @@ namespace Vala.Lang.Parser
 			column = 1;
 		}
 
-		public void seek(SourceLocation location) {
-			current = location.rdr;
+		public void seek(SourceLocation location)
+		{
+			current.Seek(location.pos, SeekOrigin.Begin);
 			line = location.line;
 			column = location.column;
 

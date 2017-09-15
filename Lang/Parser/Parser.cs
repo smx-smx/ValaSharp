@@ -164,8 +164,7 @@ namespace Vala.Lang.Parser
 		}
 
 		void rollback(SourceLocation location) {
-			var token = tokens[index];
-			while (token.begin.pos != location.pos) {
+			while (tokens[index].begin.pos != location.pos) {
 				index = (index - 1 + BUFFER_SIZE) % BUFFER_SIZE;
 				size++;
 				if (size > BUFFER_SIZE) {
