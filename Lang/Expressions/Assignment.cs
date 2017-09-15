@@ -348,7 +348,7 @@ namespace Vala.Lang.Expressions
 						}
 
 						right.value_type = variable.variable_type;
-					} else if (!is_array_add()) {
+					} else {
 						error = true;
 						Report.error(source_reference, "Assignment: Invalid assignment attempt");
 						return false;
@@ -454,34 +454,7 @@ namespace Vala.Lang.Expressions
 
 		bool is_array_add() {
 			var binary = right as BinaryExpression;
-			var ma = binary.left as MemberAccess;
-
-			stdout.printf("left is %s\n", (binary.left.GetType().Name));
-			if (ma != null) {
-				stdout.printf("inner is %s\n", ma.inner.value_type.GetType().Name);
-			}
-
-			bool is_array_pointer = false;
-			if (ma != null) {
-				stdout.printf("member name is %s\n", ma.member_name);
-				var pointer_type = ma.inner.value_type as PointerType;
-				if (pointer_type != null) {
-					var otype = pointer_type.base_type as ObjectType;
-					stdout.printf("base is %s\n", pointer_type.base_type.GetType().Name);
-					if (otype != null) {
-						stdout.printf("type is %s\n", otype.type_symbol.GetType().Name);
-					}
-				}
-			}
-
-			if (binary != null && (
-				binary.left.value_type is ArrayType ||
-				(binary.left.value_type is MemberAccess &&
-				 ma != null &&
-				 ma.symbol_reference is Field &&
-				 ma.inner.value_type is ArrayType
-				)
-			)) {
+			if (binary != null && binary.left.value_type is ArrayType) {
 				if (binary.Operator == BinaryOperator.PLUS) {
 					if (left.symbol_reference == binary.left.symbol_reference) {
 						return true;
