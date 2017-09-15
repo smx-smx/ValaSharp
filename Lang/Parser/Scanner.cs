@@ -88,8 +88,8 @@ namespace Vala.Lang.Parser
 
 		SourceReference get_source_reference(int offset, long length = 0) {
 			return new SourceReference(source_file,
-				new SourceLocation(current, line, column + offset)
-			//new SourceLocation(current.Position + length, line, column + offset + length)
+				new SourceLocation(current, line, column + offset),
+				new SourceLocation(current, current.Position + length, line, (int)(column + offset + length))
 			);
 		}
 
@@ -1368,7 +1368,7 @@ namespace Vala.Lang.Parser
 				// condition true => process code within if
 				var cond = conditional_stack[conditional_stack.Count - 1];
 				cond.matched = true;
-				cond.skip_section = true;
+				cond.skip_section = false;
 				conditional_stack[conditional_stack.Count - 1] = cond;
 			} else {
 				// skip lines until next preprocessing directive
@@ -1391,7 +1391,7 @@ namespace Vala.Lang.Parser
 				// condition true => process code within if
 				var cond = conditional_stack[conditional_stack.Count - 1];
 				cond.matched = true;
-				cond.skip_section = true;
+				cond.skip_section = false;
 				conditional_stack[conditional_stack.Count - 1] = cond;
 			} else {
 				// skip lines until next preprocessing directive

@@ -35,9 +35,10 @@ namespace Vala.Lang.Parser
 		 * @param end          the end of the referenced source code
 		 * @return             newly created source reference
 		 */
-		public SourceReference(SourceFile _file, SourceLocation location) {
+		public SourceReference(SourceFile _file, SourceLocation begin, SourceLocation end) {
 			file = _file;
-			this.begin = this.begin;
+			this.begin = begin;
+			this.end = end;
 			using_directives = file.current_using_directives;
 		}
 

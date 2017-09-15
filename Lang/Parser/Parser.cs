@@ -147,20 +147,20 @@ namespace Vala.Lang.Parser
 			return SourceFragment.get_content(token.begin, token.end);
 		}
 
-		SourceReference get_src(SourceLocation location) {
+		SourceReference get_src(SourceLocation begin) {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
-			return new SourceReference(scanner.source_file, location);
+			return new SourceReference(scanner.source_file, begin, tokens[last_index].end);
 		}
 
 		SourceReference get_current_src() {
 			var token = tokens[index];
-			return new SourceReference(scanner.source_file, token.begin);
+			return new SourceReference(scanner.source_file, token.begin, token.end);
 		}
 
 		SourceReference get_last_src() {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
-			return new SourceReference(scanner.source_file, token.begin);
+			return new SourceReference(scanner.source_file, token.begin, token.end);
 		}
 
 		void rollback(SourceLocation location) {
