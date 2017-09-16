@@ -1,6 +1,7 @@
 ﻿using GLibPorts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -177,8 +178,8 @@ namespace Vala.Lang.TypeSymbols
 		 *
 		 * @return list of constants
 		 */
-		public List<Symbol> get_constants() {
-			return constants.ConvertAll(x => (Symbol)x);
+		public List<Constant> get_constants() {
+			return constants;
 		}
 
 		/**
@@ -187,8 +188,10 @@ namespace Vala.Lang.TypeSymbols
 		 * @param m a method
 		 */
 		public override void add_method(Method m) {
-			if (m == null)
+			if (m == null){
+				Trace.WriteLine("m != null failed");
 				return;
+			}
 
 			if (m.binding == MemberBinding.INSTANCE || m is CreationMethod) {
 				m.this_parameter = new Parameter("this", SemanticAnalyzer.get_data_type_for_symbol(this));
@@ -222,8 +225,8 @@ namespace Vala.Lang.TypeSymbols
 		 *
 		 * @return list of methods
 		 */
-		public List<Symbol> get_methods() {
-			return methods.ConvertAll(x => (Symbol)x);
+		public List<Method> get_methods() {
+			return methods;
 		}
 
 		/**
@@ -248,8 +251,8 @@ namespace Vala.Lang.TypeSymbols
 		 *
 		 * @return list of properties
 		 */
-		public List<Symbol> get_properties() {
-			return properties.ConvertAll(x => (Symbol)x);
+		public List<Property> get_properties() {
+			return properties;
 		}
 
 		public override void accept(CodeVisitor visitor) {

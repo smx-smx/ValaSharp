@@ -146,7 +146,7 @@ namespace Vala.Lang.Parser
 
 		public List<UsingDirective> current_using_directives { get; set; } = new List<UsingDirective>();
 
-		private List<CodeNodes.CodeNode> nodes = new List<CodeNodes.CodeNode>();
+		private List<CodeNode> nodes = new List<CodeNode>();
 
 		string _relative_filename;
 
@@ -210,11 +210,11 @@ namespace Vala.Lang.Parser
 		 *
 		 * @param node a code node
 		 */
-		public void add_node(CodeNodes.CodeNode node) {
+		public void add_node(CodeNode node) {
 			nodes.Add(node);
 		}
 
-		public void remove_node(CodeNodes.CodeNode node) {
+		public void remove_node(CodeNode node) {
 			nodes.Remove(node);
 		}
 
@@ -223,7 +223,7 @@ namespace Vala.Lang.Parser
 		 *
 		 * @return code node list
 		 */
-		public List<CodeNodes.CodeNode> get_nodes() {
+		public List<CodeNode> get_nodes() {
 			return nodes;
 		}
 
@@ -232,7 +232,7 @@ namespace Vala.Lang.Parser
 		}
 
 		public void accept_children(CodeVisitor visitor) {
-			foreach (CodeNodes.CodeNode node in nodes) {
+			foreach (CodeNode node in nodes) {
 				node.accept(visitor);
 			}
 		}
@@ -385,11 +385,11 @@ namespace Vala.Lang.Parser
 				return (uint)content.Length;
 			}
 
-			return (uint)mapped_file.CreateViewStream().Length;
+			return (uint)new FileInfo(filename).Length;
 		}
 
 		public bool check(CodeContext context) {
-			foreach (CodeNodes.CodeNode node in nodes) {
+			foreach (CodeNode node in nodes) {
 				node.check(context);
 			}
 			return true;

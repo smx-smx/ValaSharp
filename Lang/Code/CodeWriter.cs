@@ -355,9 +355,9 @@ namespace Vala.Lang.Code
 			foreach (Field field in st.get_fields()) {
 				field.accept(this);
 			}
-			visit_sorted(st.get_constants());
-			visit_sorted(st.get_methods());
-			visit_sorted(st.get_properties());
+			visit_sorted(st.get_constants().ConvertAll(x => (Symbol)x));
+			visit_sorted(st.get_methods().ConvertAll(x => (Symbol)x));
+			visit_sorted(st.get_properties().ConvertAll(x => (Symbol)x));
 
 			current_scope = current_scope.parent_scope;
 
