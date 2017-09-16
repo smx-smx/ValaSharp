@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GLibPorts.Native;
 
@@ -49,51 +50,7 @@ namespace Vala
 		}
 
 		public static string compress(this String @this) {
-			StringBuilder sb = new StringBuilder();
-			bool unescapeNext = false;
-			foreach (char ch in @this) {
-				if (ch == '\\') {
-					unescapeNext = true;
-					continue;
-				} else {
-					if (unescapeNext) {
-						switch (ch) {
-							case '0':
-							case '1':
-							case '2':
-							case '3':
-							case '4':
-							case '5':
-							case '6':
-							case '7':
-								throw new NotSupportedException();
-							case 'b':
-								sb.Append('\b');
-								break;
-							case 'f':
-								sb.Append('\f');
-								break;
-							case 'n':
-								sb.Append('\n');
-								break;
-							case 'r':
-								sb.Append('\r');
-								break;
-							case 't':
-								sb.Append('\t');
-								break;
-							case 'v':
-								sb.Append('\v');
-								break;
-							default:            /* Also handles \" and \\ */
-								sb.Append(ch);
-								break;
-						}
-					}
-					unescapeNext = false;
-				}
-			}
-			return sb.ToString();
+			return Regex.Unescape(@this);
 		}
 
 		public static bool validate(this String @this) {
