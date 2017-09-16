@@ -45,9 +45,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created throw statement
 		 */
-		public ThrowStatement(Expression error_expression, SourceReference source_reference = null){
-			this.error_expression = error_expression;
+		public ThrowStatement(Expression error_expression, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
+			this.error_expression = error_expression;
 		}
 
 		public override void accept(CodeVisitor visitor) {
@@ -75,6 +75,7 @@ namespace Vala.Lang.Statements
 
 			is_checked = true;
 
+			error_expression.target_type = new ErrorType(null, null, source_reference);
 			error_expression.target_type.value_owned = true;
 
 			if (error_expression != null) {
