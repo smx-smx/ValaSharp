@@ -994,12 +994,11 @@ namespace Vala.Lang
 			return sym as Method;
 		}
 
-		public Symbol find_parent_method_or_property_accessor(Block block) {
-			Symbol sym = block.parent_symbol;
-			return find_parent_method_or_property_accessor(sym);
-		}
-
 		public Symbol find_parent_method_or_property_accessor(Symbol sym) {
+			while (sym is Block) {
+				sym = sym.parent_symbol;
+			}
+
 			if (sym is Method) {
 				return sym;
 			} else if (sym is PropertyAccessor) {
