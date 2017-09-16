@@ -18,7 +18,7 @@ namespace Vala.Lang.Statements
 	 * Represents a foreach statement in the source code. Foreach statements iterate
 	 * over the elements of a collection.
 	 */
-	public class ForeachStatement : Block, Statement
+	public class ForeachStatement : Block
 	{
 		/**
 		 * Specifies the element type.
