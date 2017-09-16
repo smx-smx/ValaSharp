@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GLibPorts.Native;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Literals;
@@ -90,8 +91,7 @@ namespace Vala.Lang.Parser
 		bool next() {
 			index = (index + 1) % BUFFER_SIZE;
 			size--;
-			if (size <= 0)
-			{
+			if (size <= 0) {
 				SourceLocation begin, end;
 				TokenType type = scanner.read_token(out begin, out end);
 				tokens[index] = new TokenInfo(type, begin, end);
@@ -1039,9 +1039,10 @@ namespace Vala.Lang.Parser
 		Expression parse_unary_expression() {
 			var begin = get_location();
 			var _operator = get_unary_operator(current());
+			Expression op;
 			if (_operator != UnaryOperator.NONE) {
 				next();
-				var op = parse_unary_expression();
+				op = parse_unary_expression();
 				var lit = op as IntegerLiteral;
 				if (lit != null) {
 					if (_operator == UnaryOperator.PLUS) {
@@ -1058,7 +1059,7 @@ namespace Vala.Lang.Parser
 						Report.warning(get_last_src(), "deprecated syntax, use `(owned)` cast");
 					}
 					next();
-					var op = parse_unary_expression();
+					op = parse_unary_expression();
 					return new ReferenceTransferExpression(op, get_src(begin));
 				case TokenType.OPEN_PARENS:
 					next();
@@ -1082,6 +1083,7 @@ namespace Vala.Lang.Parser
 								var type = parse_type(true, false);
 								if (accept(TokenType.CLOSE_PARENS)) {
 									// check follower to decide whether to create cast expression
+									Expression inner;
 									switch (current()) {
 										case TokenType.OP_NEG:
 										case TokenType.TILDE:
@@ -1104,18 +1106,18 @@ namespace Vala.Lang.Parser
 										case TokenType.TYPEOF:
 										case TokenType.IDENTIFIER:
 										case TokenType.PARAMS:
-											var inner = parse_unary_expression();
+											inner = parse_unary_expression();
 											return new CastExpression(inner, type, get_src(begin), false);
 										case TokenType.STAR:
 											next();
-											var op3 = parse_unary_expression();
-											var inner1 = new PointerIndirection(op3, get_src(begin));
-											return new CastExpression(inner1, type, get_src(begin), false);
+											op = parse_unary_expression();
+											inner = new PointerIndirection(op, get_src(begin));
+											return new CastExpression(inner, type, get_src(begin), false);
 										case TokenType.BITWISE_AND:
 											next();
-											var op4 = parse_unary_expression();
-											var inner2 = new AddressofExpression(op4, get_src(begin));
-											return new CastExpression(inner2, type, get_src(begin), false);
+											op = parse_unary_expression();
+											inner = new AddressofExpression(op, get_src(begin));
+											return new CastExpression(inner, type, get_src(begin), false);
 										default:
 											break;
 									}
@@ -1138,12 +1140,12 @@ namespace Vala.Lang.Parser
 					break;
 				case TokenType.STAR:
 					next();
-					var op1 = parse_unary_expression();
-					return new PointerIndirection(op1, get_src(begin));
+					op = parse_unary_expression();
+					return new PointerIndirection(op, get_src(begin));
 				case TokenType.BITWISE_AND:
 					next();
-					var op2 = parse_unary_expression();
-					return new AddressofExpression(op2, get_src(begin));
+					op = parse_unary_expression();
+					return new AddressofExpression(op, get_src(begin));
 				default:
 					break;
 			}
@@ -1217,10 +1219,11 @@ namespace Vala.Lang.Parser
 			var left = parse_additive_expression();
 			bool found = true;
 			while (found) {
+				Expression right;
 				switch (current()) {
 					case TokenType.OP_SHIFT_LEFT:
 						next();
-						var right = parse_additive_expression();
+						right = parse_additive_expression();
 						left = new BinaryExpression(BinaryOperator.SHIFT_LEFT, left, right, get_src(begin));
 						break;
 					// don't use OP_SHIFT_RIGHT to support >> for nested generics
@@ -1230,8 +1233,8 @@ namespace Vala.Lang.Parser
 						// only accept >> when there is no space between the two > signs
 						if (current() == TokenType.OP_GT && tokens[index].begin.pos == first_gt_pos + 1) {
 							next();
-							var _right = parse_additive_expression();
-							left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, _right, get_src(begin));
+							right = parse_additive_expression();
+							left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, right, get_src(begin));
 						} else {
 							prev();
 							found = false;
@@ -1253,12 +1256,13 @@ namespace Vala.Lang.Parser
 			bool found = true;
 			while (found) {
 				var _operator = get_binary_operator(current());
+				Expression right;
 				switch (_operator) {
 					case BinaryOperator.LESS_THAN:
 					case BinaryOperator.LESS_THAN_OR_EQUAL:
 					case BinaryOperator.GREATER_THAN_OR_EQUAL:
 						next();
-						var right = parse_shift_expression();
+						right = parse_shift_expression();
 						left = new BinaryExpression(_operator, left, right, get_src(begin));
 						if (!first) {
 							var be = (BinaryExpression)left;
@@ -1270,8 +1274,8 @@ namespace Vala.Lang.Parser
 						next();
 						// ignore >> and >>= (two tokens due to generics)
 						if (current() != TokenType.OP_GT && current() != TokenType.OP_GE) {
-							var _right = parse_shift_expression();
-							left = new BinaryExpression(_operator, left, _right, get_src(begin));
+							right = parse_shift_expression();
+							left = new BinaryExpression(_operator, left, right, get_src(begin));
 							if (!first) {
 								var be = (BinaryExpression)left;
 								be.chained = true;
@@ -1777,11 +1781,12 @@ namespace Vala.Lang.Parser
 				variable_type = parse_type(true, true);
 			}
 			do {
+				LocalVariable local;
 				if (variable_type == null && accept(TokenType.OPEN_PARENS)) {
 					// tuple
 					var begin = get_location();
 
-					List<string> identifiers = new List<string>{ };
+					List<string> identifiers = new List<string>();
 					do {
 						identifiers.Add(parse_identifier());
 					} while (accept(TokenType.COMMA));
@@ -1796,8 +1801,8 @@ namespace Vala.Lang.Parser
 						var temp_access = MemberAccess.simple(tuple_local.name, tuple_local.source_reference);
 						var ea = new ElementAccess(temp_access, tuple_local.source_reference);
 						ea.append_index(new IntegerLiteral(i.ToString()));
-						var _local = new LocalVariable(null, identifiers[i], ea, tuple_local.source_reference);
-						block.add_statement(new DeclarationStatement(_local, _local.source_reference));
+						local = new LocalVariable(null, identifiers[i], ea, tuple_local.source_reference);
+						block.add_statement(new DeclarationStatement(local, local.source_reference));
 					}
 
 					continue;
@@ -1807,7 +1812,7 @@ namespace Vala.Lang.Parser
 				if (variable_type != null) {
 					type_copy = variable_type.copy();
 				}
-				var local = parse_local_variable(type_copy);
+				local = parse_local_variable(type_copy);
 				block.add_statement(new DeclarationStatement(local, local.source_reference));
 			} while (accept(TokenType.COMMA));
 			expect(TokenType.SEMICOLON);
@@ -3550,19 +3555,18 @@ namespace Vala.Lang.Parser
 	public class ParseException : Exception
 	{
 		private ParseError err;
-		private string v;
+		private string message;
 		private object p;
-		private ParseError sYNTAX;
+		private ParseError error_type;
 
-		public ParseException(ParseError sYNTAX, string v) {
-			this.sYNTAX = sYNTAX;
-			this.v = v;
+		public ParseException(ParseError error_type, string message) {
+			this.error_type = error_type;
+			this.message = message;
 		}
 
-		public ParseException(ParseError err, string v, object p) {
+		public ParseException(ParseError err, string format, params VariableArgument[] args) {
 			this.err = err;
-			this.v = v;
-			this.p = p;
+			this.message = message.printf(args);
 		}
 	}
 
