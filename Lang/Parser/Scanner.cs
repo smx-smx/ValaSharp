@@ -153,6 +153,7 @@ namespace Vala.Lang.Parser
 									break;
 								}
 
+								int digit_length;
 								switch (current.PeekChar()) {
 									case '\'':
 									case '"':
@@ -211,7 +212,6 @@ namespace Vala.Lang.Parser
 										// u escape character has four hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int digit_length;
 										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
@@ -224,12 +224,11 @@ namespace Vala.Lang.Parser
 										// hexadecimal escape character requires two hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int _digit_length;
-										for (_digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); _digit_length++) {
+										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
 										}
-										if (_digit_length < 1) {
+										if (digit_length < 1) {
 											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
 										}
 										break;
@@ -698,6 +697,7 @@ namespace Vala.Lang.Parser
 									break;
 								}
 
+								int digit_length;
 								switch (current.PeekChar()) {
 									case '\'':
 									case '"':
@@ -716,7 +716,6 @@ namespace Vala.Lang.Parser
 										// u escape character has four hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int digit_length;
 										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
@@ -729,12 +728,11 @@ namespace Vala.Lang.Parser
 										// hexadecimal escape character requires two hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int _digit_length;
-										for (_digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); _digit_length++) {
+										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
 										}
-										if (_digit_length < 1) {
+										if (digit_length < 1) {
 											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
 										}
 										break;
@@ -748,7 +746,7 @@ namespace Vala.Lang.Parser
 								column = 1;
 								token_length_in_chars = 1;
 							} else {
-								char u = current.PeekCharAt((int)(end - current.Position));
+								//char u = current.PeekCharAt((int)(end - current.Position));
 								/*
 								if (u != (char)(-1)) {
 									current.Position += u.to_utf8(null);
@@ -1137,6 +1135,7 @@ namespace Vala.Lang.Parser
 									break;
 								}
 
+								int digit_length;
 								switch (current.PeekChar()) {
 									case '\'':
 									case '"':
@@ -1156,7 +1155,6 @@ namespace Vala.Lang.Parser
 										// u escape character has four hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int digit_length;
 										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
@@ -1169,12 +1167,11 @@ namespace Vala.Lang.Parser
 										// hexadecimal escape character requires two hex digits
 										current.Position++;
 										token_length_in_chars++;
-										int _digit_length;
-										for (_digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); _digit_length++) {
+										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
 											current.Position++;
 											token_length_in_chars++;
 										}
-										if (_digit_length < 1) {
+										if (digit_length < 1) {
 											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
 										}
 										break;
