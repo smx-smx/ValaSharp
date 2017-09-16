@@ -61,10 +61,10 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created for statement
 		 */
-		public ForStatement(Expression condition, Block body, SourceReference source_reference = null){
+		public ForStatement(Expression condition, Block body, SourceReference source_reference = null) {
 			this.condition = condition;
-			this.source_reference = source_reference;
 			this.body = body;
+			this.source_reference = source_reference;
 		}
 
 		/**

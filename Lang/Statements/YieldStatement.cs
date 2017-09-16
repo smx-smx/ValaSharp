@@ -42,8 +42,8 @@ namespace Vala.Lang.Statements
 		 * @return                 newly created yield statement
 		 */
 		public YieldStatement(Expression yield_expression, SourceReference source_reference = null) {
-			this.source_reference = source_reference;
 			this.yield_expression = yield_expression;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

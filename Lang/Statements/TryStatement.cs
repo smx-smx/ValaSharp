@@ -56,10 +56,10 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created try statement
 		 */
-		public TryStatement(Block body, Block finally_body, SourceReference source_reference = null){
+		public TryStatement(Block body, Block finally_body, SourceReference source_reference = null) {
 			this.body = body;
-			this.source_reference = source_reference;
 			this.finally_body = finally_body;
+			this.source_reference = source_reference;
 		}
 
 		/**
