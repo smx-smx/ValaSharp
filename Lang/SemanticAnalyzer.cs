@@ -597,32 +597,36 @@ namespace Vala.Lang
 			bool unsupported_format = false;
 
 			IEnumerator<char> format_it = format.GetEnumerator();
+			bool hasNext = format_it.MoveNext();
+
 			char c = format_it.Current;
-			while (c != '\0') {
+			while (hasNext) {
 				if (c != '%') {
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
+					if (!hasNext)
+						break;
 					c = format_it.Current;
 					continue;
 				}
 
-				format_it.MoveNext();
+				hasNext = format_it.MoveNext();
 				c = format_it.Current;
 				// flags
 				while (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+') {
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 				}
 				// field width
 				while (c >= '0' && c <= '9') {
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 				}
 				// precision
 				if (c == '.') {
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 					while (c >= '0' && c <= '9') {
-						format_it.MoveNext();
+						hasNext = format_it.MoveNext();
 						c = format_it.Current;
 					}
 				}
@@ -630,20 +634,20 @@ namespace Vala.Lang
 				int length = 0;
 				if (c == 'h') {
 					length = -1;
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 					if (c == 'h') {
 						length = -2;
-						format_it.MoveNext();
+						hasNext = format_it.MoveNext();
 						c = format_it.Current;
 					}
 				} else if (c == 'l') {
 					length = 1;
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 				} else if (c == 'z') {
 					length = 2;
-					format_it.MoveNext();
+					hasNext = format_it.MoveNext();
 					c = format_it.Current;
 				}
 				// conversion specifier
@@ -690,12 +694,12 @@ namespace Vala.Lang
 					unsupported_format = true;
 					break;
 				}
-				if (c != '\0') {
-					format_it.MoveNext();
+				if (hasNext = format_it.MoveNext()) {
 					c = format_it.Current;
 				}
 				if (param_type != null) {
-					if (arg_it.MoveNext()) {
+					hasNext = arg_it.MoveNext();
+					if (hasNext) {
 						Expression arg = arg_it.Current;
 
 						arg.target_type = param_type;
