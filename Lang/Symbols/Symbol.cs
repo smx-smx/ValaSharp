@@ -15,8 +15,7 @@ namespace Vala.Lang.Symbols
 	/// <summary>
 	/// Represents a node in the symbol tree.
 	/// </summary>
-	public class Symbol : CodeNode
-	{
+	public abstract class Symbol : CodeNode {
 	/**
 	 * The parent of this symbol.
 	 */
