@@ -439,7 +439,7 @@ namespace Vala.Lang.Expressions
 				}
 			}
 
-			foreach (Expression arg in get_argument_list()) {
+			foreach (Expression arg in get_argument_list().ToList()) {
 				arg.check(context);
 			}
 
