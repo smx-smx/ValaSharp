@@ -68,7 +68,14 @@ namespace Vala.Lang.Literals
 				value = value.Substring(0, value.Length - 1);
 			}
 
-			Int64 n = Int64.Parse(value);
+			Int64 n;
+			try {
+				n = Convert.ToInt64(value);
+			}
+			catch (Exception) {
+				n = Convert.ToInt64(value, 16);
+			}
+
 			if (!u && (n > int.MaxValue || n < int.MinValue)) {
 				// value doesn't fit into signed 32-bit
 				l = 2;

@@ -34,7 +34,13 @@ namespace Vala.Lang.Types
 				if (target_st.is_integer_type()) {
 					var int_attr = target_st.get_attribute("IntegerType");
 					if (int_attr != null && int_attr.has_argument("min") && int_attr.has_argument("max")) {
-						int val = int.Parse(literal_value);
+						int val;
+						try {
+							val = Convert.ToInt32(literal_value);
+						}
+						catch (Exception) {
+							val = Convert.ToInt32(literal_value, 16);
+						}
 						return (val >= int_attr.get_integer("min") && val <= int_attr.get_integer("max"));
 					} else {
 						// assume to be compatible if the target type doesn't specify limits
