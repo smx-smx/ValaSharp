@@ -12,15 +12,20 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a continue statement in the source code.
  */
-	public class ContinueStatement : Statement
+	public class ContinueStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Creates a new continue statement.
 		 *
 		 * @param source reference to source code
 		 * @return       newly created continue statement
 		 */
-		public ContinueStatement(SourceReference source) : base(source) {
+		public ContinueStatement(SourceReference source) {
+			source_reference = source;
 		}
 
 		public override void accept(CodeVisitor visitor) {

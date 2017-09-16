@@ -9,15 +9,20 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements
 {
-	public class StatementList : Statement //CodeNode
+	public class StatementList : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		private List<Statement> list = new List<Statement>();
 
 		public int length {
 			get { return list.Count; }
 		}
 
-		public StatementList(SourceReference source_reference) : base(source_reference) {
+		public StatementList(SourceReference source_reference) {
+			this.source_reference = source_reference;
 		}
 
 		public Statement get(int index) {
@@ -38,13 +43,13 @@ namespace Vala.Lang.Statements
 
 		public override void accept(CodeVisitor visitor) {
 			foreach (Statement stmt in list) {
-				stmt.accept(visitor);
+				stmt.node.accept(visitor);
 			}
 		}
 
 		public override void emit(CodeGenerator codegen) {
 			foreach (Statement stmt in list) {
-				stmt.emit(codegen);
+				stmt.node.emit(codegen);
 			}
 		}
 	}

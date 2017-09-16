@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a do iteration statement in the source code.
  */
-	public class DoStatement : Statement
+	public class DoStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the loop body.
 		 */
@@ -108,7 +112,7 @@ namespace Vala.Lang.Statements
 			block.add_statement(new Loop(body, source_reference));
 
 			var parent_block = (Block)parent_node;
-			parent_block.replace_statement(this, block.statement);
+			parent_block.replace_statement(this, block);
 
 			return block.check(context);
 		}

@@ -15,8 +15,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a throw statement in the source code.
  */
-	public class ThrowStatement : Statement
+	public class ThrowStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * The error expression to throw.
 		 */
@@ -41,8 +45,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created throw statement
 		 */
-		public ThrowStatement(Expression error_expression, SourceReference source_reference = null) : base(source_reference){
+		public ThrowStatement(Expression error_expression, SourceReference source_reference = null){
 			this.error_expression = error_expression;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

@@ -14,8 +14,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents a local variable or constant declaration statement in the source code.
 	 */
-	public class DeclarationStatement : Statement
+	public class DeclarationStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * The local variable or constant declaration.
 		 */
@@ -40,8 +44,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created declaration statement
 		 */
-		public DeclarationStatement(Symbol declaration, SourceReference source_reference) : base(source_reference) {
+		public DeclarationStatement(Symbol declaration, SourceReference source_reference) {
 			this.declaration = declaration;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

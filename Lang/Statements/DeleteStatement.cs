@@ -14,8 +14,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a delete statement e.g. "delete a".
  */
-	public class DeleteStatement : Statement
+	public class DeleteStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Expression representing the instance to be freed.
 		 */
@@ -29,8 +33,9 @@ namespace Vala.Lang.Statements
 
 		private Expression _expression;
 
-		public DeleteStatement(Expression expression, SourceReference source_reference = null) : base(source_reference) {
+		public DeleteStatement(Expression expression, SourceReference source_reference = null) {
 			this.expression = expression;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

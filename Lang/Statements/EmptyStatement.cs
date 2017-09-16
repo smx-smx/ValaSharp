@@ -9,15 +9,20 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements
 {
-	public class EmptyStatement : Statement
+	public class EmptyStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 	 * Creates a new empty statement.
 	 *
 	 * @param source reference to source code
 	 * @return       newly created empty statement
 	 */
-		public EmptyStatement(SourceReference source) : base(source) {
+		public EmptyStatement(SourceReference source) {
+			source_reference = source;
 		}
 
 		public override void accept(CodeVisitor visitor) {

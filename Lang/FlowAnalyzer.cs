@@ -671,7 +671,7 @@ namespace Vala.Lang
 				current_block = new BasicBlock();
 				condition_block.connect(current_block);
 				foreach (Statement section_stmt in section.get_statements()) {
-					section_stmt.accept(this);
+					section_stmt.node.accept(this);
 				}
 
 				if (section.has_default_label()) {

@@ -11,8 +11,12 @@ using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Statements
 {
-	public class ExpressionStatement : Statement
+	public class ExpressionStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 	 * Specifies the expression to evaluate.
 	 */
@@ -36,7 +40,6 @@ namespace Vala.Lang.Statements
 		 * @return                  newly created expression statement
 		 */
 		public ExpressionStatement(Expression expression, SourceReference source_reference = null)
-			: base(source_reference)
 		{
 			this.source_reference = source_reference;
 			this.expression = expression;

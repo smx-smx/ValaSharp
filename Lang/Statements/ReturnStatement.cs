@@ -16,8 +16,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents a return statement in the source code.
 	 */
-	public class ReturnStatement : Statement
+	public class ReturnStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * The optional expression to return.
 		 */
@@ -40,7 +44,8 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created return statement
 		 */
-		public ReturnStatement(Expression return_expression = null, SourceReference source_reference = null) : base(source_reference) {
+		public ReturnStatement(Expression return_expression = null, SourceReference source_reference = null) {
+			this.source_reference = source_reference;
 			this.return_expression = return_expression;
 		}
 

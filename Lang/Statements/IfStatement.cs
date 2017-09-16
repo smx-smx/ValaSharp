@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents an if selection statement in the source code.
 	 */
-	public class IfStatement : Statement
+	public class IfStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * The boolean condition to evaluate.
 		 */

@@ -20,6 +20,7 @@ namespace Vala.Lang.CodeNodes
 	/// </summary>
 	public abstract class CodeNode
 	{
+
 		/**
 	 * Parent of this code node.
 	 */

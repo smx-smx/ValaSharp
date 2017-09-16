@@ -12,8 +12,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents an endless loop.
 	 */
-	public class Loop : Statement
+	public class Loop : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the loop body.
 		 */
@@ -36,8 +40,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created while statement
 		 */
-		public Loop(Block body, SourceReference source_reference = null) : base(source_reference){
+		public Loop(Block body, SourceReference source_reference = null){
 			this.body = body;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

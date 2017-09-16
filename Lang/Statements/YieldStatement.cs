@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a yield statement in the source code.
  */
-	public class YieldStatement : Statement
+	public class YieldStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * The expression to yield or the method call to yield to.
 		 */

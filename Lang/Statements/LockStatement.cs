@@ -17,8 +17,12 @@ namespace Vala.Lang.Statements
  * occurs. Otherwise it's translated into a try/finally statement which unlocks the mutex
  * after the block is finished.
  */
-	public class LockStatement : Statement
+	public class LockStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Expression representing the resource to be locked.
 		 */
@@ -30,7 +34,6 @@ namespace Vala.Lang.Statements
 		public Block body { get; set; }
 
 		public LockStatement(Expression resource, Block body, SourceReference source_reference = null)
-			: base(source_reference)
 		{
 			this.body = body;
 			this.source_reference = source_reference;
@@ -57,7 +60,7 @@ namespace Vala.Lang.Statements
 				block.add_statement(new TryStatement(body, fin_body, source_reference));
 
 				var parent_block = (Block)parent_node;
-				parent_block.replace_statement(this, block.statement);
+				parent_block.replace_statement(this, block);
 
 				return block.check(context);
 			}

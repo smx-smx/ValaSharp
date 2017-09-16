@@ -68,7 +68,7 @@ namespace Vala.Lang
 			}
 
 			foreach (Statement st in get_statements()) {
-				st.accept(visitor);
+				st.node.accept(visitor);
 			}
 		}
 
@@ -91,7 +91,7 @@ namespace Vala.Lang
 			context.analyzer.insert_block = this;
 
 			foreach (Statement st in get_statements()) {
-				st.check(context);
+				st.node.check(context);
 			}
 
 			foreach (LocalVariable local in get_local_variables()) {
@@ -100,7 +100,7 @@ namespace Vala.Lang
 
 			// use get_statements () instead of statement_list to not miss errors within StatementList objects
 			foreach (Statement stmt in get_statements()) {
-				add_error_types(stmt.get_error_types());
+				add_error_types(stmt.node.get_error_types());
 			}
 
 			context.analyzer.current_symbol = old_symbol;

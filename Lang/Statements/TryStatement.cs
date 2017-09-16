@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a try statement in the source code.
  */
-	public class TryStatement : Statement
+	public class TryStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the body of the try statement.
 		 */
@@ -52,8 +56,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created try statement
 		 */
-		public TryStatement(Block body, Block finally_body, SourceReference source_reference = null) : base(source_reference){
+		public TryStatement(Block body, Block finally_body, SourceReference source_reference = null){
 			this.body = body;
+			this.source_reference = source_reference;
 			this.finally_body = finally_body;
 		}
 

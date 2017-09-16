@@ -12,8 +12,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents a break statement in the source code.
 	 */
-	public class BreakStatement : Statement
+	public class BreakStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Creates a new break statement.
 		 *

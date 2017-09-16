@@ -11,11 +11,7 @@ namespace Vala.Lang.Statements
 	/**
 	* Interface for all statement types.
 	*/
-	public class Statement : CodeNode {
-		public Statement() { }
-
-		public Statement(SourceReference source_reference) {
-			this.source_reference = source_reference;
-		}
+	public interface Statement {
+		CodeNode node { get; }
 	}
 }

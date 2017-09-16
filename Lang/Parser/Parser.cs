@@ -1517,7 +1517,7 @@ namespace Vala.Lang.Parser
 					comment = scanner.pop_comment();
 					switch (current()) {
 						case TokenType.OPEN_BRACE:
-							stmt = parse_block().statement;
+							stmt = parse_block();
 							break;
 						case TokenType.SEMICOLON:
 							stmt = parse_empty_statement();
@@ -1991,7 +1991,7 @@ namespace Vala.Lang.Parser
 			}
 			if (block != null) {
 				block.add_statement(stmt);
-				return block.statement;
+				return block;
 			} else {
 				return stmt;
 			}
@@ -2015,7 +2015,7 @@ namespace Vala.Lang.Parser
 			expect(TokenType.CLOSE_PARENS);
 			var src = get_src(begin);
 			var body = parse_embedded_statement("foreach");
-			return new ForeachStatement(type, id, collection, body, src).statement;
+			return new ForeachStatement(type, id, collection, body, src);
 		}
 
 		Statement parse_break_statement() {

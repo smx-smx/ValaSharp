@@ -2212,8 +2212,8 @@ namespace CCodeGen.Modules
 			}
 
 			foreach (Statement stmt in b.get_statements()) {
-				push_line(stmt.source_reference);
-				stmt.emit(this);
+				push_line(stmt.node.source_reference);
+				stmt.node.emit(this);
 				pop_line();
 			}
 

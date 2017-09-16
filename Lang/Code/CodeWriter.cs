@@ -911,7 +911,7 @@ namespace Vala.Lang.Code
 			write_begin_block();
 
 			foreach (Statement stmt in b.get_statements()) {
-				stmt.accept(this);
+				stmt.node.accept(this);
 			}
 
 			write_end_block();

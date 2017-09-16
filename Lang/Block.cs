@@ -12,9 +12,11 @@ using Vala.Lang.Symbols;
 
 namespace Vala.Lang
 {
-	public class Block : Symbol//, Statement
+	public class Block : Symbol, Statement
 	{
-		public Statement statement;
+		public CodeNode node {
+			get { return this; }
+		}
 
 		/**
 	 * Specifies whether this block contains a jump statement. This
@@ -33,7 +35,7 @@ namespace Vala.Lang
 		 *
 		 * @param source_reference  reference to source code
 		 */
-		public Block(SourceReference source_reference): base(null, source_reference){
+		public Block(SourceReference source_reference): base(null, source_reference) {
 		}
 
 		/**
@@ -42,12 +44,12 @@ namespace Vala.Lang
 		 * @param stmt a statement
 		 */
 		public void add_statement(Statement stmt) {
-			stmt.parent_node = this;
+			stmt.node.parent_node = this;
 			statement_list.Add(stmt);
 		}
 
 		public void insert_statement(int index, Statement stmt) {
-			stmt.parent_node = this;
+			stmt.node.parent_node = this;
 			statement_list.Insert(index, stmt);
 		}
 
@@ -120,7 +122,7 @@ namespace Vala.Lang
 
 		public override void accept_children(CodeVisitor visitor) {
 			foreach (Statement stmt in statement_list) {
-				stmt.accept(visitor);
+				stmt.node.accept(visitor);
 			}
 		}
 
@@ -139,7 +141,7 @@ namespace Vala.Lang
 			context.analyzer.insert_block = this;
 
 			for (int i = 0; i < statement_list.Count; i++) {
-				statement_list[i].check(context);
+				statement_list[i].node.check(context);
 			}
 
 			foreach (LocalVariable local in get_local_variables()) {
@@ -152,7 +154,7 @@ namespace Vala.Lang
 
 			// use get_statements () instead of statement_list to not miss errors within StatementList objects
 			foreach (Statement stmt in get_statements()) {
-				add_error_types(stmt.get_error_types());
+				add_error_types(stmt.node.get_error_types());
 			}
 
 			context.analyzer.current_symbol = old_symbol;
@@ -172,7 +174,7 @@ namespace Vala.Lang
 					for (int j = 0; j < stmt_list.length; j++) {
 						if (stmt_list.get(j) == stmt) {
 							stmt_list.insert(j, new_stmt);
-							new_stmt.parent_node = this;
+							new_stmt.node.parent_node = this;
 							break;
 						}
 					}
@@ -181,7 +183,7 @@ namespace Vala.Lang
 					stmt_list.add(new_stmt);
 					stmt_list.add(stmt);
 					statement_list[i] = stmt_list;
-					new_stmt.parent_node = this;
+					new_stmt.node.parent_node = this;
 				}
 			}
 		}
@@ -193,13 +195,13 @@ namespace Vala.Lang
 					for (int j = 0; j < stmt_list.length; j++) {
 						if (stmt_list.get(j) == old_stmt) {
 							stmt_list.set(j, new_stmt);
-							new_stmt.parent_node = this;
+							new_stmt.node.parent_node = this;
 							break;
 						}
 					}
 				} else if (statement_list[i] == old_stmt) {
 					statement_list[i] = new_stmt;
-					new_stmt.parent_node = this;
+					new_stmt.node.parent_node = this;
 					break;
 				}
 			}

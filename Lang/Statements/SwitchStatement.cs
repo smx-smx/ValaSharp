@@ -15,8 +15,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a switch selection statement in the source code.
  */
-	public class SwitchStatement : Statement
+	public class SwitchStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the switch expression.
 		 */
@@ -40,7 +44,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created switch statement
 		 */
-		public SwitchStatement(Expression expression, SourceReference source_reference) : base(source_reference) {
+		public SwitchStatement(Expression expression, SourceReference source_reference) {
 			this.source_reference = source_reference;
 			this.expression = expression;
 		}

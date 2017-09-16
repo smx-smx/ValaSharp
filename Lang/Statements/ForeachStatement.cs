@@ -101,8 +101,6 @@ namespace Vala.Lang.Statements
 			this.collection = collection;
 			this.body = body;
 			this.type_reference = type_reference;
-
-			statement = new Statement(source_reference);
 		}
 
 		public override void accept(CodeVisitor visitor) {

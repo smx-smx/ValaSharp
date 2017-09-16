@@ -13,15 +13,20 @@ namespace Vala.Lang.Statements
 	/**
  * Represents an unlock statement e.g. {{{ unlock (a); }}}.
  */
-	public class UnlockStatement : Statement
+	public class UnlockStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Expression representing the resource to be unlocked.
 		 */
 		public Expression resource { get; set; }
 
-		public UnlockStatement(Expression resource, SourceReference source_reference = null) : base(source_reference){
+		public UnlockStatement(Expression resource, SourceReference source_reference = null){
 			this.resource = resource;
+			this.source_reference = source_reference;
 		}
 
 		public override void accept(CodeVisitor visitor) {

@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
  * Represents a for iteration statement in the source code.
  */
-	public class ForStatement : Statement
+	public class ForStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the loop condition.
 		 */
@@ -57,8 +61,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created for statement
 		 */
-		public ForStatement(Expression condition, Block body, SourceReference source_reference = null) : base(source_reference) {
+		public ForStatement(Expression condition, Block body, SourceReference source_reference = null){
 			this.condition = condition;
+			this.source_reference = source_reference;
 			this.body = body;
 		}
 
@@ -174,7 +179,7 @@ namespace Vala.Lang.Statements
 			block.add_statement(new Loop(body, source_reference));
 
 			var parent_block = (Block)parent_node;
-			parent_block.replace_statement(this, block.statement);
+			parent_block.replace_statement(this, block);
 
 			return block.check(context);
 		}

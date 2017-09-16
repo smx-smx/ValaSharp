@@ -13,8 +13,12 @@ namespace Vala.Lang.Statements
 	/**
 	 * Represents a while iteration statement in the source code.
 	 */
-	public class WhileStatement : Statement
+	public class WhileStatement : CodeNode, Statement
 	{
+		public CodeNode node {
+			get { return this; }
+		}
+
 		/**
 		 * Specifies the loop condition.
 		 */
@@ -52,8 +56,9 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created while statement
 		 */
-		public WhileStatement(Expression condition, Block body, SourceReference source_reference = null) : base(source_reference){
+		public WhileStatement(Expression condition, Block body, SourceReference source_reference = null) {
 			this.body = body;
+			this.source_reference = source_reference;
 			this.condition = condition;
 		}
 
