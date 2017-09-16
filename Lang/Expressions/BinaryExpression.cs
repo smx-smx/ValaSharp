@@ -160,7 +160,14 @@ namespace Vala.Lang.Expressions
 				var decl = new DeclarationStatement(local, source_reference);
 				decl.check(context);
 
-				var right_stmt = new ExpressionStatement(new Assignment(MemberAccess.simple(local.name, right.source_reference), right, AssignmentOperator.SIMPLE, right.source_reference), right.source_reference);
+				var right_stmt = new ExpressionStatement(
+					new Assignment(
+						MemberAccess.simple(local.name, right.source_reference),
+						right,
+						AssignmentOperator.SIMPLE,
+						right.source_reference
+					), right.source_reference
+				);
 
 				var stmt = new ExpressionStatement(
 					new Assignment(
