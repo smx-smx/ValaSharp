@@ -7,7 +7,7 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.CodeNodes
 {
-	public class ValaAttribute : CodeNode, IComparer<ValaAttribute>
+	public class ValaAttribute : CodeNode
 	{
 		/**
 	 * The name of the attribute type.
@@ -128,10 +128,6 @@ namespace Vala.Lang.CodeNodes
 			}
 
 			return bool.Parse(value);
-		}
-
-		public int Compare(ValaAttribute x, ValaAttribute y) {
-			return x.name.CompareTo(y.name);
 		}
 	}
 }
