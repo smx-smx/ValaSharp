@@ -72,6 +72,7 @@ namespace Vala.Lang.Expressions
 			CastExpression @this = new CastExpression();
 			@this.inner = inner;
 			@this.is_non_null_cast = true;
+			@this.source_reference = source_reference;
 			return @this;
 		}
 
