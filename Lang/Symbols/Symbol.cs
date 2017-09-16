@@ -182,10 +182,6 @@ namespace Vala.Lang.Symbols
 		private Scope _owner;
 		private Scope _scope;
 
-		public Symbol()
-		{
-			
-		}
 
 		public Symbol(string name, SourceReference source_reference, Comment comment = null) {
 			this.name = name;
