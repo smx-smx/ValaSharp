@@ -9,9 +9,9 @@ namespace Vala.Lang.Symbols
 {
 	public enum SymbolAccessibility
 	{
-		PROTECTED,
-		INTERNAL,
 		PRIVATE,
+		INTERNAL,
+		PROTECTED,
 		PUBLIC
 	}
 
