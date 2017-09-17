@@ -17,8 +17,9 @@ namespace CCodeGen
 	/**
 	 * Interface to the C compiler.
 	 */
-	public class CCodeCompiler
-	{
+	public class CCodeCompiler {
+		public string path { get; set; }
+
 		public CCodeCompiler() {
 		}
 
@@ -51,7 +52,7 @@ namespace CCodeGen
 			bool use_pkgconfig = false;
 
 			if (pkg_config_command == null) {
-				pkg_config_command = "pkg-config";
+				pkg_config_command = path + "pkg-config" + GProcess.get_executable_suffix();
 			}
 
 			string pc = " --cflags";

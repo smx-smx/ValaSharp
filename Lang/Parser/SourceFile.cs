@@ -67,7 +67,7 @@ namespace Vala.Lang.Parser
 				try {
 					Process pkgconfig = Process.Start(new ProcessStartInfo {
 						UseShellExecute = false,
-						FileName = context.path + "/pkg-config" + GProcess.get_executable_suffix(),
+						FileName = context.path + "pkg-config" + GProcess.get_executable_suffix(),
 						Arguments = "--silence - errors--modversion % s".printf(pkg_config_name),
 						RedirectStandardError = true,
 						RedirectStandardOutput = true

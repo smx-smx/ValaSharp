@@ -108,6 +108,10 @@ namespace ValaCompiler
 			context.verbose_mode = opts.verbose_mode;
 			context.version_header = !opts.disable_version_header;
 
+			if (opts.path != null && !opts.path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+				opts.path += Path.DirectorySeparatorChar;
+
+
 			context.path = opts.path;
 			context.ccode_only = opts.ccode_only;
 			if (opts.ccode_only && opts.cc_options != null) {
@@ -377,6 +381,8 @@ namespace ValaCompiler
 
 			if (!opts.ccode_only) {
 				var ccompiler = new CCodeCompiler();
+				ccompiler.path = opts.path;
+
 				if (opts.cc_command == null && Environment.GetEnvironmentVariable("CC") != null) {
 					opts.cc_command = Environment.GetEnvironmentVariable("CC");
 				}
