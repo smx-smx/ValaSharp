@@ -47,6 +47,7 @@
     <Compile Include="CCodeDeclaration.cs" />
     <Compile Include="CCodeDeclarator.cs" />
     <Compile Include="CCodeElementAccess.cs" />
+    <Compile Include="CCodeEnum.cs" />
     <Compile Include="CCodeEnumValue.cs" />
     <Compile Include="CCodeFile.cs" />
     <Compile Include="CCodeFragment.cs" />

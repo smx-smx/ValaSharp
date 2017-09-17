@@ -51,7 +51,6 @@
     <Compile Include="ArrayLengthField.cs" />
     <Compile Include="BasicBlock.cs" />
     <Compile Include="Block.cs" />
-    <Compile Include="CCodeEnum.cs" />
     <Compile Include="CodeNodes\Callable.cs" />
     <Compile Include="CodeNodes\CatchClause.cs" />
     <Compile Include="CodeNodes\MemberInitializer.cs" />
