@@ -14,7 +14,7 @@ namespace Vala.Lang.Parser
 
 		public long pos;
 
-		public SourceLocation(MemoryStream rdr, long offset, int _line, int _column) : this(rdr, _line, _column)
+		public SourceLocation(MemoryStream rdr, long offset, int _line, int _column)
 		{
 			this.rdr = rdr;
 			pos = offset;
