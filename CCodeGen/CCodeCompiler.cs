@@ -29,9 +29,12 @@ namespace CCodeGen
 
 			try {
 				Process pkg_config = Process.Start(new ProcessStartInfo {
-					UseShellExecute = true,
+					UseShellExecute = false,
 					FileName = pkg_config_command,
-					Arguments = pc
+					Arguments = pc,
+					RedirectStandardOutput = true,
+					RedirectStandardError = true,
+					WorkingDirectory = Path.GetDirectoryName(pkg_config_command)
 				});
 				pkg_config.WaitForExit();
 				exit_status = pkg_config.ExitCode;
@@ -72,9 +75,12 @@ namespace CCodeGen
 				try {
 					int exit_status;
 					Process pkg_config = Process.Start(new ProcessStartInfo {
-						UseShellExecute = true,
+						UseShellExecute = false,
 						FileName = pkg_config_command,
-						Arguments = pc
+						Arguments = pc,
+						WorkingDirectory = path,
+						RedirectStandardOutput = true,
+						RedirectStandardError = true
 					});
 					pkg_config.WaitForExit();
 					exit_status = pkg_config.ExitCode;
@@ -82,6 +88,7 @@ namespace CCodeGen
 						Report.error(null, "pkg-config exited with status %d".printf(exit_status));
 						return;
 					}
+					pkgflags = pkg_config.StandardOutput.ReadToEnd();
 				} catch (Exception e) {
 					Report.error(null, e.Message);
 					return;
@@ -91,7 +98,7 @@ namespace CCodeGen
 			// TODO compile the C code files in parallel
 
 			if (cc_command == null) {
-				cc_command = "cc";
+				cc_command = context.path + "cc" + GProcess.get_executable_suffix();
 			}
 			string cmdline = "";
 			if (context.debug) {
@@ -133,15 +140,19 @@ namespace CCodeGen
 			try {
 				int exit_status;
 				Process cc = Process.Start(new ProcessStartInfo {
-					UseShellExecute = true,
+					UseShellExecute = false,
 					FileName = cc_command,
-					Arguments = cmdline
+					Arguments = cmdline,
+					RedirectStandardOutput = true,
+					RedirectStandardError = true,
+					WorkingDirectory = path
 				});
 				cc.WaitForExit();
 				exit_status = cc.ExitCode;
 				if (exit_status != 0) {
 					Report.error(null, "cc exited with status %d".printf(exit_status));
 				}
+				cc.Dispose();
 			} catch (Exception e) {
 				Report.error(null, e.Message);
 			}

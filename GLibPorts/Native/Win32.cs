@@ -34,6 +34,9 @@ namespace GLibPorts.Native
 		public static extern IntPtr fopen(string filename, string mode);
 
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int fclose(IntPtr handle);
+
+		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int _open_osfhandle(IntPtr osfhandle, int flags);
 
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -82,5 +85,23 @@ namespace GLibPorts.Native
 		public static extern int _vscprintf(
 			string format,
 			IntPtr ptr);
+
+		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int _open([MarshalAs(UnmanagedType.LPStr)] string filename, int oflag, int pmode = 0);
+
+		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr _mktemp(IntPtr template);
+
+		public static string mktemp(string template) {
+			IntPtr templatePtr = Marshal.StringToHGlobalAnsi(template);
+			IntPtr resultPtr = _mktemp(templatePtr);
+
+			string result = null;
+			if (resultPtr != IntPtr.Zero)
+				result = Marshal.PtrToStringAnsi(resultPtr);
+
+			Marshal.FreeHGlobal(templatePtr);
+			return result;
+		}
 	}
 }

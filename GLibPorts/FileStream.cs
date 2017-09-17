@@ -13,7 +13,7 @@ namespace GLibPorts
 		public static readonly FileStream stderr = new FileStream(File.stderr);
 		public static readonly FileStream stdout = new FileStream(File.stdout);
 
-		public class FileStream
+		public class FileStream : IDisposable
 		{
 			private IntPtr stream;
 
@@ -21,6 +21,17 @@ namespace GLibPorts
 				stream = streamHandle;
 
 				Win32.setvbuf(stream, null, Win32._IONBF, 0);
+			}
+
+			~FileStream() {
+				Dispose();
+			}
+
+			public void Dispose() {
+				if (stream != IntPtr.Zero) {
+					Win32.fclose(stream);
+					stream = IntPtr.Zero;
+				}
 			}
 
 			public int fileno() {

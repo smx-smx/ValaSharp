@@ -344,7 +344,11 @@ namespace ValaCompiler
 
 				// put .vapi file in current directory unless -d has been explicitly specified
 				if (opts.directory != null && !GPath.is_absolute(opts.vapi_filename)) {
-					opts.vapi_filename = "%s%c%s".printf(context.directory, Path.DirectorySeparatorChar, opts.vapi_filename);
+					string sep = "";
+					if (!context.directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
+						sep = Path.DirectorySeparatorChar.ToString();
+
+					opts.vapi_filename = "%s%s".printf(context.directory + sep, opts.vapi_filename);
 				}
 
 				interface_writer.write_file(context, opts.vapi_filename);
@@ -445,12 +449,16 @@ namespace ValaCompiler
 				return 1;
 			}
 
-			opts.output = "%s/%s.XXXXXX".printf(Path.GetTempPath(), Path.GetFileName(opts.unparsed[0]));
+			opts.output = "%s%c%s.XXXXXX".printf(Path.GetTempPath(), Path.DirectorySeparatorChar, Path.GetFileName(opts.unparsed[0]));
 
-			/*int outputfd = FileUtils.mkstemp(output);
+			string temp_filename;
+			int outputfd = FileUtils.mkstemp(opts.output, out temp_filename);
 			if (outputfd < 0) {
 				return 1;
-			}*/
+			}
+			FileUtils.close(outputfd);
+
+			opts.output = temp_filename;
 
 			run_output = true;
 			opts.disable_warnings = true;
@@ -462,7 +470,8 @@ namespace ValaCompiler
 				return ret;
 			}
 
-			//FileUtils.close(outputfd);
+			return 0;
+
 			/*if (FileUtils.chmod(output, 0700) != 0) {
 				FileUtils.unlink(output);
 				return 1;
@@ -486,7 +495,8 @@ namespace ValaCompiler
 				{
 					FileName = opts.output,
 					Arguments = string.Join(" ", target_args.ToArray()),
-					UseShellExecute = true
+					UseShellExecute = false,
+					WorkingDirectory = opts.path
 				});
 
 				System.IO.File.Delete(opts.output);

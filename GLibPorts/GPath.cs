@@ -18,9 +18,10 @@ namespace GLibPorts
 				if (file_name[0] == System.IO.Path.DirectorySeparatorChar)
 					return true;
 
+				//TODO: test System.IO.Path.IsPathRooted
 #if !UNIX
 				if (Char.IsLetter(file_name[0]) &&
-					file_name[1] == ':' && file_name[3] == System.IO.Path.DirectorySeparatorChar)
+					file_name[1] == ':' && file_name[2] == System.IO.Path.DirectorySeparatorChar)
 					return true;
 #endif
 				return false;

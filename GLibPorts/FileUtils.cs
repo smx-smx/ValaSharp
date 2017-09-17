@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace GLibPorts
 			public static void close(int outputfd)
 			{
 				Win32._close(outputfd);
+			}
+
+			public static int mkstemp(string template, out string filename) {
+				filename = Win32.mktemp(template);
+				if (filename == null)
+					return -1;
+				return Win32._open(filename, Win32._O_RDWR | Win32._O_CREAT, 0700);
 			}
 		}
 	}

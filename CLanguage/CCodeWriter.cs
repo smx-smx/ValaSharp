@@ -107,7 +107,7 @@ namespace CLanguage
 		 * Closes the file.
 		 */
 		public void close() {
-			stream = null;
+			stream.Dispose();
 
 			if (file_exists) {
 				var changed = true;
@@ -129,8 +129,8 @@ namespace CLanguage
 							changed = false;
 						}
 					}
-					old_file = null;
-					new_file = null;
+					old_file.Dispose();
+					new_file.Dispose();
 				} catch (Exception) {
 					// assume changed if mmap comparison doesn't work
 				}

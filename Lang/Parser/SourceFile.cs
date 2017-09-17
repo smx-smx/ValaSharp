@@ -70,7 +70,8 @@ namespace Vala.Lang.Parser
 						FileName = context.path + "pkg-config" + GProcess.get_executable_suffix(),
 						Arguments = "--silence - errors--modversion % s".printf(pkg_config_name),
 						RedirectStandardError = true,
-						RedirectStandardOutput = true
+						RedirectStandardOutput = true,
+						WorkingDirectory = context.path
 					});
 					pkgconfig.WaitForExit();
 					standard_output = pkgconfig.StandardOutput.ReadToEnd();
@@ -284,10 +285,10 @@ namespace Vala.Lang.Parser
 				if (context.run_output) {
 					csource_filename = context.output + ".c";
 				} else if (context.ccode_only || context.save_csources) {
-					csource_filename = GPath.build_path("/", get_destination_directory(), get_basename() + ".c");
+					csource_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), get_destination_directory(), get_basename() + ".c");
 				} else {
 					// temporary file
-					csource_filename = GPath.build_path("/", get_destination_directory(), get_basename() + ".vala.c");
+					csource_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), get_destination_directory(), get_basename() + ".vala.c");
 				}
 			}
 			return csource_filename;
