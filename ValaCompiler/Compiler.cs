@@ -444,9 +444,10 @@ namespace ValaCompiler
 			if (!CommandLine.Parser.Default.ParseArguments(args, opts))
 				return 1;
 
-			int result = run_source(opts);
-
-			return result;
+			//int result = run_source(opts);
+			//return result;
+			var compiler = new Compiler(opts);
+			return compiler.run();
 		}
 	}
 }
