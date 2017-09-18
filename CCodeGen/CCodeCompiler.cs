@@ -152,6 +152,8 @@ namespace CCodeGen
 				if (exit_status != 0) {
 					Report.error(null, "cc exited with status %d".printf(exit_status));
 				}
+				stdout.puts(cc.StandardError.ReadToEnd());
+				stderr.puts(cc.StandardError.ReadToEnd());
 				cc.Dispose();
 			} catch (Exception e) {
 				Report.error(null, e.Message);
