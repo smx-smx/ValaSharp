@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommandLine;
 using Vala.Lang;
+using CommandLine.Text;
 
 namespace ValaCompiler
 {
@@ -394,6 +395,13 @@ namespace ValaCompiler
 		public IList<string> sources {
 			get { return unparsed; }
 			set { unparsed = value; }
+		}
+
+		[HelpOption()]
+		public string GetUsage() {
+			HelpText help = HelpText.AutoBuild(this);
+			help.AdditionalNewLineAfterOption = false;
+			return help;
 		}
 	}
 }

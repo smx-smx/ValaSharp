@@ -356,7 +356,7 @@ namespace ValaCompiler
 
 			if (opts.internal_vapi_filename != null) {
 				if (opts.internal_header_filename == null ||
-				    opts.header_filename == null) {
+					opts.header_filename == null) {
 					Report.error(null, "--internal-vapi may only be used in combination with --header and --internal-header");
 					return quit();
 				}
@@ -404,38 +404,6 @@ namespace ValaCompiler
 		}
 
 		static int run_source(CompilerOptions opts) {
-#if false
-			int i = 1;
-			if (args[i] != null && args[i].StartsWith("-")) {
-				try {
-					string[] compile_args = new string[args.Length + 1];
-					compile_args[0] = "valac";
-					args.CopyTo(compile_args, 1);
-
-					//Shell.parse_argv("valac " + args[1], out compile_args);
-
-					/*var opt_context = new OptionContext("- Vala");
-					opt_context.set_help_enabled(true);
-					opt_context.add_main_entries(options, null);
-					string[] temp_args = compile_args;
-					opt_context.parse(ref temp_args);*/
-
-					var options = new CompilerOptions();
-					CommandLine.Parser.Default.ParseArgumentsStrict(args, options);
-
-				} catch (Exception e) {
-					stdout.printf("%s\n", e.Message);
-					return 1;
-				}/* catch (OptionError e) {
-					stdout.printf("%s\n", e.Message);
-					stdout.printf("Run '%s --help' to see a full list of available command line options.\n", args[0]);
-					return 1;
-				}*/
-
-				i++;
-			}
-#endif
-
 			if (opts.version) {
 				stdout.printf("Vala %s\n", Config.BUILD_VERSION);
 				return 0;
@@ -446,6 +414,9 @@ namespace ValaCompiler
 
 			if (opts.unparsed.Count == 0) {
 				stderr.printf("No source file specified.\n");
+				stderr.printf("Run '%s --help' to see a full list of available command line options.\n",
+					AppDomain.CurrentDomain.FriendlyName
+				);
 				return 1;
 			}
 
@@ -465,102 +436,17 @@ namespace ValaCompiler
 			opts.quiet_mode = true;
 
 			var compiler = new Compiler(opts);
-			int ret = compiler.run();
-			if (ret != 0) {
-				return ret;
-			}
-
-			return 0;
-
-			/*if (FileUtils.chmod(output, 0700) != 0) {
-				FileUtils.unlink(output);
-				return 1;
-			}*/
-
-			List<string> target_args = new List<string>();
-			/*while (i < args.Length) {
-				target_args.Add(args[i]);
-				i++;
-			}*/
-
-			if(opts.unparsed.Count > 1)
-				target_args.AddRange(opts.unparsed.Take(1));
-
-			try {
-				//int pid;
-				//var loop = new MainLoop();
-				int child_status = 0;
-
-				Process.Start(new ProcessStartInfo
-				{
-					FileName = opts.output,
-					Arguments = string.Join(" ", target_args.ToArray()),
-					UseShellExecute = false,
-					WorkingDirectory = opts.path
-				});
-
-				System.IO.File.Delete(opts.output);
-				
-				/*ChildWatch.add(pid, (pid, status) => {
-					child_status = (status & 0xff00) >> 8;
-					loop.quit();
-				})*/
-
-				//loop.run();
-
-				return child_status;
-			} catch (Exception e) {
-				stdout.printf("%s\n", e.Message);
-				return 1;
-			}
+			return compiler.run();
 		}
 
 		static int Main(string[] args) {
-			// initialize locale
-			//Intl.setlocale(LocaleCategory.ALL, "");
+			CompilerOptions opts = new CompilerOptions();
+			if (!CommandLine.Parser.Default.ParseArguments(args, opts))
+				return 1;
 
-#if false
-			if (Path.GetFileName(args[0]) == "vala" || Path.GetFileName(args[0]) == "vala" + Config.PACKAGE_SUFFIX) {
-				return run_source(args);
-			}
-#endif
-			//SMX
-			var opts = new CompilerOptions();
-			CommandLine.Parser.Default.ParseArguments(args, opts);
-			/*string[] new_args = new string[args.Length + 1];
-			args.CopyTo(new_args, 1);
-			new_args[0] = "valac";*/
 			int result = run_source(opts);
+
 			return result;
-
-			try {
-#if false
-				var opt_context = new OptionContext("- Vala Compiler");
-				opt_context.set_help_enabled(true);
-				opt_context.add_main_entries(options, null);
-				opt_context.parse(ref args);
-#endif
-			} catch (OptionError e) {
-				stdout.printf("%s\n", e.Message);
-				stdout.printf("Run '%s --help' to see a full list of available command line options.\n", args[0]);
-				return 1;
-			}
-
-			if (opts.version) {
-				stdout.printf("Vala %s\n", Config.BUILD_VERSION);
-				return 0;
-			} else if (opts.api_version) {
-				stdout.printf("%s\n", Config.API_VERSION);
-				return 0;
-			}
-
-			if (opts.sources == null && opts.fast_vapis == null) {
-				stderr.printf("No source file specified.\n");
-				return 1;
-			}
-
-			var compiler = new Compiler();
-			return compiler.run();
 		}
 	}
 }
