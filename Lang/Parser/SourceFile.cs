@@ -259,7 +259,7 @@ namespace Vala.Lang.Parser
 			if (context.directory == null) {
 				return get_subdir();
 			}
-			return GPath.build_path("/", context.directory, get_subdir());
+			return GPath.build_path(Path.DirectorySeparatorChar.ToString(), context.directory, get_subdir());
 		}
 
 		private string get_basename() {
@@ -305,10 +305,10 @@ namespace Vala.Lang.Parser
 				if (context.header_filename != null) {
 					cinclude_filename = Path.GetFileName(context.header_filename);
 					if (context.includedir != null) {
-						cinclude_filename = GPath.build_path("/", context.includedir, cinclude_filename);
+						cinclude_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), context.includedir, cinclude_filename);
 					}
 				} else {
-					cinclude_filename = GPath.build_path("/", get_subdir(), get_basename() + ".h");
+					cinclude_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), get_subdir(), get_basename() + ".h");
 				}
 			}
 			return cinclude_filename;

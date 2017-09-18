@@ -361,7 +361,7 @@ namespace Vala.Lang.CodeNodes
 				stdout.printf("Loaded package `%s'\n", path);
 			}
 
-			var deps_filename = GPath.build_path("/", Path.GetDirectoryName(path), pkg + ".deps");
+			var deps_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), Path.GetDirectoryName(path), pkg + ".deps");
 			if (!add_packages_from_file(deps_filename)) {
 				return false;
 			}
@@ -502,7 +502,7 @@ namespace Vala.Lang.CodeNodes
 
 			if (path == null) {
 				/* last chance: try the package compiled-in vapi dir */
-				var filename = GPath.build_path("/", Config.PACKAGE_DATADIR, "vapi", pkg + ".vapi");
+				var filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), Config.PACKAGE_DATADIR, "vapi", pkg + ".vapi");
 				if (File.Exists(filename)) {
 					path = filename;
 				}
@@ -537,7 +537,7 @@ namespace Vala.Lang.CodeNodes
 			}
 
 			// look into the same directory of .gir
-			metadata_filename = GPath.build_path("/", Path.GetDirectoryName(gir_filename), metadata_basename);
+			metadata_filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), Path.GetDirectoryName(gir_filename), metadata_basename);
 			if (File.Exists(metadata_filename)) {
 				return metadata_filename;
 			}
@@ -550,7 +550,7 @@ namespace Vala.Lang.CodeNodes
 
 			if (directories != null) {
 				foreach (string dir in directories) {
-					filename = GPath.build_path("/", dir, basename);
+					filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), dir, basename);
 					if (File.Exists(filename)) {
 						return filename;
 					}
@@ -559,7 +559,7 @@ namespace Vala.Lang.CodeNodes
 
 			if (data_dir != null) {
 				foreach (string dir in GEnvironment.get_system_data_dirs()) {
-					filename = GPath.build_path("/", dir, data_dir, basename);
+					filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), dir, data_dir, basename);
 					if (File.Exists(filename)) {
 						return filename;
 					}
@@ -568,7 +568,7 @@ namespace Vala.Lang.CodeNodes
 
 			if (versioned_data_dir != null) {
 				foreach (string dir in GEnvironment.get_system_data_dirs()) {
-					filename = GPath.build_path("/", dir, versioned_data_dir, basename);
+					filename = GPath.build_path(Path.DirectorySeparatorChar.ToString(), dir, versioned_data_dir, basename);
 					if (File.Exists(filename)) {
 						return filename;
 					}
