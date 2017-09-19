@@ -48,11 +48,29 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestsRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="tests.runsettings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Annotations\" />
+    <Folder Include="Asyncronous\" />
+    <Folder Include="BasicTypes\" />
+    <Folder Include="Chainup\" />
+    <Folder Include="ControlFlow\" />
+    <Folder Include="DBus\" />
+    <Folder Include="Delegates\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Errors\" />
+    <Folder Include="Gir\" />
+    <Folder Include="Methods\" />
+    <Folder Include="Nullability\" />
+    <Folder Include="Objects\" />
+    <Folder Include="Pointers\" />
+    <Folder Include="Structs\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
