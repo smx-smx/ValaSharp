@@ -54,11 +54,6 @@
     <Compile Include="Native\File.cs" />
     <Compile Include="Native\Varargs.cs" />
     <Compile Include="Native\Win32.cs" />
-    <Compile Include="OptionArg.cs" />
-    <Compile Include="OptionContext.cs" />
-    <Compile Include="OptionEntry.cs" />
-    <Compile Include="OptionError.cs" />
-    <Compile Include="OptionFlags.cs" />
     <Compile Include="GPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shell.cs" />
