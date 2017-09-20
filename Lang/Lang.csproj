@@ -205,6 +205,10 @@
       <Project>{98f2e413-19ea-4254-ab56-683d9901e5d7}</Project>
       <Name>GLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{22D3A3CC-8FE3-4456-BCB8-2DFC99883056}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ValaConfig\ValaConfig.csproj">
       <Project>{96077E7E-75A0-451D-943D-326215399F3C}</Project>
       <Name>ValaConfig</Name>

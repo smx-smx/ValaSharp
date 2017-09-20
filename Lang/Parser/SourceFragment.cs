@@ -19,14 +19,13 @@ namespace Vala.Lang.Parser
 		public string content {
 			get
 			{
-				long currentPos = begin.rdr.Position;
-				begin.rdr.Seek(begin.pos, SeekOrigin.Begin);
+				long currentPos = begin.view.Position;
+				begin.view.Seek(begin.pos, SeekOrigin.Begin);
 
-				byte[] chars = new byte[length];
-				begin.rdr.Read(chars, 0, (int)length);
+				string data = begin.view.ReadString((int)length);
 
-				begin.rdr.Seek(currentPos, SeekOrigin.Begin);
-				return Encoding.Default.GetString(chars);
+				begin.view.Seek(currentPos, SeekOrigin.Begin);
+				return data;
 			}
 		}
 

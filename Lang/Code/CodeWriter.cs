@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Utils;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Literals;
@@ -1532,8 +1533,14 @@ namespace Vala.Lang.Code
 		}
 
 		private void write_identifier(string id) {
-			MemoryStream mem = new MemoryStream(Encoding.Default.GetBytes(id));
-			if (Scanner.get_identifier_or_keyword(mem, id.Length) != TokenType.IDENTIFIER ||
+			var bytes = Encoding.Default.GetBytes(id);
+			MemoryMappedFile mem = MemoryMappedFile.CreateNew(id, bytes.Length);
+			MemoryMappedViewAccessor accessor = mem.CreateViewAccessor();
+			accessor.WriteArray(0, bytes, 0, bytes.Length);
+
+			FastMemoryMappedFile fmf = new FastMemoryMappedFile(mem, bytes.Length);
+			FastMView view = new FastMView(fmf);
+			if (Scanner.get_identifier_or_keyword(view, id.Length) != TokenType.IDENTIFIER ||
 				Char.IsDigit(id[0])) {
 				stream.putc('@');
 			}

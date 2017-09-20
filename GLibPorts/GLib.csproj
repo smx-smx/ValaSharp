@@ -49,7 +49,6 @@
     <Compile Include="GProcess.cs" />
     <Compile Include="gstring.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
-    <Compile Include="MemoryStreamExtensions.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleFlags.cs" />
     <Compile Include="Native\File.cs" />

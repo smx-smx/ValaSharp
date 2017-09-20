@@ -7,6 +7,7 @@ using Vala.Lang.CodeNodes;
 using static GLibPorts.GLib;
 using System.IO.MemoryMappedFiles;
 using System.Diagnostics;
+using Utils;
 
 namespace Vala.Lang.Parser
 {
@@ -156,7 +157,7 @@ namespace Vala.Lang.Parser
 
 		private List<string> source_array = null;
 
-		private MemoryMappedFile mapped_file = null;
+		private FastMemoryMappedFile mapped_file = null;
 
 		private string _content = null;
 
@@ -356,7 +357,7 @@ namespace Vala.Lang.Parser
 			}
 		}
 
-		public byte[] get_mapped_contents(out long length) {
+		public FastMView get_mapped_contents(out long length) {
 			/*if (content != null)
 			{
 				return Encoding.Default.GetBytes(content);
@@ -366,7 +367,7 @@ namespace Vala.Lang.Parser
 
 			if (mapped_file == null) {
 				try {
-					mapped_file = MemoryMappedFile.CreateFromFile(filename);
+					mapped_file = FastMemoryMappedFile.OpenExisting(filename);
 				} catch (Exception e)
 				{
 					length = 0;
@@ -375,10 +376,7 @@ namespace Vala.Lang.Parser
 				}
 			}
 
-			var stream = mapped_file.CreateViewStream();
-			BinaryReader binReader = new BinaryReader(stream);
-
-			return binReader.ReadBytes((int)stream.Length);
+			return new FastMView(mapped_file);
 		}
 
 		public uint get_mapped_length() {

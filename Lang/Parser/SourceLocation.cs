@@ -3,28 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Utils;
 
 namespace Vala.Lang.Parser
 {
     public class SourceLocation
     {
-		public MemoryStream rdr;
+		public FastMView view;
 		public int line;
 		public int column;
 
 		public long pos;
 
-		public SourceLocation(MemoryStream rdr, long offset, int _line, int _column)
+		public SourceLocation(FastMView view, long offset, int _line, int _column)
 		{
-			this.rdr = rdr;
+			this.view = view;
 			pos = offset;
 			line = _line;
 			column = _column;
 		}
 
-		public SourceLocation(MemoryStream rdr, int _line, int _column){
-			this.rdr = rdr;
-			pos = rdr.Position;
+		public SourceLocation(FastMView view, int _line, int _column){
+			this.view = view;
+			pos = view.Position;
 			line = _line;
 			column = _column;
 		}

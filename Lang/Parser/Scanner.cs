@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Parser
@@ -17,7 +18,7 @@ namespace Vala.Lang.Parser
 		public SourceFile source_file { get; private set; }
 
 		TokenType previous;
-		MemoryStream current;
+		FastMView current;
 
 		long end = 0;
 
@@ -50,9 +51,7 @@ namespace Vala.Lang.Parser
 		public Scanner(SourceFile source_file) {
 			this.source_file = source_file;
 
-			byte[] contents = source_file.get_mapped_contents(out end);
-			MemoryStream begin = new MemoryStream(contents);
-
+			FastMView begin = source_file.get_mapped_contents(out end);
 			current = begin;
 
 			line = 1;
@@ -94,7 +93,7 @@ namespace Vala.Lang.Parser
 
 		public TokenType read_regex_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			TokenType type;
-			MemoryStream begin = current.Clone();
+			FastMView begin = new FastMView(current);
 			token_begin = new SourceLocation(begin, line, column);
 
 			int token_length_in_chars = -1;
@@ -275,7 +274,7 @@ namespace Vala.Lang.Parser
 			return type;
 		}
 
-		public static TokenType get_identifier_or_keyword(MemoryStream begin, int len) {
+		public static TokenType get_identifier_or_keyword(FastMView begin, int len) {
 			switch (len) {
 				case 2:
 					switch (begin.PeekChar()) {
@@ -647,7 +646,7 @@ namespace Vala.Lang.Parser
 
 		public TokenType read_template_token(out SourceLocation token_begin, out SourceLocation token_end) {
 			TokenType type;
-			MemoryStream begin = current.Clone();
+			FastMView begin = new FastMView(current);
 			token_begin = new SourceLocation(begin, line, column);
 
 			int token_length_in_chars = -1;
@@ -797,7 +796,7 @@ namespace Vala.Lang.Parser
 			space();
 
 			TokenType type;
-			MemoryStream begin = current.Clone();
+			FastMView begin = new FastMView(current);
 			token_begin = new SourceLocation(current, line, column);
 
 			int token_length_in_chars = -1;
@@ -1237,8 +1236,8 @@ namespace Vala.Lang.Parser
 			return type;
 		}
 
-		static bool matches(MemoryStream begin, string keyword) {
-			string text = begin.PeekString(keyword.Length);
+		static bool matches(FastMView begin, string keyword) {
+			string text = begin.ReadString(keyword.Length);
 			return text == keyword;
 		}
 
@@ -1273,7 +1272,7 @@ namespace Vala.Lang.Parser
 
 			pp_space();
 
-			MemoryStream begin = current.Clone();
+			FastMView begin = new FastMView(current);
 
 			int len = 0;
 			while (current.Position < end && Char.IsLetterOrDigit(current.PeekChar())) {
@@ -1422,7 +1421,7 @@ namespace Vala.Lang.Parser
 			}
 
 			current.Seek(-len, SeekOrigin.Current);
-			string identifier = current.PeekString(len);
+			string identifier = current.ReadString(len);
 			current.Seek(len, SeekOrigin.Current);
 
 			bool defined;
@@ -1561,7 +1560,7 @@ namespace Vala.Lang.Parser
 
 				// single-line comment
 				current.Position += 2;
-				MemoryStream begin = current.Clone();
+				FastMView begin = new FastMView(current);
 
 				// skip until end of line or end of file
 				while (current.Position < end && current.PeekChar() != '\n') {
@@ -1569,7 +1568,7 @@ namespace Vala.Lang.Parser
 				}
 
 				if (source_reference != null) {
-					string comment = begin.PeekString((int)(current.Position - begin.Position));
+					string comment = begin.ReadString((int)(current.Position - begin.Position));
 					push_comment(comment, source_reference, file_comment);
 				}
 			} else {
@@ -1586,7 +1585,7 @@ namespace Vala.Lang.Parser
 				current.Position += 2;
 				column += 2;
 
-				MemoryStream begin = current.Clone();
+				FastMView begin = new FastMView(current);
 				while (current.Position < end - 1
 					   && (current.PeekChar() != '*' || current.PeekCharAt(1) != '/')) {
 					if (current.PeekChar() == '\n') {
@@ -1603,7 +1602,7 @@ namespace Vala.Lang.Parser
 				}
 
 				if (source_reference != null) {
-					string comment = begin.PeekString((int)(current.Position - begin.Position));
+					string comment = begin.ReadString((int)(current.Position - begin.Position));
 					push_comment(comment, source_reference, file_comment);
 				}
 
