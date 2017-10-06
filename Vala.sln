@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VapiGen", "VapiGen\VapiGen.csproj", "{F1CFE5DA-3F3E-4988-B998-0167E516C794}"
 EndProject
@@ -26,7 +26,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lang", "Lang\Lang.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValaConfig", "ValaConfig\ValaConfig.csproj", "{96077E7E-75A0-451D-943D-326215399F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValaTests", "ValaTests\ValaTests.csproj", "{9FCB3FA8-705E-4596-ACA6-7BF6472EF98F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValaCompilerLib", "ValaCompilerLib\ValaCompilerLib.csproj", "{25FFC845-7135-42B6-BFA2-89E934B7ACB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{4D71CE9C-63A7-446D-9E25-632E364FE573}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValaTests", "ValaTests\ValaTests.csproj", "{009EA133-33CE-4E6B-8366-D9C11F0AFBF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +70,14 @@ Global
 		{96077E7E-75A0-451D-943D-326215399F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96077E7E-75A0-451D-943D-326215399F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96077E7E-75A0-451D-943D-326215399F3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9FCB3FA8-705E-4596-ACA6-7BF6472EF98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9FCB3FA8-705E-4596-ACA6-7BF6472EF98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FCB3FA8-705E-4596-ACA6-7BF6472EF98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9FCB3FA8-705E-4596-ACA6-7BF6472EF98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25FFC845-7135-42B6-BFA2-89E934B7ACB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25FFC845-7135-42B6-BFA2-89E934B7ACB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25FFC845-7135-42B6-BFA2-89E934B7ACB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25FFC845-7135-42B6-BFA2-89E934B7ACB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009EA133-33CE-4E6B-8366-D9C11F0AFBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009EA133-33CE-4E6B-8366-D9C11F0AFBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009EA133-33CE-4E6B-8366-D9C11F0AFBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009EA133-33CE-4E6B-8366-D9C11F0AFBF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
