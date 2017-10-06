@@ -23,7 +23,6 @@ find . -type f -iname "*.vala" -print0 | while IFS= read -r -d '' path; do
 	testMethod=$(echo "$testMethod" | sed 's/-/_/g')
 
 	cat<<EOF
-		[NonParallelizable]
 		[Test]
 		public void ${testMethod}() {
 			Assert.IsTrue(runner.RunValaTest("${dir}/${file}") == 0);
