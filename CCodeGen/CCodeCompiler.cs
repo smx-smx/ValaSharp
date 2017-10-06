@@ -147,7 +147,7 @@ namespace CCodeGen
 					RedirectStandardError = true,
 					WorkingDirectory = path
 				});
-				stdout.puts(cc.StandardError.ReadToEnd());
+				stdout.puts(cc.StandardOutput.ReadToEnd());
 				stderr.puts(cc.StandardError.ReadToEnd());
 				cc.WaitForExit();
 				exit_status = cc.ExitCode;
