@@ -82,13 +82,13 @@ namespace CCodeGen
 						RedirectStandardOutput = true,
 						RedirectStandardError = true
 					});
+					pkgflags = pkg_config.StandardOutput.ReadToEnd();
 					pkg_config.WaitForExit();
 					exit_status = pkg_config.ExitCode;
 					if (exit_status != 0) {
 						Report.error(null, "pkg-config exited with status %d".printf(exit_status));
 						return;
 					}
-					pkgflags = pkg_config.StandardOutput.ReadToEnd();
 				} catch (Exception e) {
 					Report.error(null, e.Message);
 					return;
@@ -147,13 +147,13 @@ namespace CCodeGen
 					RedirectStandardError = true,
 					WorkingDirectory = path
 				});
+				stdout.puts(cc.StandardError.ReadToEnd());
+				stderr.puts(cc.StandardError.ReadToEnd());
 				cc.WaitForExit();
 				exit_status = cc.ExitCode;
 				if (exit_status != 0) {
 					Report.error(null, "cc exited with status %d".printf(exit_status));
 				}
-				stdout.puts(cc.StandardError.ReadToEnd());
-				stderr.puts(cc.StandardError.ReadToEnd());
 				cc.Dispose();
 			} catch (Exception e) {
 				Report.error(null, e.Message);
