@@ -1,28 +1,22 @@
-﻿using System;
+﻿using CCodeGen;
+using CCodeGen.Modules;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vala.Lang;
-using Vala.Lang.CodeNodes;
-using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Vala;
-using Vala.Lang.Parser;
-using CCodeGen;
-using CCodeGen.Modules;
-using CommandLine.Text;
+using Vala.Lang;
 using Vala.Lang.Code;
+using Vala.Lang.CodeNodes;
+using Vala.Lang.Parser;
 using ValaConfig;
-
 using static GLibPorts.GLib;
-using Parser = Vala.Lang.Parser.Parser;
 
-namespace ValaCompiler
+namespace ValaCompilerLib
 {
-	class Compiler
+	public class Compiler
 	{
 		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
 
@@ -67,7 +61,7 @@ namespace ValaCompiler
 			}
 		}
 
-		private int run() {
+		public int run() {
 			context = new CodeContext();
 			CodeContext.push(context);
 
@@ -435,17 +429,6 @@ namespace ValaCompiler
 			opts.disable_warnings = true;
 			opts.quiet_mode = true;
 
-			var compiler = new Compiler(opts);
-			return compiler.run();
-		}
-
-		static int Main(string[] args) {
-			CompilerOptions opts = new CompilerOptions();
-			if (!CommandLine.Parser.Default.ParseArguments(args, opts))
-				return 1;
-
-			//int result = run_source(opts);
-			//return result;
 			var compiler = new Compiler(opts);
 			return compiler.run();
 		}

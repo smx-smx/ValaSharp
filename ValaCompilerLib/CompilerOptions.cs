@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using CommandLine;
-using Vala.Lang;
+﻿using CommandLine;
 using CommandLine.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Vala.Lang;
 
-namespace ValaCompiler
+namespace ValaCompilerLib
 {
-	class CompilerOptions
+	public class CompilerOptions
 	{
 		[Option("path",
 			Required = false,
