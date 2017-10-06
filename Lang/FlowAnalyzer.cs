@@ -352,7 +352,7 @@ namespace Vala.Lang
 				}
 
 				foreach (Variable variable in defined_variables) {
-					var block_set = map[variable];
+					map.TryGetValue(variable, out var block_set);
 					if (block_set == null) {
 						block_set = new HashSet<BasicBlock>();
 						map[variable] = block_set;
@@ -417,7 +417,7 @@ namespace Vala.Lang
 				Variable used_var = used_vars_queue[0];
 				used_vars_queue.RemoveAt(0);
 
-				PhiFunction phi = phi_functions[used_var];
+				phi_functions.TryGetValue(used_var, out PhiFunction phi);
 				if (phi != null) {
 					foreach (Variable variable in phi.operands) {
 						if (variable == null) {
@@ -486,7 +486,7 @@ namespace Vala.Lang
 				}
 
 				foreach (PhiFunction phi in succ.get_phi_functions()) {
-					var variable_stack = var_map[phi.original_variable];
+					var_map.TryGetValue(phi.original_variable, out var variable_stack);
 					if (variable_stack != null && variable_stack.Count > 0) {
 						phi.operands[j] = variable_stack[variable_stack.Count - 1];
 					}
@@ -513,7 +513,7 @@ namespace Vala.Lang
 		}
 
 		Variable process_assignment(Dictionary<Symbol, List<Variable>> var_map, Variable var_symbol) {
-			var variable_stack = var_map[var_symbol];
+			var_map.TryGetValue(var_symbol, out var variable_stack);
 			if (variable_stack == null) {
 				variable_stack = new List<Variable>();
 				var_map[var_symbol] = variable_stack;

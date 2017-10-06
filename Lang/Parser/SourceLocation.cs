@@ -29,5 +29,15 @@ namespace Vala.Lang.Parser
 			line = _line;
 			column = _column;
 		}
+
+		public string ReadString(int length) {
+			var saved_pos = view.Position;
+			view.Position = pos;
+
+			string result = view.ReadString(length);
+
+			view.Position = saved_pos;
+			return result;
+		}
 	}
 }

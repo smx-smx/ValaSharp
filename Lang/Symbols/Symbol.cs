@@ -231,10 +231,11 @@ namespace Vala.Lang.Symbols
 			var result_builder = new StringBuilder("");
 
 			ITwoWayEnumerator<char> i = camel_case.GetTwoWayEnumerator();
+			i.MoveNext();
 			int length = camel_case.Length;
 
 			bool first = true;
-			while (length > 0) {
+			while (true) {
 				char c = i.Current;
 				if (Char.IsUpper(c) && !first) {
 					/* current character is upper case and
@@ -259,7 +260,8 @@ namespace Vala.Lang.Symbols
 				result_builder.Append(Char.ToLower(c));
 
 				first = false;
-				i.MoveNext();
+				if (!i.MoveNext())
+					break;
 			}
 
 			return result_builder.ToString();
@@ -275,11 +277,12 @@ namespace Vala.Lang.Symbols
 			var result_builder = new StringBuilder("");
 
 			ITwoWayEnumerator<char> i = lower_case.GetTwoWayEnumerator();
+			i.MoveNext();
 			int length = lower_case.Length;
 
 
 			bool last_underscore = true;
-			while (length > 0) {
+			while (true) {
 				char c = i.Current;
 				if (c == '_') {
 					last_underscore = true;
@@ -293,7 +296,8 @@ namespace Vala.Lang.Symbols
 					result_builder.Append(c);
 				}
 
-				i.MoveNext();
+				if (!i.MoveNext())
+					break;
 			}
 
 			return result_builder.ToString();

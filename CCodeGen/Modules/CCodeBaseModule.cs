@@ -2296,7 +2296,7 @@ namespace CCodeGen.Modules
 				cname = "_%s_".printf(cname);
 			}
 			if (is_in_coroutine()) {
-				var clash_index = emit_context.closure_variable_clash_map[local];
+				emit_context.closure_variable_clash_map.TryGetValue(local, out var clash_index);
 				if (clash_index > 0) {
 					cname = "_vala%d_%s".printf(clash_index, cname);
 				}
@@ -2363,7 +2363,7 @@ namespace CCodeGen.Modules
 			var declared = !local.captured || is_foreach_element_variable(local);
 			if (declared) {
 				if (is_in_coroutine()) {
-					var count = emit_context.closure_variable_count_map[local.name];
+					emit_context.closure_variable_count_map.TryGetValue(local.name, out var count);
 					if (count > 0) {
 						emit_context.closure_variable_clash_map[local] = count;
 					}

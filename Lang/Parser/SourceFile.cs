@@ -161,6 +161,7 @@ namespace Vala.Lang.Parser
 
 		private string _content = null;
 
+
 		/**
 		 * Creates a new source file.
 		 *
@@ -339,22 +340,15 @@ namespace Vala.Lang.Parser
 		 * Parses the input file into ::source_array.
 		 */
 		private void read_source_file() {
-			string cont;
-			try {
-				FileUtils.get_contents(filename, out cont);
-			} catch (Exception) {
-				return;
-			}
+			string cont = mapped_file.GetContents();
 			read_source_lines(cont);
 		}
 
 		private void read_source_lines(string cont) {
 			source_array = new List<string>();
-			string[] lines = cont.Split('\n');
-			int idx;
-			for (idx = 0; lines[idx] != null; ++idx) {
-				source_array.Add(lines[idx]);
-			}
+			string[] lines = cont.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+			foreach(string line in lines)
+				source_array.Add(line);
 		}
 
 		public FastMView get_mapped_contents(out long length) {
@@ -368,8 +362,7 @@ namespace Vala.Lang.Parser
 			if (mapped_file == null) {
 				try {
 					mapped_file = FastMemoryMappedFile.OpenExisting(filename);
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					length = 0;
 					Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
 					return null;

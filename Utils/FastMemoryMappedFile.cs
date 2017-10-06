@@ -35,13 +35,34 @@ namespace Utils
 		}
 
 		private void GetPointer() {
-			view = mf.CreateViewAccessor();
+			// Read access, to avoid creating a file lock
+			view = mf.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
 			view.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
+		}
+
+		public string GetContents() {
+			// Read access, to avoid creating a file lock
+			var stream = mf.CreateViewStream(0L, 0L, MemoryMappedFileAccess.Read);
+			byte[] buf = new byte[stream.Length];
+			stream.Read(buf, 0, (int)stream.Length);
+
+			return Encoding.Default.GetString(buf);
 		}
 
 		private FastMemoryMappedFile(string filePath) {
 			this.Size = new FileInfo(filePath).Length;
-			this.mf = MemoryMappedFile.CreateFromFile(filePath, FileMode.Open);
+			this.mf = MemoryMappedFile.CreateFromFile(
+				// Read access, to avoid creating a file lock
+				File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read),
+				//not mapping to a name
+				null,
+				//use the file's actual size
+				0L,
+				MemoryMappedFileAccess.Read,
+				HandleInheritability.None,
+				//close the previously passed in stream when done
+				false);
+
 			this.GetPointer();
 		}
 
@@ -53,12 +74,6 @@ namespace Utils
 
 		public FastMemoryMappedFile Clone() {
 			return new FastMemoryMappedFile(this);
-		}
-
-		~FastMemoryMappedFile() {
-			ptr = null;
-			view.Dispose();
-			mf.Dispose();
 		}
 	}
 }

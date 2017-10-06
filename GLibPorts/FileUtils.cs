@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace GLibPorts
 		public class FileUtils
 		{
 			public static bool get_contents(string filename, out string contents) {
-				contents = File.ReadAllText(filename);
+				var fileStream = new System.IO.FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+				var textReader = new StreamReader(fileStream);
+				contents = textReader.ReadToEnd();
 				return true;
 			}
 

@@ -710,7 +710,7 @@ namespace CCodeGen.Modules
 			if (expr.is_assert) {
 				//string message = ((string)expr.source_reference.begin).Substring(0, (int)(expr.source_reference.end.pos - expr.source_reference.begin.pos));
 				string message = SourceFragment.get_content(expr.source_reference.begin, expr.source_reference.end);
-				ccall.call = new CCodeIdentifier("_vala_Debug.Assert");
+				ccall.call = new CCodeIdentifier("_vala_assert");
 				ccall.add_argument(new CCodeConstant("\"%s\"".printf(message.Replace("\n", " ").escape(""))));
 				requires_assert = true;
 

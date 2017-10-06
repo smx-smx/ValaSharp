@@ -180,7 +180,7 @@ namespace Vala.Lang.Expressions
 				return false;
 			}
 
-			foreach (Expression expr in initializers) {
+			foreach (Expression expr in initializers.ToList()) {
 				expr.check(context);
 			}
 

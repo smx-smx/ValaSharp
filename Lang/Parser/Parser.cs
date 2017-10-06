@@ -346,7 +346,7 @@ namespace Vala.Lang.Parser
 				report_parse_error(e);
 			}
 
-			scanner = null;
+			//scanner = null;
 		}
 
 		void parse_file_comments() {

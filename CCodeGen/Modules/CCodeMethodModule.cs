@@ -1055,7 +1055,7 @@ namespace CCodeGen.Modules
 					vdeclarator.add_parameter(cparam_map[min_pos]);
 				}
 				if (vcall != null) {
-					var arg = carg_map[min_pos];
+					carg_map.TryGetValue(min_pos, out var arg);
 					if (arg != null) {
 						vcall.add_argument(arg);
 					}

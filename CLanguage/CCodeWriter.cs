@@ -136,6 +136,8 @@ namespace CLanguage
 				}
 
 				if (changed) {
+					if(File.Exists(filename))
+						File.Delete(filename);
 					File.Move(temp_filename, filename);
 				} else {
 					File.Delete(temp_filename);

@@ -10,6 +10,31 @@ namespace Vala
 {
 	public static class StringExtensions
 	{
+		private static Dictionary<string, string> escapeMapping = new Dictionary<string, string>()
+		{
+			{"\"", @"\\\"""},
+			{"\\\\", @"\\"},
+			{"\a", @"\a"},
+			{"\b", @"\b"},
+			{"\f", @"\f"},
+			{"\n", @"\n"},
+			{"\r", @"\r"},
+			{"\t", @"\t"},
+			{"\v", @"\v"},
+			{"\0", @"\0"},
+		};
+
+		private static Regex escapeRegex = new Regex(string.Join("|", escapeMapping.Keys.ToArray()));
+
+		private static string EscapeMatchEval(Match m)
+		{
+			if (escapeMapping.ContainsKey(m.Value))
+			{
+				return escapeMapping[m.Value];
+			}
+			return escapeMapping[Regex.Escape(m.Value)];
+		}
+
 		public static string printf(this String format, params VariableArgument[] args) {
 			if (!args.Any())
 				return format;
@@ -41,12 +66,7 @@ namespace Vala
 		*/
 
 		public static string escape(this String @this, string exceptions) {
-			char[] find = new char[] { '\b', '\f', '\n', '\r', '\t', '\v', '\\' };
-			foreach (char ch in find) {
-				string chs = ch.ToString();
-				@this.Replace(chs, "\\" + chs);
-			}
-			return @this;
+			return escapeRegex.Replace(@this, EscapeMatchEval);
 		}
 
 		public static string compress(this String @this) {
