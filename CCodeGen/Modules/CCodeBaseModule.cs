@@ -1856,7 +1856,7 @@ namespace CCodeGen.Modules
 		}
 
 		public int get_block_id(Block b) {
-			int result = block_map[b];
+			block_map.TryGetValue(b, out int result);
 			if (result == 0) {
 				result = ++next_block_id;
 				block_map[b] = result;

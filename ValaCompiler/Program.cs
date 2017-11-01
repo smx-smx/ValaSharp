@@ -13,6 +13,7 @@ using Vala;
 using Vala.Lang.Parser;
 using CCodeGen;
 using CCodeGen.Modules;
+using CommandLine;
 using CommandLine.Text;
 using Vala.Lang.Code;
 using ValaConfig;
@@ -27,7 +28,10 @@ namespace ValaCompiler
 	{
 		static int Main(string[] args) {
 			CompilerOptions opts = new CompilerOptions();
-			if (!CommandLine.Parser.Default.ParseArguments(args, opts))
+			var parser = new CommandLine.Parser((settings => {
+				settings.CaseSensitive = true;
+			}));
+			if (!parser.ParseArguments(args, opts))
 				return 1;
 
 			//int result = run_source(opts);

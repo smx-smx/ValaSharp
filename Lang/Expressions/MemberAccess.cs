@@ -115,7 +115,7 @@ namespace Vala.Lang.Expressions
 				inner.accept(visitor);
 			}
 
-			foreach (DataType type_arg in type_argument_list) {
+			foreach (DataType type_arg in type_argument_list.ToList()) {
 				type_arg.accept(visitor);
 			}
 		}

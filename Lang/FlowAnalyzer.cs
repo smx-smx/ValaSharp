@@ -451,7 +451,7 @@ namespace Vala.Lang
 				node.get_used_variables(used_variables);
 
 				foreach (Variable var_symbol in used_variables) {
-					var variable_stack = var_map[var_symbol];
+					var_map.TryGetValue(var_symbol, out var variable_stack);
 					if (variable_stack == null || variable_stack.Count == 0) {
 						if (var_symbol is LocalVariable) {
 							Report.error(node.source_reference, "use of possibly unassigned local variable `%s'".printf(var_symbol.name));

@@ -1055,7 +1055,12 @@ namespace Vala.Lang.Methods
 			// capturing variables is only supported if they are initialized
 			// therefore assume that captured variables are initialized
 			if (closure) {
-				get_captured_variables((ICollection<LocalVariable>)collection);
+				ICollection<LocalVariable> localVariables = collection.Select(
+					v => new LocalVariable(
+						v.variable_type, v.name,
+						v.initializer, v.source_reference)
+				).ToList();
+				get_captured_variables(localVariables);
 			}
 		}
 

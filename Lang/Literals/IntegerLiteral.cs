@@ -72,8 +72,14 @@ namespace Vala.Lang.Literals
 			try {
 				n = Convert.ToInt64(value);
 			}
-			catch (Exception) {
-				n = Convert.ToInt64(value, 16);
+			catch (FormatException)
+			{
+				if (value[0] != '-')
+					n = Convert.ToInt64(value, 16);
+				else
+					value = value.Substring(1);
+					n = -Convert.ToInt64(value, 16);
+
 			}
 
 			if (!u && (n > int.MaxValue || n < int.MinValue)) {

@@ -176,14 +176,16 @@ namespace ValaCompilerLib
 
 		[Option('c', "compile",
 			Required = false,
-			HelpText = "Compile but do not link"
+			HelpText = "Compile but do not link",
+			DefaultValue = false
 		)]
 		public bool compile_only { get; set; }
 
 		[Option('o', "output",
 			Required = false,
 			HelpText = "Place output in file FILE",
-			MetaValue = "FILE"
+			MetaValue = "FILE",
+			DefaultValue = null
 		)]
 		public string output { get; set; }
 

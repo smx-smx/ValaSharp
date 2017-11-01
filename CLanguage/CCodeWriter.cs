@@ -252,13 +252,7 @@ namespace CLanguage
 					}
 
 					var lineparts = fix_indent_regex.Replace(line, "").Split(new string[]{"*/"}, StringSplitOptions.None);
-
-					for (int i = 0; lineparts[i] != null; i++) {
-						stream.puts(lineparts[i]);
-						if (lineparts[i + 1] != null) {
-							stream.puts("* /");
-						}
-					}
+					stream.puts(string.Join("* /", lineparts));
 				}
 				stream.puts("*/");
 				write_newline();
