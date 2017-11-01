@@ -39,14 +39,47 @@ namespace ValaTests
 				output = outExePath,
 				packages = new List<string> {
 					"gio-2.0"
-				}
+				},
+				cc_options = new List<string>() {
+					"-DGETTEXT_PACKAGE=\\\"valac\\\"",
+					"-Werror=init-self",
+					"-Werror=implicit",
+					"-Werror=sequence-point",
+					"-Werror=return-type",
+					"-Werror=uninitialized",
+					"-Werror=pointer-arith",
+					"-Werror=int-to-pointer-cast",
+					"-Werror=pointer-to-int-cast",
+					"-Wformat",
+					"-Werror=format-security",
+					"-Werror=format-nonliteral",
+					"-Werror=redundant-decls",
+					"-Werror=int-conversion"
+				},
+				disable_warnings = true,
+
 			};
 			
 			Compiler compiler = new Compiler(opts);
 			int result = compiler.run();
 			if (File.Exists(outExePath) && new FileInfo(outExePath).Length > 0) {
-				File.Delete(outExePath);
-				return 0;
+
+				ProcessStartInfo testProc = new ProcessStartInfo
+				{
+					FileName = outExePath,
+					CreateNoWindow = true,
+					UseShellExecute = true
+				};
+
+				int exitCode;
+
+				using (Process proc = Process.Start(testProc)) {
+					proc.WaitForExit();
+					exitCode = proc.ExitCode;
+				}
+
+				return exitCode;
+				//File.Delete(outExePath);
 			}
 			return result;
 		}
