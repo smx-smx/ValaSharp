@@ -2931,7 +2931,7 @@ namespace Vala.Lang.Parser
 				throw new ParseException(ParseError.SYNTAX, "`new' modifier not allowed on constructor");
 			}
 			var c = new Constructor(get_src(begin));
-			if (flags.HasFlag(ModifierFlags.STATIC) || flags.HasFlag(ModifierFlags.CLASS)) {
+			if (flags.HasFlag(ModifierFlags.STATIC) && flags.HasFlag(ModifierFlags.CLASS)) {
 				Report.error(c.source_reference, "only one of `static' or `class' may be specified");
 			} else if (flags.HasFlag(ModifierFlags.STATIC)) {
 				c.binding = MemberBinding.STATIC;
