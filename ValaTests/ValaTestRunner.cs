@@ -56,8 +56,8 @@ namespace ValaTests
 					"-Werror=redundant-decls",
 					"-Werror=int-conversion"
 				},
-				disable_warnings = true,
-
+				entry_point = "main",
+				disable_warnings = true
 			};
 			
 			Compiler compiler = new Compiler(opts);
