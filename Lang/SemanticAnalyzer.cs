@@ -599,8 +599,8 @@ namespace Vala.Lang
 			IEnumerator<char> format_it = format.GetEnumerator();
 			bool hasNext = format_it.MoveNext();
 
-			char c = format_it.Current;
 			while (hasNext) {
+				char c = format_it.Current;
 				if (c != '%') {
 					hasNext = format_it.MoveNext();
 					if (!hasNext)
@@ -698,8 +698,7 @@ namespace Vala.Lang
 					c = format_it.Current;
 				}
 				if (param_type != null) {
-					hasNext = arg_it.MoveNext();
-					if (hasNext) {
+					if (arg_it.MoveNext()) {
 						Expression arg = arg_it.Current;
 
 						arg.target_type = param_type;
