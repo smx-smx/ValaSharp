@@ -570,7 +570,7 @@ namespace Vala.Lang.Parser
 				}
 			} else {
 				// decimal number
-				while (current.Position < end && GChar.IsXDigit(current.PeekChar())) {
+				while (current.Position < end && Char.IsDigit(current.PeekChar())) {
 					current.Position++;
 				}
 			}
