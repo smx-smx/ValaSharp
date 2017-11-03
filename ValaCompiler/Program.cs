@@ -29,9 +29,6 @@ namespace ValaCompiler
 	public class Program
 	{
 		static int Main(string[] args) {
-			Console.WriteLine("Press Enter to start work");
-			Console.ReadLine();
-
 			CompilerOptions opts = new CompilerOptions();
 			var parser = new CommandLine.Parser((settings => {
 				settings.CaseSensitive = true;
@@ -43,14 +40,6 @@ namespace ValaCompiler
 			//return result;
 			var compiler = new Compiler(opts);
 			int result = compiler.run();
-
-			compiler = null;
-			opts = null;
-			parser = null;
-
-			GC.Collect();
-			Console.WriteLine("Press Enter to quit");
-			Console.ReadLine();
 
 			GLibPorts.Native.Utils.GLibDispose();
 			return result;
