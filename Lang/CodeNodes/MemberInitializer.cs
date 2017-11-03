@@ -32,7 +32,7 @@ namespace Vala.Lang.CodeNodes
 			}
 		}
 
-		private WeakReference<Symbol> symbol_reference_weak;
+		private WeakReference<Symbol> symbol_reference_weak = new WeakReference<Symbol>(null);
 
 		/**
 		 * The symbol this expression refers to.
