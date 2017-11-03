@@ -79,9 +79,9 @@ namespace ValaTests
 					proc.WaitForExit();
 					exitCode = proc.ExitCode;
 				}
+				File.Delete(outExePath);
 
 				return exitCode;
-				//File.Delete(outExePath);
 			}
 			return result;
 		}
