@@ -24,8 +24,14 @@ foreach(new RecursiveIteratorIterator($it) as $file)
 	$ext = strtolower($fi["extension"]);
 	if($ext != "vala")
 		continue;
+
+	$testDir = dirname($file);
+	if($testDir == $scriptDir){
+		continue;
+	}
+
+	$dir = basename($testDir);
 	
-	$dir = basename(dirname($file));
 	$file = basename($file);
 	$name = $fi["filename"];
 
