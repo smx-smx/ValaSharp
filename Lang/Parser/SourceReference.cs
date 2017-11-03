@@ -8,12 +8,21 @@ namespace Vala.Lang.Parser
 	/**
 	 * Represents a reference to a location in a source file.
 	 */
-	public class SourceReference
+	public class SourceReference : IDisposable
 	{
+		private WeakReference<SourceFile> file_weak = new WeakReference<SourceFile>(null);
+
 		/**
 		 * The source file to be referenced.
 		 */
-		public SourceFile file { get; set; }
+		public SourceFile file {
+			get {
+				return file_weak.GetTarget();
+			}
+			set {
+				file_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * The begin of the referenced source code.
@@ -49,6 +58,11 @@ namespace Vala.Lang.Parser
 		 */
 		public override string ToString() {
 			return ("%s:%d.%d-%d.%d".printf(file.get_relative_filename(), begin.line, begin.column, end.line, end.column));
+		}
+
+		public void Dispose() {
+			begin?.Dispose();
+			end?.Dispose();
 		}
 	}
 }

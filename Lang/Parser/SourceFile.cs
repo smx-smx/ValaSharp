@@ -66,17 +66,18 @@ namespace Vala.Lang.Parser
 				int exit_status;
 
 				try {
-					Process pkgconfig = Process.Start(new ProcessStartInfo {
+					using (Process pkgconfig = Process.Start(new ProcessStartInfo {
 						UseShellExecute = false,
 						FileName = context.path + "pkg-config" + GProcess.get_executable_suffix(),
 						Arguments = "--silence - errors--modversion % s".printf(pkg_config_name),
 						RedirectStandardError = true,
 						RedirectStandardOutput = true,
 						WorkingDirectory = context.path
-					});
-					pkgconfig.WaitForExit();
-					standard_output = pkgconfig.StandardOutput.ReadToEnd();
-					exit_status = pkgconfig.ExitCode;
+					})) {
+						pkgconfig.WaitForExit();
+						standard_output = pkgconfig.StandardOutput.ReadToEnd();
+						exit_status = pkgconfig.ExitCode;
+					}
 					if (exit_status != 0) {
 						return null;
 					}
@@ -120,10 +121,19 @@ namespace Vala.Lang.Parser
 
 		public string gir_version { get; set; }
 
+		private WeakReference<CodeContext> context_weak = new WeakReference<CodeContext>(null);
+
 		/**
 		 * The context this source file belongs to.
 		 */
-		public CodeContext context { get; set; }
+		public CodeContext context {
+			get {
+				return context_weak.GetTarget();
+			}
+			set {
+				context_weak.SetTarget(value);
+			}
+		}
 
 		public string content {
 			get { return this._content; }
@@ -340,8 +350,26 @@ namespace Vala.Lang.Parser
 		 * Parses the input file into ::source_array.
 		 */
 		private void read_source_file() {
+			remap_file();
 			string cont = mapped_file.GetContents();
 			read_source_lines(cont);
+		}
+
+		private void remap_file() {
+			if (mapped_file != null) {
+				mapped_file.Dispose();
+				mapped_file = null;
+			}
+
+			try
+			{
+				mapped_file = FastMemoryMappedFile.OpenExisting(filename);
+			}
+			catch (Exception e)
+			{
+				//length = 0;
+				Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
+			}
 		}
 
 		private void read_source_lines(string cont) {
@@ -360,13 +388,7 @@ namespace Vala.Lang.Parser
 			length = new FileInfo(filename).Length;
 
 			if (mapped_file == null) {
-				try {
-					mapped_file = FastMemoryMappedFile.OpenExisting(filename);
-				} catch (Exception e) {
-					length = 0;
-					Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
-					return null;
-				}
+				remap_file();
 			}
 
 			return new FastMView(mapped_file);

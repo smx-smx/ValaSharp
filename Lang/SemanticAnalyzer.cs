@@ -378,6 +378,7 @@ namespace Vala.Lang
 
 			bool ellipsis = false;
 			int i = 0;
+
 			foreach (Parameter param in _params) {
 				if (!param.check(context)) {
 					return false;

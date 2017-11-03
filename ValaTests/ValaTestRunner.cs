@@ -59,9 +59,11 @@ namespace ValaTests
 				entry_point = "main",
 				disable_warnings = true
 			};
-			
-			Compiler compiler = new Compiler(opts);
-			int result = compiler.run();
+
+			int result;
+			using (Compiler compiler = new Compiler(opts)) {
+				result = compiler.run();
+			}
 			if (File.Exists(outExePath) && new FileInfo(outExePath).Length > 0) {
 
 				ProcessStartInfo testProc = new ProcessStartInfo

@@ -7,9 +7,21 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-	public unsafe class FastMView
+	public unsafe class FastMView : IDisposable
 	{
-		public FastMemoryMappedFile mf { get; private set; }
+		private WeakReference<FastMemoryMappedFile> mf_weak = new WeakReference<FastMemoryMappedFile>(null);
+
+		public FastMemoryMappedFile mf {
+			get {
+				if (mf_weak.TryGetTarget(out var mf_ref))
+					return mf_ref;
+				return null;
+			}
+			private set {
+				mf_weak.SetTarget(value);
+			}
+		}
+
 		private byte* ptr;
 
 		public long Position {
@@ -72,6 +84,13 @@ namespace Utils
 					Position = mf.Size - pos;
 					break;
 			}
+		}
+
+		/// <summary>
+		/// Closes the inner FastMemoryMappedFile
+		/// </summary>
+		public void Dispose() {
+			mf.Dispose();
 		}
 	}
 }

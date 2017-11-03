@@ -1,6 +1,7 @@
 ﻿using Vala;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Vala.Lang.Parser;
 using static GLibPorts.GLib;
@@ -201,7 +202,12 @@ namespace Vala.Lang.CodeNodes
 
 		private HashSet<string> defines = new HashSet<string>();
 
-		static List<CodeContext> context_stack_key = null;
+		public static List<CodeContext> context_stack_key = null;
+
+		public static void DisposeStatic() {
+			Debug.WriteLine(string.Format("CodeContext: disposing {0} leftovers", context_stack_key.Count));
+			context_stack_key = new List<CodeContext>();
+		}
 
 		/**
 		 * The root namespace of the symbol tree.

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using Vala;
@@ -16,7 +17,7 @@ using static GLibPorts.GLib;
 
 namespace ValaCompilerLib
 {
-	public class Compiler
+	public class Compiler : IDisposable
 	{
 		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
 
@@ -25,6 +26,7 @@ namespace ValaCompilerLib
 		private CompilerOptions opts;
 
 		public Compiler(CompilerOptions opts) {
+			GLibPorts.Native.Utils.GLibInitialize();
 			this.opts = opts;
 		}
 
@@ -255,18 +257,21 @@ namespace ValaCompilerLib
 #endif
 
 			if (context.report.get_errors() > 0 || (opts.fatal_warnings && context.report.get_warnings() > 0)) {
+				parser.Dispose();
 				return quit();
 			}
 
 			if (opts.fast_vapi_filename != null) {
 				var interface_writer = new CodeWriter(CodeWriterType.FAST);
 				interface_writer.write_file(context, opts.fast_vapi_filename);
+				parser.Dispose();
 				return quit();
 			}
 
 			context.check();
 
 			if (context.report.get_errors() > 0 || (opts.fatal_warnings && context.report.get_warnings() > 0)) {
+				parser.Dispose();
 				return quit();
 			}
 
@@ -283,10 +288,12 @@ namespace ValaCompilerLib
 			}
 
 			if (context.report.get_errors() > 0 || (opts.fatal_warnings && context.report.get_warnings() > 0)) {
+				parser.Dispose();
 				return quit();
 			}
 
 			context.codegen.emit(context);
+			parser.Dispose();
 
 			if (context.report.get_errors() > 0 || (opts.fatal_warnings && context.report.get_warnings() > 0)) {
 				return quit();
@@ -431,6 +438,12 @@ namespace ValaCompilerLib
 
 			var compiler = new Compiler(opts);
 			return compiler.run();
+		}
+
+		public void Dispose() {
+			GLibPorts.Native.Utils.GLibDispose();
+			context = null;
+			CodeContext.DisposeStatic();
 		}
 	}
 }

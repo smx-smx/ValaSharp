@@ -12,10 +12,19 @@ namespace Vala.Lang.Types
 	 */
 	public class ClassType : ReferenceType
 	{
+		private WeakReference<Class> class_symbol_weak = new WeakReference<Class>(null);
+
 		/**
 		 * The referred class.
 		 */
-		public Class class_symbol { get; set; }
+		public Class class_symbol {
+			get {
+				return class_symbol_weak.GetTarget();
+			}
+			set {
+				class_symbol_weak.SetTarget(value);
+			}
+		}
 
 		public ClassType(Class class_symbol) {
 			this.class_symbol = class_symbol;

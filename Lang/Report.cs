@@ -391,11 +391,15 @@ namespace Vala.Lang
 			IntPtr _func;
 			module.symbol("isatty", out _func);
 			if (_func == IntPtr.Zero) {
+				module.Dispose();
 				return false;
 			}
 
 			AttyFunc func = Marshal.GetDelegateForFunctionPointer<AttyFunc>(_func);
-			return func(fd) == 1;
+			bool res = func(fd) == 1;
+
+			module.Dispose();
+			return res;
 		}
 	}
 }

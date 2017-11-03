@@ -13,7 +13,7 @@ namespace Vala.Lang.Parser
 	/**
 	 * Lexical scanner for Vala source files.
 	 */
-	public class Scanner
+	public class Scanner : IDisposable
 	{
 		public SourceFile source_file { get; private set; }
 
@@ -1651,6 +1651,10 @@ namespace Vala.Lang.Parser
 			var comment = _comment;
 			_comment = null;
 			return comment;
+		}
+
+		public void Dispose() {
+			current.Dispose();
 		}
 	}
 

@@ -13,7 +13,16 @@ namespace Vala.Lang
 {
 	public class VersionAttribute
 	{
-		private Symbol symbol;
+		private WeakReference<Symbol> symbol_weak = new WeakReference<Symbol>(null);
+
+		private Symbol symbol {
+			get {
+				return symbol_weak.GetTarget();
+			}
+			set {
+				symbol_weak.SetTarget(value);
+			}
+		}
 
 		private bool? _deprecated;
 		private bool? _experimental;

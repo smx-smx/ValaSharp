@@ -20,7 +20,16 @@ namespace Vala.Lang.CodeNodes
 		 */
 		public Expression expression { get; set; }
 
-		public SwitchSection section { get; set; }
+		private WeakReference<SwitchSection> section_weak = new WeakReference<SwitchSection>(null);
+
+		public SwitchSection section {
+			get {
+				return section_weak.GetTarget();
+			}
+			set {
+				section_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * Creates a new switch case label.

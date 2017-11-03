@@ -19,7 +19,7 @@ namespace Vala.Lang.Parser
 	/**
  * Code visitor parsing all Vala source files.
  */
-	public class Parser : CodeVisitor
+	public class Parser : CodeVisitor, IDisposable
 	{
 		Scanner scanner;
 
@@ -345,8 +345,6 @@ namespace Vala.Lang.Parser
 			} catch (ParseException e) {
 				report_parse_error(e);
 			}
-
-			//scanner = null;
 		}
 
 		void parse_file_comments() {
@@ -3543,6 +3541,10 @@ namespace Vala.Lang.Parser
 				default:
 					return false;
 			}
+		}
+
+		public void Dispose() {
+			scanner.Dispose();
 		}
 	}
 

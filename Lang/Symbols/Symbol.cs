@@ -16,6 +16,7 @@ namespace Vala.Lang.Symbols
 	/// Represents a node in the symbol tree.
 	/// </summary>
 	public abstract class Symbol : CodeNode {
+
 	/**
 	 * The parent of this symbol.
 	 */
@@ -179,7 +180,16 @@ namespace Vala.Lang.Symbols
 			}
 		}
 
-		private Scope _owner;
+		private WeakReference<Scope> _owner_weak = new WeakReference<Scope>(null);
+
+		private Scope _owner {
+			get {
+				return _owner_weak.GetTarget();
+			}
+			set {
+				_owner_weak.SetTarget(value);
+			}
+		}
 		private Scope _scope;
 
 

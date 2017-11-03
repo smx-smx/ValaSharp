@@ -9,12 +9,19 @@ namespace GLibPorts
 {
 	public partial class GLib
 	{
-		public static readonly FileStream stdin = new FileStream(File.stdin);
-		public static readonly FileStream stderr = new FileStream(File.stderr);
-		public static readonly FileStream stdout = new FileStream(File.stdout);
+		public static FileStream stdin;
+		public static FileStream stderr;
+		public static FileStream stdout;
 
 		public class FileStream : IDisposable
 		{
+			public static void InitializeStatic() {
+				DisposeStatic();
+				stdin = new FileStream(File.stdin);
+				stderr = new FileStream(File.stderr);
+				stdout = new FileStream(File.stdout);
+			}
+
 			private IntPtr stream;
 
 			internal FileStream(IntPtr streamHandle) {
@@ -23,8 +30,10 @@ namespace GLibPorts
 				Win32.setvbuf(stream, null, Win32._IONBF, 0);
 			}
 
-			~FileStream() {
-				Dispose();
+			public static void DisposeStatic() {
+				stdin?.Dispose();
+				stderr?.Dispose();
+				stdout?.Dispose();
 			}
 
 			public void Dispose() {

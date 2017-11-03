@@ -30,6 +30,9 @@ namespace GLibPorts.Native
 		public const int _IOLBF = 0x0040;
 		public const int _IONBF = 0x0004;
 
+		public const int DUPLICATE_SAME_ACCESS = 0x00000002;
+
+
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr fopen(string filename, string mode);
 
@@ -48,6 +51,15 @@ namespace GLibPorts.Native
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int _close(int fd);
 
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool DuplicateHandle(IntPtr hSourceProcessHandle,
+			IntPtr hSourceHandle, IntPtr hTargetProcessHandle, out IntPtr lpTargetHandle,
+			uint dwDesiredAccess, bool bInheritHandle, uint dwOptions);
+
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool CloseHandle(IntPtr hObject);
+
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int putc(int ch, IntPtr stream);
 
@@ -61,6 +73,9 @@ namespace GLibPorts.Native
 		public static extern int fputs(string str, IntPtr stream);
 
 		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern IntPtr GetCurrentProcess();
+
+		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern IntPtr GetStdHandle(int nStdHandle);
 
 		[DllImport("kernel32.dll", SetLastError = true)]
@@ -71,6 +86,10 @@ namespace GLibPorts.Native
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern IntPtr LoadLibrary(string lpFileName);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool FreeLibrary(IntPtr hModule);
+
 
 		[DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int vfprintf_s(IntPtr stream, string format, IntPtr args);

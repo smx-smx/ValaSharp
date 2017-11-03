@@ -30,10 +30,19 @@ namespace Vala.Lang.Expressions
 
 		public DataType formal_target_type { get; set; }
 
+		private WeakReference<Symbol> symbol_reference_weak = new WeakReference<Symbol>(null);
+
 		/**
 		 * The symbol this expression refers to.
 		 */
-		public Symbol symbol_reference { get; set; }
+		public Symbol symbol_reference {
+			get {
+				return symbol_reference_weak.GetTarget();
+			}
+			set {
+				symbol_reference_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * Specifies that this expression is used as lvalue, i.e. the

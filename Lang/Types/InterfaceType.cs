@@ -12,10 +12,19 @@ namespace Vala.Lang.Types
 	 */
 	public class InterfaceType : ReferenceType
 	{
+		private WeakReference<Interface> interface_symbol_weak = new WeakReference<Interface>(null);
+		
 		/**
 		 * The referred interface.
 		 */
-		public Interface interface_symbol { get; set; }
+		public Interface interface_symbol {
+			get {
+				return interface_symbol_weak.GetTarget();
+			}
+			set {
+				interface_symbol_weak.SetTarget(value);
+			}
+		}
 
 		public InterfaceType(Interface interface_symbol) {
 			this.interface_symbol = interface_symbol;

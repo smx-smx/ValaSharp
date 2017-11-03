@@ -15,15 +15,32 @@ namespace Vala.Lang.Types
 	 */
 	public class ErrorType : ReferenceType
 	{
+		private WeakReference<ErrorDomain> error_domain_weak = new WeakReference<ErrorDomain>(null);
+		private WeakReference<ErrorCode> error_code_weak = new WeakReference<ErrorCode>(null);
+
 		/**
 		 * The error domain or null for generic error.
 		 */
-		public ErrorDomain error_domain { get; set; }
+		public ErrorDomain error_domain {
+			get {
+				return error_domain_weak.GetTarget();
+			}
+			set {
+				error_domain_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * The error code or null for generic error.
 		 */
-		public ErrorCode error_code { get; set; }
+		public ErrorCode error_code {
+			get {
+				return error_code_weak.GetTarget();
+			}
+			set {
+				error_code_weak.SetTarget(value);
+			}
+		}
 
 		public bool dynamic_error { get; set; }
 

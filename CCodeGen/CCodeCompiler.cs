@@ -28,16 +28,17 @@ namespace CCodeGen
 			int exit_status;
 
 			try {
-				Process pkg_config = Process.Start(new ProcessStartInfo {
+				using (Process pkg_config = Process.Start(new ProcessStartInfo {
 					UseShellExecute = false,
 					FileName = pkg_config_command,
 					Arguments = pc,
 					RedirectStandardOutput = true,
 					RedirectStandardError = true,
 					WorkingDirectory = Path.GetDirectoryName(pkg_config_command)
-				});
-				pkg_config.WaitForExit();
-				exit_status = pkg_config.ExitCode;
+				})) {
+					pkg_config.WaitForExit();
+					exit_status = pkg_config.ExitCode;
+				}
 				return (0 == exit_status);
 			} catch (Exception e) {
 				Report.error(null, e.Message);
@@ -74,17 +75,18 @@ namespace CCodeGen
 			if (use_pkgconfig) {
 				try {
 					int exit_status;
-					Process pkg_config = Process.Start(new ProcessStartInfo {
+					using (Process pkg_config = Process.Start(new ProcessStartInfo {
 						UseShellExecute = false,
 						FileName = pkg_config_command,
 						Arguments = pc,
 						WorkingDirectory = path,
 						RedirectStandardOutput = true,
 						RedirectStandardError = true
-					});
-					pkgflags = pkg_config.StandardOutput.ReadToEnd();
-					pkg_config.WaitForExit();
-					exit_status = pkg_config.ExitCode;
+					})) {
+						pkgflags = pkg_config.StandardOutput.ReadToEnd();
+						pkg_config.WaitForExit();
+						exit_status = pkg_config.ExitCode;
+					}
 					if (exit_status != 0) {
 						Report.error(null, "pkg-config exited with status %d".printf(exit_status));
 						return;
@@ -139,22 +141,22 @@ namespace CCodeGen
 
 			try {
 				int exit_status;
-				Process cc = Process.Start(new ProcessStartInfo {
+				using (Process cc = Process.Start(new ProcessStartInfo {
 					UseShellExecute = false,
 					FileName = cc_command,
 					Arguments = cmdline,
 					RedirectStandardOutput = true,
 					RedirectStandardError = true,
 					WorkingDirectory = path
-				});
-				//stdout.puts(cc.StandardOutput.ReadToEnd());
-				stderr.puts(cc.StandardError.ReadToEnd());
-				cc.WaitForExit();
-				exit_status = cc.ExitCode;
+				})) {
+					//stdout.puts(cc.StandardOutput.ReadToEnd());
+					stderr.puts(cc.StandardError.ReadToEnd());
+					cc.WaitForExit();
+					exit_status = cc.ExitCode;
+				}
 				if (exit_status != 0) {
 					Report.error(null, "cc exited with status %d".printf(exit_status));
 				}
-				cc.Dispose();
 			} catch (Exception e) {
 				Report.error(null, e.Message);
 			}

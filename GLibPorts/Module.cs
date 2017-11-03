@@ -9,7 +9,7 @@ namespace GLibPorts
 {
 	public partial class GLib
 	{
-		public class Module
+		public class Module : IDisposable
 		{
 			private IntPtr handle;
 			private Module(IntPtr handle) {
@@ -35,6 +35,13 @@ namespace GLibPorts
 
 			public void symbol(string symbol_name, out IntPtr symbol) {
 				symbol = Win32.GetProcAddress(handle, symbol_name);
+			}
+
+			public void Dispose() {
+				if (handle != IntPtr.Zero) {
+					Win32.FreeLibrary(handle);
+					handle = IntPtr.Zero;
+				}
 			}
 		}
 	}

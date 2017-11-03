@@ -52,5 +52,11 @@
     <Compile Include="FastMemView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GLibPorts\GLib.csproj">
+      <Project>{98F2E413-19EA-4254-AB56-683D9901E5D7}</Project>
+      <Name>GLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

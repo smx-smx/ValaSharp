@@ -10,15 +10,32 @@ namespace Vala.Lang
 {
 	public class Scope
 	{
+		private WeakReference<Symbol> owner_weak = new WeakReference<Symbol>(null);
+		private WeakReference<Scope> parent_scope_weak = new WeakReference<Scope>(null);
+
 		/**
 	 * The symbol that owns this scope.
 	 */
-		public Symbol owner { get; set; }
+		public Symbol owner {
+			get {
+				return owner_weak.GetTarget();
+			}
+			set {
+				owner_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * The parent of this scope.
 		 */
-		public Scope parent_scope { get; set; }
+		public Scope parent_scope {
+			get {
+				return parent_scope_weak.GetTarget();
+			}
+			set {
+				parent_scope_weak.SetTarget(value);
+			}
+		}
 
 		private Dictionary<string, Symbol> symbol_table;
 		private List<Symbol> anonymous_members;

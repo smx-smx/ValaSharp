@@ -163,7 +163,16 @@ namespace Vala.Lang.Methods
 			}
 		}
 
-		public Signal signal_reference { get; set; }
+		private WeakReference<Signal> signal_reference_weak = new WeakReference<Signal>(null);
+
+		public Signal signal_reference {
+			get {
+				return signal_reference_weak.GetTarget();
+			}
+			set {
+				signal_reference_weak.SetTarget(value);
+			}
+		}
 
 		public bool closure { get; set; }
 
@@ -176,8 +185,28 @@ namespace Vala.Lang.Methods
 		private List<Expression> postconditions;
 		private DataType _return_type;
 
-		private Method _base_method;
-		private Method _base_interface_method;
+		private WeakReference<Method> _base_method_weak = new WeakReference<Method>(null);
+		private WeakReference<Method> _base_interface_method_weak = new WeakReference<Method>(null);
+
+		private Method _base_method {
+			get {
+				return _base_method_weak.GetTarget();
+			}
+			set {
+				_base_method_weak.SetTarget(value);
+			}
+		}
+
+		private Method _base_interface_method {
+			get
+			{
+				return _base_interface_method_weak.GetTarget();
+			}
+			set
+			{
+				_base_interface_method_weak.SetTarget(value);
+			}
+		}
 		private DataType _base_interface_type;
 		private bool base_methods_valid;
 

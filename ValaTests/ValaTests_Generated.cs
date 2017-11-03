@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 namespace ValaTests
 {
@@ -1229,6 +1228,11 @@ namespace ValaTests
 		public void Structs_struct_only() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("Structs/struct_only.vala") == 0);
+		}
+		[Test]
+		public void ValaTests_test() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("ValaTests/test.vala") == 0);
 		}
 	}
 }

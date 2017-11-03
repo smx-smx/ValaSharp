@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-	public unsafe class FastMemoryMappedFile
+	public unsafe class FastMemoryMappedFile : IDisposable
 	{
-		public readonly MemoryMappedFile mf;
+		public MemoryMappedFile mf;
 		private MemoryMappedViewAccessor view;
+		private FileStream fs;
 
 		private byte* ptr = null;
 		public readonly long Size;
@@ -35,6 +36,9 @@ namespace Utils
 		}
 
 		private void GetPointer() {
+			if(view != null)
+				DisposeView();
+
 			// Read access, to avoid creating a file lock
 			view = mf.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
 			view.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
@@ -42,15 +46,17 @@ namespace Utils
 
 		public string GetContents() {
 			// Read access, to avoid creating a file lock
-			var stream = mf.CreateViewStream(0L, 0L, MemoryMappedFileAccess.Read);
-			byte[] buf = new byte[stream.Length];
-			stream.Read(buf, 0, (int)stream.Length);
+			using (var stream = mf.CreateViewStream(0L, 0L, MemoryMappedFileAccess.Read)) {
+				byte[] buf = new byte[stream.Length];
+				stream.Read(buf, 0, (int)stream.Length);
 
-			return Encoding.Default.GetString(buf);
+				return Encoding.Default.GetString(buf);
+			}
 		}
 
 		private FastMemoryMappedFile(string filePath) {
 			this.Size = new FileInfo(filePath).Length;
+
 			this.mf = MemoryMappedFile.CreateFromFile(
 				// Read access, to avoid creating a file lock
 				File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read),
@@ -60,7 +66,7 @@ namespace Utils
 				0L,
 				MemoryMappedFileAccess.Read,
 				HandleInheritability.None,
-				//close the previously passed in stream when done
+				//close the previously passed in stream when disposed
 				false);
 
 			this.GetPointer();
@@ -74,6 +80,31 @@ namespace Utils
 
 		public FastMemoryMappedFile Clone() {
 			return new FastMemoryMappedFile(this);
+		}
+
+		private void DisposeView() {
+			view.Flush();
+			if (ptr != null){
+				view.SafeMemoryMappedViewHandle.ReleasePointer();
+				ptr = null;
+			}
+			if (!view.SafeMemoryMappedViewHandle.IsClosed){
+				view.SafeMemoryMappedViewHandle.Close();
+			}
+			view.SafeMemoryMappedViewHandle.Dispose();
+			view.Dispose();
+		}
+
+		public void Dispose() {
+			if (view != null) {
+				DisposeView();
+			}
+			if (mf != null) {
+				mf.Dispose();
+			}
+
+			view = null;
+			mf = null;
 		}
 	}
 }

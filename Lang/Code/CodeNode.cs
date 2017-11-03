@@ -18,13 +18,21 @@ namespace Vala.Lang.CodeNodes
 	/// Code nodes get created by the parser and are used throughout the whole
 	/// compilation process.
 	/// </summary>
-	public abstract class CodeNode
-	{
+	public abstract class CodeNode {
+
+		private WeakReference<CodeNode> parent_node_weak = new WeakReference<CodeNode>(null);
 
 		/**
 	 * Parent of this code node.
 	 */
-		public CodeNode parent_node { get; set; }
+		public CodeNode parent_node {
+			get {
+				return parent_node_weak.GetTarget();
+			}
+			set {
+				parent_node_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * References the location in the source file where this code node has

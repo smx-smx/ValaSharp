@@ -21,10 +21,18 @@ namespace Vala.Lang.Types
 		 */
 		public bool nullable { get; set; }
 
+		private WeakReference<TypeSymbol> data_type_weak = new WeakReference<TypeSymbol>(null);
 		/**
 		 * The referred data type.
 		 */
-		public TypeSymbol data_type { get; set; }
+		public TypeSymbol data_type {
+			get {
+				return data_type_weak.GetTarget();
+			}
+			set {
+				data_type_weak.SetTarget(value);
+			}
+		}
 
 		/**
 		 * The referred generic type parameter.

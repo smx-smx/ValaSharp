@@ -58,6 +58,7 @@
     <Compile Include="Module.cs" />
     <Compile Include="ModuleFlags.cs" />
     <Compile Include="Native\File.cs" />
+    <Compile Include="Native\Utils.cs" />
     <Compile Include="Native\Varargs.cs" />
     <Compile Include="Native\Win32.cs" />
     <Compile Include="GPath.cs" />

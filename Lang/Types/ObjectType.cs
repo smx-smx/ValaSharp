@@ -15,10 +15,18 @@ namespace Vala.Lang.Types
 	 */
 	public class ObjectType : ReferenceType
 	{
+		private WeakReference<ObjectTypeSymbol> type_symbol_weak = new WeakReference<ObjectTypeSymbol>(null);
 		/**
 		 * The referred class or interface.
 		 */
-		public ObjectTypeSymbol type_symbol { get; set; }
+		public ObjectTypeSymbol type_symbol {
+			get {
+				return type_symbol_weak.GetTarget();
+			}
+			set {
+				type_symbol_weak.SetTarget(value);
+			}
+		}
 
 		public ObjectType(ObjectTypeSymbol type_symbol) {
 			this.type_symbol = type_symbol;

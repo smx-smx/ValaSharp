@@ -1534,17 +1534,21 @@ namespace Vala.Lang.Code
 
 		private void write_identifier(string id) {
 			var bytes = Encoding.Default.GetBytes(id);
-			MemoryMappedFile mem = MemoryMappedFile.CreateNew(id, bytes.Length);
-			MemoryMappedViewAccessor accessor = mem.CreateViewAccessor();
-			accessor.WriteArray(0, bytes, 0, bytes.Length);
 
-			FastMemoryMappedFile fmf = new FastMemoryMappedFile(mem, bytes.Length);
-			FastMView view = new FastMView(fmf);
-			if (Scanner.get_identifier_or_keyword(view, id.Length) != TokenType.IDENTIFIER ||
-				Char.IsDigit(id[0])) {
-				stream.putc('@');
+			using (MemoryMappedFile mem = MemoryMappedFile.CreateNew(id, bytes.Length))
+			using (MemoryMappedViewAccessor accessor = mem.CreateViewAccessor()) {
+				accessor.WriteArray(0, bytes, 0, bytes.Length);
+
+				using (FastMemoryMappedFile fmf = new FastMemoryMappedFile(mem, bytes.Length)) {
+					FastMView view = new FastMView(fmf);
+					if (Scanner.get_identifier_or_keyword(view, id.Length) != TokenType.IDENTIFIER ||
+						Char.IsDigit(id[0]))
+					{
+						stream.putc('@');
+					}
+					write_string(id);
+				}
 			}
-			write_string(id);
 		}
 
 		private void write_return_type(DataType type) {

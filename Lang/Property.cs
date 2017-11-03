@@ -177,7 +177,16 @@ namespace Vala.Lang
 
 		private DataType _data_type;
 
-		private Property _base_property;
+		private WeakReference<Property> _base_property_weak = new WeakReference<Property>(null);
+
+		private Property _base_property {
+			get {
+				return _base_property_weak.GetTarget();
+			}
+			set {
+				_base_property_weak.SetTarget(value);
+			}
+		}
 		private Property _base_interface_property;
 		private bool base_properties_valid;
 		PropertyAccessor _get_accessor;

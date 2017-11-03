@@ -113,24 +113,25 @@ namespace CLanguage
 				var changed = true;
 
 				try {
-					var old_file = MemoryMappedFile.OpenExisting(filename);
-					var new_file = MemoryMappedFile.OpenExisting(temp_filename);
-					var len = old_file.CreateViewStream().Length;
-					var st1 = old_file.CreateViewStream();
-					var st2 = new_file.CreateViewStream();
-					if (len == st2.Length)
+					using (var old_file = MemoryMappedFile.OpenExisting(filename))
+					using (var new_file = MemoryMappedFile.OpenExisting(temp_filename))
 					{
-						byte[] data1 = new byte[len];
-						byte[] data2 = new byte[len];
-						st1.Read(data1, 0, (int)len);
-						st2.Read(data1, 0, (int)len);
+						var len = old_file.CreateViewStream().Length;
+						var st1 = old_file.CreateViewStream();
+						var st2 = new_file.CreateViewStream();
+						if (len == st2.Length)
+						{
+							byte[] data1 = new byte[len];
+							byte[] data2 = new byte[len];
+							st1.Read(data1, 0, (int)len);
+							st2.Read(data1, 0, (int)len);
 
-						if(data1 == data2) {
-							changed = false;
+							if (data1 == data2)
+							{
+								changed = false;
+							}
 						}
 					}
-					old_file.Dispose();
-					new_file.Dispose();
 				} catch (Exception) {
 					// assume changed if mmap comparison doesn't work
 				}

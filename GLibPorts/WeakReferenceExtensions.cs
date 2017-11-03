@@ -11,7 +11,8 @@ namespace Vala
 		public static T GetTarget<T>(this WeakReference<T> @this) where T : class {
 			T target;
 			if(!@this.TryGetTarget(out target)) {
-				throw new Exception("Failed to get target for WeakReference");
+				//throw new Exception("Failed to get target for WeakReference");
+				return null;
 			}
 			return target;
 		}
