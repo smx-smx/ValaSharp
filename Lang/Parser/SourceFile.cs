@@ -350,7 +350,6 @@ namespace Vala.Lang.Parser
 		 * Parses the input file into ::source_array.
 		 */
 		private void read_source_file() {
-			remap_file();
 			string cont = mapped_file.GetContents();
 			read_source_lines(cont);
 		}
