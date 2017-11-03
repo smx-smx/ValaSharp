@@ -5,12 +5,7 @@ namespace ValaTests
 {
 	[TestFixture]
 	public class ValaCompilerTests {
-		private ValaTestRunner runner;
 
-		[SetUp]
-		public void Init() {
-			runner = new ValaTestRunner();
-		}
 
 EOF;
 
@@ -40,6 +35,7 @@ foreach(new RecursiveIteratorIterator($it) as $file)
 	echo<<<EOF
 		[Test]
 		public void ${testMethod}() {
+			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("${dir}/${file}") == 0);
 		}
 
