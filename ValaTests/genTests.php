@@ -15,40 +15,47 @@ $tail=<<<EOF
 EOF;
 
 $scriptDir = realpath(dirname(__FILE__));
+$out = fopen($scriptDir . "/ValaTests_Generated.cs", "w+") or die("Cannot open destination file for writing\n");
+
 $it = new RecursiveDirectoryIterator($scriptDir);
 
-print($head);
+fwrite($out, $head);
 foreach(new RecursiveIteratorIterator($it) as $file)
 {
 	$fi = pathinfo($file);
+	if($fi === FALSE || !isset($fi["extension"]))
+		continue;
+
 	$ext = strtolower($fi["extension"]);
 	if($ext != "vala")
 		continue;
 
-	$testDir = dirname($file);
-	if($testDir == $scriptDir){
+	if($fi["dirname"] == $scriptDir){
 		continue;
 	}
 
-	$dir = basename($testDir);
+	$dir = basename($fi["dirname"]);
 	
-	$file = basename($file);
+	$fileRelative = $fi["basename"];
 	$name = $fi["filename"];
 
 	$testMethod = "{$dir}_{$name}";
 	$testMethod = str_replace("-", "_", $testMethod);
 	
-	echo<<<EOF
+	$testCode=<<<EOF
 		[Test]
 		public void ${testMethod}() {
 			ValaTestRunner runner = new ValaTestRunner();
-			Assert.IsTrue(runner.RunValaTest("${dir}/${file}") == 0);
+			Assert.IsTrue(runner.RunValaTest("${dir}/${fileRelative}") == 0);
 		}
 
 EOF;
 
+	fwrite($out, $testCode);
+
 }
-print($tail);
+fwrite($out, $tail);
+fclose($out);
 
 
 ?>
