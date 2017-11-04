@@ -12,7 +12,7 @@ namespace Vala
 	{
 		private static Dictionary<string, string> escapeMapping = new Dictionary<string, string>()
 		{
-			{"\"", @"\\\"""},
+			{"\"", @"\" + '"'},
 			{"\\\\", @"\\"},
 			{"\a", @"\a"},
 			{"\b", @"\b"},
