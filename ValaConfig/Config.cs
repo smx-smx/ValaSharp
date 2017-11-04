@@ -28,7 +28,7 @@ namespace ValaConfig
 
 		public static string PACKAGE_SUFFIX { get; set; } = "";
 		public static string PACKAGE_DATADIR { get; set; } = "";
-		public static string BUILD_VERSION { get; set; } = "0.37.1";
+		public static string BUILD_VERSION { get; set; } = "0.37.91";
 		public static string API_VERSION { get; set; } = "";
 	}
 }
