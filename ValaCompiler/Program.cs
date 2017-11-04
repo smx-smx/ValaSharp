@@ -36,6 +36,16 @@ namespace ValaCompiler
 			if (!parser.ParseArguments(args, opts))
 				return 1;
 
+			if (opts.cc_options != null) {
+				for (int i = 0; i < opts.cc_options.Count; i++) {
+					string cc_opt = opts.cc_options[i];
+					if (cc_opt.Length > 0 && cc_opt[0] == '\'') {
+						cc_opt = cc_opt.Substring(1, cc_opt.Length - 2).Trim();
+						opts.cc_options[i] = cc_opt;
+					}
+				}
+			}
+
 			//int result = run_source(opts);
 			//return result;
 			var compiler = new Compiler(opts);
