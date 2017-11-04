@@ -1012,13 +1012,13 @@ namespace Vala.Lang.Methods
 
 			var glib_ns = CodeContext.get().root.scope.lookup("GLib");
 
-			var parameters = new List<Parameter>();
+			var _params = new List<Parameter>();
 			Parameter ellipsis = null;
 			foreach (var param in parameters) {
 				if (param.ellipsis) {
 					ellipsis = param;
 				} else if (param.direction == ParameterDirection.IN) {
-					parameters.Add(param);
+					_params.Add(param);
 				}
 			}
 
@@ -1033,13 +1033,13 @@ namespace Vala.Lang.Methods
 			callback_param.set_attribute_double("CCode", "pos", -1);
 			callback_param.set_attribute_double("CCode", "delegate_target_pos", -0.9);
 
-			parameters.Add(callback_param);
+			_params.Add(callback_param);
 
 			if (ellipsis != null) {
-				parameters.Add(ellipsis);
+				_params.Add(ellipsis);
 			}
 
-			return parameters;
+			return _params;
 		}
 
 		public List<Parameter> get_async_end_parameters() {
