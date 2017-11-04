@@ -144,6 +144,10 @@ namespace Vala.Lang.Parser
 		string get_last_string() {
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
+
+			if (!get_src(token.begin).file.filename.EndsWith(".vapi"))
+				token.ToString();	//$DBG
+
 			return SourceFragment.get_content(token.begin, token.end);
 		}
 

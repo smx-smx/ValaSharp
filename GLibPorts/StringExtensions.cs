@@ -28,11 +28,15 @@ namespace Vala
 
 		private static string EscapeMatchEval(Match m)
 		{
-			if (escapeMapping.ContainsKey(m.Value))
-			{
+			if (escapeMapping.ContainsKey(m.Value)) {
 				return escapeMapping[m.Value];
 			}
-			return escapeMapping[Regex.Escape(m.Value)];
+
+			string escaped = Regex.Escape(m.Value);
+			if (escapeMapping.ContainsKey(escaped))
+				return escapeMapping[escaped];
+
+			return m.Value;
 		}
 
 		public static string printf(this String format, params VariableArgument[] args) {
@@ -66,7 +70,21 @@ namespace Vala
 		*/
 
 		public static string escape(this String @this, string exceptions) {
-			return escapeRegex.Replace(@this, EscapeMatchEval);
+			string r = escapeRegex.Replace(@this, EscapeMatchEval);
+
+			StringBuilder sb = new StringBuilder();
+			foreach (char ch in r) {
+				if (ch < 0x20 || ch >= 0x7F) {
+					var bytes = Encoding.UTF8.GetBytes(new char[]{ch});
+					foreach(var b in bytes)
+					{
+						sb.AppendFormat(@"\" + Convert.ToString(b, 8));
+					}
+				} else {
+					sb.Append(ch);
+				}
+			}
+			return sb.ToString();
 		}
 
 		public static string compress(this String @this) {

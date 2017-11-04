@@ -238,20 +238,14 @@ namespace Vala.Lang.Parser
 							} else if (current.PeekChar() == '\n') {
 								break;
 							} else {
-								//char u = current.PeekCharAt((int)(end - current.Position));
-								//TODO: check unicode valid character
-								current.Position++;
-								token_length_in_chars++;
-
-								/*
-								char u = ((string)current).get_char_validated((long)(end - current));
-								if (u != (char)(-1)) {
-									current.Position += u.to_utf8(null);
-									token_length_in_chars++;
-								} else {
-									current.Position++;
+								try {
+									current.PeekUniChar(out int clen);
+									current.Position += clen;
+									token_length_in_chars += clen;
+								}
+								catch (ArgumentException) {
 									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
-								}*/
+								}
 							}
 						}
 						if (current.Position >= end || current.PeekChar() == '\n') {
@@ -745,17 +739,13 @@ namespace Vala.Lang.Parser
 								column = 1;
 								token_length_in_chars = 1;
 							} else {
-								//char u = current.PeekCharAt((int)(end - current.Position));
-								/*
-								if (u != (char)(-1)) {
-									current.Position += u.to_utf8(null);
-									token_length_in_chars++;
-								} else {
-									current.Position++;
+								try {
+									current.PeekUniChar(out int clen);
+									current.Position += clen;
+									token_length_in_chars += clen;
+								} catch (ArgumentException) {
 									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
-								}*/
-								current.Position++;
-								token_length_in_chars++;
+								}
 							}
 						}
 						if (current.Position >= end) {
@@ -1104,15 +1094,13 @@ namespace Vala.Lang.Parser
 									column = 1;
 									token_length_in_chars = 3;
 								} else {
-									//char _u = current.PeekCharAt((int)(end - current.Position));
-									/*if (u != (char)(-1)) {
-										current.Position += u.to_utf8(null);
-										token_length_in_chars++;
-									} else {
+									try {
+										current.PeekUniChar(out int clen);
+										current.Position += clen;
+										token_length_in_chars += clen;
+									} catch (ArgumentException) {
 										Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
-									}*/
-									current.Position++;
-									token_length_in_chars++;
+									}
 								}
 							}
 							if (current.PeekChar() == '"' && current.PeekCharAt(1) == '"' && current.PeekCharAt(2) == '"') {
@@ -1184,16 +1172,13 @@ namespace Vala.Lang.Parser
 								column = 1;
 								token_length_in_chars = 1;
 							} else {
-								//char _u = current.PeekCharAt((int)(end - current.Position), SeekOrigin.Begin);
-								/*if (u != (char)(-1)) {
-									current.Position += u.to_utf8(null);
-									token_length_in_chars++;
-								} else {
-									current.Position++;
+								try {
+									current.PeekUniChar(out int clen);
+									current.Position += clen;
+									token_length_in_chars += clen;
+								} catch (ArgumentException) {
 									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
-								}*/
-								current.Position++;
-								token_length_in_chars++;
+								}
 							}
 							if (current.Position < end && begin.PeekChar() == '\'' && current.PeekChar() != '\'') {
 								// multiple characters in single character literal
@@ -1207,16 +1192,14 @@ namespace Vala.Lang.Parser
 						}
 						break;
 					default:
-						//char u = ((string)char).get_char_validated((long)(end - current));
-						//char u = current.PeekCharAt((int)(end - current.Position));
-						/*if (u != (char)(-1)) {
-							current.Position += u.to_utf8(null);
-							Report.error(get_source_reference(0), "syntax error, unexpected character");
-						} else {
-							current.Position++;
-							Report.error(get_source_reference(0), "invalid UTF-8 character");
-						}*/
-						current.Position++;
+						try {
+							current.PeekUniChar(out int clen);
+							current.Position += clen;
+							token_length_in_chars += clen;
+						}
+						catch (ArgumentException) {
+							Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+						}
 
 
 						column++;

@@ -69,7 +69,25 @@ namespace Utils
 		}
 
 		public string ReadString(int length) {
-			return new string((sbyte*)mf.Data + Position, 0, length);
+			return Encoding.UTF8.GetString(mf.Data + Position, length);
+			//return new string((sbyte*)mf.Data + Position, 0, length);
+		}
+
+		public char PeekUniChar(out int length) {
+			char ch;
+			using (UnmanagedMemoryStream ums = new UnmanagedMemoryStream(mf.Data + Position, mf.Size - Position))
+			using (StreamReader sr = new StreamReader(ums, Encoding.UTF8, true)) {
+				ch = Convert.ToChar(sr.Read());
+			}
+			
+			length = Encoding.UTF8.GetByteCount(new char[]{ch});
+			return ch;
+		}
+
+		public char ReadUniChar() {
+			char ch = PeekUniChar(out int length);
+			Seek(length, SeekOrigin.Current);
+			return ch;
 		}
 
 		public void Seek(long pos, SeekOrigin begin) {

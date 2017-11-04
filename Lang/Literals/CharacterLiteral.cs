@@ -44,7 +44,6 @@ namespace Vala.Lang.Literals
 		public CharacterLiteral(string c, SourceReference source = null) {
 			value = c;
 			source_reference = source;
-
 		}
 
 		public override void accept(CodeVisitor visitor) {
@@ -60,9 +59,7 @@ namespace Vala.Lang.Literals
 		 * @return unicode character value
 		 */
 		public char get_char() {
-			IEnumerator<char> iter = value.GetEnumerator();
-			iter.MoveNext();
-			return iter.Current;
+			return value[1];
 		}
 
 		public override bool is_pure() {
