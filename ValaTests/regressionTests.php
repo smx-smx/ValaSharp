@@ -9,8 +9,17 @@
 $scriptDir = realpath(dirname(__FILE__));
 $it = new RecursiveDirectoryIterator($scriptDir);
 
+if($argc > 1)
+	$inTestFile = realpath($argv[1]);
+else
+	$inTestFile = null;
+
 foreach(new RecursiveIteratorIterator($it) as $file)
 {
+	if(!is_null($inTestFile) && $file != $inTestFile){
+		continue;
+	}
+
 	$fi = pathinfo($file);
 	if($fi === FALSE || !isset($fi["extension"]))
 		continue;
@@ -90,7 +99,7 @@ foreach(new RecursiveIteratorIterator($it) as $file)
 		if(
 			!$codes[0] && !$codes[1] &&
 			file_exists($diff) &&
-			empty(file_get_contents($diff))
+			empty(trim(file_get_contents($diff)))
 		){
 			unlink($fi["filename"] . ".diff");
 			printf("OK\n");
