@@ -927,18 +927,18 @@ namespace Vala.Lang.Methods
 				return false;
 			}
 
-			var parameters = get_parameters();
-			if (parameters.Count == 0) {
+			var _params = get_parameters();
+			if (_params.Count == 0) {
 				// method may have no parameters
 				return true;
 			}
 
-			if (parameters.Count > 1) {
+			if (_params.Count > 1) {
 				// method must not have more than one parameter
 				return false;
 			}
 
-			IEnumerator<Parameter> params_it = parameters.GetEnumerator();
+			IEnumerator<Parameter> params_it = _params.GetEnumerator();
 			params_it.MoveNext();
 			var param = params_it.Current;
 
