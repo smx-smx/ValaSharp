@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Code;
@@ -72,13 +73,12 @@ namespace Vala.Lang.Literals
 			try {
 				n = Convert.ToInt64(value);
 			}
-			catch (FormatException)
-			{
-				if (value[0] != '-')
-					n = Convert.ToInt64(value, 16);
-				else
-					value = value.Substring(1);
-					n = -Convert.ToInt64(value, 16);
+			catch (FormatException) {
+				string tmp = value;
+				if (value[0] == '-') {
+					tmp = value.Substring(1);
+				}
+				n = -Convert.ToInt64(tmp, 16);
 
 			}
 
