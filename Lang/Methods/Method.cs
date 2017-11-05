@@ -1045,22 +1045,22 @@ namespace Vala.Lang.Methods
 		public List<Parameter> get_async_end_parameters() {
 			Debug.Assert(this.coroutine);
 
-			var parameters = new List<Parameter>();
+			var _params = new List<Parameter>();
 
 			var glib_ns = CodeContext.get().root.scope.lookup("GLib");
 			var result_type = new ObjectType((ObjectTypeSymbol)glib_ns.scope.lookup("AsyncResult"));
 
 			var result_param = new Parameter("_res_", result_type);
 			result_param.set_attribute_double("CCode", "pos", 0.1);
-			parameters.Add(result_param);
+			_params.Add(result_param);
 
 			foreach (var param in parameters) {
 				if (param.direction == ParameterDirection.OUT) {
-					parameters.Add(param);
+					_params.Add(param);
 				}
 			}
 
-			return parameters;
+			return _params;
 		}
 
 		public void add_captured_variable(LocalVariable local) {
