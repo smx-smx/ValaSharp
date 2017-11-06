@@ -240,27 +240,25 @@ namespace Vala.Lang.Symbols
 
 			var result_builder = new StringBuilder("");
 
-			ITwoWayEnumerator<char> i = camel_case.GetTwoWayEnumerator();
-			i.MoveNext();
-			int length = camel_case.Length;
+			string i = camel_case;
+			int index = 0;
 
 			bool first = true;
-			while (true) {
-				char c = i.Current;
+			while (i.Length > 0) {
+				char c = i[0];
 				if (Char.IsUpper(c) && !first) {
 					/* current character is upper case and
 					 * we're not at the beginning */
-					ITwoWayEnumerator<char> t = i;
-					t.MovePrevious(); length++;
-
-					bool prev_upper = Char.IsUpper(t.Current);
-					t.MoveNext(); length--;
-					bool next_upper = Char.IsUpper(t.Current);
-					if (!prev_upper || (length >= 2 && !next_upper)) {
+					string t = camel_case.Substring(index - 1);
+					bool prev_upper = Char.IsUpper(t[0]);
+					t = i.Substring(1);
+					
+					bool next_upper = Char.IsUpper(t[0]);
+					if (!prev_upper || (i.Length >= 2 && !next_upper)) {
 						/* previous character wasn't upper case or
 						 * next character isn't upper case*/
-						long len = result_builder.ToString().Length;
-						if (len != 1 && result_builder.ToString().ElementAt((int)len - 2) != '_') {
+						int len = result_builder.ToString().Length;
+						if (len != 1 && result_builder.ToString()[len - 2] != '_') {
 							/* we're not creating 1 character words */
 							result_builder.Append('_');
 						}
@@ -270,8 +268,8 @@ namespace Vala.Lang.Symbols
 				result_builder.Append(Char.ToLower(c));
 
 				first = false;
-				if (!i.MoveNext())
-					break;
+				i = i.Substring(1);
+				index++;
 			}
 
 			return result_builder.ToString();
