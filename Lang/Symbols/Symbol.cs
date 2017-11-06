@@ -253,7 +253,7 @@ namespace Vala.Lang.Symbols
 					bool prev_upper = Char.IsUpper(t[0]);
 					t = i.Substring(1);
 					
-					bool next_upper = Char.IsUpper(t[0]);
+					bool next_upper = t.Length > 0 && Char.IsUpper(t[0]);
 					if (!prev_upper || (i.Length >= 2 && !next_upper)) {
 						/* previous character wasn't upper case or
 						 * next character isn't upper case*/
