@@ -392,8 +392,8 @@ namespace Vala.Lang.CodeNodes
 				FileUtils.get_contents(filename, out contents);
 				foreach (string package in contents.Split('\n')) {
 					var _package = package.Trim();
-					if (package != "") {
-						add_external_package(package);
+					if (_package != "") {
+						add_external_package(_package);
 					}
 				}
 			} catch (Exception e) {

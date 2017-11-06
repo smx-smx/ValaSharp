@@ -1656,10 +1656,8 @@ namespace Vala.Lang.Code
 			}
 
 			var iter = attributes.GetEnumerator();
-			while (true) {
+			while (!iter.MoveNext()) {
 				ValaAttribute attr = iter.Current;
-				if (!iter.MoveNext())
-					break;
 
 				var keys = new SortedSet<string>();
 				foreach (var key in attr.args.Keys) {
@@ -1694,10 +1692,8 @@ namespace Vala.Lang.Code
 
 					string separator = "";
 					var arg_iter = keys.GetEnumerator();
-					while (true) {
+					while (arg_iter.MoveNext()) {
 						string arg_name = arg_iter.Current;
-						if (!arg_iter.MoveNext())
-							break;
 
 						if (arg_name == "cheader_filename") {
 							stream.printf("%scheader_filename = \"%s\"", separator, get_cheaders(sym));
