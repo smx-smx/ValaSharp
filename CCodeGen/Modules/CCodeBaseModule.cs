@@ -3007,8 +3007,8 @@ namespace CCodeGen.Modules
 			return destroy_func;
 		}
 
-		protected string generate_free_function_ADDRESS_OF_wrapper(DataType type) {
-			string destroy_func = "_vala_%s_free_function_ADDRESS_OF".printf(get_ccode_name(type.data_type));
+		protected string generate_free_function_address_of_wrapper(DataType type) {
+			string destroy_func = "_vala_%s_free_function_address_of".printf(get_ccode_name(type.data_type));
 
 			if (!add_wrapper(destroy_func)) {
 				// wrapper already defined
@@ -3146,8 +3146,8 @@ namespace CCodeGen.Modules
 						if (cl != null && get_ccode_is_gboxed(cl)) {
 							unref_function = generate_free_func_wrapper(type);
 						} else {
-							if (is_free_function_ADDRESS_OF(type)) {
-								unref_function = generate_free_function_ADDRESS_OF_wrapper(type);
+							if (is_free_function_address_of(type)) {
+								unref_function = generate_free_function_address_of_wrapper(type);
 							} else {
 								unref_function = get_ccode_free_function(type.data_type);
 							}
@@ -4182,7 +4182,7 @@ namespace CCodeGen.Modules
 			}
 		}
 
-		bool is_free_function_ADDRESS_OF(DataType type) {
+		bool is_free_function_address_of(DataType type) {
 			var cl = type.data_type as Class;
 			if (cl != null) {
 				return get_ccode_free_function_address_of(cl);
