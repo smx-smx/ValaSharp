@@ -107,9 +107,15 @@ namespace CLanguage
 				writer.write_string("inline ");
 			}
 			writer.write_string(return_type);
-			writer.write_string(" ");
+			if (is_declaration) {
+				writer.write_string(" ");
+			}
+			else {
+				writer.write_newline();
+			}
 			writer.write_string(name);
 			writer.write_string(" (");
+			int param_pos_begin = (is_declaration ? return_type.Length + 1 : 0) + name.Length + 2;
 
 			bool has_args = (modifiers.HasFlag(CCodeModifiers.PRINTF) || modifiers.HasFlag(CCodeModifiers.SCANF));
 			int i = 0;
@@ -118,6 +124,8 @@ namespace CLanguage
 			foreach (CCodeParameter param in parameters) {
 				if (i > 0) {
 					writer.write_string(", ");
+					writer.write_newline();
+					writer.write_nspaces((uint)param_pos_begin);
 				}
 				param.write(writer);
 				if (param.modifiers.HasFlag(CCodeModifiers.FORMAT_ARG)){
@@ -166,6 +174,7 @@ namespace CLanguage
 
 				writer.write_string(";");
 			} else {
+				writer.write_newline();
 				block.write(writer);
 				writer.write_newline();
 			}

@@ -31,8 +31,9 @@ do {
 int 1x = 2;
 var foo = "bar";
 var ch = 'x';
+var boolVar = false;
 
-switch(false){
+switch(boolVar){
 	case false:
 		break;
 	case true:

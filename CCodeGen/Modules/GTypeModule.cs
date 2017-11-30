@@ -14,6 +14,7 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -548,7 +549,7 @@ namespace CCodeGen.Modules
 			}
 
 			prop_enum = new CCodeEnum();
-			prop_enum.add_value(new CCodeEnumValue("%s_DUMMY_PROPERTY".printf(get_ccode_upper_case_name(cl, null))));
+			prop_enum.add_value(new CCodeEnumValue("%s_0_PROPERTY".printf(get_ccode_upper_case_name(cl, null))));
 			signal_enum = new CCodeEnum();
 			class_init_context = new EmitContext(cl);
 			base_init_context = new EmitContext(cl);
@@ -560,7 +561,7 @@ namespace CCodeGen.Modules
 			generate_class_struct_declaration(cl, cfile);
 			generate_class_private_declaration(cl, cfile);
 
-			var last_prop = "%s_LAST_PROPERTY".printf(get_ccode_upper_case_name(cl));
+			var last_prop = "%s_NUM_PROPERTIES".printf(get_ccode_upper_case_name(cl));
 			if (is_gtypeinstance) {
 				cfile.add_type_declaration(prop_enum);
 
@@ -625,7 +626,7 @@ namespace CCodeGen.Modules
 				prop_enum.add_value(new CCodeEnumValue(last_prop));
 
 				if (cl.get_signals().Count > 0) {
-					var last_signal = "%s_LAST_SIGNAL".printf(get_ccode_upper_case_name(cl));
+					var last_signal = "%s_NUM_SIGNALS".printf(get_ccode_upper_case_name(cl));
 					signal_enum.add_value(new CCodeEnumValue(last_signal));
 					cfile.add_type_declaration(signal_enum);
 
@@ -1251,11 +1252,11 @@ namespace CCodeGen.Modules
 
 				if (!get_ccode_no_accessor_method(prop.base_property) && !get_ccode_concrete_accessor(prop.base_property)) {
 					if (prop.get_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.get_accessor);
+						string cname = get_ccode_real_name(prop.get_accessor);
 						ccode.add_assignment(CCodeMemberAccess.pointer(ccast, "get_%s".printf(prop.name)), new CCodeIdentifier(cname));
 					}
 					if (prop.set_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.set_accessor);
+						string cname = get_ccode_real_name(prop.set_accessor);
 						ccode.add_assignment(CCodeMemberAccess.pointer(ccast, "set_%s".printf(prop.name)), new CCodeIdentifier(cname));
 					}
 				}
@@ -1418,9 +1419,9 @@ namespace CCodeGen.Modules
 
 				if (!get_ccode_no_accessor_method(prop.base_interface_property) && !get_ccode_concrete_accessor(prop.base_interface_property)) {
 					if (prop.get_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.get_accessor);
+						string cname = get_ccode_real_name(prop.get_accessor);
 						if (prop.is_abstract || prop.is_virtual) {
-							cname = CCodeBaseModule.get_ccode_name(prop.get_accessor);
+							cname = get_ccode_name(prop.get_accessor);
 						}
 
 						CCodeExpression cfunc = new CCodeIdentifier(cname);
@@ -1430,9 +1431,9 @@ namespace CCodeGen.Modules
 						ccode.add_assignment(CCodeMemberAccess.pointer(ciface, "get_%s".printf(prop.name)), cfunc);
 					}
 					if (prop.set_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.set_accessor);
+						string cname = get_ccode_real_name(prop.set_accessor);
 						if (prop.is_abstract || prop.is_virtual) {
-							cname = CCodeBaseModule.get_ccode_name(prop.set_accessor);
+							cname = get_ccode_name(prop.set_accessor);
 						}
 
 						CCodeExpression cfunc = new CCodeIdentifier(cname);
@@ -1727,7 +1728,8 @@ namespace CCodeGen.Modules
 		public override CCodeExpression get_param_spec_cexpression(Property prop) {
 			var cl = (TypeSymbol)prop.parent_symbol;
 			var prop_array = new CCodeIdentifier("%s_properties".printf(get_ccode_lower_case_name(cl)));
-			var prop_enum_value = new CCodeIdentifier(get_ccode_upper_case_name(prop));
+			var prop_enum_value = new CCodeIdentifier("%s_PROPERTY".printf(get_ccode_upper_case_name(prop)));
+
 
 			return new CCodeElementAccess(prop_array, prop_enum_value);
 		}
@@ -2089,7 +2091,7 @@ namespace CCodeGen.Modules
 			iface.accept_children(this);
 
 			if (iface.get_signals().Count > 0) {
-				var last_signal = "%s_LAST_SIGNAL".printf(get_ccode_upper_case_name(iface));
+				var last_signal = "%s_NUM_SIGNALS".printf(get_ccode_upper_case_name(iface));
 				signal_enum.add_value(new CCodeEnumValue(last_signal));
 				cfile.add_type_declaration(signal_enum);
 
@@ -2186,11 +2188,11 @@ namespace CCodeGen.Modules
 			foreach (Property prop in iface.get_properties()) {
 				if (prop.is_virtual) {
 					if (prop.get_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.get_accessor);
+						string cname = get_ccode_real_name(prop.get_accessor);
 						ccode.add_assignment(CCodeMemberAccess.pointer(ciface, "get_%s".printf(prop.name)), new CCodeIdentifier(cname));
 					}
 					if (prop.set_accessor != null) {
-						string cname = CCodeBaseModule.get_ccode_real_name(prop.set_accessor);
+						string cname = get_ccode_real_name(prop.set_accessor);
 						ccode.add_assignment(CCodeMemberAccess.pointer(ciface, "set_%s".printf(prop.name)), new CCodeIdentifier(cname));
 					}
 				}

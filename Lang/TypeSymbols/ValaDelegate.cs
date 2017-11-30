@@ -173,10 +173,18 @@ namespace Vala.Lang.TypeSymbols
 				return false;
 			}
 
+			var error_types = get_error_types();
+			var method_error_types = m.get_error_types();
+
+			// method must throw error if the delegate does
+			if (error_types.Count > 0 && method_error_types.Count == 0) {
+				return false;
+			}
+
 			// method may throw less but not more errors than the delegate
-			foreach (DataType method_error_type in m.get_error_types()) {
+			foreach (DataType method_error_type in method_error_types) {
 				bool match = false;
-				foreach (DataType delegate_error_type in get_error_types()) {
+				foreach (DataType delegate_error_type in error_types) {
 					if (method_error_type.compatible(delegate_error_type)) {
 						match = true;
 						break;
@@ -227,54 +235,6 @@ namespace Vala.Lang.TypeSymbols
 					return;
 				}
 			}
-		}
-
-		public string get_prototype_string(string name) {
-			return "%s %s %s".printf(get_return_type_string(), name, get_parameters_string());
-		}
-
-		string get_return_type_string() {
-			string str = "";
-			if (!return_type.value_owned && return_type is ReferenceType) {
-				str = "weak ";
-			}
-			str += return_type.to_string();
-
-			return str;
-		}
-
-		string get_parameters_string() {
-			string str = "(";
-
-			int i = 1;
-			foreach (Parameter param in parameters) {
-				if (i > 1) {
-					str += ", ";
-				}
-
-				if (param.direction == ParameterDirection.IN) {
-					if (param.variable_type.value_owned) {
-						str += "owned ";
-					}
-				} else {
-					if (param.direction == ParameterDirection.REF) {
-						str += "ref ";
-					} else if (param.direction == ParameterDirection.OUT) {
-						str += "out ";
-					}
-					if (!param.variable_type.value_owned && param.variable_type is ReferenceType) {
-						str += "weak ";
-					}
-				}
-
-				str += param.variable_type.to_string();
-
-				i++;
-			}
-
-			str += ")";
-
-			return str;
 		}
 
 		public override bool check(CodeContext context) {

@@ -544,12 +544,12 @@ namespace Vala.Lang
 			if (arg.target_type != null) {
 				if ((direction == ParameterDirection.IN || direction == ParameterDirection.REF)
 					&& !arg.value_type.compatible(arg.target_type)) {
-					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.to_string(), arg.target_type.to_string()));
+					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.to_prototype_string(), arg.target_type.to_prototype_string()));
 					return false;
 				} else if ((direction == ParameterDirection.REF || direction == ParameterDirection.OUT)
 							&& !arg.target_type.compatible(arg.value_type)
 							&& !(arg is NullLiteral)) {
-					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.target_type.to_string(), arg.value_type.to_string()));
+					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.target_type.to_prototype_string(), arg.value_type.to_prototype_string()));
 					return false;
 				}
 			}
@@ -817,7 +817,11 @@ namespace Vala.Lang
 					// trace type arguments back to the datatype where the method has been declared
 					var instance_type = get_instance_base_type_for_member(derived_instance_type, (TypeSymbol)generic_type.type_parameter.parent_symbol, node_reference);
 
-					Debug.Assert(instance_type != null);
+					if (instance_type == null) {
+						Report.error(node_reference.source_reference, "The type-parameter `%s' must be defined on enclosing type".printf(generic_type.to_string()));
+						node_reference.error = true;
+						return null;
+					}
 
 					int param_index;
 					if (instance_type is DelegateType) {

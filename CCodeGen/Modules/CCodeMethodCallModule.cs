@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala;
 using Vala.Lang;
+using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Methods;
 using Vala.Lang.Parser;
@@ -15,6 +16,7 @@ using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -159,7 +161,7 @@ namespace CCodeGen.Modules
 				} else if (current_class.base_class == gsource_type) {
 					// g_source_new
 
-					string class_prefix = CCodeBaseModule.get_ccode_lower_case_name(current_class);
+					string class_prefix = get_ccode_lower_case_name(current_class);
 
 					var funcs = new CCodeDeclaration("const GSourceFuncs");
 					funcs.modifiers = CCodeModifiers.STATIC;
@@ -307,7 +309,7 @@ namespace CCodeGen.Modules
 				}
 				generate_dynamic_method_wrapper((DynamicMethod)m);
 			} else if (m is CreationMethod && m.parent_symbol is Class) {
-				ccode.add_assignment(get_this_cexpression(), new CCodeCastExpression(ccall, CCodeBaseModule.get_ccode_name(current_class) + "*"));
+				ccode.add_assignment(get_this_cexpression(), new CCodeCastExpression(ccall, get_ccode_name(current_class) + "*"));
 
 				if (current_method.body.captured) {
 					// capture self after setting it
@@ -513,6 +515,8 @@ namespace CCodeGen.Modules
 						out_arg_map[get_param_pos(get_ccode_array_length_pos(m) + 0.01 * dim)] = new CCodeUnaryExpression(CCodeUnaryOperator.ADDRESS_OF, temp_ref);
 
 						append_array_length(expr, temp_ref);
+					} else if (get_ccode_array_length_expr(m) != null) {
+						append_array_length(expr, new CCodeConstant(get_ccode_array_length_expr(m)));
 					} else {
 						append_array_length(expr, new CCodeConstant("-1"));
 					}
@@ -797,6 +801,12 @@ namespace CCodeGen.Modules
 
 				if (m != null && m.get_format_arg_index() >= 0) {
 					set_cvalue(expr, ccall_expr);
+				} else if (m != null && m.get_attribute_bool("CCode", "use_inplace", false)) {
+					set_cvalue(expr, ccall_expr);
+				} else if (!return_result_via_out_param
+				           && ((m != null && !has_ref_out_param(m)) || (deleg != null && !has_ref_out_param(deleg)))
+				           && (result_type is ValaValueType && !result_type.is_disposable())) {
+					set_cvalue(expr, ccall_expr);
 				} else if (!return_result_via_out_param) {
 					var temp_var = get_temp_variable(result_type, result_type.value_owned, null, false);
 					var temp_ref = get_variable_cexpression(temp_var.name);
@@ -887,6 +897,15 @@ namespace CCodeGen.Modules
 			pop_context();
 
 			return to_string_func;
+		}
+
+		bool has_ref_out_param(Callable c) {
+			foreach (var param in c.get_parameters()) {
+				if (param.direction != ParameterDirection.IN) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

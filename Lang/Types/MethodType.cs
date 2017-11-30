@@ -11,7 +11,7 @@ namespace Vala.Lang.Types
 	/**
 	 * The type of a method referencea.
 	 */
-	public class MethodType : DataType
+	public class MethodType : CallableType
 	{
 		public Method method_symbol { get; set; }
 

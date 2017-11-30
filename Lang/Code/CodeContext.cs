@@ -106,17 +106,17 @@ namespace Vala.Lang.CodeNodes
 		/**
 		 * List of directories where to find .vapi files.
 		 */
-		public string[] vapi_directories;
+		public string[] vapi_directories = {};
 
 		/**
 		 * List of directories where to find .gir files.
 		 */
-		public string[] gir_directories;
+		public string[] gir_directories = {};
 
 		/**
 		 * List of directories where to find .metadata files for .gir files.
 		 */
-		public string[] metadata_directories;
+		public string[] metadata_directories = {};
 
 		/**
 		 * Produce debug information.
@@ -190,9 +190,9 @@ namespace Vala.Lang.CodeNodes
 
 		public bool run_output { get; set; }
 
-		public string[] gresources;
+		public string[] gresources = {};
 
-		public string[] gresources_directories;
+		public string[] gresources_directories = {};
 
 		private List<SourceFile> source_files = new List<SourceFile>();
 		private List<string> c_source_files = new List<string>();

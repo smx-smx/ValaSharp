@@ -12,6 +12,7 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -104,7 +105,7 @@ namespace CCodeGen.Modules
 			ccode.add_declaration("gsize", new CCodeVariableDeclarator(quark_name, new CCodeConstant("0")), CCodeModifiers.STATIC | CCodeModifiers.VOLATILE);
 
 			var register_call = new CCodeFunctionCall(new CCodeIdentifier("g_dbus_error_register_error_domain"));
-			register_call.add_argument(new CCodeConstant("\"" + CCodeBaseModule.get_quark_name(edomain) + "\""));
+			register_call.add_argument(new CCodeConstant("\"" + get_ccode_quark_name(edomain) + "\""));
 			register_call.add_argument(new CCodeUnaryExpression(CCodeUnaryOperator.ADDRESS_OF, new CCodeIdentifier(quark_name)));
 			register_call.add_argument(new CCodeIdentifier(get_ccode_lower_case_name(edomain) + "_entries"));
 			var nentries = new CCodeFunctionCall(new CCodeIdentifier("G_N_ELEMENTS"));

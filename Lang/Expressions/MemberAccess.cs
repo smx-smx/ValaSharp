@@ -183,6 +183,9 @@ namespace Vala.Lang.Expressions
 		}
 
 		public override bool check(CodeContext context) {
+			if (source_reference != null && source_reference.file.filename.EndsWith(".vala"))
+				context.ToString();
+
 			if (is_checked) {
 				return !error;
 			}
@@ -437,6 +440,21 @@ namespace Vala.Lang.Expressions
 					if (symbol_reference != null) {
 						may_access_instance_members = true;
 						may_access_klass_members = true;
+					}
+				}
+			}
+
+			if (member_name == "foo") {
+				member_name.ToString();
+			}
+
+			// enum-type inference
+			if (symbol_reference == null && target_type != null && target_type.data_type is ValaEnum) {
+				var enum_type = (ValaEnum)target_type.data_type;
+				foreach (var val in enum_type.get_values()) {
+					if (member_name == val.name) {
+						symbol_reference = val;
+						break;
 					}
 				}
 			}

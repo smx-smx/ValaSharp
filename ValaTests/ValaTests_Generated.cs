@@ -290,6 +290,16 @@ namespace ValaTests
 			Assert.IsTrue(runner.RunValaTest("BasicTypes/bug772426.vala") == 0);
 		}
 		[Test]
+		public void BasicTypes_bug787152() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("BasicTypes/bug787152.vala") == 0);
+		}
+		[Test]
+		public void BasicTypes_bug788775() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("BasicTypes/bug788775.vala") == 0);
+		}
+		[Test]
 		public void BasicTypes_escape_chars() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("BasicTypes/escape-chars.vala") == 0);
@@ -520,6 +530,11 @@ namespace ValaTests
 			Assert.IsTrue(runner.RunValaTest("Delegates/reference_transfer.vala") == 0);
 		}
 		[Test]
+		public void Enums_bug666035() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("Enums/bug666035.vala") == 0);
+		}
+		[Test]
 		public void Enums_bug673879() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("Enums/bug673879.vala") == 0);
@@ -738,6 +753,11 @@ namespace ValaTests
 		public void Methods_bug781061() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("Methods/bug781061.vala") == 0);
+		}
+		[Test]
+		public void Methods_bug784691() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("Methods/bug784691.vala") == 0);
 		}
 		[Test]
 		public void Methods_closures() {
@@ -990,6 +1010,11 @@ namespace ValaTests
 			Assert.IsTrue(runner.RunValaTest("Objects/bug783897.vala") == 0);
 		}
 		[Test]
+		public void Objects_bug788964() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("Objects/bug788964.vala") == 0);
+		}
+		[Test]
 		public void Objects_chainup() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("Objects/chainup.vala") == 0);
@@ -1033,6 +1058,11 @@ namespace ValaTests
 		public void Objects_regex() {
 			ValaTestRunner runner = new ValaTestRunner();
 			Assert.IsTrue(runner.RunValaTest("Objects/regex.vala") == 0);
+		}
+		[Test]
+		public void Objects_signals_delegate() {
+			ValaTestRunner runner = new ValaTestRunner();
+			Assert.IsTrue(runner.RunValaTest("Objects/signals-delegate.vala") == 0);
 		}
 		[Test]
 		public void Objects_signals() {

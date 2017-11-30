@@ -9,7 +9,7 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types
 {
-	public class DelegateType : DataType
+	public class DelegateType : CallableType
 	{
 		public ValaDelegate delegate_symbol { get; set; }
 

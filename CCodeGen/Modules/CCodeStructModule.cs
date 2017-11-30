@@ -9,6 +9,7 @@ using Vala.Lang;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -146,6 +147,12 @@ namespace CCodeGen.Modules
 		public override void visit_struct(Struct st) {
 			push_context(new EmitContext(st));
 			push_line(st.source_reference);
+
+			if (get_ccode_has_type_id(st) && get_ccode_name(st).Length < 3) {
+				st.error = true;
+				Report.error(st.source_reference, "Name `%s' is too short for struct using GType".printf(get_ccode_name(st)));
+				return;
+			}
 
 			var old_instance_finalize_context = instance_finalize_context;
 			instance_finalize_context = new EmitContext();

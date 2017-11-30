@@ -13,6 +13,7 @@ using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -70,7 +71,7 @@ namespace CCodeGen.Modules
 			push_function(cquark_fun);
 
 			var cquark_call = new CCodeFunctionCall(new CCodeIdentifier("g_quark_from_static_string"));
-			cquark_call.add_argument(new CCodeConstant("\"" + CCodeBaseModule.get_quark_name(edomain) + "\""));
+			cquark_call.add_argument(new CCodeConstant("\"" + get_ccode_quark_name(edomain) + "\""));
 
 			ccode.add_return(cquark_call);
 

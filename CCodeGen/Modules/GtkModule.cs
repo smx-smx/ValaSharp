@@ -14,11 +14,14 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
+using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
 	public class GtkModule : GSignalModule
 	{
+		/* C type-func name to Vala class mapping */
+		private Dictionary<string, Class> type_id_to_vala_map = null;
 		/* C class name to Vala class mapping */
 		private Dictionary<string, Class> cclass_to_vala_map = null;
 		/* GResource name to real file name mapping */
@@ -29,6 +32,36 @@ namespace CCodeGen.Modules
 		private Dictionary<string, Class> current_child_to_class_map = new Dictionary<string, Class>();
 		/* Required custom application-specific gtype classes to be ref'd before initializing the template */
 		private List<Class> current_required_app_classes = new List<Class>();
+
+		private void ensure_type_id_to_vala_map() {
+			// map C type-func name of gtypeinstance classes to Vala classes
+			if (type_id_to_vala_map != null) {
+				return;
+			}
+			type_id_to_vala_map = new Dictionary<string, Class>();
+			recurse_type_id_to_vala_map(context.root);
+		}
+
+		private void recurse_type_id_to_vala_map(Namespace ns) {
+			foreach (var cl in ns.get_classes()) {
+				if (!cl.is_compact) {
+					var type_id = get_ccode_type_id(cl);
+					if (type_id == null)
+						continue;
+
+					var i = type_id.IndexOf('(');
+					if (i > 0) {
+						type_id = type_id.Substring(0, i - 1).Trim();
+					} else {
+						type_id = type_id.Trim();
+					}
+					type_id_to_vala_map[type_id] =  cl;
+				}
+			}
+			foreach (var inner in ns.get_namespaces()) {
+				recurse_type_id_to_vala_map(inner);
+			}
+		}
 
 		private void ensure_cclass_to_vala_map() {
 			// map C name of gtypeinstance classes to Vala classes
@@ -94,6 +127,7 @@ namespace CCodeGen.Modules
 		private void process_current_ui_resource(string ui_resource, CodeNode node) {
 			/* Scan a single gtkbuilder file for signal handlers in <object> elements,
 			   and save an handler string -> Vala.Signal mapping for each of them */
+			ensure_type_id_to_vala_map ();
 			ensure_cclass_to_vala_map();
 			ensure_gresource_to_file_map();
 
@@ -114,20 +148,35 @@ namespace CCodeGen.Modules
 			bool template_tag_found = false;
 			MarkupTokenType current_token = reader.read_token();
 			while (current_token != MarkupTokenType.EOF) {
-				if (current_token == MarkupTokenType.START_ELEMENT && (reader.name == "template" || reader.name == "object")) {
-					if (reader.name == "template") {
+				string current_name = reader.name;
+				if (current_token == MarkupTokenType.START_ELEMENT && (current_name == "object" || current_name == "template")) {
+					current_class = null;
+
+					if (current_name == "object") {
+						var type_id = reader.get_attribute ("type-func");
+						if (type_id != null) {
+							current_class = type_id_to_vala_map.get (type_id);
+						}
+					} else if (reader.name == "template") {
 						template_tag_found = true;
 					}
-					var class_name = reader.get_attribute("class");
-					if (class_name != null) {
+					if (current_class == null) {
+						var class_name = reader.get_attribute ("class");
+						if (class_name == null) {
+							Report.error (node.source_reference, "Invalid %s in ui file `%s'".printf (current_name, ui_file));
+							current_token = reader.read_token (null, null);
+							continue;
+						}
 						current_class = cclass_to_vala_map[class_name];
+					}
 
+					if (class_name != null) {
 						var child_name = reader.get_attribute("id");
 						if (child_name != null) {
 							current_child_to_class_map[child_name] = current_class;
 						}
 					}
-				} else if (current_class != null && current_token == MarkupTokenType.START_ELEMENT && reader.name == "signal") {
+				} else if (current_class != null && current_token == MarkupTokenType.START_ELEMENT && current_name == "signal") {
 					var signal_name = reader.get_attribute("name");
 					var handler_name = reader.get_attribute("handler");
 
@@ -312,7 +361,7 @@ namespace CCodeGen.Modules
 				var signal_type = new SignalType(sig);
 				var delegate_type = signal_type.get_handler_type();
 				if (!method_type.compatible(delegate_type)) {
-					Report.error(m.source_reference, "method `%s' is incompatible with signal `%s', expected `%s'".printf(method_type.to_string(), delegate_type.to_string(), delegate_type.delegate_symbol.get_prototype_string(m.name)));
+					Report.error(m.source_reference, "method `%s' is incompatible with signal `%s', expected `%s'".printf(method_type.to_string(), delegate_type.to_string(), delegate_type.to_prototype_string(m.name)));
 				} else {
 					var wrapper = generate_delegate_wrapper(m, signal_type.get_handler_type(), m);
 
