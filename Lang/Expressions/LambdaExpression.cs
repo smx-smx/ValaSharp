@@ -137,6 +137,7 @@ namespace Vala.Lang.Expressions
 			method.used = true;
 			method.version.check(source_reference);
 
+			Method m;
 			if (!cb.has_target || !context.analyzer.is_in_instance_method()) {
 				method.binding = MemberBinding.STATIC;
 			} else {
@@ -152,8 +153,8 @@ namespace Vala.Lang.Expressions
 						var d = (Destructor)sym;
 						method.this_parameter = d.this_parameter;
 					} else if (sym is Method) {
-						var _m = (Method)sym;
-						method.this_parameter = _m.this_parameter;
+						m = (Method)sym;
+						method.this_parameter = m.this_parameter;
 					}
 
 					sym = sym.parent_symbol;
@@ -218,7 +219,7 @@ namespace Vala.Lang.Expressions
 			method.body.owner = method.scope;
 
 			// support use of generics in closures
-			var m = context.analyzer.find_parent_method(context.analyzer.current_symbol);
+			m = context.analyzer.find_parent_method(context.analyzer.current_symbol);
 			if (m != null) {
 				foreach (var type_param in m.get_type_parameters()) {
 					method.add_type_parameter(new TypeParameter(type_param.name, type_param.source_reference));
@@ -248,11 +249,7 @@ namespace Vala.Lang.Expressions
 		public override void get_used_variables(ICollection<Variable> collection) {
 			// require captured variables to be initialized
 			if (method.closure) {
-				ICollection<LocalVariable> localVariables = collection.Select(
-					v => new LocalVariable(
-						v.variable_type, v.name,
-						v.initializer, v.source_reference)
-				).ToList();
+				ICollection<LocalVariable> localVariables = collection.ToList().ConvertAll(v => (LocalVariable)v);
 				method.get_captured_variables(localVariables);
 			}
 		}
