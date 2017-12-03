@@ -78,8 +78,10 @@ namespace Vala.Lang.Literals
 				if (value[0] == '-') {
 					tmp = value.Substring(1);
 				}
-				n = -Convert.ToInt64(tmp, 16);
-
+				n = Convert.ToInt64(tmp, 16);
+				if (value[0] == '-') {
+					n = -n;
+				}
 			}
 
 			if (!u && (n > int.MaxValue || n < int.MinValue)) {
