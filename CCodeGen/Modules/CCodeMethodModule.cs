@@ -15,7 +15,6 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
-using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {

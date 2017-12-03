@@ -12,7 +12,6 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
-using static CCodeGen.CCode;
 
 namespace CCodeGen
 {
@@ -60,7 +59,7 @@ namespace CCodeGen
 						_type_name = ccode.get_string("type_cname");
 					}
 					if (_type_name == null) {
-						_type_name = "%sIface".printf(get_ccode_name(sym));
+						_type_name = "%sIface".printf(CCodeBaseModule.get_ccode_name(sym));
 					}
 				}
 				return _type_name;
@@ -149,7 +148,7 @@ namespace CCodeGen
 					} else {
 						var cl = (Class)sym;
 						if (cl.base_class != null) {
-							_ref_function_void = get_ccode_ref_function_void(cl.base_class);
+							_ref_function_void = CCodeBaseModule.get_ccode_ref_function_void(cl.base_class);
 						} else {
 							_ref_function_void = false;
 						}
@@ -256,7 +255,7 @@ namespace CCodeGen
 					} else {
 						var cl = (Class)sym;
 						if (cl.base_class != null) {
-							_free_function_address_of = get_ccode_free_function_address_of(cl.base_class);
+							_free_function_address_of = CCodeBaseModule.get_ccode_free_function_address_of(cl.base_class);
 						} else {
 							_free_function_address_of = false;
 						}
@@ -421,7 +420,7 @@ namespace CCodeGen
 					if (_vfunc_name == null) {
 						Method m = node as Method;
 						if (m != null && m.signal_reference != null) {
-							_vfunc_name = get_ccode_lower_case_name(m.signal_reference);
+							_vfunc_name = CCodeBaseModule.get_ccode_lower_case_name(m.signal_reference);
 						} else {
 							_vfunc_name = sym.name;
 						}
@@ -519,10 +518,7 @@ namespace CCodeGen
 		public bool array_null_terminated {
 			get {
 				if (_array_null_terminated == null) {
-					// If arrays claim to have an array-length and also are null-terminated then rely on the given length
-					if (ccode != null && ccode.has_argument("array_length") && ccode.get_bool("array_length")) {
-						_array_null_terminated = false;
-					} else if (ccode != null && ccode.has_argument("array_null_terminated")) {
+					if (ccode != null && ccode.has_argument("array_null_terminated")) {
 						_array_null_terminated = ccode.get_bool("array_null_terminated");
 					} else {
 						_array_null_terminated = get_default_array_null_terminated();
@@ -611,11 +607,11 @@ namespace CCodeGen
 						// local constant
 						return sym.name;
 					}
-					return "%s%s".printf(get_ccode_lower_case_prefix(sym.parent_symbol).ToUpper(), sym.name);
+					return "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(sym.parent_symbol).ToUpper(), sym.name);
 				} else if (sym is Field) {
 					var cname = sym.name;
 					if (((Field)sym).binding == MemberBinding.STATIC) {
-						cname = "%s%s".printf(get_ccode_lower_case_prefix(sym.parent_symbol), sym.name);
+						cname = "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(sym.parent_symbol), sym.name);
 					}
 					if (Char.IsDigit(cname[0])) {
 						Report.error(node.source_reference, "Field name starts with a digit. Use the `cname' attribute to provide a valid C name if intended");
@@ -631,57 +627,57 @@ namespace CCodeGen
 						infix = "new";
 					}
 					if (m.name == ".new") {
-						return "%s%s".printf(get_ccode_lower_case_prefix(m.parent_symbol), infix);
+						return "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(m.parent_symbol), infix);
 					} else {
-						return "%s%s_%s".printf(get_ccode_lower_case_prefix(m.parent_symbol), infix, m.name);
+						return "%s%s_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(m.parent_symbol), infix, m.name);
 					}
 				} else if (sym is DynamicMethod) {
 					return "_dynamic_%s%d".printf(sym.name, dynamic_method_id++);
 				} else if (sym is Method) {
 					var m = (Method)sym;
 					if (m.is_async_callback) {
-						return "%s_co".printf(get_ccode_real_name((Method)m.parent_symbol));
+						return "%s_co".printf(CCodeBaseModule.get_ccode_real_name((Method)m.parent_symbol));
 					}
 					if (m.signal_reference != null) {
-						return "%s%s".printf(get_ccode_lower_case_prefix(m.parent_symbol), get_ccode_lower_case_name(m.signal_reference));
+						return "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(m.parent_symbol), CCodeBaseModule.get_ccode_lower_case_name(m.signal_reference));
 					}
 					if (sym.name == "main" && sym.parent_symbol.name == null) {
 						// avoid conflict with generated main function
 						return "_vala_main";
 					} else if (sym.name.StartsWith("_")) {
-						return "_%s%s".printf(get_ccode_lower_case_prefix(sym.parent_symbol), sym.name.Substring(1));
+						return "_%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(sym.parent_symbol), sym.name.Substring(1));
 					} else {
-						return "%s%s".printf(get_ccode_lower_case_prefix(sym.parent_symbol), sym.name);
+						return "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(sym.parent_symbol), sym.name);
 					}
 				} else if (sym is PropertyAccessor) {
 					var acc = (PropertyAccessor)sym;
 					var t = (TypeSymbol)acc.prop.parent_symbol;
 
 					if (acc.readable) {
-						return "%sget_%s".printf(get_ccode_lower_case_prefix(t), acc.prop.name);
+						return "%sget_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(t), acc.prop.name);
 					} else {
-						return "%sset_%s".printf(get_ccode_lower_case_prefix(t), acc.prop.name);
+						return "%sset_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(t), acc.prop.name);
 					}
 				} else if (sym is Signal) {
 					return Symbol.camel_case_to_lower_case(sym.name).Replace("_", "-"); ;
 				} else if (sym is LocalVariable || sym is Parameter) {
 					return sym.name;
 				} else {
-					return "%s%s".printf(get_ccode_prefix(sym.parent_symbol), sym.name);
+					return "%s%s".printf(CCodeBaseModule.get_ccode_prefix(sym.parent_symbol), sym.name);
 				}
 			} else if (node is ObjectType) {
 				var type = (ObjectType)node;
 
 				string cname;
 				if (!type.value_owned) {
-					cname = get_ccode_const_name(type.type_symbol);
+					cname = CCodeBaseModule.get_ccode_const_name(type.type_symbol);
 				} else {
-					cname = get_ccode_name(type.type_symbol);
+					cname = CCodeBaseModule.get_ccode_name(type.type_symbol);
 				}
 				return "%s*".printf(cname);
 			} else if (node is ArrayType) {
 				var type = (ArrayType)node;
-				var cname = get_ccode_name(type.element_type);
+				var cname = CCodeBaseModule.get_ccode_name(type.element_type);
 				if (type.inline_allocated) {
 					return cname;
 				} else {
@@ -689,7 +685,7 @@ namespace CCodeGen
 				}
 			} else if (node is DelegateType) {
 				var type = (DelegateType)node;
-				return get_ccode_name(type.delegate_symbol);
+				return CCodeBaseModule.get_ccode_name(type.delegate_symbol);
 			} else if (node is ErrorType) {
 				return "GError*";
 			} else if (node is GenericType) {
@@ -706,21 +702,21 @@ namespace CCodeGen
 			} else if (node is PointerType) {
 				var type = (PointerType)node;
 				if (type.base_type.data_type != null && type.base_type.data_type.is_reference_type()) {
-					return get_ccode_name(type.base_type);
+					return CCodeBaseModule.get_ccode_name(type.base_type);
 				} else {
-					return "%s*".printf(get_ccode_name(type.base_type));
+					return "%s*".printf(CCodeBaseModule.get_ccode_name(type.base_type));
 				}
 			} else if (node is VoidType) {
 				return "void";
 			} else if (node is ClassType) {
 				var type = (ClassType)node;
-				return "%sClass*".printf(get_ccode_name(type.class_symbol));
+				return "%sClass*".printf(CCodeBaseModule.get_ccode_name(type.class_symbol));
 			} else if (node is InterfaceType) {
 				var type = (InterfaceType)node;
-				return "%s*".printf(get_ccode_type_name(type.interface_symbol));
+				return "%s*".printf(CCodeBaseModule.get_ccode_type_name(type.interface_symbol));
 			} else if (node is ValaValueType) {
 				var type = (ValaValueType)node;
-				var cname = get_ccode_name(type.type_symbol);
+				var cname = CCodeBaseModule.get_ccode_name(type.type_symbol);
 				if (type.nullable) {
 					return "%s*".printf(cname);
 				} else {
@@ -739,7 +735,7 @@ namespace CCodeGen
 				return "";
 			}
 			if (sym.parent_symbol != null) {
-				var parent_headers = get_ccode_header_filenames(sym.parent_symbol);
+				var parent_headers = CCodeBaseModule.get_ccode_header_filenames(sym.parent_symbol);
 				if (parent_headers.Length > 0) {
 					return parent_headers;
 				}
@@ -755,12 +751,12 @@ namespace CCodeGen
 			if (sym is ObjectTypeSymbol) {
 				return name;
 			} else if (sym is ValaEnum || sym is ErrorDomain) {
-				return "%s_".printf(get_ccode_upper_case_name(sym));
+				return "%s_".printf(CCodeBaseModule.get_ccode_upper_case_name(sym));
 			} else if (sym is Namespace) {
 				if (sym.name != null) {
 					var parent_prefix = "";
 					if (sym.parent_symbol != null) {
-						parent_prefix = get_ccode_prefix(sym.parent_symbol);
+						parent_prefix = CCodeBaseModule.get_ccode_prefix(sym.parent_symbol);
 					}
 					return "%s%s".printf(parent_prefix, sym.name);
 				} else {
@@ -777,13 +773,13 @@ namespace CCodeGen
 				if (sym.name == null) {
 					return "";
 				} else {
-					return "%s%s_".printf(get_ccode_lower_case_prefix(sym.parent_symbol), Symbol.camel_case_to_lower_case(sym.name));
+					return "%s%s_".printf(CCodeBaseModule.get_ccode_lower_case_prefix(sym.parent_symbol), Symbol.camel_case_to_lower_case(sym.name));
 				}
 			} else if (sym is Method) {
 				// for lambda expressions
 				return "";
 			} else {
-				return "%s_".printf(get_ccode_lower_case_name(sym));
+				return "%s_".printf(CCodeBaseModule.get_ccode_lower_case_name(sym));
 			}
 		}
 
@@ -802,7 +798,7 @@ namespace CCodeGen
 				}
 				return csuffix;
 			} else if (sym is Signal) {
-				return get_ccode_attribute(sym).name.Replace("-", "_");
+				return CCodeBaseModule.get_ccode_attribute(sym).name.Replace("-", "_");
 			} else if (sym.name != null) {
 				return Symbol.camel_case_to_lower_case(sym.name);
 			}
@@ -815,11 +811,11 @@ namespace CCodeGen
 				if (cl.is_fundamental()) {
 					return "%sref".printf(lower_case_prefix);
 				} else if (cl.base_class != null) {
-					return get_ccode_ref_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_ref_function(cl.base_class);
 				}
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					var ref_func = get_ccode_ref_function((ObjectTypeSymbol)prereq.data_type);
+					var ref_func = CCodeBaseModule.get_ccode_ref_function((ObjectTypeSymbol)prereq.data_type);
 					if (ref_func != null) {
 						return ref_func;
 					}
@@ -834,11 +830,11 @@ namespace CCodeGen
 				if (cl.is_fundamental()) {
 					return "%sunref".printf(lower_case_prefix);
 				} else if (cl.base_class != null) {
-					return get_ccode_unref_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_unref_function(cl.base_class);
 				}
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					string unref_func = get_ccode_unref_function((ObjectTypeSymbol)prereq.data_type);
+					string unref_func = CCodeBaseModule.get_ccode_unref_function((ObjectTypeSymbol)prereq.data_type);
 					if (unref_func != null) {
 						return unref_func;
 					}
@@ -849,10 +845,10 @@ namespace CCodeGen
 
 		private string get_default_ref_sink_function() {
 			if (sym is Class) {
-				return get_ccode_ref_sink_function(((Class)sym).base_class);
+				return CCodeBaseModule.get_ccode_ref_sink_function(((Class)sym).base_class);
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					string ref_sink_func = get_ccode_ref_sink_function((ObjectTypeSymbol)prereq.data_type);
+					string ref_sink_func = CCodeBaseModule.get_ccode_ref_sink_function((ObjectTypeSymbol)prereq.data_type);
 					if (ref_sink_func != "") {
 						return ref_sink_func;
 					}
@@ -865,7 +861,7 @@ namespace CCodeGen
 			if (sym is Class) {
 				var cl = (Class)sym;
 				if (cl.base_class != null) {
-					return get_ccode_free_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_free_function(cl.base_class);
 				}
 				return "%sfree".printf(lower_case_prefix);
 			} else if (sym is Struct) {
@@ -879,26 +875,26 @@ namespace CCodeGen
 		private string get_default_type_id() {
 			if (sym != null) {
 				if (sym is Class && !((Class)sym).is_compact || sym is Interface) {
-					return get_ccode_upper_case_name(sym, "TYPE_");
+					return CCodeBaseModule.get_ccode_upper_case_name(sym, "TYPE_");
 				} else if (sym is ErrorType) {
 					return "G_TYPE_ERROR";
 				} else if (sym is Struct) {
 					var st = (Struct)sym;
-					if (!get_ccode_has_type_id(st)) {
+					if (!CCodeBaseModule.get_ccode_has_type_id(st)) {
 						var base_struct = st.base_struct;
 						if (base_struct != null) {
-							return get_ccode_type_id(base_struct);
+							return CCodeBaseModule.get_ccode_type_id(base_struct);
 						}
 						if (!st.is_simple_type()) {
 							return "G_TYPE_POINTER";
 						}
 					} else {
-						return get_ccode_upper_case_name(st, "TYPE_");
+						return CCodeBaseModule.get_ccode_upper_case_name(st, "TYPE_");
 					}
 				} else if (sym is ValaEnum) {
 					var en = (ValaEnum)sym;
-					if (get_ccode_has_type_id(en)) {
-						return get_ccode_upper_case_name(en, "TYPE_");
+					if (CCodeBaseModule.get_ccode_has_type_id(en)) {
+						return CCodeBaseModule.get_ccode_upper_case_name(en, "TYPE_");
 					} else {
 						return en.is_flags ? "G_TYPE_UINT" : "G_TYPE_INT";
 					}
@@ -916,7 +912,7 @@ namespace CCodeGen
 			} else {
 				var type = (DataType)node;
 				if (type.data_type != null) {
-					return get_ccode_type_id(type.data_type);
+					return CCodeBaseModule.get_ccode_type_id(type.data_type);
 				}
 			}
 			return "";
@@ -927,9 +923,9 @@ namespace CCodeGen
 				if (sym is Class) {
 					var cl = (Class)sym;
 					if (cl.base_class != null) {
-						return get_ccode_marshaller_type_name(cl.base_class);
+						return CCodeBaseModule.get_ccode_marshaller_type_name(cl.base_class);
 					} else if (!cl.is_compact) {
-						return get_ccode_upper_case_name(cl);
+						return CCodeBaseModule.get_ccode_upper_case_name(cl);
 					} else if (type_id == "G_TYPE_POINTER") {
 						return "POINTER";
 					} else {
@@ -937,7 +933,7 @@ namespace CCodeGen
 					}
 				} else if (sym is ValaEnum) {
 					var en = (ValaEnum)sym;
-					if (get_ccode_has_type_id(en)) {
+					if (CCodeBaseModule.get_ccode_has_type_id(en)) {
 						if (en.is_flags) {
 							return "FLAGS";
 						} else {
@@ -952,7 +948,7 @@ namespace CCodeGen
 					}
 				} else if (sym is Interface) {
 					foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-						var type_name = get_ccode_marshaller_type_name(prereq.data_type);
+						var type_name = CCodeBaseModule.get_ccode_marshaller_type_name(prereq.data_type);
 						if (type_name != "") {
 							return type_name;
 						}
@@ -962,15 +958,15 @@ namespace CCodeGen
 					var st = (Struct)sym;
 					var base_st = st.base_struct;
 					while (base_st != null) {
-						if (get_ccode_has_type_id(base_st)) {
-							return get_ccode_marshaller_type_name(base_st);
+						if (CCodeBaseModule.get_ccode_has_type_id(base_st)) {
+							return CCodeBaseModule.get_ccode_marshaller_type_name(base_st);
 						} else {
 							base_st = base_st.base_struct;
 						}
 					}
 					if (st.is_simple_type()) {
 						Report.error(st.source_reference, "The type `%s` doesn't declare a marshaller type name".printf(st.get_full_name()));
-					} else if (get_ccode_has_type_id(st)) {
+					} else if (CCodeBaseModule.get_ccode_has_type_id(st)) {
 						return "BOXED";
 					} else {
 						return "POINTER";
@@ -980,7 +976,7 @@ namespace CCodeGen
 					if (param.direction != ParameterDirection.IN) {
 						return "POINTER";
 					} else {
-						return get_ccode_marshaller_type_name(param.variable_type);
+						return CCodeBaseModule.get_ccode_marshaller_type_name(param.variable_type);
 					}
 				} else {
 					return "POINTER";
@@ -1004,7 +1000,7 @@ namespace CCodeGen
 			} else if (node is VoidType) {
 				return "VOID";
 			} else {
-				return get_ccode_marshaller_type_name(((DataType)node).data_type);
+				return CCodeBaseModule.get_ccode_marshaller_type_name(((DataType)node).data_type);
 			}
 			return "";
 		}
@@ -1013,9 +1009,9 @@ namespace CCodeGen
 			if (sym is Class) {
 				var cl = (Class)sym;
 				if (cl.is_fundamental()) {
-					return get_ccode_lower_case_name(cl, "value_get_");
+					return CCodeBaseModule.get_ccode_lower_case_name(cl, "value_get_");
 				} else if (cl.base_class != null) {
-					return get_ccode_get_value_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_get_value_function(cl.base_class);
 				} else if (type_id == "G_TYPE_POINTER") {
 					return "g_value_get_pointer";
 				} else {
@@ -1023,7 +1019,7 @@ namespace CCodeGen
 				}
 			} else if (sym is ValaEnum) {
 				var en = (ValaEnum)sym;
-				if (get_ccode_has_type_id(en)) {
+				if (CCodeBaseModule.get_ccode_has_type_id(en)) {
 					if (en.is_flags) {
 						return "g_value_get_flags";
 					} else {
@@ -1038,7 +1034,7 @@ namespace CCodeGen
 				}
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					var type_name = get_ccode_get_value_function(prereq.data_type);
+					var type_name = CCodeBaseModule.get_ccode_get_value_function(prereq.data_type);
 					if (type_name != "") {
 						return type_name;
 					}
@@ -1048,15 +1044,15 @@ namespace CCodeGen
 				var st = (Struct)sym;
 				var base_st = st.base_struct;
 				while (base_st != null) {
-					if (get_ccode_has_type_id(base_st)) {
-						return get_ccode_get_value_function(base_st);
+					if (CCodeBaseModule.get_ccode_has_type_id(base_st)) {
+						return CCodeBaseModule.get_ccode_get_value_function(base_st);
 					} else {
 						base_st = base_st.base_struct;
 					}
 				}
 				if (st.is_simple_type()) {
 					Report.error(st.source_reference, "The type `%s` doesn't declare a GValue get function".printf(st.get_full_name()));
-				} else if (get_ccode_has_type_id(st)) {
+				} else if (CCodeBaseModule.get_ccode_has_type_id(st)) {
 					return "g_value_get_boxed";
 				} else {
 					return "g_value_get_pointer";
@@ -1071,9 +1067,9 @@ namespace CCodeGen
 			if (sym is Class) {
 				var cl = (Class)sym;
 				if (cl.is_fundamental()) {
-					return get_ccode_lower_case_name(cl, "value_set_");
+					return CCodeBaseModule.get_ccode_lower_case_name(cl, "value_set_");
 				} else if (cl.base_class != null) {
-					return get_ccode_set_value_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_set_value_function(cl.base_class);
 				} else if (type_id == "G_TYPE_POINTER") {
 					return "g_value_set_pointer";
 				} else {
@@ -1081,7 +1077,7 @@ namespace CCodeGen
 				}
 			} else if (sym is ValaEnum) {
 				var en = (ValaEnum)sym;
-				if (get_ccode_has_type_id(en)) {
+				if (CCodeBaseModule.get_ccode_has_type_id(en)) {
 					if (en.is_flags) {
 						return "g_value_set_flags";
 					} else {
@@ -1096,7 +1092,7 @@ namespace CCodeGen
 				}
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					var type_name = get_ccode_set_value_function(prereq.data_type);
+					var type_name = CCodeBaseModule.get_ccode_set_value_function(prereq.data_type);
 					if (type_name != "") {
 						return type_name;
 					}
@@ -1106,15 +1102,15 @@ namespace CCodeGen
 				var st = (Struct)sym;
 				var base_st = st.base_struct;
 				while (base_st != null) {
-					if (get_ccode_has_type_id(base_st)) {
-						return get_ccode_set_value_function(base_st);
+					if (CCodeBaseModule.get_ccode_has_type_id(base_st)) {
+						return CCodeBaseModule.get_ccode_set_value_function(base_st);
 					} else {
 						base_st = base_st.base_struct;
 					}
 				}
 				if (st.is_simple_type()) {
 					Report.error(st.source_reference, "The type `%s` doesn't declare a GValue set function".printf(st.get_full_name()));
-				} else if (get_ccode_has_type_id(st)) {
+				} else if (CCodeBaseModule.get_ccode_has_type_id(st)) {
 					return "g_value_set_boxed";
 				} else {
 					return "g_value_set_pointer";
@@ -1129,9 +1125,9 @@ namespace CCodeGen
 			if (sym is Class) {
 				var cl = (Class)sym;
 				if (cl.is_fundamental()) {
-					return get_ccode_lower_case_name(cl, "value_take_");
+					return CCodeBaseModule.get_ccode_lower_case_name(cl, "value_take_");
 				} else if (cl.base_class != null) {
-					return get_ccode_take_value_function(cl.base_class);
+					return CCodeBaseModule.get_ccode_take_value_function(cl.base_class);
 				} else if (type_id == "G_TYPE_POINTER") {
 					return "g_value_set_pointer";
 				} else {
@@ -1139,7 +1135,7 @@ namespace CCodeGen
 				}
 			} else if (sym is ValaEnum) {
 				var en = (ValaEnum)sym;
-				if (get_ccode_has_type_id(en)) {
+				if (CCodeBaseModule.get_ccode_has_type_id(en)) {
 					if (en.is_flags) {
 						return "g_value_take_flags";
 					} else {
@@ -1154,7 +1150,7 @@ namespace CCodeGen
 				}
 			} else if (sym is Interface) {
 				foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-					var func = get_ccode_take_value_function(prereq.data_type);
+					var func = CCodeBaseModule.get_ccode_take_value_function(prereq.data_type);
 					if (func != "") {
 						return func;
 					}
@@ -1164,15 +1160,15 @@ namespace CCodeGen
 				var st = (Struct)sym;
 				var base_st = st.base_struct;
 				while (base_st != null) {
-					if (get_ccode_has_type_id(base_st)) {
-						return get_ccode_take_value_function(base_st);
+					if (CCodeBaseModule.get_ccode_has_type_id(base_st)) {
+						return CCodeBaseModule.get_ccode_take_value_function(base_st);
 					} else {
 						base_st = base_st.base_struct;
 					}
 				}
 				if (st.is_simple_type()) {
 					Report.error(st.source_reference, "The type `%s` doesn't declare a GValue take function".printf(st.get_full_name()));
-				} else if (get_ccode_has_type_id(st)) {
+				} else if (CCodeBaseModule.get_ccode_has_type_id(st)) {
 					return "g_value_take_boxed";
 				} else {
 					return "g_value_set_pointer";
@@ -1188,9 +1184,9 @@ namespace CCodeGen
 				if (sym is Class) {
 					var cl = (Class)sym;
 					if (cl.is_fundamental()) {
-						return get_ccode_lower_case_name(cl, "param_spec_");
+						return CCodeBaseModule.get_ccode_lower_case_name(cl, "param_spec_");
 					} else if (cl.base_class != null) {
-						return get_ccode_param_spec_function(cl.base_class);
+						return CCodeBaseModule.get_ccode_param_spec_function(cl.base_class);
 					} else if (type_id == "G_TYPE_POINTER") {
 						return "g_param_spec_pointer";
 					} else {
@@ -1198,7 +1194,7 @@ namespace CCodeGen
 					}
 				} else if (sym is Interface) {
 					foreach (var prereq in ((Interface)sym).get_prerequisites()) {
-						var func = get_ccode_param_spec_function(prereq.data_type);
+						var func = CCodeBaseModule.get_ccode_param_spec_function(prereq.data_type);
 						if (func != "") {
 							return func;
 						}
@@ -1206,7 +1202,7 @@ namespace CCodeGen
 					return "g_param_spec_pointer";
 				} else if (sym is ValaEnum) {
 					var e = sym as ValaEnum;
-					if (get_ccode_has_type_id(e)) {
+					if (CCodeBaseModule.get_ccode_has_type_id(e)) {
 						if (e.is_flags) {
 							return "g_param_spec_flags";
 						} else {
@@ -1220,7 +1216,7 @@ namespace CCodeGen
 						}
 					}
 				} else if (sym is Struct) {
-					var type_id = get_ccode_type_id(sym);
+					var type_id = CCodeBaseModule.get_ccode_type_id(sym);
 					if (type_id == "G_TYPE_INT") {
 						return "g_param_spec_int";
 					} else if (type_id == "G_TYPE_UINT") {
@@ -1252,7 +1248,7 @@ namespace CCodeGen
 			} else if (node is ArrayType && ((ArrayType)node).element_type.data_type == CodeContext.get().analyzer.string_type.data_type) {
 				return "g_param_spec_boxed";
 			} else if (node is DataType && ((DataType)node).data_type != null) {
-				return get_ccode_param_spec_function(((DataType)node).data_type);
+				return CCodeBaseModule.get_ccode_param_spec_function(((DataType)node).data_type);
 			}
 
 			return "g_param_spec_pointer";
@@ -1266,7 +1262,7 @@ namespace CCodeGen
 				var base_st = st.base_struct;
 
 				if (base_st != null) {
-					return get_ccode_default_value(base_st);
+					return CCodeBaseModule.get_ccode_default_value(base_st);
 				}
 			}
 			return "";
@@ -1292,25 +1288,25 @@ namespace CCodeGen
 				string infix = "construct";
 
 				if (m.name == ".new") {
-					return "%s%s".printf(get_ccode_lower_case_prefix(parent), infix);
+					return "%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(parent), infix);
 				} else {
-					return "%s%s_%s".printf(get_ccode_lower_case_prefix(parent), infix, m.name);
+					return "%s%s_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(parent), infix, m.name);
 				}
 			} else if (sym is Method) {
 				var m = (Method)sym;
 				if (m.base_method != null || m.base_interface_method != null) {
 					string m_name;
 					if (m.signal_reference != null) {
-						m_name = get_ccode_lower_case_name(m.signal_reference);
+						m_name = CCodeBaseModule.get_ccode_lower_case_name(m.signal_reference);
 					} else {
 						m_name = m.name;
 					}
 					if (m.base_interface_type != null) {
-						return "%sreal_%s%s".printf(get_ccode_lower_case_prefix(m.parent_symbol),
-													 get_ccode_lower_case_prefix(m.base_interface_type.data_type),
+						return "%sreal_%s%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(m.parent_symbol),
+													 CCodeBaseModule.get_ccode_lower_case_prefix(m.base_interface_type.data_type),
 													 m_name);
 					} else {
-						return "%sreal_%s".printf(get_ccode_lower_case_prefix(m.parent_symbol), m_name);
+						return "%sreal_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(m.parent_symbol), m_name);
 					}
 				} else {
 					return name;
@@ -1320,9 +1316,9 @@ namespace CCodeGen
 				var prop = (Property)acc.prop;
 				if (prop.base_property != null || prop.base_interface_property != null) {
 					if (acc.readable) {
-						return "%sreal_get_%s".printf(get_ccode_lower_case_prefix(prop.parent_symbol), prop.name);
+						return "%sreal_get_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(prop.parent_symbol), prop.name);
 					} else {
-						return "%sreal_set_%s".printf(get_ccode_lower_case_prefix(prop.parent_symbol), prop.name);
+						return "%sreal_set_%s".printf(CCodeBaseModule.get_ccode_lower_case_prefix(prop.parent_symbol), prop.name);
 					}
 				} else {
 					return name;
@@ -1349,7 +1345,7 @@ namespace CCodeGen
 					ptr = "*";
 				}
 
-				return "const %s%s".printf(get_ccode_name(t), ptr);
+				return "const %s%s".printf(CCodeBaseModule.get_ccode_name(t), ptr);
 			} else {
 				if (node is Class && ((Class)node).is_immutable) {
 					return "const %s".printf(name);
@@ -1363,14 +1359,14 @@ namespace CCodeGen
 			if (node is Parameter) {
 				var param = (Parameter)node;
 				if (param.base_parameter != null) {
-					return get_ccode_array_length(param.base_parameter);
+					return CCodeBaseModule.get_ccode_array_length(param.base_parameter);
 				}
 			} else if (node is Method) {
 				var method = (Method)node;
 				if (method.base_method != null && method.base_method != method) {
-					return get_ccode_array_length(method.base_method);
+					return CCodeBaseModule.get_ccode_array_length(method.base_method);
 				} else if (method.base_interface_method != null && method.base_interface_method != method) {
-					return get_ccode_array_length(method.base_interface_method);
+					return CCodeBaseModule.get_ccode_array_length(method.base_interface_method);
 				}
 			}
 			return true;
@@ -1380,14 +1376,14 @@ namespace CCodeGen
 			if (node is Parameter) {
 				var param = (Parameter)node;
 				if (param.base_parameter != null) {
-					return get_ccode_array_null_terminated(param.base_parameter);
+					return CCodeBaseModule.get_ccode_array_null_terminated(param.base_parameter);
 				}
 			} else if (node is Method) {
 				var method = (Method)node;
 				if (method.base_method != null && method.base_method != method) {
-					return get_ccode_array_null_terminated(method.base_method);
+					return CCodeBaseModule.get_ccode_array_null_terminated(method.base_method);
 				} else if (method.base_interface_method != null && method.base_interface_method != method) {
-					return get_ccode_array_null_terminated(method.base_interface_method);
+					return CCodeBaseModule.get_ccode_array_null_terminated(method.base_interface_method);
 				}
 			}
 			return false;

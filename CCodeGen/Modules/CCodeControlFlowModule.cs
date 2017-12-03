@@ -10,7 +10,6 @@ using Vala.Lang;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Statements;
 using Vala.Lang.Types;
-using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {

@@ -177,7 +177,6 @@
     <Compile Include="TypeSymbols\ValaEnum.cs" />
     <Compile Include="Types\ArrayType.cs" />
     <Compile Include="Types\BooleanType.cs" />
-    <Compile Include="Types\CallableType.cs" />
     <Compile Include="Types\ClassType.cs" />
     <Compile Include="Types\DataType.cs" />
     <Compile Include="Types\DelegateType.cs" />

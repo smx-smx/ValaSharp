@@ -11,7 +11,6 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
-using static CCodeGen.CCode;
 
 namespace CCodeGen
 {
@@ -35,11 +34,11 @@ namespace CCodeGen
 		}
 
 		public override string get_type_struct_name() {
-			return get_ccode_type_name(interface_reference);
+			return CCodeBaseModule.get_ccode_type_name(interface_reference);
 		}
 
 		public override string get_base_init_func_name() {
-			return "%s_base_init".printf(get_ccode_lower_case_name(interface_reference));
+			return "%s_base_init".printf(CCodeBaseModule.get_ccode_lower_case_name(interface_reference));
 		}
 
 		public override string get_class_finalize_func_name() {
@@ -76,8 +75,8 @@ namespace CCodeGen
 				var prereq = prereq_ref.data_type;
 
 				var func = new CCodeFunctionCall(new CCodeIdentifier("g_type_interface_add_prerequisite"));
-				func.add_argument(new CCodeIdentifier("%s_type_id".printf(get_ccode_lower_case_name(interface_reference))));
-				func.add_argument(new CCodeIdentifier(get_ccode_type_id(prereq)));
+				func.add_argument(new CCodeIdentifier("%s_type_id".printf(CCodeBaseModule.get_ccode_lower_case_name(interface_reference))));
+				func.add_argument(new CCodeIdentifier(CCodeBaseModule.get_ccode_type_id(prereq)));
 
 				block.add_statement(new CCodeExpressionStatement(func));
 			}

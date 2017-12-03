@@ -13,7 +13,7 @@ namespace Vala.Lang.Types
 	/**
  * The type of a signal referencea.
  */
-	public class SignalType : CallableType
+	public class SignalType : DataType
 	{
 		public Signal signal_symbol { get; set; }
 

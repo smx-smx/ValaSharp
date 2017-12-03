@@ -7,7 +7,6 @@ using Vala.Lang.Code;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Statements;
-using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.CodeNodes
 {
@@ -68,23 +67,9 @@ namespace Vala.Lang.CodeNodes
 
 		public override bool check(CodeContext context) {
 			if (expression != null) {
-				var switch_statement = (SwitchStatement)section.parent_node;
-
-				// enum-type inference
-				var condition_target_type = switch_statement.expression.target_type;
-				if (expression.symbol_reference == null && condition_target_type != null && condition_target_type.data_type is ValaEnum) {
-					var enum_type = (ValaEnum)condition_target_type.data_type;
-					foreach (var val in enum_type.get_values()) {
-						if (expression.to_string() == val.name) {
-							expression.target_type = condition_target_type.copy();
-							expression.symbol_reference = val;
-							break;
-						}
-					}
-				}
-
 				expression.check(context);
 
+				var switch_statement = (SwitchStatement)section.parent_node;
 				if (!expression.is_constant()) {
 					error = true;
 					Report.error(expression.source_reference, "Expression must be constant");

@@ -364,7 +364,7 @@ namespace Vala.Lang.Methods
 
 			var actual_base_type = base_method.return_type.get_actual_type(object_type, method_type_args, this);
 			if (!return_type.equals(actual_base_type)) {
-				invalid_match = "Base method expected return type `%s', but `%s' was provided".printf(actual_base_type.to_prototype_string(), return_type.to_prototype_string());
+				invalid_match = "Base method expected return type `%s', but `%s' was provided".printf(actual_base_type.to_qualified_string(), return_type.to_qualified_string());
 				return false;
 			}
 
@@ -577,8 +577,7 @@ namespace Vala.Lang.Methods
 					string invalid_match;
 					if (!compatible(base_method, out invalid_match)) {
 						error = true;
-						var base_method_type = new MethodType(base_method);
-						Report.error(source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf(get_full_name(), base_method_type.to_prototype_string(), invalid_match));
+						Report.error(source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf(get_full_name(), base_method.get_full_name(), invalid_match));
 						return;
 					}
 
@@ -624,8 +623,7 @@ namespace Vala.Lang.Methods
 							string invalid_match = null;
 							if (!compatible(base_method, out invalid_match)) {
 								error = true;
-								var base_method_type = new MethodType(base_method);
-								Report.error(source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf(get_full_name(), base_method_type.to_prototype_string(), invalid_match));
+								Report.error(source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf(get_full_name(), base_method.get_full_name(), invalid_match));
 								return;
 							}
 
@@ -637,7 +635,7 @@ namespace Vala.Lang.Methods
 			}
 
 			if (base_interface_type != null) {
-				Report.error(source_reference, "`%s': no suitable interface method found to implement".printf(get_full_name()));
+				Report.error(source_reference, "%s: no suitable interface method found to implement".printf(get_full_name()));
 			}
 		}
 
@@ -740,15 +738,15 @@ namespace Vala.Lang.Methods
 			if (!coroutine) {
 				// TODO: begin and end parameters must be checked separately for coroutines
 				var optional_param = false;
-				foreach (Parameter param in parameters) {
-					param.check(context);
-					if (coroutine && param.direction == ParameterDirection.REF) {
+				foreach (Parameter parameter in parameters) {
+					parameter.check(context);
+					if (coroutine && parameter.direction == ParameterDirection.REF) {
 						error = true;
-						Report.error(param.source_reference, "Reference parameters are not supported for async methods");
+						Report.error(parameter.source_reference, "Reference parameters are not supported for async methods");
 					}
-					if (optional_param && param.initializer == null && !param.ellipsis) {
-						Report.warning(param.source_reference, "parameter without default follows parameter with default");
-					} else if (param.initializer != null) {
+					if (optional_param && parameter.initializer == null && !parameter.ellipsis) {
+						Report.warning(parameter.source_reference, "parameter without default follows parameter with default");
+					} else if (parameter.initializer != null) {
 						optional_param = true;
 					}
 				}
@@ -792,7 +790,7 @@ namespace Vala.Lang.Methods
 					return false;
 				}
 			} else if (overrides && base_method == null) {
-				Report.error(source_reference, "`%s': no suitable method found to override".printf(get_full_name()));
+				Report.error(source_reference, "%s: no suitable method found to override".printf(get_full_name()));
 			} else if ((is_abstract || is_virtual || overrides) && access == SymbolAccessibility.PRIVATE) {
 				error = true;
 				Report.error(source_reference, "Private member `%s' cannot be marked as override, virtual, or abstract".printf(get_full_name()));
@@ -1086,6 +1084,7 @@ namespace Vala.Lang.Methods
 			// capturing variables is only supported if they are initialized
 			// therefore assume that captured variables are initialized
 			if (closure) {
+				Debug.Assert(collection.Count <= 0);
 				ICollection<LocalVariable> localVariables = new List<LocalVariable>();
 				get_captured_variables(localVariables);
 

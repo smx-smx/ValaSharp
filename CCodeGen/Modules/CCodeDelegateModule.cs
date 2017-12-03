@@ -13,7 +13,6 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
-using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {

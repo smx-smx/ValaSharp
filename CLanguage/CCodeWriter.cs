@@ -187,14 +187,6 @@ namespace CLanguage
 		}
 
 		/**
-		 * Writes n spaces.
-		 */
-		public void write_nspaces(uint n) {
-			stream.puts(gstring.nfill((int)n, ' '));
-		}
-		
-
-		/**
 		 * Writes the specified string.
 		 *
 		 * @param s a string

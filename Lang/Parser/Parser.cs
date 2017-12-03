@@ -145,6 +145,9 @@ namespace Vala.Lang.Parser
 			int last_index = (index + BUFFER_SIZE - 1) % BUFFER_SIZE;
 			var token = tokens[last_index];
 
+			if (!get_src(token.begin).file.filename.EndsWith(".vapi"))
+				token.ToString();	//$DBG
+
 			return SourceFragment.get_content(token.begin, token.end);
 		}
 
@@ -440,18 +443,9 @@ namespace Vala.Lang.Parser
 							Report.warning(get_last_src(), "deprecated syntax, use `unowned` modifier");
 						}
 						value_owned = false;
-					} else if (accept(TokenType.OWNED)) {
-						Report.warning(get_last_src(), "`owned' is default in this context");
 					}
 				} else {
-					if (accept(TokenType.OWNED)) {
-						value_owned = true;
-					} else {
-						value_owned = false;
-						if (accept(TokenType.UNOWNED)) {
-							Report.warning(get_last_src(), "`unowned' is default in this context");
-						}
-					}
+					value_owned = accept(TokenType.OWNED);
 				}
 			}
 
@@ -1046,12 +1040,6 @@ namespace Vala.Lang.Parser
 
 		Expression parse_unary_expression() {
 			var begin = get_location();
-
-			var dbg = get_src(begin);
-			if (!dbg.file.filename.EndsWith(".vapi")) {
-				dbg.ToString();
-			}
-
 			var _operator = get_unary_operator(current());
 			Expression op;
 			if (_operator != UnaryOperator.NONE) {
@@ -2830,14 +2818,7 @@ namespace Vala.Lang.Parser
 					var accessor_access = parse_access_modifier(SymbolAccessibility.PUBLIC);
 
 					var value_type = type.copy();
-					if (accept(TokenType.OWNED)) {
-						value_type.value_owned = true;
-					} else {
-						value_type.value_owned = false;
-						if (accept(TokenType.UNOWNED)) {
-							Report.warning(get_last_src(), "property getters are `unowned' by default");
-						}
-					}
+					value_type.value_owned = accept(TokenType.OWNED);
 
 					if (accept(TokenType.GET)) {
 						if (prop.get_accessor != null) {

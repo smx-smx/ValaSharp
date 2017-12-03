@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CCode.cs" />
     <Compile Include="CCodeAttribute.cs" />
     <Compile Include="ClassRegisterFunction.cs" />
     <Compile Include="CType.cs" />

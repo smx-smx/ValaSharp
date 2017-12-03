@@ -16,7 +16,7 @@ namespace Vala.Lang
 
 		readonly string[] valac_default_attrs = new string[]{
 		"CCode", "type_signature", "default_value", "set_value_function", "type_id", "cprefix", "cheader_filename",
-		"marshaller_type_name", "get_value_function", "cname", "destroy_function", "lvalue_access",
+		"marshaller_type_name", "get_value_function", "cname", "cheader_filename", "destroy_function", "lvalue_access",
 		"has_type_id", "instance_pos", "const_cname", "take_value_function", "copy_function", "free_function",
 		"param_spec_function", "has_target", "type_cname", "ref_function", "ref_function_void", "unref_function", "type",
 		"has_construct_function", "returns_floating_reference", "gir_namespace", "gir_version", "construct_function",
@@ -24,16 +24,14 @@ namespace Vala.Lang
 		"has_copy_function", "lower_case_csuffix", "ref_sink_function", "dup_function", "finish_function", "generic_type_pos",
 		"array_length_type", "array_length", "array_length_cname", "array_length_cexpr", "array_null_terminated",
 		"vfunc_name", "finish_vfunc_name", "finish_name", "free_function_address_of", "pos", "delegate_target", "delegate_target_cname",
-		"array_length_pos", "delegate_target_pos", "destroy_notify_pos", "ctype", "has_new_function", "notify", "finish_instance",
-		"use_inplace", "",
+		"array_length_pos", "delegate_target_pos", "destroy_notify_pos", "ctype", "has_new_function", "notify", "finish_instance", "",
 
 		"Immutable", "",
 		"Compact", "",
 		"NoWrapper", "",
-		"NoThrow", "",
 		"DestroysInstance", "",
 		"Flags", "",
-		"Experimental", "", // deprecated
+		"Experimental", "",
 		"NoReturn", "",
 		"NoArrayLength", "", // deprecated
 		"Assert", "",
@@ -44,18 +42,15 @@ namespace Vala.Lang
 		"ConcreteAccessor", "",
 		"HasEmitter", "",
 		"ReturnsModifiedPointer", "",
-		"Deprecated", "since", "replacement", "", // deprecated
-		"Version", "since", "replacement", "deprecated", "deprecated_since", "experimental", "experimental_until", "",
+		"Deprecated", "since", "replacement", "",
+		"Version", "since", "replacement", "deprecated", "deprecated_since", "experimental", "",
 		"Signal", "detailed", "run", "no_recurse", "action", "no_hooks", "",
 		"Description", "nick", "blurb", "",
 
-		"IntegerType", "rank", "min", "max", "signed", "width", "",
-		"FloatingType", "rank", "decimal", "width", "",
+		"IntegerType", "rank", "min", "max", "",
+		"FloatingType", "rank", "",
 		"BooleanType", "",
 		"SimpleType", "",
-		"PointerType", "",
-
-		"Print", "",
 		"PrintfFormat", "",
 		"ScanfFormat", "",
 		"FormatArg", "",
@@ -63,8 +58,6 @@ namespace Vala.Lang
 		"GtkChild", "name", "internal", "",
 		"GtkTemplate", "ui", "",
 		"GtkCallback", "name", "",
-
-		"ModuleInit", "",
 
 		"DBus", "name", "no_reply", "result", "use_string_marshalling", "value", "signature", "visible", "timeout", "",
 

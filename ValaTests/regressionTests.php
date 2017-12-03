@@ -86,10 +86,6 @@ foreach(new RecursiveIteratorIterator($it) as $file)
 		$codes = [$code];
 
 		exec(implode(" ", $args), $output, $code);
-		foreach($output as $line){
-			print($line . PHP_EOL);
-		}
-		
 		$codes[1] = $code;
 		
 		$diff = $fi["filename"] . ".diff";

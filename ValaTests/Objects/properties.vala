@@ -1,6 +1,5 @@
 using GLib;
 
-[CCode (has_target = false)]
 public delegate void Delegate ();
 
 public struct RealStruct {

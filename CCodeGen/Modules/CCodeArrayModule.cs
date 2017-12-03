@@ -10,7 +10,6 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
-using static CCodeGen.CCode;
 
 namespace CCodeGen.Modules
 {
@@ -40,7 +39,6 @@ namespace CCodeGen.Modules
 				// no heap allocation for fixed-length arrays
 
 				temp_var = get_temp_variable(array_type, true, expr);
-				temp_var.init = true;
 				name_cnode = get_variable_cexpression(temp_var.name);
 				i = 0;
 
