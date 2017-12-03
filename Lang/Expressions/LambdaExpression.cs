@@ -249,7 +249,7 @@ namespace Vala.Lang.Expressions
 		public override void get_used_variables(ICollection<Variable> collection) {
 			// require captured variables to be initialized
 			if (method.closure) {
-				ICollection<LocalVariable> localVariables = collection.ToList().ConvertAll(v => (LocalVariable)v);
+				ICollection<LocalVariable> localVariables = collection.Cast<LocalVariable>().ToList();
 				method.get_captured_variables(localVariables);
 			}
 		}
