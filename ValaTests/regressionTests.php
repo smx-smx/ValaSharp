@@ -39,9 +39,10 @@ foreach(new RecursiveIteratorIterator($it) as $file)
 	$name = $dir . "/" . $fi["filename"];
 
 	$valac = escapeshellarg(realpath("../ValaCompiler/bin/Debug/ValaCompiler.exe"));
+	$vapidir = escapeshellarg(realpath("{$scriptDir}/../vapi"));
 	$args = [
 		$valac,
-		"--vapidir C:/msys64/mingw64//share/vala-0.38/vapi",
+		"--vapidir {$vapidir}",
 		"--pkg gio-2.0",
 		"--main main",
 		"--disable-warnings",
