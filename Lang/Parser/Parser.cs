@@ -14,13 +14,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Parser
-{
+namespace Vala.Lang.Parser {
 	/**
  * Code visitor parsing all Vala source files.
  */
-	public class Parser : CodeVisitor, IDisposable
-	{
+	public class Parser : CodeVisitor, IDisposable {
 		Scanner scanner;
 
 		CodeContext context;
@@ -38,8 +36,7 @@ namespace Vala.Lang.Parser
 
 		static List<TypeParameter> _empty_type_parameter_list;
 
-		class TokenInfo
-		{
+		class TokenInfo {
 			public TokenType type;
 			public SourceLocation begin;
 			public SourceLocation end;
@@ -52,8 +49,7 @@ namespace Vala.Lang.Parser
 		}
 
 		[Flags]
-		enum ModifierFlags
-		{
+		enum ModifierFlags {
 			NONE,
 			ABSTRACT = 1 << 0,
 			CLASS = 1 << 1,
@@ -146,7 +142,7 @@ namespace Vala.Lang.Parser
 			var token = tokens[last_index];
 
 			if (!get_src(token.begin).file.filename.EndsWith(".vapi"))
-				token.ToString();	//$DBG
+				token.ToString();   //$DBG
 
 			return SourceFragment.get_content(token.begin, token.end);
 		}
@@ -2393,8 +2389,7 @@ namespace Vala.Lang.Parser
 			}
 		}
 
-		enum RecoveryState
-		{
+		enum RecoveryState {
 			EOF,
 			DECLARATION_BEGIN,
 			STATEMENT_BEGIN
@@ -3552,14 +3547,12 @@ namespace Vala.Lang.Parser
 		}
 	}
 
-	public enum ParseError
-	{
+	public enum ParseError {
 		FAILED,
 		SYNTAX
 	}
 
-	public class ParseException : Exception
-	{
+	public class ParseException : Exception {
 		private ParseError err;
 		private string message;
 		private object p;

@@ -12,14 +12,12 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents a lambda expression in the source code. Lambda expressions are
  * anonymous methods with implicitly typed parameters.
  */
-	public class LambdaExpression : Expression
-	{
+	public class LambdaExpression : Expression {
 		/**
 		 * The expression body of this lambda expression. Only one of
 		 * expression_body or statement_body may be set.

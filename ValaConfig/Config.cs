@@ -2,12 +2,9 @@
 using System.Globalization;
 using System.Threading;
 
-namespace ValaConfig
-{
-	public static class Config
-	{
-		private static void SetCCulture()
-		{
+namespace ValaConfig {
+	public static class Config {
+		private static void SetCCulture() {
 			// Clone the current Culture, and alter it as needed
 			CultureInfo CCulture = Thread.CurrentThread.CurrentCulture.Clone() as CultureInfo;
 			CCulture.NumberFormat.NumberDecimalSeparator = ".";

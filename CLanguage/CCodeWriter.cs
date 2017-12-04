@@ -12,13 +12,11 @@ using System.Threading.Tasks;
 using Vala;
 using ValaConfig;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a writer to write C source files.
 	 */
-	public class CCodeWriter
-	{
+	public class CCodeWriter {
 		/**
 		 * Specifies the file to be written.
 		 */
@@ -114,20 +112,17 @@ namespace CLanguage
 
 				try {
 					using (var old_file = MemoryMappedFile.OpenExisting(filename))
-					using (var new_file = MemoryMappedFile.OpenExisting(temp_filename))
-					{
+					using (var new_file = MemoryMappedFile.OpenExisting(temp_filename)) {
 						var len = old_file.CreateViewStream().Length;
 						var st1 = old_file.CreateViewStream();
 						var st2 = new_file.CreateViewStream();
-						if (len == st2.Length)
-						{
+						if (len == st2.Length) {
 							byte[] data1 = new byte[len];
 							byte[] data2 = new byte[len];
 							st1.Read(data1, 0, (int)len);
 							st2.Read(data1, 0, (int)len);
 
-							if (data1 == data2)
-							{
+							if (data1 == data2) {
 								changed = false;
 							}
 						}
@@ -137,13 +132,12 @@ namespace CLanguage
 				}
 
 				if (changed) {
-					if(File.Exists(filename))
+					if (File.Exists(filename))
 						File.Delete(filename);
 					File.Move(temp_filename, filename);
 				} else {
 					File.Delete(temp_filename);
-					if (source_filename != null)
-					{
+					if (source_filename != null) {
 						var atime = File.GetLastAccessTime(source_filename);
 						var mtime = File.GetLastWriteTime(source_filename);
 
@@ -252,7 +246,7 @@ namespace CLanguage
 						first = false;
 					}
 
-					var lineparts = fix_indent_regex.Replace(line, "").Split(new string[]{"*/"}, StringSplitOptions.None);
+					var lineparts = fix_indent_regex.Replace(line, "").Split(new string[] { "*/" }, StringSplitOptions.None);
 					stream.puts(string.Join("* /", lineparts));
 				}
 				stream.puts("*/");

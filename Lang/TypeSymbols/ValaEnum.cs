@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class ValaEnum : TypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class ValaEnum : TypeSymbol {
 		/**
 	 * Specifies whether this is a flags enum.
 	 */
@@ -179,6 +177,6 @@ namespace Vala.Lang.TypeSymbols
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
 		}
+	}
 }

@@ -6,13 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a variable declarator in the C code.
 	 */
-	public class CCodeVariableDeclarator : CCodeDeclarator
-	{
+	public class CCodeVariableDeclarator : CCodeDeclarator {
 		/**
 		 * The variable name.
 		 */
@@ -86,8 +84,7 @@ namespace CLanguage
 		}
 	}
 
-	public class CCodeDeclaratorSuffix
-	{
+	public class CCodeDeclaratorSuffix {
 		bool array;
 		CCodeExpression array_length;
 

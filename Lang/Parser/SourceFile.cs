@@ -9,10 +9,8 @@ using System.IO.MemoryMappedFiles;
 using System.Diagnostics;
 using Utils;
 
-namespace Vala.Lang.Parser
-{
-	public class SourceFile
-	{
+namespace Vala.Lang.Parser {
+	public class SourceFile {
 		/**
 		 * The name of this source file.
 		 */
@@ -360,12 +358,9 @@ namespace Vala.Lang.Parser
 				mapped_file = null;
 			}
 
-			try
-			{
+			try {
 				mapped_file = FastMemoryMappedFile.OpenExisting(filename);
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				//length = 0;
 				Report.error(null, "Unable to map file `%s': %s".printf(filename, e.Message));
 			}
@@ -374,7 +369,7 @@ namespace Vala.Lang.Parser
 		private void read_source_lines(string cont) {
 			source_array = new List<string>();
 			string[] lines = cont.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-			foreach(string line in lines)
+			foreach (string line in lines)
 				source_array.Add(line);
 		}
 
@@ -409,8 +404,7 @@ namespace Vala.Lang.Parser
 		}
 	}
 
-	public enum SourceFileType
-	{
+	public enum SourceFileType {
 		NONE,
 		SOURCE,
 		PACKAGE,

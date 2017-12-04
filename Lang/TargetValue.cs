@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
-	public class TargetValue
-	{
+namespace Vala.Lang {
+	public class TargetValue {
 		public DataType value_type { get; set; }
 		public DataType actual_value_type { get; set; }
 

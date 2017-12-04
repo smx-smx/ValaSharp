@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a node in the C code tree.
 	 */
-	public abstract class CCodeNode
-	{
+	public abstract class CCodeNode {
 		/**
 		 * The source file name and line number to be presumed for this code
 		 * node.

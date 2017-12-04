@@ -12,10 +12,8 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace Vala.Lang.Expressions
-{
-	public class UnaryExpression : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class UnaryExpression : Expression {
 		/**
 		 * The unary operator.
 		 */
@@ -268,8 +266,7 @@ namespace Vala.Lang.Expressions
 		}
 	}
 
-	public enum UnaryOperator
-	{
+	public enum UnaryOperator {
 		NONE,
 		PLUS,
 		MINUS,

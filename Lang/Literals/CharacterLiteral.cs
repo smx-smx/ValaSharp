@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
  * Represents a single literal character.
  */
-	public class CharacterLiteral : Literal
-	{
+	public class CharacterLiteral : Literal {
 		/**
 		 * The literal value.
 		 */

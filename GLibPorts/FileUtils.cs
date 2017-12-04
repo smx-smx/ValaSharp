@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 using GLibPorts.Native;
 using File = System.IO.File;
 
-namespace GLibPorts
-{
-	public partial class GLib
-	{
-		public class FileUtils
-		{
+namespace GLibPorts {
+	public partial class GLib {
+		public class FileUtils {
 			public static bool get_contents(string filename, out string contents) {
 				var fileStream = new System.IO.FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 				var textReader = new StreamReader(fileStream);
@@ -27,8 +24,7 @@ namespace GLibPorts
 				return true;
 			}
 
-			public static void close(int outputfd)
-			{
+			public static void close(int outputfd) {
 				Win32._close(outputfd);
 			}
 

@@ -15,10 +15,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public abstract class CCodeMemberAccessModule : CCodeControlFlowModule
-	{
+namespace CCodeGen.Modules {
+	public abstract class CCodeMemberAccessModule : CCodeControlFlowModule {
 		public override void visit_member_access(MemberAccess expr) {
 			CCodeExpression pub_inst = null;
 

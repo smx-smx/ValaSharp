@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	public class Comment {
 		public Comment(string comment, SourceReference _source_reference) {
 			source_reference = _source_reference;

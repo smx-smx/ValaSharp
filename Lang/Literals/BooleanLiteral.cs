@@ -7,13 +7,11 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
 	 * Represents a literal boolean, i.e. true or false.
 	 */
-	public class BooleanLiteral : Literal
-	{
+	public class BooleanLiteral : Literal {
 		/**
 		 * The literal value.
 		 */

@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a identifier in the C code.
 	 */
-	public class CCodeIdentifier : CCodeExpression
-	{
+	public class CCodeIdentifier : CCodeExpression {
 		/**
 		 * The name of this identifier.
 		 */

@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public class StructValueType : ValaValueType
-	{
+namespace Vala.Lang.Types {
+	public class StructValueType : ValaValueType {
 		public StructValueType(Struct type_symbol) : base(type_symbol) {
 		}
 

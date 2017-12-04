@@ -7,14 +7,12 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 
 	/**
 	 * A class type.
 	 */
-	public class ObjectType : ReferenceType
-	{
+	public class ObjectType : ReferenceType {
 		private WeakReference<ObjectTypeSymbol> type_symbol_weak = new WeakReference<ObjectTypeSymbol>(null);
 		/**
 		 * The referred class or interface.

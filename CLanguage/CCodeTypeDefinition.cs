@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a typedef in the C code.
 	 */
-	public class CCodeTypeDefinition : CCodeNode
-	{
+	public class CCodeTypeDefinition : CCodeNode {
 		/**
 		 * The type name.
 		 */

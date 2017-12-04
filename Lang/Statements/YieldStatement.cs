@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a yield statement in the source code.
  */
-	public class YieldStatement : CodeNode, Statement
-	{
+	public class YieldStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents a pointer indirection in the source code, e.g. `*pointer`.
 	 */
-	public class PointerIndirection : Expression
-	{
+	public class PointerIndirection : Expression {
 		/**
 		 * The pointer to dereference.
 		 */

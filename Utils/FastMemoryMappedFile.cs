@@ -7,10 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils
-{
-	public unsafe class FastMemoryMappedFile : IDisposable
-	{
+namespace Utils {
+	public unsafe class FastMemoryMappedFile : IDisposable {
 		public MemoryMappedFile mf;
 		private MemoryMappedViewAccessor view;
 		private FileStream fs;
@@ -36,7 +34,7 @@ namespace Utils
 		}
 
 		private void GetPointer() {
-			if(view != null)
+			if (view != null)
 				DisposeView();
 
 			// Read access, to avoid creating a file lock
@@ -84,11 +82,11 @@ namespace Utils
 
 		private void DisposeView() {
 			view.Flush();
-			if (ptr != null){
+			if (ptr != null) {
 				view.SafeMemoryMappedViewHandle.ReleasePointer();
 				ptr = null;
 			}
-			if (!view.SafeMemoryMappedViewHandle.IsClosed){
+			if (!view.SafeMemoryMappedViewHandle.IsClosed) {
 				view.SafeMemoryMappedViewHandle.Close();
 			}
 			view.SafeMemoryMappedViewHandle.Dispose();

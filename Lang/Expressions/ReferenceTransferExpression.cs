@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
-	public class ReferenceTransferExpression : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class ReferenceTransferExpression : Expression {
 		/**
 	 * The variable whose reference is to be transferred.
 	 */
@@ -99,9 +97,9 @@ namespace Vala.Lang.Expressions
 			value_type.value_owned = true;
 
 			return !error;
-			}
+		}
 
-	public override void emit(CodeGenerator codegen) {
+		public override void emit(CodeGenerator codegen) {
 			inner.emit(codegen);
 
 			codegen.visit_reference_transfer_expression(this);

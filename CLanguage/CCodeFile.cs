@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
-	public class CCodeFile
-	{
+namespace CLanguage {
+	public class CCodeFile {
 		public bool is_header { get; set; }
 
 		HashSet<string> declarations = new HashSet<string>();

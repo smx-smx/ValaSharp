@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents an unlock statement e.g. {{{ unlock (a); }}}.
  */
-	public class UnlockStatement : CodeNode, Statement
-	{
+	public class UnlockStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -24,7 +22,7 @@ namespace Vala.Lang.Statements
 		 */
 		public Expression resource { get; set; }
 
-		public UnlockStatement(Expression resource, SourceReference source_reference = null){
+		public UnlockStatement(Expression resource, SourceReference source_reference = null) {
 			this.resource = resource;
 			this.source_reference = source_reference;
 		}

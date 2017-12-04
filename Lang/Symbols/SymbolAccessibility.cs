@@ -5,18 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
-namespace Vala.Lang.Symbols
-{
-	public enum SymbolAccessibility
-	{
+namespace Vala.Lang.Symbols {
+	public enum SymbolAccessibility {
 		PRIVATE,
 		INTERNAL,
 		PROTECTED,
 		PUBLIC
 	}
 
-	public static class SymbolAccessibilityExtensions
-	{
+	public static class SymbolAccessibilityExtensions {
 		public static string ToString(this SymbolAccessibility @this) {
 			switch (@this) {
 				case SymbolAccessibility.PROTECTED:

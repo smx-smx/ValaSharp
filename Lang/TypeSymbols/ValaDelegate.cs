@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class ValaDelegate : TypeSymbol, Callable
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class ValaDelegate : TypeSymbol, Callable {
 		/**
 	 * The return type of this callback.
 	 */
@@ -64,8 +62,7 @@ namespace Vala.Lang.TypeSymbols
 		 * @return                  newly created delegate
 		 */
 		public ValaDelegate(string name, DataType return_type, SourceReference source_reference = null, Comment comment = null)
-			: base(name, source_reference, comment)
-		{
+			: base(name, source_reference, comment) {
 			this.return_type = return_type;
 		}
 
@@ -307,6 +304,6 @@ namespace Vala.Lang.TypeSymbols
 			context.analyzer.current_source_file = old_source_file;
 
 			return !error;
-			}
 		}
+	}
 }

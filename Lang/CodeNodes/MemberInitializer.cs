@@ -8,14 +8,12 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.CodeNodes
-{
+namespace Vala.Lang.CodeNodes {
 	/**
 	 * Represents a member initializer, i.e. an element of an object initializer, in
 	 * the source code.
 	 */
-	public class MemberInitializer : CodeNode
-	{
+	public class MemberInitializer : CodeNode {
 		/**
 		 * Member name.
 		 */

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a comment in the C code.
 	 */
-	public class CCodeComment : CCodeNode
-	{
+	public class CCodeComment : CCodeNode {
 		/**
 		 * The text content of the comment.
 		 */

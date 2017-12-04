@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VapiGen
-{
-	class Program
-	{
+namespace VapiGen {
+	class Program {
 		static void Main(string[] args) {
 		}
 	}

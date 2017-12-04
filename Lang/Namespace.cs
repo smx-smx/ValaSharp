@@ -10,13 +10,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/// <summary>
 	/// Represents a namespace declaration in the source code.
 	/// </summary>
-	public class Namespace : Symbol
-	{
+	public class Namespace : Symbol {
 		private List<Class> classes = new List<Class>();
 		private List<Interface> interfaces = new List<Interface>();
 		private List<Struct> structs = new List<Struct>();
@@ -512,6 +510,6 @@ namespace Vala.Lang
 			}
 
 			return !error;
-			}
 		}
+	}
 }

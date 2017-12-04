@@ -14,13 +14,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
 	 * C function to register a type at runtime.
 	 */
-	public abstract class TypeRegisterFunction
-	{
+	public abstract class TypeRegisterFunction {
 		CCodeFragment source_declaration_fragment = new CCodeFragment();
 		CCodeFragment declaration_fragment = new CCodeFragment();
 		CCodeFragment definition_fragment = new CCodeFragment();

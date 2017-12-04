@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public class TrackingTextReader : TextReader
-	{
+namespace GLibPorts {
+	public class TrackingTextReader : TextReader {
 		private StringReader _baseReader;
 		private int _position;
 

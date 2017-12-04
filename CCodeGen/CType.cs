@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Types;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
  * A C type, used only for code generation purposes.
  */
-	public class CType : DataType
-	{
+	public class CType : DataType {
 		/**
 		 * The name of the C type.
 		 */

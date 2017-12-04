@@ -7,135 +7,134 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * A pointer type.
 	 */
 	public class PointerType : DataType {
-	/**
-	 * The base type the pointer is referring to.
-	 */
-	public DataType base_type {
-		get { return _base_type; }
-		set {
-			_base_type = value;
-			_base_type.parent_node = this;
+		/**
+		 * The base type the pointer is referring to.
+		 */
+		public DataType base_type {
+			get { return _base_type; }
+			set {
+				_base_type = value;
+				_base_type.parent_node = this;
+			}
 		}
-	}
 
-	private DataType _base_type;
+		private DataType _base_type;
 
-	public PointerType(DataType base_type, SourceReference source_reference = null) {
-		this.base_type = base_type;
-		nullable = true;
-		this.source_reference = source_reference;
-	}
+		public PointerType(DataType base_type, SourceReference source_reference = null) {
+			this.base_type = base_type;
+			nullable = true;
+			this.source_reference = source_reference;
+		}
 
-	public override string to_qualified_string(Scope scope) {
-		return base_type.to_qualified_string(scope) + "*";
-	}
+		public override string to_qualified_string(Scope scope) {
+			return base_type.to_qualified_string(scope) + "*";
+		}
 
-	public override DataType copy() {
-		return new PointerType(base_type.copy());
-	}
+		public override DataType copy() {
+			return new PointerType(base_type.copy());
+		}
 
-	public override bool compatible(DataType target_type) {
-		if (target_type is PointerType) {
-			var tt = target_type as PointerType;
+		public override bool compatible(DataType target_type) {
+			if (target_type is PointerType) {
+				var tt = target_type as PointerType;
 
-			if (tt.base_type is VoidType || base_type is VoidType) {
+				if (tt.base_type is VoidType || base_type is VoidType) {
+					return true;
+				}
+
+				/* dereference only if both types are references or not */
+				if (base_type.is_reference_type_or_type_parameter() != tt.base_type.is_reference_type_or_type_parameter()) {
+					return false;
+				}
+
+				return base_type.compatible(tt.base_type);
+			}
+
+			if ((target_type.data_type != null && target_type.data_type.get_attribute("PointerType") != null)) {
 				return true;
 			}
 
-			/* dereference only if both types are references or not */
-			if (base_type.is_reference_type_or_type_parameter() != tt.base_type.is_reference_type_or_type_parameter()) {
-				return false;
+			/* temporarily ignore type parameters */
+			if (target_type.type_parameter != null) {
+				return true;
 			}
 
-			return base_type.compatible(tt.base_type);
+			if (base_type.is_reference_type_or_type_parameter()) {
+				// Object* is compatible with Object if Object is a reference type
+				return base_type.compatible(target_type);
+			}
+
+			if (target_type.data_type != null && target_type.data_type.is_subtype_of(CodeContext.get().analyzer.gvalue_type.data_type)) {
+				// allow implicit conversion to GValue
+				return true;
+			}
+
+			return false;
 		}
 
-		if ((target_type.data_type != null && target_type.data_type.get_attribute("PointerType") != null)) {
-			return true;
-		}
-
-		/* temporarily ignore type parameters */
-		if (target_type.type_parameter != null) {
-			return true;
-		}
-
-		if (base_type.is_reference_type_or_type_parameter()) {
-			// Object* is compatible with Object if Object is a reference type
-			return base_type.compatible(target_type);
-		}
-
-		if (target_type.data_type != null && target_type.data_type.is_subtype_of(CodeContext.get().analyzer.gvalue_type.data_type)) {
-			// allow implicit conversion to GValue
-			return true;
-		}
-
-		return false;
-	}
-
-	public override Symbol get_member(string member_name) {
-		return null;
-	}
-
-	public override Symbol get_pointer_member(string member_name) {
-		Symbol base_symbol = base_type.data_type;
-
-		if (base_symbol == null) {
+		public override Symbol get_member(string member_name) {
 			return null;
 		}
 
-		return SemanticAnalyzer.symbol_lookup_inherited(base_symbol, member_name);
-	}
+		public override Symbol get_pointer_member(string member_name) {
+			Symbol base_symbol = base_type.data_type;
 
-	public override bool is_accessible(Symbol sym) {
-		return base_type.is_accessible(sym);
-	}
+			if (base_symbol == null) {
+				return null;
+			}
 
-	public override void accept_children(CodeVisitor visitor) {
-		base_type.accept(visitor);
-	}
-
-	public override void replace_type(DataType old_type, DataType new_type) {
-		if (base_type == old_type) {
-			base_type = new_type;
+			return SemanticAnalyzer.symbol_lookup_inherited(base_symbol, member_name);
 		}
-	}
 
-	public override bool is_disposable() {
-		return false;
-	}
+		public override bool is_accessible(Symbol sym) {
+			return base_type.is_accessible(sym);
+		}
 
-	public override DataType get_actual_type(DataType derived_instance_type, List<DataType> method_type_arguments, CodeNode node_reference) {
-		PointerType result = (PointerType)this.copy();
+		public override void accept_children(CodeVisitor visitor) {
+			base_type.accept(visitor);
+		}
 
-		if (derived_instance_type == null && method_type_arguments == null) {
+		public override void replace_type(DataType old_type, DataType new_type) {
+			if (base_type == old_type) {
+				base_type = new_type;
+			}
+		}
+
+		public override bool is_disposable() {
+			return false;
+		}
+
+		public override DataType get_actual_type(DataType derived_instance_type, List<DataType> method_type_arguments, CodeNode node_reference) {
+			PointerType result = (PointerType)this.copy();
+
+			if (derived_instance_type == null && method_type_arguments == null) {
+				return result;
+			}
+
+			if (base_type is GenericType || base_type.has_type_arguments()) {
+				result.base_type = result.base_type.get_actual_type(derived_instance_type, method_type_arguments, node_reference);
+			}
+
 			return result;
 		}
 
-		if (base_type is GenericType || base_type.has_type_arguments()) {
-			result.base_type = result.base_type.get_actual_type(derived_instance_type, method_type_arguments, node_reference);
+		public override DataType infer_type_argument(TypeParameter type_param, DataType value_type) {
+			var pointer_type = value_type as PointerType;
+			if (pointer_type != null) {
+				return base_type.infer_type_argument(type_param, pointer_type.base_type);
+			}
+
+			return null;
 		}
 
-		return result;
-	}
-
-	public override DataType infer_type_argument(TypeParameter type_param, DataType value_type) {
-		var pointer_type = value_type as PointerType;
-		if (pointer_type != null) {
-			return base_type.infer_type_argument(type_param, pointer_type.base_type);
+		public override bool check(CodeContext context) {
+			error = !base_type.check(context);
+			return !error;
 		}
-
-		return null;
 	}
-
-	public override bool check(CodeContext context) {
-		error = !base_type.check(context);
-		return !error;
-	}
-}
 }

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a label declaration in the C code.
 	 */
-	public class CCodeLabel : CCodeStatement
-	{
+	public class CCodeLabel : CCodeStatement {
 		/**
 		 * The name of this label.
 		 */

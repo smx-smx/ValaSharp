@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents an enum value in the C code.
 	 */
-	public class CCodeEnumValue : CCodeNode
-	{
+	public class CCodeEnumValue : CCodeNode {
 		/**
 		 * The name of this enum value.
 		 */

@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 
 	/**
 	 * Represents a return statement in the C code.
 	 */
-	public class CCodeReturnStatement : CCodeStatement
-	{
+	public class CCodeReturnStatement : CCodeStatement {
 		/**
 		 * The optional expression to return.
 		 */

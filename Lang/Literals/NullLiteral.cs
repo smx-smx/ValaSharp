@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
 	 * Represents a literal `null` in the source code.
 	 */
-	public class NullLiteral : Literal
-	{
+	public class NullLiteral : Literal {
 		/**
 		 * Creates a new null literal.
 		 *

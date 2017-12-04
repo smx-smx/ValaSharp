@@ -11,10 +11,8 @@ using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
-	public class PropertyAccessor : Subroutine
-	{
+namespace Vala.Lang {
+	public class PropertyAccessor : Subroutine {
 		/**
 	 * The corresponding property.
 	 */
@@ -78,8 +76,7 @@ namespace Vala.Lang
 		 * @return                   newly created property accessor
 		 */
 		public PropertyAccessor(bool readable, bool writable, bool construction, DataType value_type, Block body, SourceReference source_reference, Comment comment = null)
-			: base(null, source_reference, comment)
-		{
+			: base(null, source_reference, comment) {
 			this.readable = readable;
 			this.writable = writable;
 			this.construction = construction;
@@ -191,9 +188,9 @@ namespace Vala.Lang
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
+		}
 
-	public override void replace_type(DataType old_type, DataType new_type) {
+		public override void replace_type(DataType old_type, DataType new_type) {
 			if (value_type == old_type) {
 				value_type = new_type;
 			}

@@ -11,10 +11,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class Struct : TypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class Struct : TypeSymbol {
 		private List<TypeParameter> type_parameters = new List<TypeParameter>();
 		private List<Constant> constants = new List<Constant>();
 		private List<Field> fields = new List<Field>();
@@ -188,7 +186,7 @@ namespace Vala.Lang.TypeSymbols
 		 * @param m a method
 		 */
 		public override void add_method(Method m) {
-			if (m == null){
+			if (m == null) {
 				Trace.WriteLine("m != null failed");
 				return;
 			}

@@ -10,13 +10,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents an array slice expression e.g "a[1:5]".
  */
-	public class SliceExpression : Expression
-	{
+	public class SliceExpression : Expression {
 		public Expression container {
 			get {
 				return _container;

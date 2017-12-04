@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents an assignment expression in the C code.
 	 */
-	public class CCodeAssignment : CCodeExpression
-	{
+	public class CCodeAssignment : CCodeExpression {
 		/**
 		 * Left hand side of the assignment.
 		 */
@@ -72,8 +70,7 @@ namespace CLanguage
 		}
 	}
 
-	public enum CCodeAssignmentOperator
-	{
+	public enum CCodeAssignmentOperator {
 		SIMPLE,
 		BITWISE_OR,
 		BITWISE_AND,

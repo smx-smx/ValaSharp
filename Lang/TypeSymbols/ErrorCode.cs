@@ -8,10 +8,8 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class ErrorCode : TypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class ErrorCode : TypeSymbol {
 		/**
 	 * Specifies the numerical representation of this enum value.
 	 */

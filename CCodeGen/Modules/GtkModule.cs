@@ -15,10 +15,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GtkModule : GSignalModule
-	{
+namespace CCodeGen.Modules {
+	public class GtkModule : GSignalModule {
 		/* C class name to Vala class mapping */
 		private Dictionary<string, Class> cclass_to_vala_map = null;
 		/* GResource name to real file name mapping */

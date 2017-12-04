@@ -12,8 +12,7 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Statements;
 using Vala.Lang.Literals;
 
-namespace Vala.Lang.CodeNodes
-{
+namespace Vala.Lang.CodeNodes {
 	/**
 	* Abstract code node visitor for traversing source code tree.
 	*/

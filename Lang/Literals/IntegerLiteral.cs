@@ -10,13 +10,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
 	 * Represents an integer literal in the source code.
 	 */
-	public class IntegerLiteral : Literal
-	{
+	public class IntegerLiteral : Literal {
 		/**
 		 * The literal value.
 		 */
@@ -72,8 +70,7 @@ namespace Vala.Lang.Literals
 			Int64 n;
 			try {
 				n = Convert.ToInt64(value);
-			}
-			catch (FormatException) {
+			} catch (FormatException) {
 				string tmp = value;
 				if (value[0] == '-') {
 					tmp = value.Substring(1);

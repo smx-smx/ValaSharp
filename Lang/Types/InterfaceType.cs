@@ -5,15 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * An interface type.
 	 */
-	public class InterfaceType : ReferenceType
-	{
+	public class InterfaceType : ReferenceType {
 		private WeakReference<Interface> interface_symbol_weak = new WeakReference<Interface>(null);
-		
+
 		/**
 		 * The referred interface.
 		 */

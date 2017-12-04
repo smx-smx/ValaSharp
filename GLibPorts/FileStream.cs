@@ -5,16 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GLibPorts.Native;
 
-namespace GLibPorts
-{
-	public partial class GLib
-	{
+namespace GLibPorts {
+	public partial class GLib {
 		public static FileStream stdin;
 		public static FileStream stderr;
 		public static FileStream stdout;
 
-		public class FileStream : IDisposable
-		{
+		public class FileStream : IDisposable {
 			public static void InitializeStatic() {
 				DisposeStatic();
 				stdin = new FileStream(File.stdin);

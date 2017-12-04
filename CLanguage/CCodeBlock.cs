@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a C code block.
 	 */
-	public class CCodeBlock : CCodeStatement
-	{
+	public class CCodeBlock : CCodeStatement {
 		/**
 		 * Specifies whether a newline at the end of the block should be
 		 * suppressed.

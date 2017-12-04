@@ -11,10 +11,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
-	public class Parameter : Variable
-	{
+namespace Vala.Lang {
+	public class Parameter : Variable {
 		public ParameterDirection direction { get; set; } = ParameterDirection.IN;
 
 		/**
@@ -197,8 +195,7 @@ namespace Vala.Lang
 		}
 	}
 
-	public enum ParameterDirection
-	{
+	public enum ParameterDirection {
 		IN,
 		OUT,
 		REF

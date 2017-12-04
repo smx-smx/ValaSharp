@@ -13,15 +13,12 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Code visitor building the control flow graph.
 	 */
-	public class FlowAnalyzer : CodeVisitor
-	{
-		private class JumpTarget
-		{
+	public class FlowAnalyzer : CodeVisitor {
+		private class JumpTarget {
 			public bool is_break_target { get; set; }
 			public bool is_continue_target { get; set; }
 			public bool is_return_target { get; set; }
@@ -372,7 +369,7 @@ namespace Vala.Lang
 			var added = new Dictionary<BasicBlock, int>();
 			var phi = new Dictionary<BasicBlock, int>();
 			foreach (BasicBlock block in block_list) {
-				added[block] =  0;
+				added[block] = 0;
 				phi[block] = 0;
 			}
 

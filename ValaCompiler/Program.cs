@@ -24,10 +24,8 @@ using static GLibPorts.GLib;
 using Parser = Vala.Lang.Parser.Parser;
 using ValaCompilerLib;
 
-namespace ValaCompiler
-{
-	public class Program
-	{
+namespace ValaCompiler {
+	public class Program {
 		static int Main(string[] args) {
 			CompilerOptions opts = new CompilerOptions();
 			var parser = new CommandLine.Parser((settings => {

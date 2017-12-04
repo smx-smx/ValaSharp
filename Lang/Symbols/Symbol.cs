@@ -10,16 +10,15 @@ using Vala.Lang.Methods;
 using Vala.Lang.TypeSymbols;
 using GLibPorts;
 
-namespace Vala.Lang.Symbols
-{
+namespace Vala.Lang.Symbols {
 	/// <summary>
 	/// Represents a node in the symbol tree.
 	/// </summary>
 	public abstract class Symbol : CodeNode {
 
-	/**
-	 * The parent of this symbol.
-	 */
+		/**
+		 * The parent of this symbol.
+		 */
 		public Symbol parent_symbol {
 			get {
 				if (owner == null) {
@@ -252,7 +251,7 @@ namespace Vala.Lang.Symbols
 					string t = camel_case.Substring(index - 1);
 					bool prev_upper = Char.IsUpper(t[0]);
 					t = i.Substring(1);
-					
+
 					bool next_upper = t.Length > 0 && Char.IsUpper(t[0]);
 					if (!prev_upper || (i.Length >= 2 && !next_upper)) {
 						/* previous character wasn't upper case or

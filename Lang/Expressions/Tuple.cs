@@ -7,10 +7,8 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Expressions
-{
-	public class ValaTuple : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class ValaTuple : Expression {
 		private List<Expression> expression_list = new List<Expression>();
 
 		public ValaTuple(SourceReference source_reference = null) {

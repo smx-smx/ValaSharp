@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public class CastedList<TTo, TFrom> : IList<TTo>
-	{
+namespace GLibPorts {
+	public class CastedList<TTo, TFrom> : IList<TTo> {
 		public IList<TFrom> BaseList;
 
 		public CastedList(IList<TFrom> baseList) {
@@ -41,8 +39,7 @@ namespace GLibPorts
 		public void RemoveAt(int index) { BaseList.RemoveAt(index); }
 	}
 
-	public class CastedEnumerator<TTo, TFrom> : IEnumerator<TTo>
-	{
+	public class CastedEnumerator<TTo, TFrom> : IEnumerator<TTo> {
 		public IEnumerator<TFrom> BaseEnumerator;
 
 		public CastedEnumerator(IEnumerator<TFrom> baseEnumerator) {
@@ -61,8 +58,7 @@ namespace GLibPorts
 		public TTo Current { get { return (TTo)(object)BaseEnumerator.Current; } }
 	}
 
-	public static class ListExtensions
-	{
+	public static class ListExtensions {
 		public static IList<TTo> CastList<TFrom, TTo>(this IList<TFrom> list) {
 			return new CastedList<TTo, TFrom>(list);
 		}

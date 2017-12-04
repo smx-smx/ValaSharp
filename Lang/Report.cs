@@ -9,12 +9,9 @@ using System.Runtime.InteropServices;
 using Vala.Lang.CodeNodes;
 using Vala;
 
-namespace Vala.Lang
-{
-    public class Report
-    {
-		public enum Colored
-		{
+namespace Vala.Lang {
+	public class Report {
+		public enum Colored {
 			AUTO,
 			NEVER,
 			ALWAYS
@@ -159,7 +156,7 @@ namespace Vala.Lang
 						return false;
 				}
 			}
-			
+
 			if (colored_output == Report.Colored.ALWAYS || (
 				colored_output == Report.Colored.AUTO && is_atty(stderr.fileno())
 			)) {

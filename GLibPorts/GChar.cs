@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public class GChar
-	{
+namespace GLibPorts {
+	public class GChar {
 		/// <summary>
 		/// Is a character 0-9 a-f A-F ?
 		/// </summary>

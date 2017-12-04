@@ -7,10 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang;
 
-namespace ValaCompilerLib
-{
-	public class CompilerOptions
-	{
+namespace ValaCompilerLib {
+	public class CompilerOptions {
 		[Option("path",
 			Required = false,
 			HelpText = "Look for required binaries in DIRECTORY",

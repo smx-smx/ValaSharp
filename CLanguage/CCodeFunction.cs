@@ -8,13 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a function declaration in the C code.
  */
-	public class CCodeFunction : CCodeNode
-	{
+	public class CCodeFunction : CCodeNode {
 		/**
 		 * The name of this function.
 		 */
@@ -120,7 +118,7 @@ namespace CLanguage
 					writer.write_string(", ");
 				}
 				param.write(writer);
-				if (param.modifiers.HasFlag(CCodeModifiers.FORMAT_ARG)){
+				if (param.modifiers.HasFlag(CCodeModifiers.FORMAT_ARG)) {
 					format_arg_index = i;
 				}
 				if (has_args && param.ellipsis) {

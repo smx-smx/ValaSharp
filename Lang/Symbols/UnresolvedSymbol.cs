@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Symbols
-{
+namespace Vala.Lang.Symbols {
 	/**
 	 * An unresolved reference to a symbol.
 	 */
-	public class UnresolvedSymbol : Symbol
-	{
+	public class UnresolvedSymbol : Symbol {
 		/**
 		 * The parent of the symbol or null.
 		 */
@@ -24,8 +22,7 @@ namespace Vala.Lang.Symbols
 		public bool qualified { get; set; }
 
 		public UnresolvedSymbol(UnresolvedSymbol inner, string name, SourceReference source_reference = null)
-			: base(name, source_reference)
-		{
+			: base(name, source_reference) {
 			this.inner = inner;
 		}
 

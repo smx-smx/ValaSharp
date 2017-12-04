@@ -8,10 +8,8 @@ using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
-	public abstract class Expression : CodeNode
-	{
+namespace Vala.Lang.Expressions {
+	public abstract class Expression : CodeNode {
 		/**
 	 * The static type of the value of this expression.
 	 * 

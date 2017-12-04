@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
+namespace GLibPorts {
 	public partial class GLib {
 		public class GProcess {
 			public static string get_executable_suffix() {

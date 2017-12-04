@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 
 	/**
 	 * Represents a struct or array initializer list in the C code.
 	 */
-	public class CCodeInitializerList : CCodeExpression
-	{
+	public class CCodeInitializerList : CCodeExpression {
 		private List<CCodeExpression> initializers = new List<CCodeExpression>();
 
 		/**

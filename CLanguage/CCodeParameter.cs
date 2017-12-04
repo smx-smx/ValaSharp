@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a formal parameter in a C method signature.
  */
-	public class CCodeParameter : CCodeNode
-	{
+	public class CCodeParameter : CCodeNode {
 		/**
 		 * The parameter name.
 		 */

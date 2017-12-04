@@ -16,10 +16,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GSignalModule : GObjectModule
-	{
+namespace CCodeGen.Modules {
+	public class GSignalModule : GObjectModule {
 		string get_marshaller_function(List<Parameter> _params, DataType return_type, string prefix = null) {
 			var signature = get_marshaller_signature(_params, return_type);
 			string ret;

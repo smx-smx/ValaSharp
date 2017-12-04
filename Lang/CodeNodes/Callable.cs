@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.CodeNodes
-{
-	public interface Callable
-	{
+namespace Vala.Lang.CodeNodes {
+	public interface Callable {
 		/**
 	 * The return type of this callable.
 	 */

@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public partial class GLib
-	{
-		public class GPath
-		{
+namespace GLibPorts {
+	public partial class GLib {
+		public class GPath {
 			public static bool is_absolute(string file_name) {
 				if (file_name == null || file_name.Length < 1)
 					return false;

@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 	/**
  * Represents a C code statement that evaluates a given expression.
  */
-	public class CCodeExpressionStatement : CCodeStatement
-	{
+	public class CCodeExpressionStatement : CCodeStatement {
 		/**
 		 * The expression to evaluate.
 		 */

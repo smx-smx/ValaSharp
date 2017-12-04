@@ -7,10 +7,8 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
-	public class EmptyStatement : CodeNode, Statement
-	{
+namespace Vala.Lang.Statements {
+	public class EmptyStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

@@ -13,13 +13,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an invocation expression in the source code.
 	 */
-	public class MethodCall : Expression
-	{
+	public class MethodCall : Expression {
 		/**
 		 * The method to call.
 		 */
@@ -647,9 +645,9 @@ namespace Vala.Lang.Expressions
 			}
 
 			return !error;
-			}
+		}
 
-	public override void emit(CodeGenerator codegen) {
+		public override void emit(CodeGenerator codegen) {
 			var method_type = call.value_type as MethodType;
 
 			if (method_type != null && method_type.method_symbol.parent_symbol is Signal) {

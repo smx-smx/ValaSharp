@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	[Flags]
-	public enum CCodeModifiers
-	{
+	public enum CCodeModifiers {
 		NONE = 0,
 		STATIC = 1 << 0,
 		REGISTER = 1 << 1,

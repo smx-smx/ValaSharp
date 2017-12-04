@@ -8,8 +8,7 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a lock statement e.g. {{{ lock (a); }}} or {{{ lock (a) { f(a); } }}}.
  *
@@ -17,8 +16,7 @@ namespace Vala.Lang.Statements
  * occurs. Otherwise it's translated into a try/finally statement which unlocks the mutex
  * after the block is finished.
  */
-	public class LockStatement : CodeNode, Statement
-	{
+	public class LockStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -33,8 +31,7 @@ namespace Vala.Lang.Statements
 		 */
 		public Block body { get; set; }
 
-		public LockStatement(Expression resource, Block body, SourceReference source_reference = null)
-		{
+		public LockStatement(Expression resource, Block body, SourceReference source_reference = null) {
 			this.body = body;
 			this.source_reference = source_reference;
 			this.resource = resource;

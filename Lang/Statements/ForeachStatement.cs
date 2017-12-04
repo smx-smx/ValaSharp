@@ -12,14 +12,12 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents a foreach statement in the source code. Foreach statements iterate
 	 * over the elements of a collection.
 	 */
-	public class ForeachStatement : Block
-	{
+	public class ForeachStatement : Block {
 		/**
 		 * Specifies the element type.
 		 */
@@ -96,7 +94,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created foreach statement
 		 */
-		public ForeachStatement(DataType type_reference, string variable_name, Expression collection, Block body, SourceReference source_reference): base(source_reference) {
+		public ForeachStatement(DataType type_reference, string variable_name, Expression collection, Block body, SourceReference source_reference) : base(source_reference) {
 			this.variable_name = variable_name;
 			this.collection = collection;
 			this.body = body;

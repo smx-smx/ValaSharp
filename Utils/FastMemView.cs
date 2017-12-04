@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils
-{
-	public unsafe class FastMView : IDisposable
-	{
+namespace Utils {
+	public unsafe class FastMView : IDisposable {
 		private WeakReference<FastMemoryMappedFile> mf_weak = new WeakReference<FastMemoryMappedFile>(null);
 
 		public FastMemoryMappedFile mf {
@@ -61,7 +59,7 @@ namespace Utils
 		}
 
 		public byte PeekByte() {
-			if(Position >= mf.Size) {
+			if (Position >= mf.Size) {
 				throw new EndOfStreamException();
 			}
 
@@ -79,8 +77,8 @@ namespace Utils
 			using (StreamReader sr = new StreamReader(ums, Encoding.UTF8, true)) {
 				ch = Convert.ToChar(sr.Read());
 			}
-			
-			length = Encoding.UTF8.GetByteCount(new char[]{ch});
+
+			length = Encoding.UTF8.GetByteCount(new char[] { ch });
 			return ch;
 		}
 

@@ -7,13 +7,11 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents a break statement in the source code.
 	 */
-	public class BreakStatement : CodeNode, Statement
-	{
+	public class BreakStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

@@ -7,10 +7,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public abstract class DataType : CodeNode
-	{
+namespace Vala.Lang.Types {
+	public abstract class DataType : CodeNode {
 		/**
 		* Specifies that the expression or variable owns the value.
 		*/

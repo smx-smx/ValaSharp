@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents a type cast in the source code.
 	 */
-	public class CastExpression : Expression
-	{
+	public class CastExpression : Expression {
 		/**
 		 * The expression to be cast.
 		 */

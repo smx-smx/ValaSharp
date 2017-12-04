@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents the Array.length field.
 	 */
-	public class ArrayLengthField : Field
-	{
+	public class ArrayLengthField : Field {
 		/**
 		 * Creates a new array length field.
 		 *

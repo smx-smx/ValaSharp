@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a section that should only to processed once.
 	 */
-	public class CCodeOnceSection : CCodeFragment
-	{
+	public class CCodeOnceSection : CCodeFragment {
 		/**
 		 * The name of the guarding define.
 		 */

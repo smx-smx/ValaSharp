@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 
-namespace Vala.Lang
-{
-	public class BasicBlock
-	{
+namespace Vala.Lang {
+	public class BasicBlock {
 		private List<CodeNode> nodes = new List<CodeNode>();
 
 		// control flow graph

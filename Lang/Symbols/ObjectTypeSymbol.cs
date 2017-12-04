@@ -7,10 +7,8 @@ using Vala.Lang.Methods;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Symbols
-{
-	public abstract class ObjectTypeSymbol : TypeSymbol
-	{
+namespace Vala.Lang.Symbols {
+	public abstract class ObjectTypeSymbol : TypeSymbol {
 		private List<TypeParameter> type_parameters = new List<TypeParameter>();
 
 		public ObjectTypeSymbol(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {

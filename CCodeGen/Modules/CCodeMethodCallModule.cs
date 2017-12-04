@@ -16,10 +16,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class CCodeMethodCallModule : CCodeAssignmentModule
-	{
+namespace CCodeGen.Modules {
+	public class CCodeMethodCallModule : CCodeAssignmentModule {
 		public override void visit_method_call(MethodCall expr) {
 			// the bare function call
 			var ccall = new CCodeFunctionCall(get_cvalue(expr.call));

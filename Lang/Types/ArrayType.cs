@@ -11,10 +11,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public class ArrayType : ReferenceType
-	{
+namespace Vala.Lang.Types {
+	public class ArrayType : ReferenceType {
 		/**
 	 * The element type.
 	 */

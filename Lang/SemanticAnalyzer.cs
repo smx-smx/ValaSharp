@@ -15,10 +15,8 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace Vala.Lang
-{
-	public class SemanticAnalyzer : CodeVisitor
-	{
+namespace Vala.Lang {
+	public class SemanticAnalyzer : CodeVisitor {
 		public CodeContext context { get; set; }
 
 		public Symbol root_symbol;

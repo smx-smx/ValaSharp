@@ -8,10 +8,8 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Symbols
-{
-	public class Variable : Symbol
-	{
+namespace Vala.Lang.Symbols {
+	public class Variable : Symbol {
 		/**
 	 * The optional initializer expression.
 	 */
@@ -46,8 +44,7 @@ namespace Vala.Lang.Symbols
 		DataType _variable_type;
 
 		public Variable(DataType variable_type, string name, Expression initializer = null, SourceReference source_reference = null, Comment comment = null)
-			: base(name, source_reference, comment)
-		{
+			: base(name, source_reference, comment) {
 			this.variable_type = variable_type;
 			this.initializer = initializer;
 		}

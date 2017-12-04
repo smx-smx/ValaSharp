@@ -9,10 +9,8 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Statements
-{
-	public class ExpressionStatement : CodeNode, Statement
-	{
+namespace Vala.Lang.Statements {
+	public class ExpressionStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -39,8 +37,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created expression statement
 		 */
-		public ExpressionStatement(Expression expression, SourceReference source_reference = null)
-		{
+		public ExpressionStatement(Expression expression, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.expression = expression;
 		}

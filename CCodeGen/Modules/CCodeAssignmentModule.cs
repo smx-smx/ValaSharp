@@ -13,13 +13,11 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen.Modules
-{
+namespace CCodeGen.Modules {
 	/**
 	 * The link between an assignment and generated code.
 	 */
-	public class CCodeAssignmentModule : CCodeMemberAccessModule
-	{
+	public class CCodeAssignmentModule : CCodeMemberAccessModule {
 		TargetValue emit_simple_assignment(Assignment assignment) {
 			Variable variable = (Variable)assignment.left.symbol_reference;
 

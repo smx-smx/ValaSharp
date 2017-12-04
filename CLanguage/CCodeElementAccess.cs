@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents an access to an array member in the C code.
 	 */
-	public class CCodeElementAccess : CCodeExpression
-	{
+	public class CCodeElementAccess : CCodeExpression {
 		/**
 		 * Expression representing the container on which we want to access.
 		 */

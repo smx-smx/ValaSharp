@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a line directive in the C code.
 	 */
-	public class CCodeLineDirective : CCodeNode
-	{
+	public class CCodeLineDirective : CCodeNode {
 		/**
 		 * The name of the source file to be presumed.
 		 */

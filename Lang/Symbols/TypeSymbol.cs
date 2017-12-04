@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Symbols
-{
-	public abstract class TypeSymbol : Symbol
-	{
+namespace Vala.Lang.Symbols {
+	public abstract class TypeSymbol : Symbol {
 		public TypeSymbol(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 		}
 

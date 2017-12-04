@@ -6,10 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang
-{
-	public class Scope
-	{
+namespace Vala.Lang {
+	public class Scope {
 		private WeakReference<Symbol> owner_weak = new WeakReference<Symbol>(null);
 		private WeakReference<Scope> parent_scope_weak = new WeakReference<Scope>(null);
 

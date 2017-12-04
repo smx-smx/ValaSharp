@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 	/**
  * Represents a while iteration statement in the C code.
  */
-	public class CCodeWhileStatement : CCodeStatement
-	{
+	public class CCodeWhileStatement : CCodeStatement {
 		/**
 		 * The loop condition.
 		 */

@@ -10,8 +10,7 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.CodeNodes
-{
+namespace Vala.Lang.CodeNodes {
 	/// <summary>
 	/// Represents a part of the parsed source code.
 	/// 
@@ -67,7 +66,7 @@ namespace Vala.Lang.CodeNodes
 
 		private List<DataType> _error_types;
 		private static List<DataType> _empty_type_list;
-		private AttributeCache[] attributes_cache = {};
+		private AttributeCache[] attributes_cache = { };
 
 		static int last_temp_nr = 0;
 		static int next_attribute_cache_index = 0;

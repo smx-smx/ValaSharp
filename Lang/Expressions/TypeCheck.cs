@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents a type check (`is`) expression in the source code.
  */
-	public class TypeCheck : Expression
-	{
+	public class TypeCheck : Expression {
 		/**
 		 * The expression to be checked.
 		 */

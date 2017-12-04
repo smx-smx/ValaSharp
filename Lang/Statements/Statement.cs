@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	* Interface for all statement types.
 	*/

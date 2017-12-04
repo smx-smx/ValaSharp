@@ -14,10 +14,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GObjectModule : GTypeModule
-	{
+namespace CCodeGen.Modules {
+	public class GObjectModule : GTypeModule {
 		int dynamic_property_id;
 		int signal_wrapper_id;
 

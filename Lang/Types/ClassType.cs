@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * A class type.
 	 */
-	public class ClassType : ReferenceType
-	{
+	public class ClassType : ReferenceType {
 		private WeakReference<Class> class_symbol_weak = new WeakReference<Class>(null);
 
 		/**

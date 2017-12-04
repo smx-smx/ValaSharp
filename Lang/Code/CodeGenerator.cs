@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Code
-{
-	public abstract class CodeGenerator : CodeVisitor
-	{
+namespace Vala.Lang.Code {
+	public abstract class CodeGenerator : CodeVisitor {
 		/**
 	 * Generate and emit C code for the specified code context.
 	 *

@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
 	 * Represents a real literal in the source code.
 	 */
-	public class RealLiteral : Literal
-	{
+	public class RealLiteral : Literal {
 		/**
 		 * The literal value.
 		 */

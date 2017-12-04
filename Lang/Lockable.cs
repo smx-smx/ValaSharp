@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents a lockable object.
 	 */

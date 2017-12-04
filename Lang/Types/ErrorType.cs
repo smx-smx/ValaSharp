@@ -8,13 +8,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * A class type.
 	 */
-	public class ErrorType : ReferenceType
-	{
+	public class ErrorType : ReferenceType {
 		private WeakReference<ErrorDomain> error_domain_weak = new WeakReference<ErrorDomain>(null);
 		private WeakReference<ErrorCode> error_code_weak = new WeakReference<ErrorCode>(null);
 

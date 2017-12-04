@@ -12,13 +12,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
 	 * C function to register an interface at runtime.
 	 */
-	public class InterfaceRegisterFunction : TypeRegisterFunction
-	{
+	public class InterfaceRegisterFunction : TypeRegisterFunction {
 		/**
 		 * Specifies the interface to be registered.
 		 */

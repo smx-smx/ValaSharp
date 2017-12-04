@@ -7,13 +7,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
 	 * C function to register an enum at runtime.
 	 */
-	public class EnumRegisterFunction : TypeRegisterFunction
-	{
+	public class EnumRegisterFunction : TypeRegisterFunction {
 		/**
 		 * Specifies the enum to be registered.
 		 */

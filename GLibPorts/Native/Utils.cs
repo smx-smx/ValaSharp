@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts.Native
-{
-	public class Utils
-	{
+namespace GLibPorts.Native {
+	public class Utils {
 		/// <summary>
 		/// Clears up unmanaged resources used through GLib's lifetime
 		/// </summary>
@@ -16,8 +14,7 @@ namespace GLibPorts.Native
 			File.DisposeStatic();
 		}
 
-		public static void GLibInitialize()
-		{
+		public static void GLibInitialize() {
 			File.InitializeStatic();
 			GLib.FileStream.InitializeStatic();
 		}

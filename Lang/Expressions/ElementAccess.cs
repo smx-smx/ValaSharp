@@ -10,10 +10,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
-	public class ElementAccess : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class ElementAccess : Expression {
 		/**
 	 * Expression representing the container on which we want to access.
 	 */
@@ -204,9 +202,9 @@ namespace Vala.Lang.Expressions
 			}
 
 			return !error;
-			}
+		}
 
-	public override void emit(CodeGenerator codegen) {
+		public override void emit(CodeGenerator codegen) {
 			container.emit(codegen);
 			foreach (Expression e in indices) {
 				e.emit(codegen);

@@ -12,10 +12,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Methods
-{
-	public class Method : Subroutine, Callable
-	{
+namespace Vala.Lang.Methods {
+	public class Method : Subroutine, Callable {
 		List<TypeParameter> type_parameters;
 
 		/**
@@ -198,12 +196,10 @@ namespace Vala.Lang.Methods
 		}
 
 		private Method _base_interface_method {
-			get
-			{
+			get {
 				return _base_interface_method_weak.GetTarget();
 			}
-			set
-			{
+			set {
 				_base_interface_method_weak.SetTarget(value);
 			}
 		}

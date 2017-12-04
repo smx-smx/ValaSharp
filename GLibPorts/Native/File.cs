@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 using static GLibPorts.Native.Win32;
 
-namespace GLibPorts.Native
-{
-	public class File
-	{
+namespace GLibPorts.Native {
+	public class File {
 		public static IntPtr stdin;
 		public static IntPtr stderr;
 		public static IntPtr stdout;
@@ -40,7 +38,7 @@ namespace GLibPorts.Native
 		}
 
 		public static void DisposeStatic() {
-			if(stdin != IntPtr.Zero)
+			if (stdin != IntPtr.Zero)
 				fclose(stdin);
 
 			if (stderr != IntPtr.Zero)

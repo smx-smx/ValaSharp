@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents a comma separated expression list in the C code.
 	 */
-	public class CCodeCommaExpression : CCodeExpression
-	{
+	public class CCodeCommaExpression : CCodeExpression {
 		private List<CCodeExpression> inner = new List<CCodeExpression>();
 
 		/**

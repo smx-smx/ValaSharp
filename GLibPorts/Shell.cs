@@ -5,8 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
+namespace GLibPorts {
 	public partial class GLib {
 		public class Shell {
 			public static string quote(string str) {

@@ -11,13 +11,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Code visitor resolving symbol names.
 	 */
-	public class SymbolResolver : CodeVisitor
-	{
+	public class SymbolResolver : CodeVisitor {
 		CodeContext context;
 		Symbol root_symbol;
 		Scope current_scope;

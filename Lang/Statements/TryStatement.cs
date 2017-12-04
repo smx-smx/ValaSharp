@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a try statement in the source code.
  */
-	public class TryStatement : CodeNode, Statement
-	{
+	public class TryStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

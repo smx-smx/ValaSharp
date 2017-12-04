@@ -10,10 +10,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
-	public class InitializerList : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class InitializerList : Expression {
 		private List<Expression> initializers = new List<Expression>();
 
 		/**

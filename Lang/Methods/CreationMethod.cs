@@ -11,10 +11,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Methods
-{
-	public class CreationMethod : Method
-	{
+namespace Vala.Lang.Methods {
+	public class CreationMethod : Method {
 		/**
 	 * Specifies the name of the type this creation method belongs to.
 	 */
@@ -33,9 +31,8 @@ namespace Vala.Lang.Methods
 		 * @param source_reference reference to source code
 		 * @return                 newly created method
 		 */
-		public CreationMethod(string class_name, string name, SourceReference source_reference = null, Comment comment = null) 
-			: base(name, new VoidType(), source_reference, comment)
-		{
+		public CreationMethod(string class_name, string name, SourceReference source_reference = null, Comment comment = null)
+			: base(name, new VoidType(), source_reference, comment) {
 			this.class_name = class_name;
 		}
 
@@ -167,6 +164,6 @@ namespace Vala.Lang.Methods
 			}
 
 			return !error;
-			}
 		}
+	}
 }

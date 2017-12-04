@@ -13,12 +13,9 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GVariantModule : GAsyncModule
-	{
-		class BasicTypeInfo
-		{
+namespace CCodeGen.Modules {
+	public class GVariantModule : GAsyncModule {
+		class BasicTypeInfo {
 			public string signature;
 			public string type_name;
 			public bool is_string;

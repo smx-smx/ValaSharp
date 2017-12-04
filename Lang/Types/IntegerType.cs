@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public class IntegerType : ValaValueType
-	{
+namespace Vala.Lang.Types {
+	public class IntegerType : ValaValueType {
 		string literal_value;
 		string literal_type_name;
 
@@ -37,8 +35,7 @@ namespace Vala.Lang.Types
 						int val;
 						try {
 							val = Convert.ToInt32(literal_value);
-						}
-						catch (Exception) {
+						} catch (Exception) {
 							val = Convert.ToInt32(literal_value, 16);
 						}
 						return (val >= int_attr.get_integer("min") && val <= int_attr.get_integer("max"));

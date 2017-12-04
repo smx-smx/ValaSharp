@@ -10,10 +10,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public abstract class CCodeStructModule : CCodeBaseModule
-	{
+namespace CCodeGen.Modules {
+	public abstract class CCodeStructModule : CCodeBaseModule {
 		public override void generate_struct_declaration(Struct st, CCodeFile decl_space) {
 			if (add_symbol_declaration(decl_space, st, get_ccode_name(st))) {
 				return;

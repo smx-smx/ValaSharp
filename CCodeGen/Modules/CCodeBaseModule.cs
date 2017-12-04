@@ -20,15 +20,12 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen.Modules
-{
+namespace CCodeGen.Modules {
 	/**
 	 * Code visitor generating C Code.
 	 */
-	public abstract class CCodeBaseModule : CodeGenerator
-	{
-		public class EmitContext
-		{
+	public abstract class CCodeBaseModule : CodeGenerator {
+		public class EmitContext {
 			public Symbol current_symbol;
 			public List<Symbol> symbol_stack = new List<Symbol>();
 			public TryStatement current_try;
@@ -5130,8 +5127,7 @@ namespace CCodeGen.Modules
 			return load_temp_value(result);
 		}
 
-		private CCodeExpression deserialize_expression(DataType type, CCodeIdentifier variant_expr, CCodeExpression expr, CCodeExpression error_expr = null)
-		{
+		private CCodeExpression deserialize_expression(DataType type, CCodeIdentifier variant_expr, CCodeExpression expr, CCodeExpression error_expr = null) {
 			bool may_fail;
 			return deserialize_expression(type, variant_expr, expr, out may_fail, error_expr);
 		}
@@ -6820,8 +6816,7 @@ namespace CCodeGen.Modules
 		}
 	}
 
-	internal class GLibValue : TargetValue
-	{
+	internal class GLibValue : TargetValue {
 		public CCodeExpression cvalue;
 		public bool lvalue;
 		public bool non_null;

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents a parenthesized expression in the C code.
 	 */
-	public class CCodeParenthesizedExpression : CCodeExpression
-	{
+	public class CCodeParenthesizedExpression : CCodeExpression {
 		/**
 		 * The expression in the parenthesis.
 		 */

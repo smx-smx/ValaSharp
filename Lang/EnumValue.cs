@@ -8,10 +8,8 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang
-{
-	public class EnumValue : Constant
-	{
+namespace Vala.Lang {
+	public class EnumValue : Constant {
 		/**
 	 * Creates a new enum value with the specified numerical representation.
 	 *
@@ -20,8 +18,7 @@ namespace Vala.Lang
 	 * @return      newly created enum value
 	 */
 		public EnumValue(string name, Expression value, SourceReference source_reference = null, Comment comment = null)
-			: base(name, null, value, source_reference, comment)
-		{
+			: base(name, null, value, source_reference, comment) {
 		}
 
 		public override void accept(CodeVisitor visitor) {
@@ -46,6 +43,6 @@ namespace Vala.Lang
 			}
 
 			return !error;
-			}
 		}
 	}
+}

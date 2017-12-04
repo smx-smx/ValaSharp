@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents an enum in the C code.
 	 */
-	public class CCodeEnum : CCodeNode
-	{
+	public class CCodeEnum : CCodeNode {
 		/**
 		 * The name of this enum.
 		 */

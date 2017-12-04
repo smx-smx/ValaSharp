@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.CodeNodes
-{
-	public class UsingDirective : CodeNode
-	{
+namespace Vala.Lang.CodeNodes {
+	public class UsingDirective : CodeNode {
 		/**
 	 * The symbol of the namespace this using directive is referring to.
 	 */

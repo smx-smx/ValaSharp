@@ -13,13 +13,11 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
  * Cache for the CCode attribute
  */
-	public class CCodeAttribute : AttributeCache
-	{
+	public class CCodeAttribute : AttributeCache {
 		private CodeNode node;
 		private Symbol sym;
 		private ValaAttribute ccode;

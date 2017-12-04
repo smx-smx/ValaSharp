@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents an include preprocessor directive in the C code.
  */
-	public class CCodeIncludeDirective : CCodeNode
-	{
+	public class CCodeIncludeDirective : CCodeNode {
 		/**
 		 * The file to be included.
 		 */

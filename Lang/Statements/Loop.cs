@@ -7,13 +7,11 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents an endless loop.
 	 */
-	public class Loop : CodeNode, Statement
-	{
+	public class Loop : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -40,7 +38,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference reference to source code
 		 * @return                 newly created while statement
 		 */
-		public Loop(Block body, SourceReference source_reference = null){
+		public Loop(Block body, SourceReference source_reference = null) {
 			this.body = body;
 			this.source_reference = source_reference;
 		}

@@ -5,15 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using GLibPorts.Native;
 
-namespace GLibPorts
-{
-	public partial class GLib
-	{
-		public class Module : IDisposable
-		{
+namespace GLibPorts {
+	public partial class GLib {
+		public class Module : IDisposable {
 			private IntPtr handle;
 			private Module(IntPtr handle) {
-				if(handle == IntPtr.Zero) {
+				if (handle == IntPtr.Zero) {
 					throw new ArgumentNullException("handle");
 				}
 				this.handle = handle;
@@ -21,7 +18,7 @@ namespace GLibPorts
 
 			public static Module open(string file_name, ModuleFlags flags) {
 				IntPtr handle = IntPtr.Zero;
-				if(file_name == null) {
+				if (file_name == null) {
 					handle = Win32.GetModuleHandle(null);
 				} else {
 					handle = Win32.LoadLibrary(file_name);

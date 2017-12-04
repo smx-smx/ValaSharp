@@ -12,10 +12,8 @@ using System.IO;
 using GLibPorts;
 using ValaConfig;
 
-namespace Vala.Lang.CodeNodes
-{
-	public class CodeContext
-	{
+namespace Vala.Lang.CodeNodes {
+	public class CodeContext {
 		/**
  * Enable run-time checks for programming errors.
  */
@@ -522,7 +520,7 @@ namespace Vala.Lang.CodeNodes
 		}
 
 		public string get_gresource_path(string gresource, string resource) {
-			var filename = get_file_path(resource, null, null, new string[]{ Path.GetDirectoryName(gresource) });
+			var filename = get_file_path(resource, null, null, new string[] { Path.GetDirectoryName(gresource) });
 			if (filename == null) {
 				filename = get_file_path(resource, null, null, gresources_directories);
 			}

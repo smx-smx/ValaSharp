@@ -8,10 +8,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Expressions
-{
-	public class NamedArgument : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class NamedArgument : Expression {
 		public string name { get; set; }
 
 		public Expression inner {

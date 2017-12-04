@@ -20,13 +20,11 @@ using Vala.Lang.TypeSymbols;
 using ValaConfig;
 using static GLibPorts.GLib;
 
-namespace Vala.Lang.Code
-{
+namespace Vala.Lang.Code {
 	/**
 	 * Code visitor generating Vala API file for the public interface.
 	 */
-	public class CodeWriter : CodeVisitor
-	{
+	public class CodeWriter : CodeVisitor {
 		static Regex fix_indent_regex;
 
 		private CodeContext context;
@@ -1542,8 +1540,7 @@ namespace Vala.Lang.Code
 				using (FastMemoryMappedFile fmf = new FastMemoryMappedFile(mem, bytes.Length)) {
 					FastMView view = new FastMView(fmf);
 					if (Scanner.get_identifier_or_keyword(view, id.Length) != TokenType.IDENTIFIER ||
-						Char.IsDigit(id[0]))
-					{
+						Char.IsDigit(id[0])) {
 						stream.putc('@');
 					}
 					write_string(id);
@@ -1757,8 +1754,7 @@ namespace Vala.Lang.Code
 		}
 	}
 
-	public enum CodeWriterType
-	{
+	public enum CodeWriterType {
 		EXTERNAL,
 		INTERNAL,
 		FAST,

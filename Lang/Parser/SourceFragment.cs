@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vala.Lang.Parser
-{
-	public class SourceFragment
-	{
+namespace Vala.Lang.Parser {
+	public class SourceFragment {
 		public SourceLocation begin;
 		public SourceLocation end;
 
@@ -17,8 +15,7 @@ namespace Vala.Lang.Parser
 		}
 
 		public string content {
-			get
-			{
+			get {
 				long currentPos = begin.view.Position;
 				begin.view.Seek(begin.pos, SeekOrigin.Begin);
 
@@ -29,13 +26,11 @@ namespace Vala.Lang.Parser
 			}
 		}
 
-		public static string get_content(SourceLocation begin, SourceLocation end)
-		{
+		public static string get_content(SourceLocation begin, SourceLocation end) {
 			return new SourceFragment(begin, end).content;
 		}
 
-		public SourceFragment(SourceLocation begin, SourceLocation end)
-		{
+		public SourceFragment(SourceLocation begin, SourceLocation end) {
 			this.begin = begin;
 			this.end = end;
 		}

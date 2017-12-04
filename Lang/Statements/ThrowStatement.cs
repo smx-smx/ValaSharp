@@ -10,13 +10,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a throw statement in the source code.
  */
-	public class ThrowStatement : CodeNode, Statement
-	{
+	public class ThrowStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

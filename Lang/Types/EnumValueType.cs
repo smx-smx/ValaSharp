@@ -8,10 +8,8 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public class EnumValueType : ValaValueType
-	{
+namespace Vala.Lang.Types {
+	public class EnumValueType : ValaValueType {
 		private Method to_string_method;
 
 		public EnumValueType(ValaEnum type_symbol) : base(type_symbol) { }

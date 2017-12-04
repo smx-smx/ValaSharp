@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents a local variable or constant declaration statement in the source code.
 	 */
-	public class DeclarationStatement : CodeNode, Statement
-	{
+	public class DeclarationStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

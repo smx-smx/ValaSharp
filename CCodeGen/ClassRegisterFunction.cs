@@ -12,13 +12,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
 	 * C function to register a class at runtime.
 	 */
-	public class ClassRegisterFunction : TypeRegisterFunction
-	{
+	public class ClassRegisterFunction : TypeRegisterFunction {
 		/**
 		 * Specifies the class to be registered.
 		 */

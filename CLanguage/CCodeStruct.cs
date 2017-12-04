@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a struct declaration in the C code.
 	 */
-	public class CCodeStruct : CCodeNode
-	{
+	public class CCodeStruct : CCodeNode {
 		/**
 		 * The struct name.
 		 */

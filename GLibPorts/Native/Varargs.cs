@@ -5,11 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts.Native
-{
+namespace GLibPorts.Native {
 	#region VariableCombiner
-	public class CombinedVariables : IDisposable
-	{
+	public class CombinedVariables : IDisposable {
 		readonly IntPtr _ptr;
 		readonly IList<IDisposable> _disposables;
 
@@ -49,15 +47,13 @@ namespace GLibPorts.Native
 
 	#region VariableArgument
 
-	public abstract class VariableArgument
-	{
+	public abstract class VariableArgument {
 		#region SentinelDispose
 
 		protected static readonly IDisposable SentinelDisposable =
 				new SentinelDispose();
 
-		class SentinelDispose : IDisposable
-		{
+		class SentinelDispose : IDisposable {
 			public void Dispose() {
 
 			}
@@ -88,8 +84,7 @@ namespace GLibPorts.Native
 
 	#region VariableIntegerArgument
 
-	sealed class VariableIntegerArgument : VariableArgument
-	{
+	sealed class VariableIntegerArgument : VariableArgument {
 		readonly int _value;
 
 		public VariableIntegerArgument(int value) {
@@ -106,8 +101,7 @@ namespace GLibPorts.Native
 
 	#region VariableDoubleArgument
 
-	sealed class VariableDoubleArgument : VariableArgument
-	{
+	sealed class VariableDoubleArgument : VariableArgument {
 		readonly double _value;
 
 		public VariableDoubleArgument(double value) {
@@ -128,8 +122,7 @@ namespace GLibPorts.Native
 
 	#region VariableStringArgument
 
-	sealed class VariableStringArgument : VariableArgument
-	{
+	sealed class VariableStringArgument : VariableArgument {
 		readonly string _value;
 
 		public VariableStringArgument(string value) {
@@ -146,8 +139,7 @@ namespace GLibPorts.Native
 
 		#region StringArgumentDisposable
 
-		class StringArgumentDisposable : IDisposable
-		{
+		class StringArgumentDisposable : IDisposable {
 			IntPtr _ptr;
 
 			public StringArgumentDisposable(IntPtr ptr) {

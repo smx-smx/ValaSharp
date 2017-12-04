@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a container for C code nodes.
  */
-	public class CCodeFragment : CCodeNode
-	{
+	public class CCodeFragment : CCodeNode {
 		private List<CCodeNode> children = new List<CCodeNode>();
 
 		/**

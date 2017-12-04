@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a function pointer declarator in the C code.
 	 */
-	public class CCodeFunctionDeclarator : CCodeDeclarator
-	{
+	public class CCodeFunctionDeclarator : CCodeDeclarator {
 		/**
 		 * The declarator name.
 		 */

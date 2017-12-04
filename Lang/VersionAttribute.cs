@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.CodeNodes;
 using System.IO;
 
-namespace Vala.Lang
-{
-	public class VersionAttribute
-	{
+namespace Vala.Lang {
+	public class VersionAttribute {
 		private WeakReference<Symbol> symbol_weak = new WeakReference<Symbol>(null);
 
 		private Symbol symbol {

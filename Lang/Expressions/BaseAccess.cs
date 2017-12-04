@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an access to base class members in the source code.
 	 */
-	public class BaseAccess : Expression
-	{
+	public class BaseAccess : Expression {
 		/**
 		 * Creates a new base access expression.
 		 *

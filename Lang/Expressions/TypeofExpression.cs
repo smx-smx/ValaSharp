@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents a typeof expression in the source code.
  */
-	public class TypeofExpression : Expression
-	{
+	public class TypeofExpression : Expression {
 		/**
 		 * The type to be retrieved.
 		 */

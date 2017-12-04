@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
  * A reference to an instance field without a specific instance.
  */
-	public class FieldPrototype : DataType
-	{
+	public class FieldPrototype : DataType {
 		public Field field_symbol { get; set; }
 
 		public FieldPrototype(Field field_symbol) {

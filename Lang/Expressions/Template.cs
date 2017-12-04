@@ -7,10 +7,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Expressions
-{
-	public class Template : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class Template : Expression {
 		private List<Expression> expression_list = new List<Expression>();
 
 		public Template(SourceReference source_reference = null) {
@@ -73,6 +71,6 @@ namespace Vala.Lang.Expressions
 			context.analyzer.replaced_nodes.Add(this);
 			parent_node.replace_expression(this, expr);
 			return expr.check(context);
-			}
 		}
 	}
+}

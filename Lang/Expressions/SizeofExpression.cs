@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents a sizeof expression in the source code.
 	 */
-	public class SizeofExpression : Expression
-	{
+	public class SizeofExpression : Expression {
 		/**
 		 * The type whose size to be retrieved.
 		 */

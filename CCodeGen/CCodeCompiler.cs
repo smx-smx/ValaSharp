@@ -11,8 +11,7 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using static GLibPorts.GLib;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 
 	/**
 	 * Interface to the C compiler.

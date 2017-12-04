@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 using Utils;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Parser
-{
+namespace Vala.Lang.Parser {
 	/**
 	 * Lexical scanner for Vala source files.
 	 */
-	public class Scanner : IDisposable
-	{
+	public class Scanner : IDisposable {
 		public SourceFile source_file { get; private set; }
 
 		TokenType previous;
@@ -29,8 +27,7 @@ namespace Vala.Lang.Parser
 
 		List<Conditional> conditional_stack = new List<Conditional>();
 
-		struct Conditional
-		{
+		struct Conditional {
 			public bool matched;
 			public bool else_found;
 			public bool skip_section;
@@ -38,8 +35,7 @@ namespace Vala.Lang.Parser
 
 		List<State> state_stack = new List<State>();
 
-		enum State
-		{
+		enum State {
 			PARENS,
 			BRACE,
 			BRACKET,
@@ -58,8 +54,7 @@ namespace Vala.Lang.Parser
 			column = 1;
 		}
 
-		public void seek(SourceLocation location)
-		{
+		public void seek(SourceLocation location) {
 			current.Seek(location.pos, SeekOrigin.Begin);
 			line = location.line;
 			column = location.column;
@@ -242,8 +237,7 @@ namespace Vala.Lang.Parser
 									current.PeekUniChar(out int clen);
 									current.Position += clen;
 									token_length_in_chars += clen;
-								}
-								catch (ArgumentException) {
+								} catch (ArgumentException) {
 									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
 								}
 							}
@@ -1196,8 +1190,7 @@ namespace Vala.Lang.Parser
 							current.PeekUniChar(out int clen);
 							current.Position += clen;
 							token_length_in_chars += clen;
-						}
-						catch (ArgumentException) {
+						} catch (ArgumentException) {
 							Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
 						}
 

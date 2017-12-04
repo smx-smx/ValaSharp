@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang
-{
-	public class PhiFunction
-	{
+namespace Vala.Lang {
+	public class PhiFunction {
 		public Variable original_variable { get; private set; }
 
 		public List<Variable> operands { get; private set; }

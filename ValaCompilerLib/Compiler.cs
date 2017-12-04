@@ -15,10 +15,8 @@ using Vala.Lang.Parser;
 using ValaConfig;
 using static GLibPorts.GLib;
 
-namespace ValaCompilerLib
-{
-	public class Compiler : IDisposable
-	{
+namespace ValaCompilerLib {
+	public class Compiler : IDisposable {
 		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
 
 		static bool run_output;

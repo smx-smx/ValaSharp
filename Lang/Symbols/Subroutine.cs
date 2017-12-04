@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Symbols
-{
-	public abstract class Subroutine : Symbol
-	{
+namespace Vala.Lang.Symbols {
+	public abstract class Subroutine : Symbol {
 		Block _body;
 
 		public BasicBlock entry_block { get; set; }
@@ -25,7 +23,7 @@ namespace Vala.Lang.Symbols
 
 		public abstract bool has_result { get; }
 
-		protected Subroutine(string name, SourceReference source_reference, Comment comment = null) 
+		protected Subroutine(string name, SourceReference source_reference, Comment comment = null)
 			: base(name, source_reference, comment) { }
 
 		public Block body {

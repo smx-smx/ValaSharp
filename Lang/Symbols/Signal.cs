@@ -11,10 +11,8 @@ using Vala.Lang.Statements;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Symbols
-{
-	public class Signal : Symbol, Lockable, Callable
-	{
+namespace Vala.Lang.Symbols {
+	public class Signal : Symbol, Lockable, Callable {
 		/**
 	 * The return type of handlers of this signal.
 	 */

@@ -13,13 +13,11 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an object creation expression in the source code.
 	 */
-	public class ObjectCreationExpression : Expression
-	{
+	public class ObjectCreationExpression : Expression {
 		/**
 		 * The object type to create.
 		 */

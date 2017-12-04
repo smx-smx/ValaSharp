@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
  * Represents a switch section in the source code.
  */
-	public class SwitchSection : Block
-	{
+	public class SwitchSection : Block {
 		private List<SwitchLabel> labels = new List<SwitchLabel>();
 
 		/**

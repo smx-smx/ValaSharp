@@ -5,34 +5,31 @@ using System.IO;
 using System.Text;
 using Utils;
 
-namespace Vala.Lang.Parser
-{
-    public class SourceLocation : IDisposable
-    {
+namespace Vala.Lang.Parser {
+	public class SourceLocation : IDisposable {
 		private WeakReference<FastMView> view_weak = new WeakReference<FastMView>(null);
 
-	    public FastMView view {
-		    get {
-			    return view_weak.GetTarget();
-		    }
-		    set {
-			    view_weak.SetTarget(value);
-		    }
-	    }
+		public FastMView view {
+			get {
+				return view_weak.GetTarget();
+			}
+			set {
+				view_weak.SetTarget(value);
+			}
+		}
 		public int line;
 		public int column;
 
 		public long pos;
 
-		public SourceLocation(FastMView view, long offset, int _line, int _column)
-		{
+		public SourceLocation(FastMView view, long offset, int _line, int _column) {
 			this.view = view;
 			pos = offset;
 			line = _line;
 			column = _column;
 		}
 
-		public SourceLocation(FastMView view, int _line, int _column){
+		public SourceLocation(FastMView view, int _line, int _column) {
 			this.view = view;
 			pos = view.Position;
 			line = _line;
@@ -49,8 +46,8 @@ namespace Vala.Lang.Parser
 			return result;
 		}
 
-	    public void Dispose() {
+		public void Dispose() {
 			view?.Dispose();
-	    }
-    }
+		}
+	}
 }

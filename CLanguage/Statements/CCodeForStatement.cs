@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 	/**
 	 * Represents a for iteration statement in the C code.
 	 */
-	public class CCodeForStatement : CCodeStatement
-	{
+	public class CCodeForStatement : CCodeStatement {
 		/**
 		 * The loop condition.
 		 */

@@ -7,10 +7,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public class DelegateType : DataType
-	{
+namespace Vala.Lang.Types {
+	public class DelegateType : DataType {
 		public ValaDelegate delegate_symbol { get; set; }
 
 		public bool is_called_once { get; set; }

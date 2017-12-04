@@ -8,10 +8,8 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
-	public class UsedAttr : CodeVisitor
-	{
+namespace Vala.Lang {
+	public class UsedAttr : CodeVisitor {
 		public Dictionary<string, HashSet<string>> marked = new Dictionary<string, HashSet<string>>();
 
 		readonly string[] valac_default_attrs = new string[]{
@@ -85,8 +83,7 @@ namespace Vala.Lang
 		/**
 		 * Mark the attribute or attribute argument as used by the compiler
 		 */
-		public void mark(string attribute, string argument)
-		{
+		public void mark(string attribute, string argument) {
 			marked.TryGetValue(attribute, out var set);
 			if (set == null) {
 				set = new HashSet<string>();

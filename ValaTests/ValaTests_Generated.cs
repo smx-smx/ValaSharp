@@ -1,6 +1,5 @@
 using NUnit.Framework;
-namespace ValaTests
-{
+namespace ValaTests {
 	[TestFixture]
 	public class ValaCompilerTests {
 

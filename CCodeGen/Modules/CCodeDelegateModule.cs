@@ -14,10 +14,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class CCodeDelegateModule : CCodeArrayModule
-	{
+namespace CCodeGen.Modules {
+	public class CCodeDelegateModule : CCodeArrayModule {
 		public override void generate_delegate_declaration(ValaDelegate d, CCodeFile decl_space) {
 			if (add_symbol_declaration(decl_space, d, get_ccode_name(d))) {
 				return;
@@ -259,7 +257,7 @@ namespace CCodeGen.Modules
 			int min_pos;
 			while (true) {
 				min_pos = -1;
-				foreach (int pos in cparam_map.Keys){
+				foreach (int pos in cparam_map.Keys) {
 					if (pos > last_pos && (min_pos == -1 || pos < min_pos)) {
 						min_pos = pos;
 					}

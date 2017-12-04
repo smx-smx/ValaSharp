@@ -10,10 +10,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang
-{
-	public class Block : Symbol, Statement
-	{
+namespace Vala.Lang {
+	public class Block : Symbol, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -35,7 +33,7 @@ namespace Vala.Lang
 		 *
 		 * @param source_reference  reference to source code
 		 */
-		public Block(SourceReference source_reference): base(null, source_reference) {
+		public Block(SourceReference source_reference) : base(null, source_reference) {
 		}
 
 		/**

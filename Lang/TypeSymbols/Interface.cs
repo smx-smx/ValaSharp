@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class Interface : ObjectTypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class Interface : ObjectTypeSymbol {
 		private List<DataType> prerequisites = new List<DataType>();
 
 		private List<Method> methods = new List<Method>();
@@ -504,6 +502,6 @@ namespace Vala.Lang.TypeSymbols
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
 		}
+	}
 }

@@ -7,13 +7,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents a class or instance destructor.
 	 */
-	public class Destructor : Subroutine
-	{
+	public class Destructor : Subroutine {
 		/**
 		 * Specifies the generated `this` parameter for instance methods.
 		 */

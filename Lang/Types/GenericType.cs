@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * The type of a generic type parameter.
 	 */
-	public class GenericType : DataType
-	{
+	public class GenericType : DataType {
 		public GenericType(TypeParameter type_parameter) {
 			this.type_parameter = type_parameter;
 			// type parameters are always considered nullable

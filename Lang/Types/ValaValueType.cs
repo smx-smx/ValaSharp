@@ -7,10 +7,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
-	public abstract class ValaValueType : DataType
-	{
+namespace Vala.Lang.Types {
+	public abstract class ValaValueType : DataType {
 		private WeakReference<TypeSymbol> type_symbol_weak = new WeakReference<TypeSymbol>(null);
 
 		/**

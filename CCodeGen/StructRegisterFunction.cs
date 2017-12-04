@@ -7,13 +7,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen
-{
+namespace CCodeGen {
 	/**
 	 * C function to register a struct at runtime.
 	 */
-	public class StructRegisterFunction : TypeRegisterFunction
-	{
+	public class StructRegisterFunction : TypeRegisterFunction {
 		/**
 		 * Specifies the struct to be registered.
 		 */

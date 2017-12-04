@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents an access to a struct member in the C code.
 	 */
-	public class CCodeMemberAccess : CCodeExpression
-	{
+	public class CCodeMemberAccess : CCodeExpression {
 		/**
 		 * The parent of the member.
 		 */

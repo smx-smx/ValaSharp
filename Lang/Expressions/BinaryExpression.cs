@@ -14,15 +14,13 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an expression with two operands in the source code.
 	 *
 	 * Supports +, -, *, /, %, <<, >>, <, >, <=, >=, ==, !=, &, |, ^, &&, ||, ??.
 	 */
-	public class BinaryExpression : Expression
-	{
+	public class BinaryExpression : Expression {
 		/**
 		 * The binary operator.
 		 */
@@ -552,8 +550,7 @@ namespace Vala.Lang.Expressions
 		}
 	}
 
-	public enum BinaryOperator
-	{
+	public enum BinaryOperator {
 		NONE,
 		PLUS,
 		MINUS,

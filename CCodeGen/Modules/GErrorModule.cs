@@ -14,10 +14,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GErrorModule : CCodeDelegateModule
-	{
+namespace CCodeGen.Modules {
+	public class GErrorModule : CCodeDelegateModule {
 		private int current_try_id = 0;
 		private int next_try_id = 0;
 		private bool is_in_catch = false;

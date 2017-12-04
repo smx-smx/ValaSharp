@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a section that should be processed on condition.
  */
-	public class CCodeGGnucSection : CCodeFragment
-	{
+	public class CCodeGGnucSection : CCodeFragment {
 		/**
 		 * The expression
 		 */
@@ -37,13 +35,11 @@ namespace CLanguage
 		}
 	}
 
-	public enum GGnucSectionType
-	{
+	public enum GGnucSectionType {
 		IGNORE_DEPRECATIONS
 	}
 
-	public static class GGnucSectionTypeExtensions
-	{
+	public static class GGnucSectionTypeExtensions {
 		public static string ToString(this GGnucSectionType @this) {
 			switch (@this) {
 				case GGnucSectionType.IGNORE_DEPRECATIONS:

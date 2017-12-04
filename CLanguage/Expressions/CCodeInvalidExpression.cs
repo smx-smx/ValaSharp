@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents an invalid expression.
 	 */
-	public class CCodeInvalidExpression : CCodeExpression
-	{
+	public class CCodeInvalidExpression : CCodeExpression {
 		public CCodeInvalidExpression() {
 		}
 

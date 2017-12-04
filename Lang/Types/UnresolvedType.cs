@@ -7,13 +7,11 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * An unresolved reference to a data type.
 	 */
-	public class UnresolvedType : DataType
-	{
+	public class UnresolvedType : DataType {
 		/**
 		 * The unresolved reference to a type symbol.
 		 */

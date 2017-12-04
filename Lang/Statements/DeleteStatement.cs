@@ -9,13 +9,11 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a delete statement e.g. "delete a".
  */
-	public class DeleteStatement : CodeNode, Statement
-	{
+	public class DeleteStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

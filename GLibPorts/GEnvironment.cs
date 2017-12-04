@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public class GEnvironment
-	{
+namespace GLibPorts {
+	public class GEnvironment {
 		public static string[] get_system_data_dirs() {
 			return new string[] {
 				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

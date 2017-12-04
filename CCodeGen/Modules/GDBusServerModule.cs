@@ -15,10 +15,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GDBusServerModule : GDBusClientModule
-	{
+namespace CCodeGen.Modules {
+	public class GDBusServerModule : GDBusClientModule {
 		string generate_dbus_wrapper(Method m, ObjectTypeSymbol sym, bool ready = false) {
 			string wrapper_name = "_dbus_%s".printf(get_ccode_name(m));
 			bool need_goto_label = false;
@@ -569,8 +567,7 @@ namespace CCodeGen.Modules
 			if (get_dbus_signature(prop) != null) {
 				ccode.add_assignment(target, new CCodeIdentifier("_value"));
 				ccode.add_expression(ccall);
-			} else
-			{
+			} else {
 				bool may_fail;
 				var expr = deserialize_expression(prop.property_type, new CCodeIdentifier("_value"), target, out may_fail);
 				ccode.add_assignment(target, expr);

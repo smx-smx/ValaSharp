@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a local variable declaration in the C code.
 	 */
-	public class CCodeDeclaration : CCodeStatement
-	{
+	public class CCodeDeclaration : CCodeStatement {
 		/**
 		 * The type of the local variable.
 		 */

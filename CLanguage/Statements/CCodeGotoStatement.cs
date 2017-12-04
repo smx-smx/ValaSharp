@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 	/**
 	 * Represents a goto statement in the C code.
 	 */
-	public class CCodeGotoStatement : CCodeStatement
-	{
+	public class CCodeGotoStatement : CCodeStatement {
 		/**
 		 * The name of the target label.
 		 */

@@ -15,10 +15,8 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen.Modules
-{
-	public class GTypeModule : GErrorModule
-	{
+namespace CCodeGen.Modules {
+	public class GTypeModule : GErrorModule {
 		public override CCodeParameter generate_parameter(Parameter param, CCodeFile decl_space, Dictionary<int, CCodeParameter> cparam_map, Dictionary<int, CCodeExpression> carg_map) {
 			if (!(param.variable_type is ObjectType)) {
 				return base.generate_parameter(param, decl_space, cparam_map, carg_map);

@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
 	 * Represents a string literal in the source code.
 	 */
-	public class StringLiteral : Literal
-	{
+	public class StringLiteral : Literal {
 		/**
 		 * The literal value.
 		 */

@@ -7,8 +7,7 @@ using System.Reflection;
 using NUnit.Framework;
 using ValaCompilerLib;
 
-namespace ValaTests
-{
+namespace ValaTests {
 	public class ValaTestRunner {
 		private string baseDir;
 		private string projDir;
@@ -35,7 +34,7 @@ namespace ValaTests
 				debug = false,
 				verbose_mode = true,
 				sources = sources,
-				vapi_directories = new List<string>{ vapiDir },
+				vapi_directories = new List<string> { vapiDir },
 				output = outExePath,
 				packages = new List<string> {
 					"gio-2.0"
@@ -66,8 +65,7 @@ namespace ValaTests
 			}
 			if (File.Exists(outExePath) && new FileInfo(outExePath).Length > 0) {
 
-				ProcessStartInfo testProc = new ProcessStartInfo
-				{
+				ProcessStartInfo testProc = new ProcessStartInfo {
 					FileName = outExePath,
 					CreateNoWindow = true,
 					UseShellExecute = true

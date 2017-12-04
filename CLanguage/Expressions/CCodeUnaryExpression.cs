@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents an expression with one operand in the C code.
 	 */
-	public class CCodeUnaryExpression : CCodeExpression
-	{
+	public class CCodeUnaryExpression : CCodeExpression {
 		/**
 		 * The unary operator.
 		 */
@@ -68,8 +66,7 @@ namespace CLanguage.Expressions
 		}
 	}
 
-	public enum CCodeUnaryOperator
-	{
+	public enum CCodeUnaryOperator {
 		PLUS,
 		MINUS,
 		LOGICAL_NEGATION,

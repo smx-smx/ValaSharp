@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Types
-{
-	public class VoidType : DataType
-	{
+namespace Vala.Lang.Types {
+	public class VoidType : DataType {
 		public VoidType(SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 		}

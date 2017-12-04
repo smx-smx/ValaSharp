@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a variable or function pointer declarator in the C code.
  */
-	public abstract class CCodeDeclarator : CCodeNode
-	{
+	public abstract class CCodeDeclarator : CCodeNode {
 		/**
 		 * Writes initialization statements for this declarator with the
 		 * specified C code writer if necessary.

@@ -7,18 +7,15 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents a late bound property.
 	 */
-	public class DynamicProperty : Property
-	{
+	public class DynamicProperty : Property {
 		public DataType dynamic_type { get; set; }
 
 		public DynamicProperty(DataType dynamic_type, string name, SourceReference source_reference = null, Comment comment = null)
-			: base(name, null, null, null, source_reference, comment)
-		{
+			: base(name, null, null, null, source_reference, comment) {
 			this.dynamic_type = dynamic_type;
 		}
 

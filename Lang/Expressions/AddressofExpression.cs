@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents an address-of expression in the source code, e.g. `&foo`.
  */
-	public class AddressofExpression : Expression
-	{
+	public class AddressofExpression : Expression {
 		/**
 		 * The variable whose address is to be computed.
 		 */

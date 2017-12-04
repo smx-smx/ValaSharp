@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * The type of a method referencea.
 	 */
-	public class MethodType : DataType
-	{
+	public class MethodType : DataType {
 		public Method method_symbol { get; set; }
 
 		public MethodType(Method method_symbol) {

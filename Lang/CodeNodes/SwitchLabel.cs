@@ -8,13 +8,11 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 
-namespace Vala.Lang.CodeNodes
-{
+namespace Vala.Lang.CodeNodes {
 	/**
  * Represents a switch label in the source code.
  */
-	public class SwitchLabel : CodeNode
-	{
+	public class SwitchLabel : CodeNode {
 		/**
 		 * Specifies the label expression.
 		 */

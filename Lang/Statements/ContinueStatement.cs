@@ -7,13 +7,11 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a continue statement in the source code.
  */
-	public class ContinueStatement : CodeNode, Statement
-	{
+	public class ContinueStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

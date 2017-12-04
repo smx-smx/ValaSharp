@@ -8,13 +8,11 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a do iteration statement in the source code.
  */
-	public class DoStatement : CodeNode, Statement
-	{
+	public class DoStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
@@ -56,7 +54,7 @@ namespace Vala.Lang.Statements
 		 * @param source_reference  reference to source code
 		 * @return                  newly created do statement
 		 */
-		public DoStatement(Block body, Expression condition, SourceReference source_reference = null){
+		public DoStatement(Block body, Expression condition, SourceReference source_reference = null) {
 			this.condition = condition;
 			this.source_reference = source_reference;
 			this.body = body;

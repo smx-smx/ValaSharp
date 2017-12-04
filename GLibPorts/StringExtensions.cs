@@ -6,10 +6,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GLibPorts.Native;
 
-namespace Vala
-{
-	public static class StringExtensions
-	{
+namespace Vala {
+	public static class StringExtensions {
 		private static Dictionary<string, string> escapeMapping = new Dictionary<string, string>()
 		{
 			{"\"", @"\" + '"'},
@@ -26,8 +24,7 @@ namespace Vala
 
 		private static Regex escapeRegex = new Regex(string.Join("|", escapeMapping.Keys.ToArray()));
 
-		private static string EscapeMatchEval(Match m)
-		{
+		private static string EscapeMatchEval(Match m) {
 			if (escapeMapping.ContainsKey(m.Value)) {
 				return escapeMapping[m.Value];
 			}
@@ -75,9 +72,8 @@ namespace Vala
 			StringBuilder sb = new StringBuilder();
 			foreach (char ch in r) {
 				if (ch < 0x20 || ch >= 0x7F) {
-					var bytes = Encoding.UTF8.GetBytes(new char[]{ch});
-					foreach(var b in bytes)
-					{
+					var bytes = Encoding.UTF8.GetBytes(new char[] { ch });
+					foreach (var b in bytes) {
 						sb.AppendFormat(@"\" + Convert.ToString(b, 8));
 					}
 				} else {

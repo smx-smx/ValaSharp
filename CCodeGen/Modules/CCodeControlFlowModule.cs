@@ -11,10 +11,8 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Statements;
 using Vala.Lang.Types;
 
-namespace CCodeGen.Modules
-{
-	public abstract class CCodeControlFlowModule : CCodeMethodModule
-	{
+namespace CCodeGen.Modules {
+	public abstract class CCodeControlFlowModule : CCodeMethodModule {
 		public override void visit_if_statement(IfStatement stmt) {
 			ccode.open_if(get_cvalue(stmt.condition));
 

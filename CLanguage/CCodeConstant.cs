@@ -7,13 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GLibPorts;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * A constant C expression.
 	 */
-	public class CCodeConstant : CCodeExpression
-	{
+	public class CCodeConstant : CCodeExpression {
 		/**
 		 * The name of this constant.
 		 */
@@ -56,7 +54,7 @@ namespace CLanguage
 					builder.Append(_name[p]);
 					builder.Append(_name[p + 1]);
 					p += 2;
-					switch (_name[p -1]) {
+					switch (_name[p - 1]) {
 						case 'x':
 							// hexadecimal character
 							while (p < end && GChar.IsXDigit(_name[p])) {

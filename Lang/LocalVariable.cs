@@ -11,10 +11,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
-	public class LocalVariable : Variable
-	{
+namespace Vala.Lang {
+	public class LocalVariable : Variable {
 		public bool is_result { get; set; }
 
 		public bool captured { get; set; }

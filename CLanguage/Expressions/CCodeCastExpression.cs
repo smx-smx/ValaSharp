@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents a type cast in the generated C code.
 	 */
-	public class CCodeCastExpression : CCodeExpression
-	{
+	public class CCodeCastExpression : CCodeExpression {
 		/**
 		 * The expression to be cast.
 		 */

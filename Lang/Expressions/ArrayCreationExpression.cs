@@ -10,13 +10,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an array creation expression e.g. {{{ new int[] {1,2,3} }}}.
 	 */
-	public class ArrayCreationExpression : Expression
-	{
+	public class ArrayCreationExpression : Expression {
 		/**
 		 * The type of the elements of the array.
 		 */

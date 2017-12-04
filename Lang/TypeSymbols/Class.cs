@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class Class : ObjectTypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class Class : ObjectTypeSymbol {
 		/**
 	 * Specifies the base class.
 	 */
@@ -860,6 +858,6 @@ namespace Vala.Lang.TypeSymbols
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
 		}
+	}
 }

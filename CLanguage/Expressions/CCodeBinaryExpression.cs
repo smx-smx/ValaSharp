@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
 	 * Represents an expression with two operands in C code.
 	 */
-	public class CCodeBinaryExpression : CCodeExpression
-	{
+	public class CCodeBinaryExpression : CCodeExpression {
 		/**
 		 * The binary operator.
 		 */
@@ -68,8 +66,7 @@ namespace CLanguage.Expressions
 		}
 	}
 
-	public enum CCodeBinaryOperator
-	{
+	public enum CCodeBinaryOperator {
 		PLUS,
 		MINUS,
 		MUL,

@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts
-{
-	public interface ITwoWayEnumerator<T> : IEnumerator<T>
-	{
+namespace GLibPorts {
+	public interface ITwoWayEnumerator<T> : IEnumerator<T> {
 		bool MovePrevious();
 	}
 
-	public class TwoWayEnumerator<T> : ITwoWayEnumerator<T>
-	{
+	public class TwoWayEnumerator<T> : ITwoWayEnumerator<T> {
 		private IEnumerator<T> _enumerator;
 		private List<T> _buffer;
 		private int _index;

@@ -9,10 +9,8 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Symbols
-{
-	public class Constant : Symbol, Lockable
-	{
+namespace Vala.Lang.Symbols {
+	public class Constant : Symbol, Lockable {
 		/**
 	 * The data type of this constant.
 	 */
@@ -20,7 +18,7 @@ namespace Vala.Lang.Symbols
 			get { return _data_type; }
 			set {
 				_data_type = value;
-				_data_type.parent_node = this; 
+				_data_type.parent_node = this;
 			}
 		}
 
@@ -53,8 +51,7 @@ namespace Vala.Lang.Symbols
 		 * @return                 newly created constant
 		 */
 		public Constant(string name, DataType type_reference, Expression value, SourceReference source_reference, Comment comment = null)
-			: base(name, source_reference, comment)
-		{
+			: base(name, source_reference, comment) {
 			if (type_reference != null) {
 				this.type_reference = type_reference;
 			}
@@ -175,19 +172,19 @@ namespace Vala.Lang.Symbols
 			active = true;
 
 			return !error;
-			}
+		}
 
-			bool check_const_type(DataType type, CodeContext context) {
-				if (type is ValaValueType) {
-					return true;
-				} else if (type is ArrayType) {
-					var array_type = type as ArrayType;
-					return check_const_type(array_type.element_type, context);
-				} else if (type.data_type == context.analyzer.string_type.data_type) {
-					return true;
-				} else {
-					return false;
-				}
+		bool check_const_type(DataType type, CodeContext context) {
+			if (type is ValaValueType) {
+				return true;
+			} else if (type is ArrayType) {
+				var array_type = type as ArrayType;
+				return check_const_type(array_type.element_type, context);
+			} else if (type.data_type == context.analyzer.string_type.data_type) {
+				return true;
+			} else {
+				return false;
 			}
 		}
+	}
 }

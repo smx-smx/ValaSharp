@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
 	 * A boolean type.
 	 */
-	public class BooleanType : ValaValueType
-	{
+	public class BooleanType : ValaValueType {
 		public BooleanType(Struct type_symbol) : base(type_symbol) { }
 
 		public override DataType copy() {

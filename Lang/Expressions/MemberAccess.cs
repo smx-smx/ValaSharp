@@ -12,10 +12,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Expressions
-{
-	public class MemberAccess : Expression
-	{
+namespace Vala.Lang.Expressions {
+	public class MemberAccess : Expression {
 		/**
 		 * The parent of the member.
 		 */

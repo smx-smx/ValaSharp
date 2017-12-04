@@ -16,13 +16,11 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
-namespace CCodeGen.Modules
-{
+namespace CCodeGen.Modules {
 	/**
 	 * The link between a method and generated code.
 	 */
-	public abstract class CCodeMethodModule : CCodeStructModule
-	{
+	public abstract class CCodeMethodModule : CCodeStructModule {
 
 		private bool ellipses_to_valist = false;
 
@@ -931,7 +929,7 @@ namespace CCodeGen.Modules
 			} else if (m.parent_symbol is Class && m is CreationMethod) {
 				var cl = (Class)m.parent_symbol;
 				if (!cl.is_compact && vcall == null && (direction & 1) == 1) {
-					cparam_map[get_param_pos(get_ccode_instance_pos(m))] =  new CCodeParameter("object_type", "GType");
+					cparam_map[get_param_pos(get_ccode_instance_pos(m))] = new CCodeParameter("object_type", "GType");
 				}
 			} else if ((m.binding == MemberBinding.INSTANCE || (m.parent_symbol is Struct && m is CreationMethod))
 				&& (direction != 2 || get_ccode_finish_instance(m))) {

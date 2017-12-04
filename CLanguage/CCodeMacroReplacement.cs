@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
  * Represents a preprocessor macro replacement definition in the C code.
  */
-	public class CCodeMacroReplacement : CCodeNode
-	{
+	public class CCodeMacroReplacement : CCodeNode {
 		/**
 		 * The name of this macro.
 		 */

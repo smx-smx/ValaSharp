@@ -5,10 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Globalization;
 
-namespace ValaTests
-{
-	public static class ConsoleHelper
-	{
+namespace ValaTests {
+	public static class ConsoleHelper {
 		private const int STD_INPUT_HANDLE = -10;
 		private const int STD_OUTPUT_HANDLE = -11;
 		private const int STD_ERROR_HANDLE = -12;
@@ -16,7 +14,7 @@ namespace ValaTests
 		private static readonly int MY_CODE_PAGE = CultureInfo.CurrentCulture.TextInfo.ANSICodePage;
 
 
-		public static void CreateConsole(){
+		public static void CreateConsole() {
 #if !UNIX
 			AllocConsole();
 			SetConsoleCtrlHandler(null, true);

@@ -8,13 +8,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents a conditional expression in the source code.
 	 */
-	public class ConditionalExpression : Expression
-	{
+	public class ConditionalExpression : Expression {
 		/**
 		 * The condition.
 		 */

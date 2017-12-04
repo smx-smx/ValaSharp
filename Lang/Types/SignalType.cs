@@ -8,13 +8,11 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang.Types
-{
+namespace Vala.Lang.Types {
 	/**
  * The type of a signal referencea.
  */
-	public class SignalType : DataType
-	{
+	public class SignalType : DataType {
 		public Signal signal_symbol { get; set; }
 
 		Method connect_method;

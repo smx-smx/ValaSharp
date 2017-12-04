@@ -8,13 +8,11 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents an if selection statement in the source code.
 	 */
-	public class IfStatement : CodeNode, Statement
-	{
+	public class IfStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

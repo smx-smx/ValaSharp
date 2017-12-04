@@ -8,13 +8,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.CodeNodes
-{
+namespace Vala.Lang.CodeNodes {
 	/**
 	 * Represents a catch clause in a try statement in the source code.
 	 */
-	public class CatchClause : CodeNode
-	{
+	public class CatchClause : CodeNode {
 		/**
 		 * Specifies the error type.
 		 */

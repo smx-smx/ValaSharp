@@ -13,10 +13,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GDBusModule : GVariantModule
-	{
+namespace CCodeGen.Modules {
+	public class GDBusModule : GVariantModule {
 		public static string get_dbus_name(TypeSymbol symbol) {
 			return symbol.get_attribute_string("DBus", "name");
 		}

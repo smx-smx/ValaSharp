@@ -9,10 +9,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.TypeSymbols
-{
-	public class ErrorDomain : TypeSymbol
-	{
+namespace Vala.Lang.TypeSymbols {
+	public class ErrorDomain : TypeSymbol {
 		private List<ErrorCode> codes = new List<ErrorCode>();
 		private List<Method> methods = new List<Method>();
 
@@ -109,6 +107,6 @@ namespace Vala.Lang.TypeSymbols
 			}
 
 			return !error;
-			}
 		}
+	}
 }

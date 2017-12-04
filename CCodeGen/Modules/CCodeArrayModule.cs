@@ -11,10 +11,8 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class CCodeArrayModule : CCodeMethodCallModule
-	{
+namespace CCodeGen.Modules {
+	public class CCodeArrayModule : CCodeMethodCallModule {
 		int next_array_dup_id = 0;
 		int next_array_add_id = 0;
 

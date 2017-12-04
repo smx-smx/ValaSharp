@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Statements
-{
+namespace CLanguage.Statements {
 	/**
 	 * Represents a case block in a switch statement in C code.
 	 */
-	public class CCodeCaseStatement : CCodeStatement
-	{
+	public class CCodeCaseStatement : CCodeStatement {
 		/**
 		 * The case expression.
 		 */

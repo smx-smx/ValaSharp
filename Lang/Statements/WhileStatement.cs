@@ -8,13 +8,11 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
 	 * Represents a while iteration statement in the source code.
 	 */
-	public class WhileStatement : CodeNode, Statement
-	{
+	public class WhileStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

@@ -10,13 +10,11 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Statements
-{
+namespace Vala.Lang.Statements {
 	/**
  * Represents a switch selection statement in the source code.
  */
-	public class SwitchStatement : CodeNode, Statement
-	{
+	public class SwitchStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}

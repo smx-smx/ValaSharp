@@ -10,10 +10,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
-	public class Property : Symbol, Lockable
-	{
+namespace Vala.Lang {
+	public class Property : Symbol, Lockable {
 		/**
 	 * The property type.
 	 */
@@ -208,8 +206,7 @@ namespace Vala.Lang
 		public Property(
 			string name, DataType property_type, PropertyAccessor get_accessor,
 			PropertyAccessor set_accessor, SourceReference source_reference = null, Comment comment = null
-		) : base(name, source_reference, comment)
-		{
+		) : base(name, source_reference, comment) {
 			this.property_type = property_type;
 			this.get_accessor = get_accessor;
 			this.set_accessor = set_accessor;
@@ -487,6 +484,6 @@ namespace Vala.Lang
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
 		}
 	}
+}

@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.CodeNodes
-{
-	public class ValaAttribute : CodeNode
-	{
+namespace Vala.Lang.CodeNodes {
+	public class ValaAttribute : CodeNode {
 		/**
 	 * The name of the attribute type.
 	 */

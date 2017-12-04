@@ -8,13 +8,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang
-{
+namespace Vala.Lang {
 	/**
 	 * Represents a class or instance constructor.
 	 */
-	public class Constructor : Subroutine
-	{
+	public class Constructor : Subroutine {
 		/**
 		 * Specifies the generated `this` parameter for instance methods.
 		 */

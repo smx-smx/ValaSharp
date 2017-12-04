@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage
-{
+namespace CLanguage {
 	/**
 	 * Represents a function call in the C code.
 	 */
-	public class CCodeFunctionCall : CCodeExpression
-	{
+	public class CCodeFunctionCall : CCodeExpression {
 		/**
 		 * The function to be called.
 		 */

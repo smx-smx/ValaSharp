@@ -14,12 +14,9 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GDBusClientModule : GDBusModule
-	{
-		enum CallType
-		{
+namespace CCodeGen.Modules {
+	public class GDBusClientModule : GDBusModule {
+		enum CallType {
 			SYNC,
 			ASYNC,
 			FINISH,
@@ -502,8 +499,7 @@ namespace CCodeGen.Modules
 			return wrapper_name;
 		}
 
-		private void read_expression(DataType type, CCodeIdentifier iter_expr, CCodeIdentifier target_expr, Parameter param)
-		{
+		private void read_expression(DataType type, CCodeIdentifier iter_expr, CCodeIdentifier target_expr, Parameter param) {
 			bool may_fail;
 			read_expression(type, iter_expr, target_expr, param, out may_fail);
 		}

@@ -8,13 +8,11 @@ using Vala.Lang.Code;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Literals
-{
+namespace Vala.Lang.Literals {
 	/**
  * Represents a regular expression literal in the source code.
  */
-	public class RegexLiteral : Literal
-	{
+	public class RegexLiteral : Literal {
 		/**
 		 * The literal value.
 		 */

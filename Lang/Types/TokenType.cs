@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vala.Lang.Types
-{
-	public enum TokenType
-	{
+namespace Vala.Lang.Types {
+	public enum TokenType {
 		NONE,
 		ABSTRACT,
 		AS,
@@ -140,8 +138,7 @@ namespace Vala.Lang.Types
 		YIELD
 	}
 
-	public static class TokenTypeExtensions
-	{
+	public static class TokenTypeExtensions {
 		public static string ToString(this TokenType @this) {
 			switch (@this) {
 				case TokenType.ABSTRACT: return "`abstract'";

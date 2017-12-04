@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Symbols
-{
-	public class TypeParameter : Symbol
-	{
+namespace Vala.Lang.Symbols {
+	public class TypeParameter : Symbol {
 		/**
 		* Creates a new generic type parameter.
 		*

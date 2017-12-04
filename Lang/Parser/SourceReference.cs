@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Vala.Lang.CodeNodes;
 
-namespace Vala.Lang.Parser
-{
+namespace Vala.Lang.Parser {
 	/**
 	 * Represents a reference to a location in a source file.
 	 */
-	public class SourceReference : IDisposable
-	{
+	public class SourceReference : IDisposable {
 		private WeakReference<SourceFile> file_weak = new WeakReference<SourceFile>(null);
 
 		/**

@@ -15,15 +15,13 @@ using Vala.Lang.Types;
 
 using static GLibPorts.GLib;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
 	 * Represents an assignment expression in the source code.
 	 *
 	 * Supports =, |=, &=, ^=, +=, -=, *=, /=, %=, <<=, >>=.
 	 */
-	public class Assignment : Expression
-	{
+	public class Assignment : Expression {
 		/**
 		 * Left hand side of the assignment.
 		 */
@@ -570,8 +568,7 @@ namespace Vala.Lang.Expressions
 		}
 	}
 
-	public enum AssignmentOperator
-	{
+	public enum AssignmentOperator {
 		NONE,
 		SIMPLE,
 		BITWISE_OR,

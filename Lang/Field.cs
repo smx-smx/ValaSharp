@@ -10,10 +10,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace Vala.Lang
-{
-	public class Field : Variable, Lockable
-	{
+namespace Vala.Lang {
+	public class Field : Variable, Lockable {
 		/**
 	 * Specifies whether this field may only be accessed with an instance of
 	 * the contained type.
@@ -38,8 +36,7 @@ namespace Vala.Lang
 		 * @return                  newly created field
 		 */
 		public Field(string name, DataType variable_type, Expression initializer, SourceReference source_reference = null, Comment comment = null)
-			: base(variable_type, name, initializer, source_reference, comment)
-		{
+			: base(variable_type, name, initializer, source_reference, comment) {
 		}
 
 		public override void accept(CodeVisitor visitor) {
@@ -183,6 +180,6 @@ namespace Vala.Lang
 			context.analyzer.current_symbol = old_symbol;
 
 			return !error;
-			}
 		}
+	}
 }

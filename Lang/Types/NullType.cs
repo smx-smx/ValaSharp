@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
-namespace Vala.Lang.Types
-{
-	public class NullType : ReferenceType
-	{
+namespace Vala.Lang.Types {
+	public class NullType : ReferenceType {
 		public NullType(SourceReference source_reference) {
 			this.nullable = true;
 			this.source_reference = source_reference;

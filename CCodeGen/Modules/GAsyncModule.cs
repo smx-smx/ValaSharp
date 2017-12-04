@@ -15,10 +15,8 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
-namespace CCodeGen.Modules
-{
-	public class GAsyncModule : GtkModule
-	{
+namespace CCodeGen.Modules {
+	public class GAsyncModule : GtkModule {
 		CCodeStruct generate_data_struct(Method m) {
 			string dataname = Symbol.lower_case_to_camel_case(get_ccode_name(m)) + "Data";
 			var data = new CCodeStruct("_" + dataname);
@@ -837,7 +835,7 @@ namespace CCodeGen.Modules
 			complete_async();
 		}
 
-		public override void generate_cparameters(Method m, CCodeFile decl_space, Dictionary<int, CCodeParameter> cparam_map, CCodeFunction func, CCodeFunctionDeclarator vdeclarator = null, Dictionary<int, CCodeExpression>carg_map = null, CCodeFunctionCall vcall = null, int direction = 3) {
+		public override void generate_cparameters(Method m, CCodeFile decl_space, Dictionary<int, CCodeParameter> cparam_map, CCodeFunction func, CCodeFunctionDeclarator vdeclarator = null, Dictionary<int, CCodeExpression> carg_map = null, CCodeFunctionCall vcall = null, int direction = 3) {
 			if (m.coroutine) {
 				decl_space.add_include("gio/gio.h");
 

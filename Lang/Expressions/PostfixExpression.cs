@@ -9,13 +9,11 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
-namespace Vala.Lang.Expressions
-{
+namespace Vala.Lang.Expressions {
 	/**
  * Represents a postfix increment or decrement expression.
  */
-	public class PostfixExpression : Expression
-	{
+	public class PostfixExpression : Expression {
 		/**
 		 * The operand, must be a variable or a property.
 		 */

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLanguage.Expressions
-{
+namespace CLanguage.Expressions {
 	/**
  * Represents a conditional expression in C code.
  */
-	public class CCodeConditionalExpression : CCodeExpression
-	{
+	public class CCodeConditionalExpression : CCodeExpression {
 		/**
 		 * The condition.
 		 */
