@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -299,6 +300,9 @@ namespace Vala.Lang {
 			if (do_report_source && source != null) {
 				report_source(source);
 			}
+
+			if (Debugger.IsAttached)
+				Debug.WriteLine($"[{type_color_start}] {message}");
 		}
 
 		/**
