@@ -16,7 +16,7 @@ namespace ValaTests {
 		public ValaTestRunner() {
 			baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			projDir = Path.GetFullPath(baseDir + "/../../");
-			vapiDir = projDir + "/vapi";
+			vapiDir = Path.GetFullPath(projDir + "../vapi");
 		}
 
 		public int RunValaTest(IList<string> sources) {
