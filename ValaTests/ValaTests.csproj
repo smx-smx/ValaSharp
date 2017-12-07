@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="CommandLineParsing.cs" />
     <Compile Include="ValaTestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValaTests_Generated.cs" />
@@ -346,6 +347,10 @@
     <None Include="Structs\struct_only.vala" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GLibPorts\GLib.csproj">
+      <Project>{98F2E413-19EA-4254-AB56-683D9901E5D7}</Project>
+      <Name>GLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ValaCompilerLib\ValaCompilerLib.csproj">
       <Project>{25FFC845-7135-42B6-BFA2-89E934B7ACB1}</Project>
       <Name>ValaCompilerLib</Name>

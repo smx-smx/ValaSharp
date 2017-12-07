@@ -1,5 +1,4 @@
-﻿using CommandLine;
-using CommandLine.Text;
+﻿using GLibPorts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,402 +8,394 @@ using Vala.Lang;
 
 namespace ValaCompilerLib {
 	public class CompilerOptions {
-		[Option("path",
-			Required = false,
-			HelpText = "Look for required binaries in DIRECTORY",
-			MetaValue = "DIRECTORY..."
-		)]
-		public string path { get; set; }
+		public string path;
 
-		[OptionList("vapidir",
-			Required = false,
-			HelpText = "Look for package bindings in DIRECTORY",
-			MetaValue = "DIRECTORY...",
-			DefaultValue = null
-		)]
-		public IList<string> vapi_directories { get; set; }
+		public string basedir;
+		public string directory;
+		public bool version;
+		public bool api_version;
 
-		[OptionList("girdir",
-			Required = false,
-			HelpText = "Look for .gir files in DIRECTORY",
-			MetaValue = "DIRECTORY...",
-			DefaultValue = null
-		)]
-		public IList<string> gir_directories { get; set; }
+		public IList<string> sources;
+		public IList<string> vapi_directories;
+		public IList<string> gir_directories;
+		public IList<string> metadata_directories;
+		public string vapi_filename;
+		public string library;
+		public string shared_library;
+		public string gir;
 
-		[OptionList("metadatadir",
-			Required = false,
-			HelpText = "Look for GIR .metadata files in DIRECTORY",
-			MetaValue = "DIRECTORY...",
-			DefaultValue = null
-		)]
-		public IList<string> metadata_directories { get; set; }
+		public IList<string> packages;
 
-		[OptionList("pkg",
-			Required = false,
-			HelpText = "Include binding for PACKAGE",
-			MetaValue = "PACKAGE...",
-			DefaultValue = null
-		)]
-		public IList<string> packages { get; set; }
+		public IList<string> fast_vapis;
+		public string target_glib;
 
-		[Option("vapi",
-			HelpText = "Output VAPI file name",
-			MetaValue = "FILE"
-		)]
-		public string vapi_filename { get; set; }
+		public IList<string> gresources;
+		public IList<string> gresources_directories;
 
-		[Option("library",
-			Required = false,
-			HelpText = "Library name",
-			MetaValue = "NAME"
-		)]
-		public string library { get; set; }
+		public bool ccode_only;
+		public string header_filename;
+		public bool use_header;
+		public string internal_header_filename;
+		public string internal_vapi_filename;
+		public string fast_vapi_filename;
+		public bool vapi_comments;
+		public string symbols_filename;
+		public string includedir;
+		public bool compile_only;
+		public string output;
 
-		[Option("shared-library",
-			Required = false,
-			HelpText = "Shared library name used in generated gir",
-			MetaValue = "NAME"
-		)]
-		public string shared_library { get; set; }
+		public bool valac_debug;
+		public bool debug;
 
-		[Option("gir",
-			Required = false,
-			HelpText = "GObject-Introspection repository file name",
-			MetaValue = "NAME-VERSION.gir"
-		)]
-		public string gir { get; set; }
+		public bool thread;
+		public bool mem_profiler;
+		public bool disable_assert;
+		public bool enable_checking;
+		public bool deprecated;
+		public bool hide_internal;
+		public bool experimental;
+		public bool experimental_non_null;
+		public bool gobject_tracing;
+		public bool disable_since_check;
+		public bool disable_warnings;
+		public string cc_command;
 
-		[Option('b', "basedir",
-			Required = false,
-			HelpText = "Base source directory",
-			MetaValue = "DIRECTORY"
-		)]
-		public string basedir { get; set; }
+		public IList<string> cc_options;
+		public string pkg_config_command;
+		public string dump_tree;
+		public bool save_temps;
 
-		[Option('d', "directory",
-			HelpText = "Change output directory from current working directory",
-			MetaValue = "DIRECTORY"
-		)]
-		public string directory { get; set; }
+		public IList<string> defines;
+		public bool quiet_mode;
+		public bool verbose_mode;
+		public string profile;
+		public bool nostdpkg;
+		public bool enable_version_header;
+		public bool disable_version_header;
+		public bool fatal_warnings;
+		public bool disable_colored_output;
+		public Report.Colored colored_output = Report.Colored.AUTO;
 
-		[Option("version",
-			Required = false,
-			HelpText = "Display version number"
-		)]
-		public bool version { get; set; }
+		public string dependencies;
+		public string entry_point;
+		public bool run_output;
 
-		[Option("api-version",
-			Required = false,
-			HelpText = "Display API version number"
-		)]
-		public bool api_version { get; set; }
-
-		[Option('C', "ccode",
-			Required = false,
-			HelpText = "Output C code"
-		)]
-		public bool ccode_only { get; set; }
-
-		[Option('H', "header",
-			Required = false,
-			HelpText = "Output C header file",
-			MetaValue = "FILE"
-		)]
-		public string header_filename { get; set; }
-
-		[Option("use-header",
-			Required = false,
-			HelpText = "Use C header file"
-		)]
-		public bool use_header { get; set; }
-
-		[Option("includedir",
-			Required = false,
-			HelpText = "Directory used to include the C header file",
-			MetaValue = "DIRECTORY"
-		)]
-		public string includedir { get; set; }
-
-		[Option('h', "internal-header",
-			Required = false,
-			HelpText = "Output internal C header file",
-			MetaValue = "FILE"
-		)]
-		public string internal_header_filename { get; set; }
-
-		[Option("internal-vapi",
-			Required = false,
-			HelpText = "Output vapi with internal api",
-			MetaValue = "FILE"
-		)]
-		public string internal_vapi_filename { get; set; }
-
-		[Option("fast-vapi",
-			Required = false,
-			HelpText = "Output vapi without performing symbol resolution"
-		)]
-		public string fast_vapi_filename { get; set; }
-
-		[OptionList("use-fast-vapi",
-			Required = false,
-			HelpText = "Use --fast-vapi output during this compile",
-			DefaultValue = null
-		)]
-		public IList<string> fast_vapis { get; set; }
-
-		[Option("vapi-comments",
-			Required = false,
-			HelpText = "Include comments in generated vapi"
-		)]
-		public bool vapi_comments { get; set; }
-
-		[Option("deps",
-			Required = false,
-			HelpText = "Write make-style dependency information to this file"
-		)]
-		public string dependencies { get; set; }
-
-		[Option("symbols",
-			Required = false,
-			HelpText = "Output symbols file",
-			MetaValue = "FILE"
-		)]
-		public string symbols_filename { get; set; }
-
-		[Option('c', "compile",
-			Required = false,
-			HelpText = "Compile but do not link",
-			DefaultValue = false
-		)]
-		public bool compile_only { get; set; }
-
-		[Option('o', "output",
-			Required = false,
-			HelpText = "Place output in file FILE",
-			MetaValue = "FILE",
-			DefaultValue = null
-		)]
-		public string output { get; set; }
-
-		[Option('g', "debug",
-			Required = false,
-			HelpText = "Produce debug information"
-		)]
-		public bool debug { get; set; }
-
-		[Option("threads",
-			Required = false,
-			HelpText = "Enable multithreading support (DEPRECATED AND IGNORED)"
-		)]
-		public bool thread { get; set; }
-
-		[Option("enable-mem-profiler",
-			Required = false,
-			HelpText = "Enable GLib memory profiler"
-		)]
-		public bool mem_profiler { get; set; }
-
-		[Option('D', "define",
-			Required = false,
-			HelpText = "Define SYMBOL",
-			MetaValue = "SYMBOL...",
-			DefaultValue = null
-		)]
-		public IList<string> defines { get; set; }
-
-		[Option("main",
-			Required = false,
-			HelpText = "Use SYMBOL as entry point",
-			MetaValue = "SYMBOL..."
-		)]
-		public string entry_point { get; set; }
-
-		[Option("nostdpkg",
-			Required = false,
-			HelpText = "Do not include standard packages"
-		)]
-		public bool nostdpkg { get; set; }
-
-		[Option("disable-assert",
-			Required = false,
-			HelpText = "Disable assertions"
-		)]
-		public bool disable_assert { get; set; }
-
-		[Option("enable-checking",
-			Required = false,
-			HelpText = "Enable additional run-time checks"
-		)]
-		public bool enable_checking { get; set; }
-
-		[Option("enable-deprecated",
-			Required = false,
-			HelpText = "Enable deprecated features"
-		)]
-		public bool deprecated { get; set; }
-
-		[Option("hide-internal",
-			Required = false,
-			HelpText = "Hide symbols marked as internal"
-		)]
-		public bool hide_internal { get; set; }
-
-		[Option("enable-experimental",
-			Required = false,
-			HelpText = "Enable experimental features"
-		)]
-		public bool experimental { get; set; }
-
-		[Option("disable-warnings",
-			Required = false,
-			HelpText = "Disable warnings"
-		)]
-		public bool disable_warnings { get; set; }
-
-		[Option("fatal-warnings",
-			Required = false,
-			HelpText = "Treat warnings as fatal"
-		)]
-		public bool fatal_warnings { get; set; }
-
-		[Option("disable-since-check",
-			Required = false,
-			HelpText = "Do not check whether used symbols exist in local packages"
-		)]
-		public bool disable_since_check { get; set; }
-
-		[Option("enable-experimental-non-null",
-			Required = false,
-			HelpText = "Enable experimental enhancements for non-null types"
-		)]
-		public bool experimental_non_null { get; set; }
-
-		[Option("enable-gobject-tracing",
-			Required = false,
-			HelpText = "Enable GObject creation tracing"
-		)]
-		public bool gobject_tracing { get; set; }
-
-		[Option("cc",
-			Required = false,
-			HelpText = "Use COMMAND as C compiler command",
-			MetaValue = "COMMAND"
-		)]
-		public string cc_command { get; set; }
-
-		[OptionList('X', "Xcc",
-			Required = false,
-			HelpText = "Pass OPTION to the C compiler",
-			MetaValue = "OPTION...",
-			DefaultValue = null
-		)]
-		public IList<string> cc_options { get; set; }
-
-		[Option("pkg-config",
-			Required = false,
-			HelpText = "Use COMMAND as pkg-config command",
-			MetaValue = "COMMAND"
-		)]
-		public string pkg_config_command { get; set; }
-
-		[Option("dump-tree",
-			Required = false,
-			HelpText = "Write code tree to FILE",
-			MetaValue = "FILE"
-		)]
-		public string dump_tree { get; set; }
-
-		[Option("save-temps",
-			Required = false,
-			HelpText = "Keep temporary files"
-		)]
-		public bool save_temps { get; set; }
-
-		[Option("profile",
-			Required = false,
-			HelpText = "Use the given profile instead of the default",
-			MetaValue = "PROFILE"
-		)]
-		public string profile { get; set; }
-
-		[Option('q', "quiet",
-			Required = false,
-			HelpText = "Do not print messages to the console"
-		)]
-		public bool quiet_mode { get; set; }
-
-		[Option('v', "verbose",
-			Required = false,
-			HelpText = "Print additional messages to the console"
-		)]
-		public bool verbose_mode { get; set; }
-
-		[Option("no-color",
-			Required = false,
-			HelpText = "Disable colored output, alias for --color=never"
-		)]
-		public bool disable_colored_output { get; set; }
-
-		[Option("color",
-			Required = false,
-			HelpText = "Enable color output, options are 'always', 'never', or 'auto'",
-			MetaValue = "WHEN"
-		)]
-		public Report.Colored colored_output { get; set; }
-
-		[Option("target-glib",
-			Required = false,
-			HelpText = "Target version of glib for code generation",
-			MetaValue = "MAJOR.MINOR"
-		)]
-		public string target_glib { get; set; }
-
-		[OptionList("gresources",
-			Required = false,
-			HelpText = "XML of gresources",
-			MetaValue = "FILE...",
-			DefaultValue = null
-		)]
-		public IList<string> gresources { get; set; }
-
-		[OptionList("gresourcesdir",
-			Required = false,
-			HelpText = "Look for resources in DIRECTORY",
-			MetaValue = "DIRECTORY...",
-			DefaultValue = null
-		)]
-		public IList<string> gresources_directories { get; set; }
-
-		[Option("enable-version-header",
-			Required = false,
-			HelpText = "Write vala build version in generated files"
-		)]
-		public bool enable_version_header { get; set; }
-
-		[Option("disable-version-header",
-			Required = false,
-			HelpText = "Do not write vala build version in generated files"
-		)]
-		public bool disable_version_header { get; set; }
-
-		/*[Option(
-			Required = true,
-			MetaValue = "FILE..."
-		)]*/
-		[ValueList(typeof(List<string>))]
-		public IList<string> unparsed { get; set; }
-
-		public IList<string> sources {
-			get { return unparsed; }
-			set { unparsed = value; }
+		private bool option_parse_color(string option_name, string val, IntPtr data) {
+			switch (val) {
+				case "auto": colored_output = Report.Colored.AUTO; break;
+				case "never": colored_output = Report.Colored.NEVER; break;
+				case null:
+				case "always": colored_output = Report.Colored.ALWAYS; break;
+				default: throw new Exception($"Invalid --color argument '{val}'");
+			}
+			return true;
 		}
 
-		[HelpOption()]
-		public string GetUsage() {
-			HelpText help = HelpText.AutoBuild(this);
-			help.AdditionalNewLineAfterOption = false;
-			return help;
+		public void parse_args(string[] args) {
+			OptionEntry[] options = new OptionEntry[]{
+				new OptionEntry<string>(
+					"path", 0, 0, OptionArg.STRING,
+					"Use the gcc/toolchain binaries located in DIRECTORY", "DIRECTORY",
+					(value) => { path = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"vapidir", 0, 0, OptionArg.FILENAME_ARRAY,
+					"Look for package bindings in DIRECTORY", "DIRECTORY...",
+					(value) => { vapi_directories = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"girdir", 0, 0, OptionArg.FILENAME_ARRAY,
+					"Look for .gir files in DIRECTORY", "DIRECTORY...",
+					(value) => { gir_directories = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"metadatadir", 0, 0, OptionArg.FILENAME_ARRAY,
+					"Look for GIR .metadata files in DIRECTORY", "DIRECTORY...",
+					(value) => { metadata_directories = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"pkg", 0, 0, OptionArg.STRING_ARRAY,
+					"Include binding for PACKAGE", "PACKAGE...",
+					(value) => { packages = value; }
+				),
+				new OptionEntry<string>(
+					"vapi", 0, 0, OptionArg.FILENAME,
+					"Output VAPI file name", "FILE",
+					(value) => { vapi_filename = value; }
+				),
+				new OptionEntry<string>(
+					"library", 0, 0, OptionArg.STRING,
+					"Library name", "NAME",
+					(value) => { library = value; }
+				),
+				new OptionEntry<string>(
+					"shared-library", 0, 0, OptionArg.STRING,
+					"Shared library name used in generated gir", "NAME",
+					(value) => { shared_library = value; }
+				),
+				new OptionEntry<string>(
+					"gir", 0, 0, OptionArg.STRING,
+					"GObject-Introspection repository file name", "NAME-VERSION.gir",
+					(value) => { gir = value; }
+				),
+				new OptionEntry<string>(
+					"basedir", 'b', 0, OptionArg.FILENAME,
+					"Base source directory", "DIRECTORY",
+					(value) => { basedir = value; }
+				),
+				new OptionEntry<string>(
+					"directory", 'd', 0, OptionArg.FILENAME,
+					"Change output directory from current working directory", "DIRECTORY",
+					(value) => { directory = value; }
+				),
+				new OptionEntry<bool>(
+					"version", 0, 0, OptionArg.NONE,
+					"Display version number", null,
+					(value) => { version = value; }
+				),
+				new OptionEntry<bool>(
+					"api-version", 0, 0, OptionArg.NONE,
+					"Display API version number", null,
+					(value) => { api_version = value; }
+				),
+				new OptionEntry<bool>(
+					"ccode", 'C', 0, OptionArg.NONE,
+					"Output C code", null,
+					(value) => { ccode_only = value; }
+				),
+				new OptionEntry<string>(
+					"header", 'H', 0, OptionArg.FILENAME,
+					"Output C header file", "FILE",
+					(value) => { header_filename = value; }
+				),
+				new OptionEntry<bool>(
+					"use-header", 0, 0, OptionArg.NONE,
+					"Use C header file", null,
+					(value) => { use_header = value; }
+				),
+				new OptionEntry<string>(
+					"includedir", 0, 0, OptionArg.FILENAME,
+					"Directory used to include the C header file", "DIRECTORY",
+					(value) => { includedir = value; }
+				),
+				new OptionEntry<string>(
+					"internal-header", 'h', 0, OptionArg.FILENAME,
+					"Output internal C header file", "FILE",
+					(value) => { internal_header_filename = value; }
+				),
+				new OptionEntry<string>(
+					"internal-vapi", 0, 0, OptionArg.FILENAME,
+					"Output vapi with internal api", "FILE",
+					(value) => { internal_vapi_filename = value; }
+				),
+				new OptionEntry<string>(
+					"fast-vapi", 0, 0, OptionArg.STRING,
+					"Output vapi without performing symbol resolution", null,
+					(value) => { fast_vapi_filename = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"use-fast-vapi", 0, 0, OptionArg.STRING_ARRAY,
+					"Use --fast-vapi output during this compile", null,
+					(value) => { fast_vapis = value; }
+				),
+				new OptionEntry<bool>(
+					"vapi-comments", 0, 0, OptionArg.NONE,
+					"Include comments in generated vapi", null,
+					(value) => { vapi_comments = value; }
+				),
+				new OptionEntry<string>(
+					"deps", 0, 0, OptionArg.STRING,
+					"Write make-style dependency information to this file", null,
+					(value) => { dependencies = value; }
+				),
+				new OptionEntry<string>(
+					"symbols", 0, 0, OptionArg.FILENAME,
+					"Output symbols file", "FILE",
+					(value) => { symbols_filename = value; }
+				),
+				new OptionEntry<bool>(
+					"compile", 'c', 0, OptionArg.NONE,
+					"Compile but do not link", null,
+					(value) => { compile_only = value; }
+				),
+				new OptionEntry<string>(
+					"output", 'o', 0, OptionArg.FILENAME,
+					"Place output in file FILE", "FILE",
+					(value) => { output = value; }
+				),
+				new OptionEntry<bool>(
+					"debug", 'g', 0, OptionArg.NONE,
+					"Produce debug information", null,
+					(value) => { debug = value; }
+				),
+				new OptionEntry<bool>(
+					"valac-debug", 0, 0, OptionArg.NONE,
+					"Start the debugger", null,
+					(value) => { valac_debug = value; }
+				),
+				new OptionEntry<bool>(
+					"thread", 0, 0, OptionArg.NONE,
+					"Enable multithreading support (DEPRECATED AND IGNORED)", null,
+					(value) => { thread = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-mem-profiler", 0, 0, OptionArg.NONE,
+					"Enable GLib memory profiler", null,
+					(value) => { mem_profiler = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"define", 'D', 0, OptionArg.STRING_ARRAY,
+					"Define SYMBOL", "SYMBOL...",
+					(value) => { defines = value; }
+				),
+				new OptionEntry<string>(
+					"main", 0, 0, OptionArg.STRING,
+					"Use SYMBOL as entry point", "SYMBOL...",
+					(value) => { entry_point = value; }
+				),
+				new OptionEntry<bool>(
+					"nostdpkg", 0, 0, OptionArg.NONE,
+					"Do not include standard packages", null,
+					(value) => { nostdpkg = value; }
+				),
+				new OptionEntry<bool>(
+					"disable-assert", 0, 0, OptionArg.NONE,
+					"Disable assertions", null,
+					(value) => { disable_assert = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-checking", 0, 0, OptionArg.NONE,
+					"Enable additional run-time checks", null,
+					(value) => { enable_checking = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-deprecated", 0, 0, OptionArg.NONE,
+					"Enable deprecated features", null,
+					(value) => { deprecated = value; }
+				),
+				new OptionEntry<bool>(
+					"hide-internal", 0, 0, OptionArg.NONE,
+					"Hide symbols marked as internal", null,
+					(value) => { hide_internal = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-experimental", 0, 0, OptionArg.NONE,
+					"Enable experimental features", null,
+					(value) => { experimental = value; }
+				),
+				new OptionEntry<bool>(
+					"disable-warnings", 0, 0, OptionArg.NONE,
+					"Disable warnings", null,
+					(value) => { disable_warnings = value; }
+				),
+				new OptionEntry<bool>(
+					"fatal-warnings", 0, 0, OptionArg.NONE,
+					"Treat warnings as fatal", null,
+					(value) => { fatal_warnings = value; }
+				),
+				new OptionEntry<bool>(
+					"disable-since-check", 0, 0, OptionArg.NONE,
+					"Do not check whether used symbols exist in local packages", null,
+					(value) => { disable_since_check = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-experimental-non-null", 0, 0, OptionArg.NONE,
+					"Enable experimental enhancements for non-null types", null,
+					(value) => { experimental_non_null = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-gobject-tracing", 0, 0, OptionArg.NONE,
+					"Enable GObject creation tracing", null,
+					(value) => { gobject_tracing = value; }
+				),
+				new OptionEntry<string>(
+					"cc", 0, 0, OptionArg.STRING,
+					"Use COMMAND as C compiler command", "COMMAND",
+					(value) => { cc_command = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"Xcc", 'X', 0, OptionArg.STRING_ARRAY,
+					"Pass OPTION to the C compiler", "OPTION...",
+					(value) => { cc_options = value; }
+				),
+				new OptionEntry<string>(
+					"pkg-config", 0, 0, OptionArg.STRING,
+					"Use COMMAND as pkg-config command", "COMMAND",
+					(value) => { pkg_config_command = value; }
+				),
+				new OptionEntry<string>(
+					"dump-tree", 0, 0, OptionArg.FILENAME,
+					"Write code tree to FILE", "FILE",
+					(value) => { dump_tree = value; }
+				),
+				new OptionEntry<bool>(
+					"save-temps", 0, 0, OptionArg.NONE,
+					"Keep temporary files", null,
+					(value) => { save_temps = value; }
+				),
+				new OptionEntry<string>(
+					"profile", 0, 0, OptionArg.STRING,
+					"Use the given profile instead of the default", "PROFILE",
+					(value) => { profile = value; }
+				),
+				new OptionEntry<bool>(
+					"quiet", 'q', 0, OptionArg.NONE,
+					"Do not print messages to the console", null,
+					(value) => { quiet_mode = value; }
+				),
+				new OptionEntry<bool>(
+					"verbose", 'v', 0, OptionArg.NONE,
+					"Print additional messages to the console", null,
+					(value) => { verbose_mode = value; }
+				),
+				new OptionEntry<bool>(
+					"no-color", 0, 0, OptionArg.NONE,
+					"Disable colored output, alias for --color=never", null,
+					(value) => { disable_colored_output = value; }
+				),
+				new OptionEntry<OptionArgFunc>(
+					"color", 0, OptionFlags.OPTIONAL_ARG, OptionArg.CALLBACK,
+					"Enable color output, options are 'always', 'never', or 'auto'", "WHEN",
+					(value) => { }
+				){
+					arg_data = new OptionArgFunc(option_parse_color)
+				},
+				new OptionEntry<string>(
+					"target-glib", 0, 0, OptionArg.STRING,
+					"Target version of glib for code generation", "MAJOR.MINOR",
+					(value) => { target_glib = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"gresources", 0, 0, OptionArg.FILENAME_ARRAY,
+					"XML of gresources", "FILE...",
+					(value) => { gresources = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"gresourcesdir", 0, 0, OptionArg.FILENAME_ARRAY,
+					"Look for resources in DIRECTORY", "DIRECTORY...",
+					(value) => { gresources_directories = value; }
+				),
+				new OptionEntry<bool>(
+					"enable-version-header", 0, 0, OptionArg.NONE,
+					"Write vala build version in generated files", null,
+					(value) => { enable_version_header = value; }
+				),
+				new OptionEntry<bool>(
+					"disable-version-header", 0, 0, OptionArg.NONE,
+					"Do not write vala build version in generated files", null,
+					(value) => { disable_version_header = value; }
+				),
+				new OptionEntry<IList<string>>(
+					"", 0, 0, OptionArg.FILENAME_ARRAY,
+					 null, "FILE...",
+					 (value) => { sources = value; }
+				)
+			};
+
+			var opt_context = new OptionContext("- Vala Interpreter");
+			opt_context.help_enabled = true;
+			opt_context.add_main_entries(options, null);
+			opt_context.parse(args);
 		}
 	}
 }

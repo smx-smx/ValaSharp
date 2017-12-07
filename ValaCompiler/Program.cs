@@ -14,8 +14,6 @@ using Vala;
 using Vala.Lang.Parser;
 using CCodeGen;
 using CCodeGen.Modules;
-using CommandLine;
-using CommandLine.Text;
 using GLibPorts;
 using Vala.Lang.Code;
 using ValaConfig;
@@ -26,13 +24,15 @@ using ValaCompilerLib;
 
 namespace ValaCompiler {
 	public class Program {
+		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
+
+		private CodeContext context;
+
 		static int Main(string[] args) {
+			GLibPorts.Native.Utils.GLibInitialize();
+
 			CompilerOptions opts = new CompilerOptions();
-			var parser = new CommandLine.Parser((settings => {
-				settings.CaseSensitive = true;
-			}));
-			if (!parser.ParseArguments(args, opts))
-				return 1;
+			opts.parse_args(args);
 
 			if (opts.cc_options != null) {
 				for (int i = 0; i < opts.cc_options.Count; i++) {
@@ -42,6 +42,19 @@ namespace ValaCompiler {
 						opts.cc_options[i] = cc_opt;
 					}
 				}
+			}
+
+			if (opts.version) {
+				stdout.printf("Vala %s\n", Config.BUILD_VERSION);
+				return 0;
+			} else if (opts.api_version) {
+				stdout.printf("%s\n", Config.API_VERSION);
+				return 0;
+			}
+
+			if (opts.sources == null && opts.fast_vapis == null) {
+				stderr.printf("No source file specified.\n");
+				return 1;
 			}
 
 			//int result = run_source(opts);

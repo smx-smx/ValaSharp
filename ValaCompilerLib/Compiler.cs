@@ -2,6 +2,7 @@
 using CCodeGen.Modules;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime;
@@ -24,7 +25,6 @@ namespace ValaCompilerLib {
 		private CompilerOptions opts;
 
 		public Compiler(CompilerOptions opts) {
-			GLibPorts.Native.Utils.GLibInitialize();
 			this.opts = opts;
 		}
 
@@ -62,6 +62,9 @@ namespace ValaCompilerLib {
 		}
 
 		public int run() {
+			if (opts.valac_debug)
+				Debugger.Launch();
+
 			context = new CodeContext();
 			CodeContext.push(context);
 
@@ -149,7 +152,7 @@ namespace ValaCompilerLib {
 				context.profile = Profile.GOBJECT;
 				context.add_define("GOBJECT");
 			} else {
-				Report.error(null, "Unknown profile %s".printf(opts.profile));
+				Report.error(null, "Unknown profile %s".printf(opts.profile as string));
 			}
 			opts.nostdpkg |= opts.fast_vapi_filename != null;
 			context.nostdpkg = opts.nostdpkg;
@@ -299,7 +302,7 @@ namespace ValaCompilerLib {
 
 			if (opts.vapi_filename == null && opts.library != null) {
 				// keep backward compatibility with --library option
-				opts.vapi_filename = "%s.vapi".printf(opts.library);
+				opts.vapi_filename = "%s.vapi".printf(opts.library as string);
 			}
 
 			if (opts.library != null) {
@@ -309,13 +312,13 @@ namespace ValaCompilerLib {
 					int last_hyphen = gir_base.LastIndexOf('-');
 
 					if (last_hyphen == -1 || !gir_base.EndsWith(".gir")) {
-						Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir));
+						Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir as string));
 					} else {
 						string gir_namespace = gir_base.Substring(0, last_hyphen);
 						string gir_version = gir_base.Substring(last_hyphen + 1, (int)(gir_len - last_hyphen - 5));
 						gir_version.canon("0123456789.", '?');
 						if (gir_namespace == "" || gir_version == "" || !Char.IsDigit(gir_version[0]) || gir_version.Contains("?")) {
-							Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir));
+							Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir as string));
 						} else {
 #if false
 							var gir_writer = new GIRWriter();
@@ -347,7 +350,7 @@ namespace ValaCompilerLib {
 					if (!context.directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
 						sep = Path.DirectorySeparatorChar.ToString();
 
-					opts.vapi_filename = "%s%s".printf(context.directory + sep, opts.vapi_filename);
+					opts.vapi_filename = "%s%s".printf(context.directory + sep, opts.vapi_filename as string);
 				}
 
 				interface_writer.write_file(context, opts.vapi_filename);
@@ -411,15 +414,12 @@ namespace ValaCompilerLib {
 				return 0;
 			}
 
-			if (opts.unparsed.Count == 0) {
+			if (opts.sources == null) {
 				stderr.printf("No source file specified.\n");
-				stderr.printf("Run '%s --help' to see a full list of available command line options.\n",
-					AppDomain.CurrentDomain.FriendlyName
-				);
 				return 1;
 			}
 
-			opts.output = "%s%c%s.XXXXXX".printf(Path.GetTempPath(), Path.DirectorySeparatorChar, Path.GetFileName(opts.unparsed[0]));
+			opts.output = "%s%c%s.XXXXXX".printf(Path.GetTempPath(), Path.DirectorySeparatorChar, Path.GetFileName(opts.sources[0] as string));
 
 			string temp_filename;
 			int outputfd = FileUtils.mkstemp(opts.output, out temp_filename);
@@ -428,11 +428,15 @@ namespace ValaCompilerLib {
 			}
 			FileUtils.close(outputfd);
 
+			opts.ccode_only = false;
+			opts.compile_only = false;
 			opts.output = temp_filename;
 
 			run_output = true;
 			opts.disable_warnings = true;
 			opts.quiet_mode = true;
+			opts.library = null;
+			opts.shared_library = null;
 
 			var compiler = new Compiler(opts);
 			return compiler.run();
