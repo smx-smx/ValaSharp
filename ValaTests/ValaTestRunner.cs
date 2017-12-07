@@ -13,6 +13,10 @@ namespace ValaTests {
 		private string projDir;
 		private string vapiDir;
 
+		static ValaTestRunner() {
+			GLibPorts.Native.Utils.GLibInitialize();
+		}
+
 		public ValaTestRunner() {
 			baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			projDir = Path.GetFullPath(baseDir + "/../../");
