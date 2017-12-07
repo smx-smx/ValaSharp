@@ -90,16 +90,13 @@ namespace CLanguage {
 			var define = new StringBuilder("__");
 
 			var i = filename.GetEnumerator();
-			int length = filename.Length;
-			while (length > 0) {
+			while (i.MoveNext()) {
 				var c = i.Current;
 				if (Char.IsLetterOrDigit(c) && c < 0x80) {
 					define.Append(Char.ToUpper(c));
 				} else {
 					define.Append('_');
 				}
-
-				i.MoveNext();
 			}
 
 			define.Append("__");

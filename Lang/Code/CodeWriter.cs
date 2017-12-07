@@ -92,38 +92,37 @@ namespace Vala.Lang.Code {
 
 			current_scope = null;
 
+			stream.Dispose();
 			stream = null;
 
 			if (file_exists) {
 				var changed = true;
 
 				try {
-					var old_file = MemoryMappedFile.OpenExisting(filename);
-					var new_file = MemoryMappedFile.OpenExisting(temp_filename);
-					var len = old_file.CreateViewStream().Length;
-					if (len == new_file.CreateViewStream().Length) {
-						var st1 = old_file.CreateViewStream();
-						var st2 = new_file.CreateViewStream();
-						byte[] data1 = new byte[st1.Length];
-						byte[] data2 = new byte[st2.Length];
-						st1.Read(data1, 0, (int)len);
-						st2.Read(data2, 0, (int)len);
+					using (var old_file = MemoryMappedFile.OpenExisting(filename))
+					using (var new_file = MemoryMappedFile.OpenExisting(temp_filename)) {
+						var len = old_file.CreateViewStream().Length;
+						if (len == new_file.CreateViewStream().Length) {
+							var st1 = old_file.CreateViewStream();
+							var st2 = new_file.CreateViewStream();
+							byte[] data1 = new byte[st1.Length];
+							byte[] data2 = new byte[st2.Length];
+							st1.Read(data1, 0, (int)len);
+							st2.Read(data2, 0, (int)len);
 
-						if (data1 == data2) {
-							changed = false;
+							if (data1 == data2) {
+								changed = false;
+							}
 						}
 					}
-					old_file = null;
-					new_file = null;
 				} catch (Exception) {
 					// assume changed if mmap comparison doesn't work
 				}
 
 				if (changed) {
-					File.Move(temp_filename, filename);
-				} else {
-					File.Delete(temp_filename);
+					File.Copy(temp_filename, filename, true);
 				}
+				File.Delete(temp_filename);
 			}
 
 		}
@@ -1653,7 +1652,7 @@ namespace Vala.Lang.Code {
 			}
 
 			var iter = attributes.GetEnumerator();
-			while (!iter.MoveNext()) {
+			while (iter.MoveNext()) {
 				ValaAttribute attr = iter.Current;
 
 				var keys = new SortedSet<string>();
