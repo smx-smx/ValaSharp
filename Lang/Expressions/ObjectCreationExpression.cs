@@ -404,7 +404,7 @@ namespace Vala.Lang.Expressions {
 					}
 				}
 
-				foreach (Expression arg in args) {
+				foreach (Expression arg in args.ToList()) {
 					arg.check(context);
 				}
 

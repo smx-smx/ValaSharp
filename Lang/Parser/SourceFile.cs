@@ -257,7 +257,7 @@ namespace Vala.Lang.Parser {
 			if (filename.StartsWith(context.basedir + Path.DirectorySeparatorChar)) {
 				var basename = Path.GetFileName(filename);
 				var subdir = filename.Substring(context.basedir.Length, filename.Length - context.basedir.Length - basename.Length);
-				while (subdir[0] == Path.DirectorySeparatorChar) {
+				while (subdir.Length > 0 && subdir[0] == Path.DirectorySeparatorChar) {
 					subdir = subdir.Substring(1);
 				}
 				return subdir;

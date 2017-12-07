@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.CodeNodes {
-	public class ValaAttribute : CodeNode {
+	public class ValaAttribute : CodeNode, IComparable {
 		/**
 	 * The name of the attribute type.
 	 */
@@ -126,6 +126,17 @@ namespace Vala.Lang.CodeNodes {
 			}
 
 			return bool.Parse(value);
+		}
+
+		public int CompareTo(object obj) {
+			if (obj == null)
+				return 1;
+
+			ValaAttribute other = obj as ValaAttribute;
+			if (other == null)
+				throw new ArgumentException("Object is not a ValaAttribute");
+
+			return this.name.CompareTo(other.name);
 		}
 	}
 }
