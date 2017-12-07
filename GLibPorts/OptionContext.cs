@@ -282,7 +282,7 @@ namespace GLibPorts {
 					return retval;
 				} else {
 					int len = group.entries[j].long_name.Length;
-					if (group.entries[j].long_name == arg && (
+					if (arg.StartsWith(group.entries[j].long_name) && (
 						arg.Length <= len || arg[len] == '='
 					)) {
 						string value = null;

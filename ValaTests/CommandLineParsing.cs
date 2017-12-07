@@ -31,14 +31,16 @@ namespace ValaTests {
 			string[] args = {
 				"--vapidir", "foo",
 				"--vapidir", "bar",
+				"--vapidir=baz",
 				"--foo"
 			};
 
 			opt_context.parse(args);
 
-			Assert.IsTrue(vapi_directories != null && vapi_directories.Count == 2);
+			Assert.IsTrue(vapi_directories != null && vapi_directories.Count == 3);
 			Assert.AreEqual(vapi_directories[0], "foo");
 			Assert.AreEqual(vapi_directories[1], "bar");
+			Assert.AreEqual(vapi_directories[2], "baz");
 			Assert.IsTrue(foo);
 		}
 	}
