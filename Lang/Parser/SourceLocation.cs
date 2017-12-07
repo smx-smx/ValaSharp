@@ -7,16 +7,7 @@ using Utils;
 
 namespace Vala.Lang.Parser {
 	public class SourceLocation : IDisposable {
-		private WeakReference<FastMView> view_weak = new WeakReference<FastMView>(null);
-
-		public FastMView view {
-			get {
-				return view_weak.GetTarget();
-			}
-			set {
-				view_weak.SetTarget(value);
-			}
-		}
+		public FastMView view;
 		public int line;
 		public int column;
 
