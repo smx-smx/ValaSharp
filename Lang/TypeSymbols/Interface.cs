@@ -476,7 +476,7 @@ namespace Vala.Lang.TypeSymbols {
 				unordered_seen = unordered_seen || !ordered;
 				if (!ordered_seen || !unordered_seen) {
 					if (ordered) {
-						Symbol prev = positions[ordering];
+						positions.TryGetValue(ordering, out Symbol prev);
 						if (prev != null) {
 							Report.error(sym.source_reference, "%s: Duplicate ordering (previous virtual with the same position is %s)".printf(sym.get_full_name(), prev.name));
 							error = true;
