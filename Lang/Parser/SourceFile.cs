@@ -254,10 +254,10 @@ namespace Vala.Lang.Parser {
 			}
 
 			// filename and basedir are already canonicalized
-			if (filename.StartsWith(context.basedir + "/")) {
+			if (filename.StartsWith(context.basedir + Path.DirectorySeparatorChar)) {
 				var basename = Path.GetFileName(filename);
 				var subdir = filename.Substring(context.basedir.Length, filename.Length - context.basedir.Length - basename.Length);
-				while (subdir[0] == '/') {
+				while (subdir[0] == Path.DirectorySeparatorChar) {
 					subdir = subdir.Substring(1);
 				}
 				return subdir;

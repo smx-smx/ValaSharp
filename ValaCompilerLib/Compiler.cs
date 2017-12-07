@@ -116,7 +116,7 @@ namespace ValaCompilerLib {
 				Report.warning(null, "--output and -o have no effect when -C or --ccode is set");
 			}
 			if (opts.basedir == null) {
-				context.basedir = Path.GetFullPath(".");
+				context.basedir = Environment.CurrentDirectory;
 			} else {
 				context.basedir = Path.GetFullPath(opts.basedir);
 			}
