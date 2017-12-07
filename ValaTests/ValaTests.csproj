@@ -51,7 +51,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleHelper.cs" />
     <Compile Include="CommandLineParsing.cs" />
     <Compile Include="ValaTestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
