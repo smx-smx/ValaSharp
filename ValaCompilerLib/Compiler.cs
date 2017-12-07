@@ -18,6 +18,7 @@ using static GLibPorts.GLib;
 
 namespace ValaCompilerLib {
 	public class Compiler : IDisposable {
+
 		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
 
 		static bool run_output;
@@ -30,19 +31,6 @@ namespace ValaCompilerLib {
 
 		public Compiler() {
 		}
-
-		/*
-		static bool option_parse_color(string option_name, string val) {
-			switch (val) {
-				case "auto": colored_output = Report.Colored.AUTO; break;
-				case "never": colored_output = Report.Colored.NEVER; break;
-				case null:
-				case "always": colored_output = Report.Colored.ALWAYS; break;
-				default: throw new OptionError_Failed("Invalid --color argument '%s'", val);
-			}
-			return true;
-		}
-		*/
 
 		private int quit() {
 			if (context.report.get_errors() == 0 && context.report.get_warnings() == 0) {
@@ -152,7 +140,7 @@ namespace ValaCompilerLib {
 				context.profile = Profile.GOBJECT;
 				context.add_define("GOBJECT");
 			} else {
-				Report.error(null, "Unknown profile %s".printf(opts.profile as string));
+				Report.error(null, "Unknown profile %s".printf(opts.profile));
 			}
 			opts.nostdpkg |= opts.fast_vapi_filename != null;
 			context.nostdpkg = opts.nostdpkg;
@@ -302,7 +290,7 @@ namespace ValaCompilerLib {
 
 			if (opts.vapi_filename == null && opts.library != null) {
 				// keep backward compatibility with --library option
-				opts.vapi_filename = "%s.vapi".printf(opts.library as string);
+				opts.vapi_filename = "%s.vapi".printf(opts.library);
 			}
 
 			if (opts.library != null) {
@@ -312,13 +300,13 @@ namespace ValaCompilerLib {
 					int last_hyphen = gir_base.LastIndexOf('-');
 
 					if (last_hyphen == -1 || !gir_base.EndsWith(".gir")) {
-						Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir as string));
+						Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir));
 					} else {
 						string gir_namespace = gir_base.Substring(0, last_hyphen);
 						string gir_version = gir_base.Substring(last_hyphen + 1, (int)(gir_len - last_hyphen - 5));
 						gir_version.canon("0123456789.", '?');
 						if (gir_namespace == "" || gir_version == "" || !Char.IsDigit(gir_version[0]) || gir_version.Contains("?")) {
-							Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir as string));
+							Report.error(null, "GIR file name `%s' is not well-formed, expected NAME-VERSION.gir".printf(opts.gir));
 						} else {
 #if false
 							var gir_writer = new GIRWriter();
@@ -350,7 +338,7 @@ namespace ValaCompilerLib {
 					if (!context.directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
 						sep = Path.DirectorySeparatorChar.ToString();
 
-					opts.vapi_filename = "%s%s".printf(context.directory + sep, opts.vapi_filename as string);
+					opts.vapi_filename = "%s%s".printf(context.directory + sep, opts.vapi_filename);
 				}
 
 				interface_writer.write_file(context, opts.vapi_filename);
@@ -419,7 +407,7 @@ namespace ValaCompilerLib {
 				return 1;
 			}
 
-			opts.output = "%s%c%s.XXXXXX".printf(Path.GetTempPath(), Path.DirectorySeparatorChar, Path.GetFileName(opts.sources[0] as string));
+			opts.output = "%s%c%s.XXXXXX".printf(Path.GetTempPath(), Path.DirectorySeparatorChar, Path.GetFileName(opts.sources[0]));
 
 			string temp_filename;
 			int outputfd = FileUtils.mkstemp(opts.output, out temp_filename);

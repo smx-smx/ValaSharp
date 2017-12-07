@@ -66,6 +66,7 @@
     <Compile Include="OptionArg.cs" />
     <Compile Include="OptionContext.cs" />
     <Compile Include="OptionEntry.cs" />
+    <Compile Include="OptionFlags.cs" />
     <Compile Include="OptionGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shell.cs" />

@@ -21,13 +21,15 @@ namespace GLibPorts {
 		public OptionEntryFunc onValue = null;
 
 		public void notify() {
-			if(onValue != null) {
-				onValue(this.arg_data);
-			}
+			onValue?.Invoke(this.arg_data);
 		}
 
-		public OptionEntry(string long_name, int short_name, OptionFlags flags, OptionArg arg, string description, string arg_desc, OptionEntryFunc onValue)
-		{
+		public OptionEntry(
+			string long_name, int short_name,
+			OptionFlags flags, OptionArg arg,
+			string description, string arg_desc,
+			OptionEntryFunc onValue
+		){
 			this.long_name = long_name;
 			this.short_name = Convert.ToChar(short_name);
 
