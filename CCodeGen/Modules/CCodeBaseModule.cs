@@ -617,10 +617,13 @@ namespace CCodeGen.Modules {
 			}
 			if (sym.external_package || (!decl_space.is_header && CodeContext.get().use_header && !sym.is_internal_symbol())) {
 				// add appropriate include file
-				foreach (string header_filename in get_ccode_header_filenames(sym).Split(',')) {
-					decl_space.add_include(header_filename, !sym.external_package ||
-															 (sym.external_package &&
-															  sym.from_commandline));
+				var headers = get_ccode_header_filenames(sym);
+				if (headers.Length > 0) {
+					foreach (string header_filename in headers.Split(',')) {
+						decl_space.add_include(header_filename, !sym.external_package ||
+																 (sym.external_package &&
+																  sym.from_commandline));
+					}
 				}
 				// declaration complete
 				return true;
