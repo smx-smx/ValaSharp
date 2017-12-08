@@ -235,7 +235,7 @@ namespace Vala.Lang.TypeSymbols {
 			if (!return_type.value_owned && return_type is ReferenceType) {
 				str = "weak ";
 			}
-			str += return_type.to_string();
+			str += return_type.ToString();
 
 			return str;
 		}
@@ -264,7 +264,7 @@ namespace Vala.Lang.TypeSymbols {
 					}
 				}
 
-				str += param.variable_type.to_string();
+				str += param.variable_type.ToString();
 
 				i++;
 			}

@@ -365,7 +365,7 @@ namespace Vala.Lang.CodeNodes {
 		 *
 		 * @return a string representation
 		 */
-		public virtual string to_string() {
+		public virtual string ToString() {
 			var str = new StringBuilder();
 
 			str.Append("/* ");

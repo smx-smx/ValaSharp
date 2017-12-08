@@ -97,7 +97,7 @@ namespace Vala.Lang {
 			// check whether field type is at least as accessible as the field
 			if (!context.analyzer.is_type_accessible(this, variable_type)) {
 				error = true;
-				Report.error(source_reference, "field type `%s` is less accessible than field `%s`".printf(variable_type.to_string(), get_full_name()));
+				Report.error(source_reference, "field type `%s` is less accessible than field `%s`".printf(variable_type.ToString(), get_full_name()));
 				return false;
 			}
 
@@ -117,7 +117,7 @@ namespace Vala.Lang {
 
 				if (!initializer.value_type.compatible(variable_type)) {
 					error = true;
-					Report.error(source_reference, "Cannot convert from `%s' to `%s'".printf(initializer.value_type.to_string(), variable_type.to_string()));
+					Report.error(source_reference, "Cannot convert from `%s' to `%s'".printf(initializer.value_type.ToString(), variable_type.ToString()));
 					return false;
 				}
 

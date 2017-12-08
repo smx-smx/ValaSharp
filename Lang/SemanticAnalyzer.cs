@@ -408,7 +408,7 @@ namespace Vala.Lang {
 						if (m != null) {
 							Report.error(expr.source_reference, "%d missing arguments for `%s'".printf(m.get_parameters().Count - args.Count, m.to_prototype_string()));
 						} else {
-							Report.error(expr.source_reference, "Too few arguments, method `%s' does not take %d arguments".printf(mtype.to_string(), args.Count));
+							Report.error(expr.source_reference, "Too few arguments, method `%s' does not take %d arguments".printf(mtype.ToString(), args.Count));
 						}
 						return false;
 					} else {
@@ -445,7 +445,7 @@ namespace Vala.Lang {
 				if (m != null) {
 					Report.error(expr.source_reference, "%d extra arguments for `%s'".printf(args.Count - m.get_parameters().Count, m.to_prototype_string()));
 				} else {
-					Report.error(expr.source_reference, "Too many arguments, method `%s' does not take %d arguments".printf(mtype.to_string(), args.Count));
+					Report.error(expr.source_reference, "Too many arguments, method `%s' does not take %d arguments".printf(mtype.ToString(), args.Count));
 				}
 				return false;
 			}
@@ -542,12 +542,12 @@ namespace Vala.Lang {
 			if (arg.target_type != null) {
 				if ((direction == ParameterDirection.IN || direction == ParameterDirection.REF)
 					&& !arg.value_type.compatible(arg.target_type)) {
-					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.to_string(), arg.target_type.to_string()));
+					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.ToString(), arg.target_type.ToString()));
 					return false;
 				} else if ((direction == ParameterDirection.REF || direction == ParameterDirection.OUT)
 							&& !arg.target_type.compatible(arg.value_type)
 							&& !(arg is NullLiteral)) {
-					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.target_type.to_string(), arg.value_type.to_string()));
+					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.target_type.ToString(), arg.value_type.ToString()));
 					return false;
 				}
 			}
@@ -582,7 +582,7 @@ namespace Vala.Lang {
 					}
 				} else if (arg.target_type != null && !arg.value_type.compatible(arg.target_type)) {
 					// target_type known for printf arguments
-					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.to_string(), arg.target_type.to_string()));
+					Report.error(arg.source_reference, "Argument %d: Cannot convert from `%s' to `%s'".printf(i + 1, arg.value_type.ToString(), arg.target_type.ToString()));
 					return false;
 				}
 

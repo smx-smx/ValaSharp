@@ -74,7 +74,7 @@ namespace Vala.Lang.Types {
 		}
 
 		public override string to_qualified_string(Scope scope) {
-			var s = unresolved_symbol.to_string();
+			var s = unresolved_symbol.ToString();
 
 			var type_args = get_type_arguments();
 			if (type_args.Count > 0) {

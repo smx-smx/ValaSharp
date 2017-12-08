@@ -41,7 +41,7 @@ namespace Vala.Lang.Expressions {
 			if (expr is StringLiteral) {
 				return expr;
 			} else {
-				return new MethodCall(new MemberAccess(expr, "to_string", expr.source_reference), expr.source_reference);
+				return new MethodCall(new MemberAccess(expr, "ToString", expr.source_reference), expr.source_reference);
 			}
 		}
 

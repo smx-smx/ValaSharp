@@ -122,9 +122,9 @@ namespace Vala.Lang.Statements {
 						if (label.expression is StringLiteral) {
 							value = ((StringLiteral)label.expression).eval();
 						} else if (label.expression is Literal) {
-							value = ((Literal)label.expression).to_string();
+							value = ((Literal)label.expression).ToString();
 						} else if (label.expression.is_constant()) {
-							value = label.expression.to_string();
+							value = label.expression.ToString();
 						}
 
 						if (value != null && !labelset.Add(value)) {

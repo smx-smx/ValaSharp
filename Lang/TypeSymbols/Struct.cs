@@ -483,7 +483,7 @@ namespace Vala.Lang.TypeSymbols {
 
 				if (!(base_type is ValaValueType)) {
 					error = true;
-					Report.error(source_reference, "The base type `%s` of struct `%s` is not a struct".printf(base_type.to_string(), get_full_name()));
+					Report.error(source_reference, "The base type `%s` of struct `%s` is not a struct".printf(base_type.ToString(), get_full_name()));
 					return false;
 				}
 			}

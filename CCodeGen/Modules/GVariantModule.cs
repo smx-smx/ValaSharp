@@ -155,7 +155,7 @@ namespace CCodeGen.Modules {
 				cfile.add_include("gio/gio.h");
 
 				cfile.add_function(generate_enum_from_string_function(en));
-				cfile.add_function(generate_enum_to_string_function(en));
+				cfile.add_function(generate_enum_ToString_function(en));
 			}
 		}
 
@@ -163,7 +163,7 @@ namespace CCodeGen.Modules {
 			if (base.generate_enum_declaration(en, decl_space)) {
 				if (is_string_marshalled_enum(en)) {
 					decl_space.add_function_declaration(generate_enum_from_string_function_declaration(en));
-					decl_space.add_function_declaration(generate_enum_to_string_function_declaration(en));
+					decl_space.add_function_declaration(generate_enum_ToString_function_declaration(en));
 				}
 				return true;
 			}
@@ -523,7 +523,7 @@ namespace CCodeGen.Modules {
 			}
 
 			if (result == null) {
-				Report.error(type.source_reference, "GVariant deserialization of type `%s' is not supported".printf(type.to_string()));
+				Report.error(type.source_reference, "GVariant deserialization of type `%s' is not supported".printf(type.ToString()));
 			}
 
 			return result;
@@ -563,32 +563,32 @@ namespace CCodeGen.Modules {
 			ccode.add_expression(unref);
 		}
 
-		CCodeExpression generate_enum_value_to_string(EnumValueType type, CCodeExpression expr) {
+		CCodeExpression generate_enum_value_ToString(EnumValueType type, CCodeExpression expr) {
 			var en = type.type_symbol as ValaEnum;
-			var to_string_name = "%s_to_string".printf(get_ccode_lower_case_name(en, null));
+			var ToString_name = "%s_ToString".printf(get_ccode_lower_case_name(en, null));
 
-			var to_string_call = new CCodeFunctionCall(new CCodeIdentifier(to_string_name));
-			to_string_call.add_argument(expr);
+			var ToString_call = new CCodeFunctionCall(new CCodeIdentifier(ToString_name));
+			ToString_call.add_argument(expr);
 
-			return to_string_call;
+			return ToString_call;
 		}
 
-		public CCodeFunction generate_enum_to_string_function_declaration(ValaEnum en) {
-			var to_string_name = "%s_to_string".printf(get_ccode_lower_case_name(en, null));
+		public CCodeFunction generate_enum_ToString_function_declaration(ValaEnum en) {
+			var ToString_name = "%s_ToString".printf(get_ccode_lower_case_name(en, null));
 
-			var to_string_func = new CCodeFunction(to_string_name, "const char*");
-			to_string_func.add_parameter(new CCodeParameter("value", get_ccode_name(en)));
+			var ToString_func = new CCodeFunction(ToString_name, "const char*");
+			ToString_func.add_parameter(new CCodeParameter("value", get_ccode_name(en)));
 
-			return to_string_func;
+			return ToString_func;
 		}
 
-		public CCodeFunction generate_enum_to_string_function(ValaEnum en) {
-			var to_string_name = "%s_to_string".printf(get_ccode_lower_case_name(en, null));
+		public CCodeFunction generate_enum_ToString_function(ValaEnum en) {
+			var ToString_name = "%s_ToString".printf(get_ccode_lower_case_name(en, null));
 
-			var to_string_func = new CCodeFunction(to_string_name, "const char*");
-			to_string_func.add_parameter(new CCodeParameter("value", get_ccode_name(en)));
+			var ToString_func = new CCodeFunction(ToString_name, "const char*");
+			ToString_func.add_parameter(new CCodeParameter("value", get_ccode_name(en)));
 
-			push_function(to_string_func);
+			push_function(ToString_func);
 
 			ccode.add_declaration("const char *", new CCodeVariableDeclarator("str"));
 
@@ -605,7 +605,7 @@ namespace CCodeGen.Modules {
 			ccode.add_return(new CCodeIdentifier("str"));
 
 			pop_function();
-			return to_string_func;
+			return ToString_func;
 		}
 
 		CCodeExpression serialize_basic(BasicTypeInfo basic_type, CCodeExpression expr) {
@@ -792,7 +792,7 @@ namespace CCodeGen.Modules {
 			CCodeExpression result = null;
 			if (is_string_marshalled_enum(type.data_type)) {
 				get_basic_type_info("s", out basic_type);
-				result = generate_enum_value_to_string(type as EnumValueType, expr);
+				result = generate_enum_value_ToString(type as EnumValueType, expr);
 				result = serialize_basic(basic_type, result);
 			} else if (get_basic_type_info(get_type_signature(type), out basic_type)) {
 				result = serialize_basic(basic_type, expr);
@@ -815,7 +815,7 @@ namespace CCodeGen.Modules {
 			}
 
 			if (result == null) {
-				Report.error(type.source_reference, "GVariant serialization of type `%s' is not supported".printf(type.to_string()));
+				Report.error(type.source_reference, "GVariant serialization of type `%s' is not supported".printf(type.ToString()));
 			}
 
 			return result;

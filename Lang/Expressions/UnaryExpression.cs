@@ -79,8 +79,8 @@ namespace Vala.Lang.Expressions {
 			return null;
 		}
 
-		public override string to_string() {
-			return get_operator_string() + _inner.to_string();
+		public override string ToString() {
+			return get_operator_string() + _inner.ToString();
 		}
 
 		public override bool is_constant() {
@@ -168,7 +168,7 @@ namespace Vala.Lang.Expressions {
 				// integer or floating point type
 				if (!is_numeric_type(inner.value_type)) {
 					error = true;
-					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.to_string()));
+					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.ToString()));
 					return false;
 				}
 
@@ -177,7 +177,7 @@ namespace Vala.Lang.Expressions {
 				// boolean type
 				if (!inner.value_type.compatible(context.analyzer.bool_type)) {
 					error = true;
-					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.to_string()));
+					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.ToString()));
 					return false;
 				}
 
@@ -186,7 +186,7 @@ namespace Vala.Lang.Expressions {
 				// integer type
 				if (!is_integer_type(inner.value_type) && !(inner.value_type is EnumValueType)) {
 					error = true;
-					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.to_string()));
+					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.ToString()));
 					return false;
 				}
 
@@ -196,7 +196,7 @@ namespace Vala.Lang.Expressions {
 				// integer type
 				if (!is_integer_type(inner.value_type)) {
 					error = true;
-					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.to_string()));
+					Report.error(source_reference, "Operator not supported for `%s'".printf(inner.value_type.ToString()));
 					return false;
 				}
 

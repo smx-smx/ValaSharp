@@ -40,7 +40,7 @@ namespace Vala.Lang.Literals {
 			visitor.visit_expression(this);
 		}
 
-		public override string to_string() {
+		public override string ToString() {
 			return value;
 		}
 

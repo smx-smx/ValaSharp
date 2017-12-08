@@ -42,8 +42,8 @@ namespace CCodeGen.Modules {
 					check_type_arguments(ma);
 				}
 
-				if (ma.inner != null && ma.inner.value_type is EnumValueType && ((EnumValueType)ma.inner.value_type).get_to_string_method() == m) {
-					// Enum.VALUE.to_string()
+				if (ma.inner != null && ma.inner.value_type is EnumValueType && ((EnumValueType)ma.inner.value_type).get_ToString_method() == m) {
+					// Enum.VALUE.ToString()
 					var en = (ValaEnum)ma.inner.value_type.data_type;
 					ccall.call = new CCodeIdentifier(generate_enum_tostring_function(en));
 				} else if (expr.is_constructv_chainup) {
@@ -853,15 +853,15 @@ namespace CCodeGen.Modules {
 		}
 
 		private string generate_enum_tostring_function(ValaEnum en) {
-			var to_string_func = "_%s_to_string".printf(get_ccode_lower_case_name(en));
+			var ToString_func = "_%s_ToString".printf(get_ccode_lower_case_name(en));
 
-			if (!add_wrapper(to_string_func)) {
+			if (!add_wrapper(ToString_func)) {
 				// wrapper already defined
-				return to_string_func;
+				return ToString_func;
 			}
 			// declaration
 
-			var function = new CCodeFunction(to_string_func, "const char*");
+			var function = new CCodeFunction(ToString_func, "const char*");
 			function.modifiers = CCodeModifiers.STATIC;
 
 			function.add_parameter(new CCodeParameter("value", get_ccode_name(en)));
@@ -884,7 +884,7 @@ namespace CCodeGen.Modules {
 
 			pop_context();
 
-			return to_string_func;
+			return ToString_func;
 		}
 	}
 }

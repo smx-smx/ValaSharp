@@ -120,8 +120,8 @@ namespace Vala.Lang.Expressions {
 			return null;
 		}
 
-		public override string to_string() {
-			return _left.to_string() + get_operator_string() + _right.to_string();
+		public override string ToString() {
+			return _left.ToString() + get_operator_string() + _right.ToString();
 		}
 
 		public override bool is_constant() {
@@ -387,7 +387,7 @@ namespace Vala.Lang.Expressions {
 
 				if (value_type == null) {
 					error = true;
-					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					return false;
 				}
 			} else if (Operator == BinaryOperator.MOD
@@ -400,7 +400,7 @@ namespace Vala.Lang.Expressions {
 
 				if (value_type == null) {
 					error = true;
-					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					return false;
 				}
 			} else if (Operator == BinaryOperator.LESS_THAN
@@ -424,7 +424,7 @@ namespace Vala.Lang.Expressions {
 
 					if (resulting_type == null) {
 						error = true;
-						Report.error(source_reference, "Relational operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+						Report.error(source_reference, "Relational operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 						return false;
 					}
 
@@ -443,7 +443,7 @@ namespace Vala.Lang.Expressions {
 
 				if (!right.value_type.compatible(left.value_type)
 					&& !left.value_type.compatible(right.value_type)) {
-					Report.error(source_reference, "Equality operation: `%s' and `%s' are incompatible".printf(right.value_type.to_string(), left.value_type.to_string()));
+					Report.error(source_reference, "Equality operation: `%s' and `%s' are incompatible".printf(right.value_type.ToString(), left.value_type.ToString()));
 					error = true;
 					return false;
 				}
@@ -494,13 +494,13 @@ namespace Vala.Lang.Expressions {
 					right.target_type.nullable = false;
 				} else if (right.value_type is ArrayType) {
 					if (!left.value_type.compatible(((ArrayType)right.value_type).element_type)) {
-						Report.error(source_reference, "Cannot look for `%s' in `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+						Report.error(source_reference, "Cannot look for `%s' in `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					}
 				} else {
 					// otherwise require a bool contains () method
 					var contains_method = right.value_type.get_member("contains") as Method;
 					if (contains_method == null) {
-						Report.error(source_reference, "`%s' does not have a `contains' method".printf(right.value_type.to_string()));
+						Report.error(source_reference, "`%s' does not have a `contains' method".printf(right.value_type.ToString()));
 						error = true;
 						return false;
 					}

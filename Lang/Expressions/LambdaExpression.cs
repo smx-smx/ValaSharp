@@ -121,7 +121,7 @@ namespace Vala.Lang.Expressions {
 			if (!(target_type is DelegateType)) {
 				error = true;
 				if (target_type != null) {
-					Report.error(source_reference, "Cannot convert lambda expression to `%s'".printf(target_type.to_string()));
+					Report.error(source_reference, "Cannot convert lambda expression to `%s'".printf(target_type.ToString()));
 				} else {
 					Report.error(source_reference, "lambda expression not allowed in this context");
 				}

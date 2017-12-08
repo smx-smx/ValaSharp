@@ -157,7 +157,7 @@ namespace Vala.Lang.Expressions {
 					while (field == null) {
 						if (!field_it.MoveNext()) {
 							this.error = true;
-							Report.error(e.source_reference, "too many expressions in initializer list for `%s'".printf(target_type.to_string()));
+							Report.error(e.source_reference, "too many expressions in initializer list for `%s'".printf(target_type.ToString()));
 							return false;
 						}
 						field = field_it.Current;
@@ -174,7 +174,7 @@ namespace Vala.Lang.Expressions {
 				}
 			} else {
 				this.error = true;
-				Report.error(source_reference, "initializer list used for `%s', which is neither array nor struct".printf(target_type.to_string()));
+				Report.error(source_reference, "initializer list used for `%s', which is neither array nor struct".printf(target_type.ToString()));
 				return false;
 			}
 
@@ -196,7 +196,7 @@ namespace Vala.Lang.Expressions {
 				} else if (!e.value_type.compatible(e.target_type)) {
 					error = true;
 					e.error = true;
-					Report.error(e.source_reference, "Expected initializer of type `%s' but got `%s'".printf(e.target_type.to_string(), e.value_type.to_string()));
+					Report.error(e.source_reference, "Expected initializer of type `%s' but got `%s'".printf(e.target_type.ToString(), e.value_type.ToString()));
 				}
 			}
 

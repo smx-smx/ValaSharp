@@ -112,7 +112,7 @@ namespace Vala.Lang.Symbols {
 
 			if (!check_const_type(type_reference, context)) {
 				error = true;
-				Report.error(source_reference, "`%s' not supported as type for constants".printf(type_reference.to_string()));
+				Report.error(source_reference, "`%s' not supported as type for constants".printf(type_reference.ToString()));
 				return false;
 			}
 
@@ -130,7 +130,7 @@ namespace Vala.Lang.Symbols {
 
 					if (!value.value_type.compatible(type_reference)) {
 						error = true;
-						Report.error(source_reference, "Cannot convert from `%s' to `%s'".printf(value.value_type.to_string(), type_reference.to_string()));
+						Report.error(source_reference, "Cannot convert from `%s' to `%s'".printf(value.value_type.ToString(), type_reference.ToString()));
 						return false;
 					}
 
