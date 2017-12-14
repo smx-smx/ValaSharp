@@ -18,6 +18,9 @@ namespace Vala.Lang {
 			ALWAYS
 		}
 
+		public event EventHandler<ReportEventArgs> OnReport;
+
+
 		/**
  * SGR (Select Graphic Rendition) end tag
  */
@@ -365,19 +368,29 @@ namespace Vala.Lang {
 
 		/* Convenience methods calling warn and err on correct instance */
 		public static void notice(SourceReference source, string message) {
-			CodeContext.get().report.note(source, message);
+			var report = CodeContext.get().report;
+			report.note(source, message);
+			report.OnReport?.Invoke(report, new ReportEventArgs(ReportType.Notice, message, source));
 		}
 		public static void deprecated(SourceReference source, string message) {
-			CodeContext.get().report.depr(source, message);
+			var report = CodeContext.get().report;
+			report.depr(source, message);
+			report.OnReport?.Invoke(report, new ReportEventArgs(ReportType.Deprecated, message, source));
 		}
 		public static void experimental(SourceReference source, string message) {
-			CodeContext.get().report.depr(source, message);
+			var report = CodeContext.get().report;
+			report.depr(source, message);
+			report.OnReport?.Invoke(report, new ReportEventArgs(ReportType.Experimental, message, source));
 		}
 		public static void warning(SourceReference source, string message) {
-			CodeContext.get().report.warn(source, message);
+			var report = CodeContext.get().report;
+			report.warn(source, message);
+			report.OnReport?.Invoke(report, new ReportEventArgs(ReportType.Warning, message, source));
 		}
 		public static void error(SourceReference source, string message) {
-			CodeContext.get().report.err(source, message);
+			var report = CodeContext.get().report;
+			report.err(source, message);
+			report.OnReport?.Invoke(report, new ReportEventArgs(ReportType.Error, message, source));
 		}
 
 

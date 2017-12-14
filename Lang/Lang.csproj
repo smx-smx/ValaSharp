@@ -128,6 +128,7 @@
     <Compile Include="Property.cs" />
     <Compile Include="PropertyAccessor.cs" />
     <Compile Include="Report.cs" />
+    <Compile Include="ReportEventArgs.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="SemanticAnalyzer.cs" />
     <Compile Include="Parser\SourceFile.cs" />

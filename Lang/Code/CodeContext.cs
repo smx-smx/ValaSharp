@@ -59,6 +59,11 @@ namespace Vala.Lang.CodeNodes {
 		 */
 		public bool ccode_only { get; set; }
 
+		/// <summary>
+		/// Only check source for validity
+		/// </summary>
+		public bool dry_run { get; set; }
+
 		/**
 		 * Output C header file.
 		 */
@@ -203,7 +208,6 @@ namespace Vala.Lang.CodeNodes {
 		public static List<CodeContext> context_stack_key = null;
 
 		public static void DisposeStatic() {
-			Debug.WriteLine(string.Format("CodeContext: disposing {0} leftovers", context_stack_key.Count));
 			context_stack_key = new List<CodeContext>();
 		}
 

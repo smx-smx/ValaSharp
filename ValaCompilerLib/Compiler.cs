@@ -22,7 +22,7 @@ namespace ValaCompilerLib {
 		private const string DEFAULT_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
 
 		static bool run_output;
-		private CodeContext context;
+		public CodeContext context { get; private set; }
 		private CompilerOptions opts;
 
 		public Compiler(CompilerOptions opts) {
@@ -49,12 +49,19 @@ namespace ValaCompilerLib {
 			}
 		}
 
-		public int run() {
+		public void init() {
 			if (opts.valac_debug)
 				Debugger.Launch();
 
+			CodeContext.DisposeStatic();
+
 			context = new CodeContext();
 			CodeContext.push(context);
+		}
+
+		public int run() {
+			if (context == null)
+				init();
 
 			if (opts.disable_colored_output) {
 				opts.colored_output = Report.Colored.NEVER;
@@ -112,6 +119,8 @@ namespace ValaCompilerLib {
 			context.symbols_filename = opts.symbols_filename;
 			context.includedir = opts.includedir;
 			context.output = opts.output;
+			context.dry_run = opts.dry_run;
+
 			if (opts.output != null && opts.ccode_only) {
 				Report.warning(null, "--output and -o have no effect when -C or --ccode is set");
 			}
@@ -264,7 +273,7 @@ namespace ValaCompilerLib {
 				return quit();
 			}
 
-			if (!opts.ccode_only && !opts.compile_only && opts.library == null) {
+			if (!opts.dry_run && !opts.ccode_only && !opts.compile_only && opts.library == null) {
 				// building program, require entry point
 				if (!has_c_files && context.entry_point == null) {
 					Report.error(null, "program does not contain a static `main' method");
@@ -281,8 +290,13 @@ namespace ValaCompilerLib {
 				return quit();
 			}
 
-			context.codegen.emit(context);
+			if(!opts.dry_run)
+				context.codegen.emit(context);
+
 			parser.Dispose();
+
+			if (opts.dry_run)
+				return quit();
 
 			if (context.report.get_errors() > 0 || (opts.fatal_warnings && context.report.get_warnings() > 0)) {
 				return quit();

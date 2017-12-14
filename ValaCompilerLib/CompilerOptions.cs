@@ -33,6 +33,8 @@ namespace ValaCompilerLib {
 		public IList<string> gresources_directories;
 
 		public bool ccode_only;
+		public bool dry_run;
+
 		public string header_filename;
 		public bool use_header;
 		public string internal_header_filename;
@@ -162,6 +164,11 @@ namespace ValaCompilerLib {
 					"ccode", 'C', 0, OptionArg.NONE,
 					"Output C code", null,
 					(value) => { ccode_only = value; }
+				),
+				new OptionEntry<bool>(
+					null, 'n', 0, OptionArg.NONE,
+					"Dry Run", null,
+					(value) => { dry_run = value; }
 				),
 				new OptionEntry<string>(
 					"header", 'H', 0, OptionArg.FILENAME,
