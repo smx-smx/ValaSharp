@@ -9,13 +9,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.CodeNodes {
-	/**
-	 * Represents a catch clause in a try statement in the source code.
-	 */
+	/// <summary>
+	/// Represents a catch clause in a try statement in the source code.
+	/// </summary>
 	public class CatchClause : CodeNode {
-		/**
-		 * Specifies the error type.
-		 */
+		/// <summary>
+		/// Specifies the error type.
+		/// </summary>
 		public DataType error_type {
 			get { return _data_type; }
 			set {
@@ -26,14 +26,14 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Specifies the error variable name.
-		 */
+		/// <summary>
+		/// Specifies the error variable name.
+		/// </summary>
 		public string variable_name { get; set; }
 
-		/**
-		 * Specifies the error handler body.
-		 */
+		/// <summary>
+		/// Specifies the error handler body.
+		/// </summary>
 		public Block body {
 			get { return _body; }
 			set {
@@ -42,9 +42,9 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Specifies the declarator for the generated error variable.
-		 */
+		/// <summary>
+		/// Specifies the declarator for the generated error variable.
+		/// </summary>
 		public LocalVariable error_variable {
 			get { return _error_variable; }
 			set {
@@ -53,9 +53,9 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Specifies the label used for this catch clause in the C code.
-		 */
+		/// <summary>
+		/// Specifies the label used for this catch clause in the C code.
+		/// </summary>
 		public string clabel_name { get; set; }
 
 		private DataType _data_type;
@@ -63,15 +63,15 @@ namespace Vala.Lang.CodeNodes {
 		private Block _body;
 		private LocalVariable _error_variable;
 
-		/**
-		 * Creates a new catch
-		 *
-		 * @param error_type       error type
-		 * @param variable_name    error variable name
-		 * @param body             error handler body
-		 * @param source_reference reference to source code
-		 * @return                 newly created catch clause
-		 */
+		/// <summary>
+		/// Creates a new catch
+		/// 
+		/// <param name="error_type">error type</param>
+		/// <param name="variable_name">error variable name</param>
+		/// <param name="body">error handler body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created catch clause</returns>
+		/// </summary>
 		public CatchClause(DataType error_type, string variable_name, Block body, SourceReference source_reference = null) {
 			this.error_type = error_type;
 			this.variable_name = variable_name;

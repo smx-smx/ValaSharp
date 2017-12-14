@@ -30,9 +30,9 @@ namespace Vala.Lang.TypeSymbols {
 		private bool? _signed;
 		private bool? _is_immutable;
 
-		/**
-		 * Specifies the base type.
-		 */
+		/// <summary>
+		/// Specifies the base type.
+		/// </summary>
 		public DataType base_type {
 			get {
 				return _base_type;
@@ -43,9 +43,9 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Specifies the base Struct.
-		 */
+		/// <summary>
+		/// Specifies the base Struct.
+		/// </summary>
 		public Struct base_struct {
 			get {
 				if (_base_type != null) {
@@ -55,15 +55,15 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Specifies the default construction method.
-		 */
+		/// <summary>
+		/// Specifies the default construction method.
+		/// </summary>
 		public Method default_construction_method { get; set; }
 
-		/**
-		 * Specifies if 'const' should be emitted for input parameters
-		 * of this type.
-		 */
+		/// <summary>
+		/// Specifies if 'const' should be emitted for input parameters
+		/// of this type.
+		/// </summary>
 		public bool is_immutable {
 			get {
 				if (_is_immutable == null) {
@@ -111,50 +111,50 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Creates a new struct.
-		 *
-		 * @param name             type name
-		 * @param source_reference reference to source code
-		 * @return                 newly created struct
-		 */
+		/// <summary>
+		/// Creates a new struct.
+		/// 
+		/// <param name="name">type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created struct</returns>
+		/// </summary>
 		public Struct(string name, SourceReference source_reference = null, Comment comment = null)
 			: base(name, source_reference, comment) { }
 
-		/**
-		 * Appends the specified parameter to the list of type parameters.
-		 *
-		 * @param p a type parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of type parameters.
+		/// 
+		/// <param name="p">a type parameter</param>
+		/// </summary>
 		public void add_type_parameter(TypeParameter p) {
 			type_parameters.Add(p);
 			scope.add(p.name, p);
 		}
 
-		/**
-		 * Returns a copy of the type parameter list.
-		 *
-		 * @return list of type parameters
-		 */
+		/// <summary>
+		/// Returns a copy of the type parameter list.
+		/// 
+		/// <returns>list of type parameters</returns>
+		/// </summary>
 		public List<TypeParameter> get_type_parameters() {
 			return type_parameters;
 		}
 
-		/**
-		 * Adds the specified constant as a member to this struct.
-		 *
-		 * @param c a constant
-		 */
+		/// <summary>
+		/// Adds the specified constant as a member to this struct.
+		/// 
+		/// <param name="c">a constant</param>
+		/// </summary>
 		public override void add_constant(Constant c) {
 			constants.Add(c);
 			scope.add(c.name, c);
 		}
 
-		/**
-		 * Adds the specified field as a member to this struct.
-		 *
-		 * @param f a field
-		 */
+		/// <summary>
+		/// Adds the specified field as a member to this struct.
+		/// 
+		/// <param name="f">a field</param>
+		/// </summary>
 		public override void add_field(Field f) {
 			f.access = SymbolAccessibility.PUBLIC;
 
@@ -162,29 +162,29 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(f.name, f);
 		}
 
-		/**
-		 * Returns a copy of the list of fields.
-		 *
-		 * @return list of fields
-		 */
+		/// <summary>
+		/// Returns a copy of the list of fields.
+		/// 
+		/// <returns>list of fields</returns>
+		/// </summary>
 		public List<Field> get_fields() {
 			return fields;
 		}
 
-		/**
-		 * Returns a copy of the list of constants.
-		 *
-		 * @return list of constants
-		 */
+		/// <summary>
+		/// Returns a copy of the list of constants.
+		/// 
+		/// <returns>list of constants</returns>
+		/// </summary>
 		public List<Constant> get_constants() {
 			return constants;
 		}
 
-		/**
-		 * Adds the specified method as a member to this struct.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a member to this struct.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m == null) {
 				Trace.WriteLine("m != null failed");
@@ -218,20 +218,20 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(m.name, m);
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return list of methods
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>list of methods</returns>
+		/// </summary>
 		public List<Method> get_methods() {
 			return methods;
 		}
 
-		/**
-		 * Adds the specified property as a member to this struct.
-		 *
-		 * @param prop a property
-		 */
+		/// <summary>
+		/// Adds the specified property as a member to this struct.
+		/// 
+		/// <param name="prop">a property</param>
+		/// </summary>
 		public override void add_property(Property prop) {
 			properties.Add(prop);
 			scope.add(prop.name, prop);
@@ -244,11 +244,11 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Returns a copy of the list of properties.
-		 *
-		 * @return list of properties
-		 */
+		/// <summary>
+		/// Returns a copy of the list of properties.
+		/// 
+		/// <returns>list of properties</returns>
+		/// </summary>
 		public List<Property> get_properties() {
 			return properties;
 		}
@@ -283,11 +283,11 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Returns whether this is a boolean type.
-		 *
-		 * @return true if this is a boolean type, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether this is a boolean type.
+		/// 
+		/// <returns>true if this is a boolean type, false otherwise</returns>
+		/// </summary>
 		public bool is_boolean_type() {
 			var st = base_struct;
 			if (st != null && st.is_boolean_type()) {
@@ -299,11 +299,11 @@ namespace Vala.Lang.TypeSymbols {
 			return boolean_type.Value;
 		}
 
-		/**
-		 * Returns whether this is an integer type.
-		 *
-		 * @return true if this is an integer type, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether this is an integer type.
+		/// 
+		/// <returns>true if this is an integer type, false otherwise</returns>
+		/// </summary>
 		public bool is_integer_type() {
 			var st = base_struct;
 			if (st != null && st.is_integer_type()) {
@@ -315,11 +315,11 @@ namespace Vala.Lang.TypeSymbols {
 			return integer_type.Value;
 		}
 
-		/**
-		 * Returns whether this is a floating point type.
-		 *
-		 * @return true if this is a floating point type, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether this is a floating point type.
+		/// 
+		/// <returns>true if this is a floating point type, false otherwise</returns>
+		/// </summary>
 		public bool is_floating_type() {
 			var st = base_struct;
 			if (st != null && st.is_floating_type()) {
@@ -342,11 +342,11 @@ namespace Vala.Lang.TypeSymbols {
 			return decimal_floating_type.Value;
 		}
 
-		/**
-		 * Returns the rank of this integer or floating point type.
-		 *
-		 * @return the rank if this is an integer or floating point type
-		 */
+		/// <summary>
+		/// Returns the rank of this integer or floating point type.
+		/// 
+		/// <returns>the rank if this is an integer or floating point type</returns>
+		/// </summary>
 		public int get_rank() {
 			if (rank == null) {
 				if (is_integer_type() && has_attribute_argument("IntegerType", "rank")) {
@@ -363,9 +363,9 @@ namespace Vala.Lang.TypeSymbols {
 			return rank.Value;
 		}
 
-		/**
-		 * Sets the rank of this integer or floating point type.
-		 */
+		/// <summary>
+		/// Sets the rank of this integer or floating point type.
+		/// </summary>
 		public void set_rank(int rank) {
 			this.rank = rank;
 			if (is_integer_type()) {
@@ -388,10 +388,10 @@ namespace Vala.Lang.TypeSymbols {
 			return -1;
 		}
 
-		/**
-		 * Returns whether this struct is a simple type, i.e. whether
-		 * instances are passed by value.
-		 */
+		/// <summary>
+		/// Returns whether this struct is a simple type, i.e. whether
+		/// instances are passed by value.
+		/// </summary>
 		public bool is_simple_type() {
 			var st = base_struct;
 			if (st != null && st.is_simple_type()) {
@@ -403,10 +403,10 @@ namespace Vala.Lang.TypeSymbols {
 			return simple_type.Value;
 		}
 
-		/**
-		 * Marks this struct as simple type, i.e. instances will be passed by
-		 * value.
-		 */
+		/// <summary>
+		/// Marks this struct as simple type, i.e. instances will be passed by
+		/// value.
+		/// </summary>
 		public void set_simple_type(bool simple_type) {
 			this.simple_type = simple_type;
 			set_attribute("SimpleType", simple_type);

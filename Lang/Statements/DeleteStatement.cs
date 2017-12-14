@@ -10,17 +10,17 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a delete statement e.g. "delete a".
- */
+	/// <summary>
+	/// Represents a delete statement e.g. "delete a".
+	/// </summary>
 	public class DeleteStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Expression representing the instance to be freed.
-		 */
+		/// <summary>
+		/// Expression representing the instance to be freed.
+		/// </summary>
 		public Expression expression {
 			get { return _expression; }
 			set {

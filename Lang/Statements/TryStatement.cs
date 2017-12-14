@@ -9,17 +9,17 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a try statement in the source code.
- */
+	/// <summary>
+	/// Represents a try statement in the source code.
+	/// </summary>
 	public class TryStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the body of the try statement.
-		 */
+		/// <summary>
+		/// Specifies the body of the try statement.
+		/// </summary>
 		public Block body {
 			get { return _body; }
 			set {
@@ -28,9 +28,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the body of the optional finally clause.
-		 */
+		/// <summary>
+		/// Specifies the body of the optional finally clause.
+		/// </summary>
 		public Block finally_body {
 			get { return _finally_body; }
 			set {
@@ -46,35 +46,35 @@ namespace Vala.Lang.Statements {
 		private Block _finally_body;
 		private List<CatchClause> catch_clauses = new List<CatchClause>();
 
-		/**
-		 * Creates a new try statement.
-		 *
-		 * @param body             body of the try statement
-		 * @param finally_body     body of the optional finally clause
-		 * @param source_reference reference to source code
-		 * @return                 newly created try statement
-		 */
+		/// <summary>
+		/// Creates a new try statement.
+		/// 
+		/// <param name="body">body of the try statement</param>
+		/// <param name="finally_body">body of the optional finally clause</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created try statement</returns>
+		/// </summary>
 		public TryStatement(Block body, Block finally_body, SourceReference source_reference = null) {
 			this.body = body;
 			this.finally_body = finally_body;
 			this.source_reference = source_reference;
 		}
 
-		/**
-		 * Appends the specified clause to the list of catch clauses.
-		 *
-		 * @param clause a catch clause
-		 */
+		/// <summary>
+		/// Appends the specified clause to the list of catch clauses.
+		/// 
+		/// <param name="clause">a catch clause</param>
+		/// </summary>
 		public void add_catch_clause(CatchClause clause) {
 			clause.parent_node = this;
 			catch_clauses.Add(clause);
 		}
 
-		/**
-		 * Returns a copy of the list of catch clauses.
-		 *
-		 * @return list of catch clauses
-		 */
+		/// <summary>
+		/// Returns a copy of the list of catch clauses.
+		/// 
+		/// <returns>list of catch clauses</returns>
+		/// </summary>
 		public List<CatchClause> get_catch_clauses() {
 			return catch_clauses;
 		}

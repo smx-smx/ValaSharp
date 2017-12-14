@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
-	 * Represents a case block in a switch statement in C code.
-	 */
+	/// <summary>
+	/// Represents a case block in a switch statement in C code.
+	/// </summary>
 	public class CCodeCaseStatement : CCodeStatement {
-		/**
-		 * The case expression.
-		 */
+		/// <summary>
+		/// The case expression.
+		/// </summary>
 		public CCodeExpression expression { get; set; }
 
 		public CCodeCaseStatement(CCodeExpression expression) {

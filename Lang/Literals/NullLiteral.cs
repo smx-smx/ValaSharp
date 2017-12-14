@@ -9,16 +9,16 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Literals {
-	/**
-	 * Represents a literal `null` in the source code.
-	 */
+	/// <summary>
+	/// Represents a literal `null` in the source code.
+	/// </summary>
 	public class NullLiteral : Literal {
-		/**
-		 * Creates a new null literal.
-		 *
-		 * @param source reference to source code
-		 * @return       newly created null literal
-		 */
+		/// <summary>
+		/// Creates a new null literal.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created null literal</returns>
+		/// </summary>
 		public NullLiteral(SourceReference source = null) {
 			source_reference = source;
 		}

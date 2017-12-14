@@ -13,28 +13,28 @@ using Vala;
 using ValaConfig;
 
 namespace CLanguage {
-	/**
-	 * Represents a writer to write C source files.
-	 */
+	/// <summary>
+	/// Represents a writer to write C source files.
+	/// </summary>
 	public class CCodeWriter {
-		/**
-		 * Specifies the file to be written.
-		 */
+		/// <summary>
+		/// Specifies the file to be written.
+		/// </summary>
 		public string filename { get; set; }
 
-		/**
-		 * Specifies the source file used to generate this one.
-		 */
+		/// <summary>
+		/// Specifies the source file used to generate this one.
+		/// </summary>
 		private string source_filename;
 
-		/**
-		 * Specifies whether to emit line directives.
-		 */
+		/// <summary>
+		/// Specifies whether to emit line directives.
+		/// </summary>
 		public bool line_directives { get; set; }
 
-		/**
-		 * Specifies whether the output stream is at the beginning of a line.
-		 */
+		/// <summary>
+		/// Specifies whether the output stream is at the beginning of a line.
+		/// </summary>
 		public bool bol {
 			get { return _bol; }
 		}
@@ -58,12 +58,12 @@ namespace CLanguage {
 			this.source_filename = source_filename;
 		}
 
-		/**
-		 * Opens the file.
-		 *
-		 * @return true if the file has been opened successfully,
-		 *         false otherwise
-		 */
+		/// <summary>
+		/// Opens the file.
+		/// 
+		/// <returns>true if the file has been opened successfully,</returns>
+		/// false otherwise
+		/// </summary>
 		public bool open(bool write_version) {
 			file_exists = File.Exists(filename);
 			if (file_exists) {
@@ -101,9 +101,9 @@ namespace CLanguage {
 			return true;
 		}
 
-		/**
-		 * Closes the file.
-		 */
+		/// <summary>
+		/// Closes the file.
+		/// </summary>
 		public void close() {
 			stream.Dispose();
 
@@ -153,9 +153,9 @@ namespace CLanguage {
 			}
 		}
 
-		/**
-		 * Writes tabs according to the current indent level.
-		 */
+		/// <summary>
+		/// Writes tabs according to the current indent level.
+		/// </summary>
 		public void write_indent(CCodeLineDirective line = null) {
 			if (line_directives) {
 				if (line != null) {
@@ -180,28 +180,28 @@ namespace CLanguage {
 			_bol = false;
 		}
 
-		/**
-		 * Writes the specified string.
-		 *
-		 * @param s a string
-		 */
+		/// <summary>
+		/// Writes the specified string.
+		/// 
+		/// <param name="s">a string</param>
+		/// </summary>
 		public void write_string(string s) {
 			stream.puts(s);
 			_bol = false;
 		}
 
-		/**
-		 * Writes a newline.
-		 */
+		/// <summary>
+		/// Writes a newline.
+		/// </summary>
 		public void write_newline() {
 			stream.putc('\n');
 			current_line_number++;
 			_bol = true;
 		}
 
-		/**
-		 * Opens a new block, increasing the indent level.
-		 */
+		/// <summary>
+		/// Opens a new block, increasing the indent level.
+		/// </summary>
 		public void write_begin_block() {
 			if (!_bol) {
 				stream.putc(' ');
@@ -213,9 +213,9 @@ namespace CLanguage {
 			indent++;
 		}
 
-		/**
-		 * Closes the current block, decreasing the indent level.
-		 */
+		/// <summary>
+		/// Closes the current block, decreasing the indent level.
+		/// </summary>
 		public void write_end_block() {
 			Debug.Assert(indent > 0);
 
@@ -224,11 +224,11 @@ namespace CLanguage {
 			stream.putc('}');
 		}
 
-		/**
-		 * Writes the specified text as comment.
-		 *
-		 * @param text the comment text
-		 */
+		/// <summary>
+		/// Writes the specified text as comment.
+		/// 
+		/// <param name="text">the comment text</param>
+		/// </summary>
 		public void write_comment(string text) {
 			try {
 				write_indent();

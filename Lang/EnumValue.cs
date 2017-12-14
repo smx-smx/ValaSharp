@@ -10,13 +10,13 @@ using Vala.Lang.Symbols;
 
 namespace Vala.Lang {
 	public class EnumValue : Constant {
-		/**
-	 * Creates a new enum value with the specified numerical representation.
-	 *
-	 * @param name  enum value name
-	 * @param value numerical representation
-	 * @return      newly created enum value
-	 */
+		/// <summary>
+		/// Creates a new enum value with the specified numerical representation.
+		/// 
+		/// <param name="name">enum value name</param>
+		/// <param name="value">numerical representation</param>
+		/// <returns>newly created enum value</returns>
+		/// </summary>
 		public EnumValue(string name, Expression value, SourceReference source_reference = null, Comment comment = null)
 			: base(name, null, value, source_reference, comment) {
 		}

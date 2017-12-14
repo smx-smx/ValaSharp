@@ -8,21 +8,21 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
 namespace CCodeGen {
-	/**
-	 * C function to register an enum at runtime.
-	 */
+	/// <summary>
+	/// C function to register an enum at runtime.
+	/// </summary>
 	public class EnumRegisterFunction : TypeRegisterFunction {
-		/**
-		 * Specifies the enum to be registered.
-		 */
+		/// <summary>
+		/// Specifies the enum to be registered.
+		/// </summary>
 		public ValaEnum enum_reference { get; set; }
 
-		/**
-		 * Creates a new C function to register the specified enum at runtime.
-		 *
-		 * @param en an enum
-		 * @return   newly created enum register function
-		 */
+		/// <summary>
+		/// Creates a new C function to register the specified enum at runtime.
+		/// 
+		/// <param name="en">an enum</param>
+		/// <returns>newly created enum register function</returns>
+		/// </summary>
 		public EnumRegisterFunction(ValaEnum en, CodeContext context) {
 			enum_reference = en;
 			this.context = context;

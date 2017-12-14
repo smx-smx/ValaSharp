@@ -8,11 +8,11 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.Code {
 	public abstract class CodeGenerator : CodeVisitor {
-		/**
-	 * Generate and emit C code for the specified code context.
-	 *
-	 * @param context a code context
-	 */
+		/// <summary>
+		/// Generate and emit C code for the specified code context.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public virtual void emit(CodeContext context) {
 		}
 

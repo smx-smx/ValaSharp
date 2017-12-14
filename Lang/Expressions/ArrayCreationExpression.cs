@@ -11,13 +11,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an array creation expression e.g. {{{ new int[] {1,2,3} }}}.
-	 */
+	/// <summary>
+	/// Represents an array creation expression e.g. {{{ new int[] {1,2,3} }}}.
+	/// </summary>
 	public class ArrayCreationExpression : Expression {
-		/**
-		 * The type of the elements of the array.
-		 */
+		/// <summary>
+		/// The type of the elements of the array.
+		/// </summary>
 		public DataType element_type {
 			get { return _element_type; }
 			set {
@@ -26,19 +26,19 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The rank of the array.
-		 */
+		/// <summary>
+		/// The rank of the array.
+		/// </summary>
 		public int rank { get; set; }
 
-		/**
-		 * The size for each dimension ascending from left to right.
-		 */
+		/// <summary>
+		/// The size for each dimension ascending from left to right.
+		/// </summary>
 		private List<Expression> sizes = new List<Expression>();
 
-		/**
-		 * The root array initializer list.
-		 */
+		/// <summary>
+		/// The root array initializer list.
+		/// </summary>
 		public InitializerList initializer_list {
 			get { return _initializer_list; }
 			set {
@@ -52,9 +52,9 @@ namespace Vala.Lang.Expressions {
 		private DataType _element_type;
 		private InitializerList _initializer_list;
 
-		/**
-		 * Add a size expression.
-		 */
+		/// <summary>
+		/// Add a size expression.
+		/// </summary>
 		public void append_size(Expression size) {
 			sizes.Add(size);
 			if (size != null) {
@@ -62,9 +62,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Get the sizes for all dimensions ascending from left to right.
-		 */
+		/// <summary>
+		/// Get the sizes for all dimensions ascending from left to right.
+		/// </summary>
 		public List<Expression> get_sizes() {
 			return sizes;
 		}

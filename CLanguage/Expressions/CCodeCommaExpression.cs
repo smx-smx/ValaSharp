@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Expressions {
-	/**
-	 * Represents a comma separated expression list in the C code.
-	 */
+	/// <summary>
+	/// Represents a comma separated expression list in the C code.
+	/// </summary>
 	public class CCodeCommaExpression : CCodeExpression {
 		private List<CCodeExpression> inner = new List<CCodeExpression>();
 
-		/**
-		 * Appends the specified expression to the expression list.
-		 *
-		 * @param expr a C code expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the expression list.
+		/// 
+		/// <param name="expr">a C code expression</param>
+		/// </summary>
 		public void append_expression(CCodeExpression expr) {
 			inner.Add(expr);
 		}

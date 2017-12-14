@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using Vala;
 
 namespace CLanguage {
-	/**
-	 * Represents a line directive in the C code.
-	 */
+	/// <summary>
+	/// Represents a line directive in the C code.
+	/// </summary>
 	public class CCodeLineDirective : CCodeNode {
-		/**
-		 * The name of the source file to be presumed.
-		 */
+		/// <summary>
+		/// The name of the source file to be presumed.
+		/// </summary>
 		public string filename { get; set; }
 
-		/**
-		 * The line number in the source file to be presumed.
-		 */
+		/// <summary>
+		/// The line number in the source file to be presumed.
+		/// </summary>
 		public int line_number { get; set; }
 
 		public CCodeLineDirective(string _filename, int _line) {

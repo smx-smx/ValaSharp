@@ -6,23 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents a preprocessor macro replacement definition in the C code.
- */
+	/// <summary>
+	/// Represents a preprocessor macro replacement definition in the C code.
+	/// </summary>
 	public class CCodeMacroReplacement : CCodeNode {
-		/**
-		 * The name of this macro.
-		 */
+		/// <summary>
+		/// The name of this macro.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * The replacement of this macro.
-		 */
+		/// <summary>
+		/// The replacement of this macro.
+		/// </summary>
 		public string replacement { get; set; }
 
-		/**
-		 * The replacement expression of this macro.
-		 */
+		/// <summary>
+		/// The replacement expression of this macro.
+		/// </summary>
 		public CCodeExpression replacement_expression { get; set; }
 
 		public CCodeMacroReplacement(string name, string replacement) {

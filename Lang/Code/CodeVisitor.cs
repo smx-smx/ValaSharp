@@ -13,648 +13,648 @@ using Vala.Lang.Statements;
 using Vala.Lang.Literals;
 
 namespace Vala.Lang.CodeNodes {
-	/**
-	* Abstract code node visitor for traversing source code tree.
-	*/
+	/// <summary>
+	/// Abstract code node visitor for traversing source code tree.
+	/// </summary>
 	public abstract class CodeVisitor {
-		/**
-		* Visit operation called for source files.
-		*
-		* @param source_file a source file
-		*/
+		/// <summary>
+		/// Visit operation called for source files.
+		/// 
+		/// <param name="source_file">a source file</param>
+		/// </summary>
 		public virtual void visit_source_file(SourceFile source_file) {
 		}
 
-		/**
-		* Visit operation called for namespaces.
-		*
-		* @param ns a namespace
-		*/
+		/// <summary>
+		/// Visit operation called for namespaces.
+		/// 
+		/// <param name="ns">a namespace</param>
+		/// </summary>
 		public virtual void visit_namespace(Namespace ns) {
 		}
 
-		/**
-		* Visit operation called for classes.
-		*
-		* @param cl a class
-		*/
+		/// <summary>
+		/// Visit operation called for classes.
+		/// 
+		/// <param name="cl">a class</param>
+		/// </summary>
 		public virtual void visit_class(Class cl) {
 		}
 
-		/**
-		* Visit operation called for structs.
-		*
-		* @param st a struct
-		*/
+		/// <summary>
+		/// Visit operation called for structs.
+		/// 
+		/// <param name="st">a struct</param>
+		/// </summary>
 		public virtual void visit_struct(Struct st) {
 		}
 
-		/**
-		* Visit operation called for interfaces.
-		*
-		* @param iface an interface
-		*/
+		/// <summary>
+		/// Visit operation called for interfaces.
+		/// 
+		/// <param name="iface">an interface</param>
+		/// </summary>
 		public virtual void visit_interface(Interface iface) {
 		}
 
-		/**
-		* Visit operation called for enums.
-		*
-		* @param en an enum
-		*/
+		/// <summary>
+		/// Visit operation called for enums.
+		/// 
+		/// <param name="en">an enum</param>
+		/// </summary>
 		public virtual void visit_enum(ValaEnum en) {
 		}
 
-		/**
-		* Visit operation called for enum values.
-		*
-		* @param ev an enum value
-		*/
+		/// <summary>
+		/// Visit operation called for enum values.
+		/// 
+		/// <param name="ev">an enum value</param>
+		/// </summary>
 		public virtual void visit_enum_value(EnumValue ev) {
 		}
 
-		/**
-		* Visit operation called for error domains.
-		*
-		* @param edomain an error domain
-		*/
+		/// <summary>
+		/// Visit operation called for error domains.
+		/// 
+		/// <param name="edomain">an error domain</param>
+		/// </summary>
 		public virtual void visit_error_domain(ErrorDomain edomain) {
 		}
 
-		/**
-		* Visit operation called for error codes.
-		*
-		* @param ecode an error code
-		*/
+		/// <summary>
+		/// Visit operation called for error codes.
+		/// 
+		/// <param name="ecode">an error code</param>
+		/// </summary>
 		public virtual void visit_error_code(ErrorCode ecode) {
 		}
 
-		/**
-		* Visit operation called for delegates.
-		*
-		* @param d a delegate
-		*/
+		/// <summary>
+		/// Visit operation called for delegates.
+		/// 
+		/// <param name="d">a delegate</param>
+		/// </summary>
 		public virtual void visit_delegate(ValaDelegate d) {
 		}
 
-		/**
-		* Visit operation called for constants.
-		*
-		* @param c a constant
-		*/
+		/// <summary>
+		/// Visit operation called for constants.
+		/// 
+		/// <param name="c">a constant</param>
+		/// </summary>
 		public virtual void visit_constant(Constant c) {
 		}
 
-		/**
-		* Visit operation called for fields.
-		*
-		* @param f a field
-		*/
+		/// <summary>
+		/// Visit operation called for fields.
+		/// 
+		/// <param name="f">a field</param>
+		/// </summary>
 		public virtual void visit_field(Field f) {
 		}
 
-		/**
-		* Visit operation called for methods.
-		*
-		* @param m a method
-		*/
+		/// <summary>
+		/// Visit operation called for methods.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public virtual void visit_method(Method m) {
 		}
 
-		/**
-		* Visit operation called for creation methods.
-		*
-		* @param m a method
-		*/
+		/// <summary>
+		/// Visit operation called for creation methods.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public virtual void visit_creation_method(CreationMethod m) {
 		}
 
-		/**
-		* Visit operation called for formal parameters.
-		*
-		* @param p a formal parameter
-		*/
+		/// <summary>
+		/// Visit operation called for formal parameters.
+		/// 
+		/// <param name="p">a formal parameter</param>
+		/// </summary>
 		public virtual void visit_formal_parameter(Parameter p) {
 		}
 
-		/**
-		* Visit operation called for properties.
-		*
-		* @param prop a property
-		*/
+		/// <summary>
+		/// Visit operation called for properties.
+		/// 
+		/// <param name="prop">a property</param>
+		/// </summary>
 		public virtual void visit_property(Property prop) {
 		}
 
-		/**
-		* Visit operation called for property accessors.
-		*
-		* @param acc a property accessor
-		*/
+		/// <summary>
+		/// Visit operation called for property accessors.
+		/// 
+		/// <param name="acc">a property accessor</param>
+		/// </summary>
 		public virtual void visit_property_accessor(PropertyAccessor acc) {
 		}
 
-		/**
-		* Visit operation called for signals.
-		*
-		* @param sig a signal
-		*/
+		/// <summary>
+		/// Visit operation called for signals.
+		/// 
+		/// <param name="sig">a signal</param>
+		/// </summary>
 		public virtual void visit_signal(Signal sig) {
 		}
 
-		/**
-		* Visit operation called for constructors.
-		*
-		* @param c a constructor
-		*/
+		/// <summary>
+		/// Visit operation called for constructors.
+		/// 
+		/// <param name="c">a constructor</param>
+		/// </summary>
 		public virtual void visit_constructor(Constructor c) {
 		}
 
-		/**
-		* Visit operation called for destructors.
-		*
-		* @param d a destructor
-		*/
+		/// <summary>
+		/// Visit operation called for destructors.
+		/// 
+		/// <param name="d">a destructor</param>
+		/// </summary>
 		public virtual void visit_destructor(Destructor d) {
 		}
 
-		/**
-		* Visit operation called for type parameters.
-		*
-		* @param p a type parameter
-		*/
+		/// <summary>
+		/// Visit operation called for type parameters.
+		/// 
+		/// <param name="p">a type parameter</param>
+		/// </summary>
 		public virtual void visit_type_parameter(TypeParameter p) {
 		}
 
-		/**
-		* Visit operation called for using directives.
-		*
-		* @param ns a using directive
-		*/
+		/// <summary>
+		/// Visit operation called for using directives.
+		/// 
+		/// <param name="ns">a using directive</param>
+		/// </summary>
 		public virtual void visit_using_directive(UsingDirective ns) {
 		}
 
-		/**
-		* Visit operation called for type references.
-		*
-		* @param type a type reference
-		*/
+		/// <summary>
+		/// Visit operation called for type references.
+		/// 
+		/// <param name="type">a type reference</param>
+		/// </summary>
 		public virtual void visit_data_type(DataType type) {
 		}
 
-		/**
-		* Visit operation called for blocks.
-		*
-		* @param b a block
-		*/
+		/// <summary>
+		/// Visit operation called for blocks.
+		/// 
+		/// <param name="b">a block</param>
+		/// </summary>
 		public virtual void visit_block(Block b) {
 		}
 
-		/**
-		* Visit operation called for empty statements.
-		*
-		* @param stmt an empty statement
-		*/
+		/// <summary>
+		/// Visit operation called for empty statements.
+		/// 
+		/// <param name="stmt">an empty statement</param>
+		/// </summary>
 		public virtual void visit_empty_statement(EmptyStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for declaration statements.
-		*
-		* @param stmt a declaration statement
-		*/
+		/// <summary>
+		/// Visit operation called for declaration statements.
+		/// 
+		/// <param name="stmt">a declaration statement</param>
+		/// </summary>
 		public virtual void visit_declaration_statement(DeclarationStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for local variables.
-		*
-		* @param local a local variable
-		*/
+		/// <summary>
+		/// Visit operation called for local variables.
+		/// 
+		/// <param name="local">a local variable</param>
+		/// </summary>
 		public virtual void visit_local_variable(LocalVariable local) {
 		}
 
-		/**
-		* Visit operation called for initializer lists
-		*
-		* @param list an initializer list
-		*/
+		/// <summary>
+		/// Visit operation called for initializer lists
+		/// 
+		/// <param name="list">an initializer list</param>
+		/// </summary>
 		public virtual void visit_initializer_list(InitializerList list) {
 		}
 
-		/**
-		* Visit operation called for expression statements.
-		*
-		* @param stmt an expression statement
-		*/
+		/// <summary>
+		/// Visit operation called for expression statements.
+		/// 
+		/// <param name="stmt">an expression statement</param>
+		/// </summary>
 		public virtual void visit_expression_statement(ExpressionStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for if statements.
-		*
-		* @param stmt an if statement
-		*/
+		/// <summary>
+		/// Visit operation called for if statements.
+		/// 
+		/// <param name="stmt">an if statement</param>
+		/// </summary>
 		public virtual void visit_if_statement(IfStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for switch statements.
-		*
-		* @param stmt a switch statement
-		*/
+		/// <summary>
+		/// Visit operation called for switch statements.
+		/// 
+		/// <param name="stmt">a switch statement</param>
+		/// </summary>
 		public virtual void visit_switch_statement(SwitchStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for switch sections.
-		*
-		* @param section a switch section
-		*/
+		/// <summary>
+		/// Visit operation called for switch sections.
+		/// 
+		/// <param name="section">a switch section</param>
+		/// </summary>
 		public virtual void visit_switch_section(SwitchSection section) {
 		}
 
-		/**
-		* Visit operation called for switch label.
-		*
-		* @param label a switch label
-		*/
+		/// <summary>
+		/// Visit operation called for switch label.
+		/// 
+		/// <param name="label">a switch label</param>
+		/// </summary>
 		public virtual void visit_switch_label(SwitchLabel label) {
 		}
 
-		/**
-		* Visit operation called for loops.
-		*
-		* @param stmt a loop
-		*/
+		/// <summary>
+		/// Visit operation called for loops.
+		/// 
+		/// <param name="stmt">a loop</param>
+		/// </summary>
 		public virtual void visit_loop(Loop stmt) {
 		}
 
-		/**
-		* Visit operation called for while statements.
-		*
-		* @param stmt an while statement
-		*/
+		/// <summary>
+		/// Visit operation called for while statements.
+		/// 
+		/// <param name="stmt">an while statement</param>
+		/// </summary>
 		public virtual void visit_while_statement(WhileStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for do statements.
-		*
-		* @param stmt a do statement
-		*/
+		/// <summary>
+		/// Visit operation called for do statements.
+		/// 
+		/// <param name="stmt">a do statement</param>
+		/// </summary>
 		public virtual void visit_do_statement(DoStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for for statements.
-		*
-		* @param stmt a for statement
-		*/
+		/// <summary>
+		/// Visit operation called for for statements.
+		/// 
+		/// <param name="stmt">a for statement</param>
+		/// </summary>
 		public virtual void visit_for_statement(ForStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for foreach statements.
-		*
-		* @param stmt a foreach statement
-		*/
+		/// <summary>
+		/// Visit operation called for foreach statements.
+		/// 
+		/// <param name="stmt">a foreach statement</param>
+		/// </summary>
 		public virtual void visit_foreach_statement(ForeachStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for break statements.
-		*
-		* @param stmt a break statement
-		*/
+		/// <summary>
+		/// Visit operation called for break statements.
+		/// 
+		/// <param name="stmt">a break statement</param>
+		/// </summary>
 		public virtual void visit_break_statement(BreakStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for continue statements.
-		*
-		* @param stmt a continue statement
-		*/
+		/// <summary>
+		/// Visit operation called for continue statements.
+		/// 
+		/// <param name="stmt">a continue statement</param>
+		/// </summary>
 		public virtual void visit_continue_statement(ContinueStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for return statements.
-		*
-		* @param stmt a return statement
-		*/
+		/// <summary>
+		/// Visit operation called for return statements.
+		/// 
+		/// <param name="stmt">a return statement</param>
+		/// </summary>
 		public virtual void visit_return_statement(ReturnStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for yield statement.
-		*
-		* @param y a yield statement
-		*/
+		/// <summary>
+		/// Visit operation called for yield statement.
+		/// 
+		/// <param name="y">a yield statement</param>
+		/// </summary>
 		public virtual void visit_yield_statement(YieldStatement y) {
 		}
 
-		/**
-		* Visit operation called for throw statements.
-		*
-		* @param stmt a throw statement
-		*/
+		/// <summary>
+		/// Visit operation called for throw statements.
+		/// 
+		/// <param name="stmt">a throw statement</param>
+		/// </summary>
 		public virtual void visit_throw_statement(ThrowStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for try statements.
-		*
-		* @param stmt a try statement
-		*/
+		/// <summary>
+		/// Visit operation called for try statements.
+		/// 
+		/// <param name="stmt">a try statement</param>
+		/// </summary>
 		public virtual void visit_try_statement(TryStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for catch clauses.
-		*
-		* @param clause a catch cluase
-		*/
+		/// <summary>
+		/// Visit operation called for catch clauses.
+		/// 
+		/// <param name="clause">a catch cluase</param>
+		/// </summary>
 		public virtual void visit_catch_clause(CatchClause clause) {
 		}
 
-		/**
-		* Visit operation called for lock statements before the body has been visited.
-		*
-		* @param stmt a lock statement
-		*/
+		/// <summary>
+		/// Visit operation called for lock statements before the body has been visited.
+		/// 
+		/// <param name="stmt">a lock statement</param>
+		/// </summary>
 		public virtual void visit_lock_statement(LockStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for unlock statements.
-		*
-		* @param stmt an unlock statement
-		*/
+		/// <summary>
+		/// Visit operation called for unlock statements.
+		/// 
+		/// <param name="stmt">an unlock statement</param>
+		/// </summary>
 		public virtual void visit_unlock_statement(UnlockStatement stmt) {
 		}
 
-		/**
-		* Visit operation called for delete statements.
-		*
-		* @param stmt a delete statement
-		*/
+		/// <summary>
+		/// Visit operation called for delete statements.
+		/// 
+		/// <param name="stmt">a delete statement</param>
+		/// </summary>
 		public virtual void visit_delete_statement(DeleteStatement stmt) {
 		}
 
-		/**
-		* Visit operations called for expresions.
-		*
-		* @param expr an expression
-		*/
+		/// <summary>
+		/// Visit operations called for expresions.
+		/// 
+		/// <param name="expr">an expression</param>
+		/// </summary>
 		public virtual void visit_expression(Expression expr) {
 		}
 
-		/**
-		* Visit operations called for array creation expresions.
-		*
-		* @param expr an array creation expression
-		*/
+		/// <summary>
+		/// Visit operations called for array creation expresions.
+		/// 
+		/// <param name="expr">an array creation expression</param>
+		/// </summary>
 		public virtual void visit_array_creation_expression(ArrayCreationExpression expr) {
 		}
 
-		/**
-		* Visit operation called for boolean literals.
-		*
-		* @param lit a boolean literal
-		*/
+		/// <summary>
+		/// Visit operation called for boolean literals.
+		/// 
+		/// <param name="lit">a boolean literal</param>
+		/// </summary>
 		public virtual void visit_boolean_literal(BooleanLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for character literals.
-		*
-		* @param lit a character literal
-		*/
+		/// <summary>
+		/// Visit operation called for character literals.
+		/// 
+		/// <param name="lit">a character literal</param>
+		/// </summary>
 		public virtual void visit_character_literal(CharacterLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for integer literals.
-		*
-		* @param lit an integer literal
-		*/
+		/// <summary>
+		/// Visit operation called for integer literals.
+		/// 
+		/// <param name="lit">an integer literal</param>
+		/// </summary>
 		public virtual void visit_integer_literal(IntegerLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for real literals.
-		*
-		* @param lit a real literal
-		*/
+		/// <summary>
+		/// Visit operation called for real literals.
+		/// 
+		/// <param name="lit">a real literal</param>
+		/// </summary>
 		public virtual void visit_real_literal(RealLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for regex literals.
-		*
-		* @param lit a regex literal
-		*/
+		/// <summary>
+		/// Visit operation called for regex literals.
+		/// 
+		/// <param name="lit">a regex literal</param>
+		/// </summary>
 		public virtual void visit_regex_literal(RegexLiteral lit) {
 		}
 
 
-		/**
-		* Visit operation called for string literals.
-		*
-		* @param lit a string literal
-		*/
+		/// <summary>
+		/// Visit operation called for string literals.
+		/// 
+		/// <param name="lit">a string literal</param>
+		/// </summary>
 		public virtual void visit_string_literal(StringLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for string templates.
-		*
-		* @param tmpl a string template
-		*/
+		/// <summary>
+		/// Visit operation called for string templates.
+		/// 
+		/// <param name="tmpl">a string template</param>
+		/// </summary>
 		public virtual void visit_template(Template tmpl) {
 		}
 
-		/**
-		* Visit operation called for tuples.
-		*
-		* @param tuple a tuple
-		*/
+		/// <summary>
+		/// Visit operation called for tuples.
+		/// 
+		/// <param name="tuple">a tuple</param>
+		/// </summary>
 		public virtual void visit_tuple(ValaTuple tuple) {
 		}
 
-		/**
-		* Visit operation called for null literals.
-		*
-		* @param lit a null literal
-		*/
+		/// <summary>
+		/// Visit operation called for null literals.
+		/// 
+		/// <param name="lit">a null literal</param>
+		/// </summary>
 		public virtual void visit_null_literal(NullLiteral lit) {
 		}
 
-		/**
-		* Visit operation called for member access expressions.
-		*
-		* @param expr a member access expression
-		*/
+		/// <summary>
+		/// Visit operation called for member access expressions.
+		/// 
+		/// <param name="expr">a member access expression</param>
+		/// </summary>
 		public virtual void visit_member_access(MemberAccess expr) {
 		}
 
-		/**
-		* Visit operation called for invocation expressions.
-		*
-		* @param expr an invocation expression
-		*/
+		/// <summary>
+		/// Visit operation called for invocation expressions.
+		/// 
+		/// <param name="expr">an invocation expression</param>
+		/// </summary>
 		public virtual void visit_method_call(MethodCall expr) {
 		}
 
-		/**
-		* Visit operation called for element access expressions.
-		*
-		* @param expr an element access expression
-		*/
+		/// <summary>
+		/// Visit operation called for element access expressions.
+		/// 
+		/// <param name="expr">an element access expression</param>
+		/// </summary>
 		public virtual void visit_element_access(ElementAccess expr) {
 		}
 
-		/**
-		* Visit operation called for array slice expressions.
-		*
-		* @param expr an array slice expression
-		*/
+		/// <summary>
+		/// Visit operation called for array slice expressions.
+		/// 
+		/// <param name="expr">an array slice expression</param>
+		/// </summary>
 		public virtual void visit_slice_expression(SliceExpression expr) {
 		}
 
-		/**
-		* Visit operation called for base access expressions.
-		*
-		* @param expr a base access expression
-		*/
+		/// <summary>
+		/// Visit operation called for base access expressions.
+		/// 
+		/// <param name="expr">a base access expression</param>
+		/// </summary>
 		public virtual void visit_base_access(BaseAccess expr) {
 		}
 
-		/**
-		* Visit operation called for postfix expressions.
-		*
-		* @param expr a postfix expression
-		*/
+		/// <summary>
+		/// Visit operation called for postfix expressions.
+		/// 
+		/// <param name="expr">a postfix expression</param>
+		/// </summary>
 		public virtual void visit_postfix_expression(PostfixExpression expr) {
 		}
 
-		/**
-		* Visit operation called for object creation expressions.
-		*
-		* @param expr an object creation expression
-		*/
+		/// <summary>
+		/// Visit operation called for object creation expressions.
+		/// 
+		/// <param name="expr">an object creation expression</param>
+		/// </summary>
 		public virtual void visit_object_creation_expression(ObjectCreationExpression expr) {
 		}
 
-		/**
-		* Visit operation called for sizeof expressions.
-		*
-		* @param expr a sizeof expression
-		*/
+		/// <summary>
+		/// Visit operation called for sizeof expressions.
+		/// 
+		/// <param name="expr">a sizeof expression</param>
+		/// </summary>
 		public virtual void visit_sizeof_expression(SizeofExpression expr) {
 		}
 
-		/**
-		* Visit operation called for typeof expressions.
-		*
-		* @param expr a typeof expression
-		*/
+		/// <summary>
+		/// Visit operation called for typeof expressions.
+		/// 
+		/// <param name="expr">a typeof expression</param>
+		/// </summary>
 		public virtual void visit_typeof_expression(TypeofExpression expr) {
 		}
 
-		/**
-		* Visit operation called for unary expressions.
-		*
-		* @param expr an unary expression
-		*/
+		/// <summary>
+		/// Visit operation called for unary expressions.
+		/// 
+		/// <param name="expr">an unary expression</param>
+		/// </summary>
 		public virtual void visit_unary_expression(UnaryExpression expr) {
 		}
 
-		/**
-		* Visit operation called for call expressions.
-		*
-		* @param expr a call expression
-		*/
+		/// <summary>
+		/// Visit operation called for call expressions.
+		/// 
+		/// <param name="expr">a call expression</param>
+		/// </summary>
 		public virtual void visit_cast_expression(CastExpression expr) {
 		}
 
-		/**
-		* Visit operation called for named arguments.
-		*
-		* @param expr a named argument
-		*/
+		/// <summary>
+		/// Visit operation called for named arguments.
+		/// 
+		/// <param name="expr">a named argument</param>
+		/// </summary>
 		public virtual void visit_named_argument(NamedArgument expr) {
 		}
 
-		/**
-		* Visit operation called for pointer indirections.
-		*
-		* @param expr a pointer indirection
-		*/
+		/// <summary>
+		/// Visit operation called for pointer indirections.
+		/// 
+		/// <param name="expr">a pointer indirection</param>
+		/// </summary>
 		public virtual void visit_pointer_indirection(PointerIndirection expr) {
 		}
 
-		/**
-		* Visit operation called for address-of expressions.
-		*
-		* @param expr an address-of expression
-		*/
+		/// <summary>
+		/// Visit operation called for address-of expressions.
+		/// 
+		/// <param name="expr">an address-of expression</param>
+		/// </summary>
 		public virtual void visit_addressof_expression(AddressofExpression expr) {
 		}
 
-		/**
-		* Visit operation called for reference transfer expressions.
-		*
-		* @param expr a reference transfer expression
-		*/
+		/// <summary>
+		/// Visit operation called for reference transfer expressions.
+		/// 
+		/// <param name="expr">a reference transfer expression</param>
+		/// </summary>
 		public virtual void visit_reference_transfer_expression(ReferenceTransferExpression expr) {
 		}
 
-		/**
-		* Visit operation called for binary expressions.
-		*
-		* @param expr a binary expression
-		*/
+		/// <summary>
+		/// Visit operation called for binary expressions.
+		/// 
+		/// <param name="expr">a binary expression</param>
+		/// </summary>
 		public virtual void visit_binary_expression(BinaryExpression expr) {
 		}
 
-		/**
-		* Visit operation called for type checks.
-		*
-		* @param expr a type check expression
-		*/
+		/// <summary>
+		/// Visit operation called for type checks.
+		/// 
+		/// <param name="expr">a type check expression</param>
+		/// </summary>
 		public virtual void visit_type_check(TypeCheck expr) {
 		}
 
-		/**
-		* Visit operation called for conditional expressions.
-		*
-		* @param expr a conditional expression
-		*/
+		/// <summary>
+		/// Visit operation called for conditional expressions.
+		/// 
+		/// <param name="expr">a conditional expression</param>
+		/// </summary>
 		public virtual void visit_conditional_expression(ConditionalExpression expr) {
 		}
 
-		/**
-		* Visit operation called for lambda expressions.
-		*
-		* @param expr a lambda expression
-		*/
+		/// <summary>
+		/// Visit operation called for lambda expressions.
+		/// 
+		/// <param name="expr">a lambda expression</param>
+		/// </summary>
 		public virtual void visit_lambda_expression(LambdaExpression expr) {
 		}
 
-		/**
-		* Visit operation called for assignments.
-		*
-		* @param a an assignment
-		*/
+		/// <summary>
+		/// Visit operation called for assignments.
+		/// 
+		/// <param name="a">an assignment</param>
+		/// </summary>
 		public virtual void visit_assignment(Assignment a) {
 		}
 
-		/**
-		* Visit operation called at end of full expressions.
-		*
-		* @param expr a full expression
-		*/
+		/// <summary>
+		/// Visit operation called at end of full expressions.
+		/// 
+		/// <param name="expr">a full expression</param>
+		/// </summary>
 		public virtual void visit_end_full_expression(Expression expr) {
 		}
 	}

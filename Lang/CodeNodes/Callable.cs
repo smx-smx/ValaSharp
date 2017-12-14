@@ -7,21 +7,21 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.CodeNodes {
 	public interface Callable {
-		/**
-	 * The return type of this callable.
-	 */
+		/// <summary>
+		/// The return type of this callable.
+		/// </summary>
 		DataType return_type { get; set; }
 
-		/**
-		 * Appends parameter to this callable.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends parameter to this callable.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		void add_parameter(Parameter param);
 
-		/**
-		 * Returns the parameter list.
-		 */
+		/// <summary>
+		/// Returns the parameter list.
+		/// </summary>
 		List<Parameter> get_parameters();
 	}
 }

@@ -9,9 +9,9 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Methods {
-	/**
-	 * Represents a late bound method.
-	 */
+	/// <summary>
+	/// Represents a late bound method.
+	/// </summary>
 	public class DynamicMethod : Method {
 		public DataType dynamic_type { get; set; }
 

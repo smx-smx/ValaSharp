@@ -8,13 +8,13 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * A pointer type.
-	 */
+	/// <summary>
+	/// A pointer type.
+	/// </summary>
 	public class PointerType : DataType {
-		/**
-		 * The base type the pointer is referring to.
-		 */
+		/// <summary>
+		/// The base type the pointer is referring to.
+		/// </summary>
 		public DataType base_type {
 			get { return _base_type; }
 			set {

@@ -10,27 +10,27 @@ using Vala.Lang.Symbols;
 
 namespace Vala.Lang.TypeSymbols {
 	public class ErrorCode : TypeSymbol {
-		/**
-	 * Specifies the numerical representation of this enum value.
-	 */
+		/// <summary>
+		/// Specifies the numerical representation of this enum value.
+		/// </summary>
 		public Expression value { get; set; }
 
-		/**
-		 * Creates a new enum value.
-		 *
-		 * @param name enum value name
-		 * @return     newly created enum value
-		 */
+		/// <summary>
+		/// Creates a new enum value.
+		/// 
+		/// <param name="name">enum value name</param>
+		/// <returns>newly created enum value</returns>
+		/// </summary>
 		public ErrorCode(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 		}
 
-		/**
-		 * Creates a new enum value with the specified numerical representation.
-		 *
-		 * @param name  enum value name
-		 * @param value numerical representation
-		 * @return      newly created enum value
-		 */
+		/// <summary>
+		/// Creates a new enum value with the specified numerical representation.
+		/// 
+		/// <param name="name">enum value name</param>
+		/// <param name="value">numerical representation</param>
+		/// <returns>newly created enum value</returns>
+		/// </summary>
 		public static ErrorCode with_value(string name, Expression value, SourceReference source_reference = null) {
 			ErrorCode err = new ErrorCode(name, source_reference);
 			err.value = value;

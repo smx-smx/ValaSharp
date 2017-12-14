@@ -80,9 +80,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Mark the attribute or attribute argument as used by the compiler
-		 */
+		/// <summary>
+		/// Mark the attribute or attribute argument as used by the compiler
+		/// </summary>
 		public void mark(string attribute, string argument) {
 			marked.TryGetValue(attribute, out var set);
 			if (set == null) {
@@ -95,11 +95,11 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Traverse the code tree and warn about unused attributes.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Traverse the code tree and warn about unused attributes.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void check_unused(CodeContext context) {
 			context.root.accept(this);
 		}

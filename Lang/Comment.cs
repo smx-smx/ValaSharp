@@ -12,15 +12,15 @@ namespace Vala.Lang {
 			content = comment;
 		}
 
-		/**
-		 * The text describing the referenced source code.
-		 */
+		/// <summary>
+		/// The text describing the referenced source code.
+		/// </summary>
 		public string content { set; get; }
 
-		/**
-		 * References the location in the source file where this code node has
-		 * been written.
-		 */
+		/// <summary>
+		/// References the location in the source file where this code node has
+		/// been written.
+		/// </summary>
 		public SourceReference source_reference { get; set; }
 	}
 }

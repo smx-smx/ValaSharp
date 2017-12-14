@@ -13,24 +13,24 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Methods {
 	public class CreationMethod : Method {
-		/**
-	 * Specifies the name of the type this creation method belongs to.
-	 */
+		/// <summary>
+		/// Specifies the name of the type this creation method belongs to.
+		/// </summary>
 		public string class_name { get; set; }
 
-		/**
-		 * Specifies whether this constructor chains up to a base
-		 * constructor or a different constructor of the same class.
-		 */
+		/// <summary>
+		/// Specifies whether this constructor chains up to a base
+		/// constructor or a different constructor of the same class.
+		/// </summary>
 		public bool chain_up { get; set; }
 
-		/**
-		 * Creates a new method.
-		 *
-		 * @param name             method name
-		 * @param source_reference reference to source code
-		 * @return                 newly created method
-		 */
+		/// <summary>
+		/// Creates a new method.
+		/// 
+		/// <param name="name">method name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created method</returns>
+		/// </summary>
 		public CreationMethod(string class_name, string name, SourceReference source_reference = null, Comment comment = null)
 			: base(name, new VoidType(), source_reference, comment) {
 			this.class_name = class_name;

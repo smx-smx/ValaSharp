@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
-	 * Represents a for iteration statement in the C code.
-	 */
+	/// <summary>
+	/// Represents a for iteration statement in the C code.
+	/// </summary>
 	public class CCodeForStatement : CCodeStatement {
-		/**
-		 * The loop condition.
-		 */
+		/// <summary>
+		/// The loop condition.
+		/// </summary>
 		public CCodeExpression condition { get; set; }
 
-		/**
-		 * The loop body.
-		 */
+		/// <summary>
+		/// The loop body.
+		/// </summary>
 		public CCodeStatement body { get; set; }
 
 		private List<CCodeExpression> initializer = new List<CCodeExpression>();
@@ -28,20 +28,20 @@ namespace CLanguage.Statements {
 			this.body = body;
 		}
 
-		/**
-		 * Appends the specified expression to the list of initializers.
-		 *
-		 * @param expr an initializer expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the list of initializers.
+		/// 
+		/// <param name="expr">an initializer expression</param>
+		/// </summary>
 		public void add_initializer(CCodeExpression expr) {
 			initializer.Add(expr);
 		}
 
-		/**
-		 * Appends the specified expression to the iterator.
-		 *
-		 * @param expr an iterator expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the iterator.
+		/// 
+		/// <param name="expr">an iterator expression</param>
+		/// </summary>
 		public void add_iterator(CCodeExpression expr) {
 			iterator.Add(expr);
 		}

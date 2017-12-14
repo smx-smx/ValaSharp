@@ -14,14 +14,14 @@ using static GLibPorts.GLib;
 
 namespace Vala.Lang.Expressions {
 	public class UnaryExpression : Expression {
-		/**
-		 * The unary operator.
-		 */
+		/// <summary>
+		/// The unary operator.
+		/// </summary>
 		public UnaryOperator Operator { get; set; }
 
-		/**
-		 * The operand.
-		 */
+		/// <summary>
+		/// The operand.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -34,14 +34,14 @@ namespace Vala.Lang.Expressions {
 
 		private Expression _inner;
 
-		/**
-		 * Creates a new unary expression.
-		 *
-		 * @param op     unary operator
-		 * @param _inner operand
-		 * @param source reference to source code
-		 * @return       newly created binary expression
-		 */
+		/// <summary>
+		/// Creates a new unary expression.
+		/// 
+		/// <param name="op">unary operator</param>
+		/// <param name="_inner">operand</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created binary expression</returns>
+		/// </summary>
 		public UnaryExpression(UnaryOperator op, Expression _inner, SourceReference source) {
 			Operator = op;
 			inner = _inner;
@@ -66,14 +66,14 @@ namespace Vala.Lang.Expressions {
 
 		private string get_operator_string() {
 			switch (Operator) {
-				case UnaryOperator.PLUS: return "+";
-				case UnaryOperator.MINUS: return "-";
-				case UnaryOperator.LOGICAL_NEGATION: return "!";
-				case UnaryOperator.BITWISE_COMPLEMENT: return "~";
-				case UnaryOperator.INCREMENT: return "++";
-				case UnaryOperator.DECREMENT: return "--";
-				case UnaryOperator.REF: return "ref ";
-				case UnaryOperator.OUT: return "out ";
+			case UnaryOperator.PLUS: return "+";
+			case UnaryOperator.MINUS: return "-";
+			case UnaryOperator.LOGICAL_NEGATION: return "!";
+			case UnaryOperator.BITWISE_COMPLEMENT: return "~";
+			case UnaryOperator.INCREMENT: return "++";
+			case UnaryOperator.DECREMENT: return "--";
+			case UnaryOperator.REF: return "ref ";
+			case UnaryOperator.OUT: return "out ";
 			}
 			assert_not_reached();
 			return null;

@@ -8,9 +8,9 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang {
-	/**
-	 * Represents a late bound property.
-	 */
+	/// <summary>
+	/// Represents a late bound property.
+	/// </summary>
 	public class DynamicProperty : Property {
 		public DataType dynamic_type { get; set; }
 

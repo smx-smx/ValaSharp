@@ -21,69 +21,69 @@ namespace Vala.Lang {
 		public event EventHandler<ReportEventArgs> OnReport;
 
 
-		/**
- * SGR (Select Graphic Rendition) end tag
- */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag
+		/// </summary>
 		private const string ANSI_COLOR_END = "\x1b[0m";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for source location
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for source location
+		/// </summary>
 		private string locus_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for source location
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for source location
+		/// </summary>
 		private string locus_color_end = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for warning titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for warning titles
+		/// </summary>
 		private string warning_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for warning titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for warning titles
+		/// </summary>
 		private string warning_color_end = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for error titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for error titles
+		/// </summary>
 		private string error_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for error titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for error titles
+		/// </summary>
 		private string error_color_end = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for note titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for note titles
+		/// </summary>
 		private string note_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for note titles
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for note titles
+		/// </summary>
 		private string note_color_end = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for caret line (^^^)
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for caret line (^^^)
+		/// </summary>
 		private string caret_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for caret line (^^^)
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for caret line (^^^)
+		/// </summary>
 		private string caret_color_end = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) start tag for quotes line ('...', `...`, `...')
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) start tag for quotes line ('...', `...`, `...')
+		/// </summary>
 		private string quote_color_start = "";
 
-		/**
-		 * SGR (Select Graphic Rendition) end tag for quotes line ('...', `...`, `...')
-		 */
+		/// <summary>
+		/// SGR (Select Graphic Rendition) end tag for quotes line ('...', `...`, `...')
+		/// </summary>
 		private string quote_color_end = "";
 
 
@@ -96,13 +96,13 @@ namespace Vala.Lang {
 
 		static Regex val_regex;
 
-		/**
-		 * Set all colors by string
-		 *
-		 * {{{
-		 *   "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
-		 * }}}
-		 */
+		/// <summary>
+		/// Set all colors by string
+		/// 
+		/// {{{
+		/// "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
+		/// }}}
+		/// </summary>
 		public bool set_colors(string str, Report.Colored colored_output = Report.Colored.AUTO) {
 			try {
 				if (val_regex == null)
@@ -132,32 +132,32 @@ namespace Vala.Lang {
 
 				string checked_value = eq[1].Trim();
 				switch (eq[0].Trim()) {
-					case "error":
-						error_color = checked_value;
-						break;
+				case "error":
+					error_color = checked_value;
+					break;
 
-					case "warning":
-						warning_color = checked_value;
-						break;
+				case "warning":
+					warning_color = checked_value;
+					break;
 
-					case "note":
-						note_color = checked_value;
-						break;
+				case "note":
+					note_color = checked_value;
+					break;
 
-					case "caret":
-						caret_color = checked_value;
-						break;
+				case "caret":
+					caret_color = checked_value;
+					break;
 
-					case "locus":
-						locus_color = checked_value;
-						break;
+				case "locus":
+					locus_color = checked_value;
+					break;
 
-					case "quote":
-						quote_color = checked_value;
-						break;
+				case "quote":
+					quote_color = checked_value;
+					break;
 
-					default:
-						return false;
+				default:
+					return false;
 				}
 			}
 
@@ -197,30 +197,30 @@ namespace Vala.Lang {
 			return true;
 		}
 
-		/**
-		 * Set the error verbosity.
-		 */
+		/// <summary>
+		/// Set the error verbosity.
+		/// </summary>
 		public void set_verbose_errors(bool verbose) {
 			verbose_errors = verbose;
 		}
 
-		/**
-		 * Returns the total number of warnings reported.
-		 */
+		/// <summary>
+		/// Returns the total number of warnings reported.
+		/// </summary>
 		public int get_warnings() {
 			return warnings;
 		}
 
-		/**
-		 * Returns the total number of errors reported.
-		 */
+		/// <summary>
+		/// Returns the total number of errors reported.
+		/// </summary>
 		public int get_errors() {
 			return errors;
 		}
 
-		/**
-		 * Pretty-print the actual line of offending code if possible.
-		 */
+		/// <summary>
+		/// Pretty-print the actual line of offending code if possible.
+		/// </summary>
 		private void report_source(SourceReference source) {
 			if (source.begin.line != source.end.line) {
 				// FIXME Cannot report multi-line issues currently
@@ -308,12 +308,12 @@ namespace Vala.Lang {
 				Debug.WriteLine($"[{type_color_start}] {message}");
 		}
 
-		/**
-		 * Reports the specified message as note.
-		 *
-		 * @param source  reference to source code
-		 * @param message note message
-		 */
+		/// <summary>
+		/// Reports the specified message as note.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <param name="message">note message</param>
+		/// </summary>
 		public virtual void note(SourceReference source, string message) {
 			if (!enable_warnings) {
 				return;
@@ -322,12 +322,12 @@ namespace Vala.Lang {
 			print_message(source, "note", note_color_start, note_color_end, message, verbose_errors);
 		}
 
-		/**
-		 * Reports the specified message as deprecation warning.
-		 *
-		 * @param source  reference to source code
-		 * @param message warning message
-		 */
+		/// <summary>
+		/// Reports the specified message as deprecation warning.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <param name="message">warning message</param>
+		/// </summary>
 		public virtual void depr(SourceReference source, string message) {
 			if (!enable_warnings) {
 				return;
@@ -338,12 +338,12 @@ namespace Vala.Lang {
 			print_message(source, "warning", warning_color_start, warning_color_end, message, false);
 		}
 
-		/**
-		 * Reports the specified message as warning.
-		 *
-		 * @param source  reference to source code
-		 * @param message warning message
-		 */
+		/// <summary>
+		/// Reports the specified message as warning.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <param name="message">warning message</param>
+		/// </summary>
 		public virtual void warn(SourceReference source, string message) {
 			if (!enable_warnings) {
 				return;
@@ -354,12 +354,12 @@ namespace Vala.Lang {
 			print_message(source, "warning", warning_color_start, warning_color_end, message, verbose_errors);
 		}
 
-		/**
-		 * Reports the specified message as error.
-		 *
-		 * @param source  reference to source code
-		 * @param message error message
-		 */
+		/// <summary>
+		/// Reports the specified message as error.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <param name="message">error message</param>
+		/// </summary>
 		public virtual void err(SourceReference source, string message) {
 			errors++;
 

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using GLibPorts;
 
 namespace CLanguage {
-	/**
-	 * A constant C expression.
-	 */
+	/// <summary>
+	/// A constant C expression.
+	/// </summary>
 	public class CCodeConstant : CCodeExpression {
-		/**
-		 * The name of this constant.
-		 */
+		/// <summary>
+		/// The name of this constant.
+		/// </summary>
 		public string name { get; set; }
 
 		public CCodeConstant(string _name) {
@@ -55,31 +55,31 @@ namespace CLanguage {
 					builder.Append(_name[p + 1]);
 					p += 2;
 					switch (_name[p - 1]) {
-						case 'x':
-							// hexadecimal character
-							while (p < end && GChar.IsXDigit(_name[p])) {
-								builder.Append(_name[p]);
-								p++;
-							}
-							break;
-						case '0':
-						case '1':
-						case '2':
-						case '3':
-						case '4':
-						case '5':
-						case '6':
-						case '7':
-							// octal character
-							while (p < end && p - begin_of_char <= 3 && _name[p] >= '0' && _name[p] <= '7') {
-								builder.Append(_name[p]);
-								p++;
-							}
-							break;
-						case 'n':
-							// break line at \n
-							col = LINE_LENGTH;
-							break;
+					case 'x':
+						// hexadecimal character
+						while (p < end && GChar.IsXDigit(_name[p])) {
+							builder.Append(_name[p]);
+							p++;
+						}
+						break;
+					case '0':
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+						// octal character
+						while (p < end && p - begin_of_char <= 3 && _name[p] >= '0' && _name[p] <= '7') {
+							builder.Append(_name[p]);
+							p++;
+						}
+						break;
+					case 'n':
+						// break line at \n
+						col = LINE_LENGTH;
+						break;
 					}
 					col += (int)(p - begin_of_char);
 				} else {

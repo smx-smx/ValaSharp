@@ -11,17 +11,17 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a switch selection statement in the source code.
- */
+	/// <summary>
+	/// Represents a switch selection statement in the source code.
+	/// </summary>
 	public class SwitchStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the switch expression.
-		 */
+		/// <summary>
+		/// Specifies the switch expression.
+		/// </summary>
 		public Expression expression {
 			get {
 				return _expression;
@@ -35,33 +35,33 @@ namespace Vala.Lang.Statements {
 		private Expression _expression;
 		private List<SwitchSection> sections = new List<SwitchSection>();
 
-		/**
-		 * Creates a new switch statement.
-		 *
-		 * @param expression       switch expression
-		 * @param source_reference reference to source code
-		 * @return                 newly created switch statement
-		 */
+		/// <summary>
+		/// Creates a new switch statement.
+		/// 
+		/// <param name="expression">switch expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created switch statement</returns>
+		/// </summary>
 		public SwitchStatement(Expression expression, SourceReference source_reference) {
 			this.source_reference = source_reference;
 			this.expression = expression;
 		}
 
-		/**
-		 * Appends the specified section to the list of switch sections.
-		 *
-		 * @param section a switch section
-		 */
+		/// <summary>
+		/// Appends the specified section to the list of switch sections.
+		/// 
+		/// <param name="section">a switch section</param>
+		/// </summary>
 		public void add_section(SwitchSection section) {
 			section.parent_node = this;
 			sections.Add(section);
 		}
 
-		/**
-		 * Returns a copy of the list of switch sections.
-		 *
-		 * @return section list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of switch sections.
+		/// 
+		/// <returns>section list</returns>
+		/// </summary>
 		public List<SwitchSection> get_sections() {
 			return sections;
 		}

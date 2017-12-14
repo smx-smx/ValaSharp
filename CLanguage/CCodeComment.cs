@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a comment in the C code.
-	 */
+	/// <summary>
+	/// Represents a comment in the C code.
+	/// </summary>
 	public class CCodeComment : CCodeNode {
-		/**
-		 * The text content of the comment.
-		 */
+		/// <summary>
+		/// The text content of the comment.
+		/// </summary>
 		public string text { get; set; }
 
 		public CCodeComment(string _text) {

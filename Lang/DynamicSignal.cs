@@ -10,9 +10,9 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang {
-	/**
-	 * Represents a late bound signal.
-	 */
+	/// <summary>
+	/// Represents a late bound signal.
+	/// </summary>
 	public class DynamicSignal : Signal {
 		public DataType dynamic_type { get; set; }
 

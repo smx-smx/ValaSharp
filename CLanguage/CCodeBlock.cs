@@ -6,28 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a C code block.
-	 */
+	/// <summary>
+	/// Represents a C code block.
+	/// </summary>
 	public class CCodeBlock : CCodeStatement {
-		/**
-		 * Specifies whether a newline at the end of the block should be
-		 * suppressed.
-		 */
+		/// <summary>
+		/// Specifies whether a newline at the end of the block should be
+		/// suppressed.
+		/// </summary>
 		public bool suppress_newline { get; set; }
 
 		private List<CCodeNode> statements = new List<CCodeNode>();
 
-		/**
-		 * Prepend the specified statement to the list of statements.
-		 */
+		/// <summary>
+		/// Prepend the specified statement to the list of statements.
+		/// </summary>
 		public void prepend_statement(CCodeNode statement) {
 			statements.Insert(0, statement);
 		}
 
-		/**
-		 * Append the specified statement to the list of statements.
-		 */
+		/// <summary>
+		/// Append the specified statement to the list of statements.
+		/// </summary>
 		public void add_statement(CCodeNode statement) {
 			/* allow generic nodes to include comments */
 			statements.Add(statement);

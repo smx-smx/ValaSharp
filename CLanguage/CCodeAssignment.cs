@@ -6,23 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents an assignment expression in the C code.
-	 */
+	/// <summary>
+	/// Represents an assignment expression in the C code.
+	/// </summary>
 	public class CCodeAssignment : CCodeExpression {
-		/**
-		 * Left hand side of the assignment.
-		 */
+		/// <summary>
+		/// Left hand side of the assignment.
+		/// </summary>
 		public CCodeExpression left { get; set; }
 
-		/**
-		 * Assignment Operator.
-		 */
+		/// <summary>
+		/// Assignment Operator.
+		/// </summary>
 		public CCodeAssignmentOperator Operator { get; set; }
 
-		/**
-		 * Right hand side of the assignment.
-		 */
+		/// <summary>
+		/// Right hand side of the assignment.
+		/// </summary>
 		public CCodeExpression right { get; set; }
 
 		public CCodeAssignment(CCodeExpression l, CCodeExpression r, CCodeAssignmentOperator op = CCodeAssignmentOperator.SIMPLE) {

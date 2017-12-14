@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents a formal parameter in a C method signature.
- */
+	/// <summary>
+	/// Represents a formal parameter in a C method signature.
+	/// </summary>
 	public class CCodeParameter : CCodeNode {
-		/**
-		 * The parameter name.
-		 */
+		/// <summary>
+		/// The parameter name.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * The parameter type.
-		 */
+		/// <summary>
+		/// The parameter type.
+		/// </summary>
 		public string type_name { get; set; }
 
-		/**
-		 * Specifies whether the function accepts an indefinite number of
-		 * arguments.
-		 */
+		/// <summary>
+		/// Specifies whether the function accepts an indefinite number of
+		/// arguments.
+		/// </summary>
 		public bool ellipsis { get; set; }
 
 		public CCodeParameter(string n, string type) {

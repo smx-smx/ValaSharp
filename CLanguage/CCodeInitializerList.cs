@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CLanguage {
 
-	/**
-	 * Represents a struct or array initializer list in the C code.
-	 */
+	/// <summary>
+	/// Represents a struct or array initializer list in the C code.
+	/// </summary>
 	public class CCodeInitializerList : CCodeExpression {
 		private List<CCodeExpression> initializers = new List<CCodeExpression>();
 
-		/**
-		 * Appends the specified expression to this initializer list.
-		 *
-		 * @param expr an expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to this initializer list.
+		/// 
+		/// <param name="expr">an expression</param>
+		/// </summary>
 		public void append(CCodeExpression expr) {
 			initializers.Add(expr);
 		}

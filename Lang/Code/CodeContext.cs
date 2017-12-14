@@ -14,49 +14,49 @@ using ValaConfig;
 
 namespace Vala.Lang.CodeNodes {
 	public class CodeContext {
-		/**
- * Enable run-time checks for programming errors.
- */
+		/// <summary>
+		/// Enable run-time checks for programming errors.
+		/// </summary>
 		public bool assert { get; set; }
 
-		/**
-		 * Enable additional run-time checks such as type checks.
-		 */
+		/// <summary>
+		/// Enable additional run-time checks such as type checks.
+		/// </summary>
 		public bool checking { get; set; }
 
-		/**
-		 * Do not warn when using deprecated features.
-		 */
+		/// <summary>
+		/// Do not warn when using deprecated features.
+		/// </summary>
 		public bool deprecated { get; set; }
 
-		/**
-		 * Hide the symbols marked as internal
-		 */
+		/// <summary>
+		/// Hide the symbols marked as internal
+		/// </summary>
 		public bool hide_internal { get; set; }
 
-		/**
-		 * Do not check whether used symbols exist in local packages.
-		 */
+		/// <summary>
+		/// Do not check whether used symbols exist in local packages.
+		/// </summary>
 		public bool since_check { get; set; }
 
-		/**
-		 * Do not warn when using experimental features.
-		 */
+		/// <summary>
+		/// Do not warn when using experimental features.
+		/// </summary>
 		public bool experimental { get; set; }
 
-		/**
-		 * Enable experimental enhancements for non-null types.
-		 */
+		/// <summary>
+		/// Enable experimental enhancements for non-null types.
+		/// </summary>
 		public bool experimental_non_null { get; set; }
 
-		/**
-		 * Enable GObject creation tracing.
-		 */
+		/// <summary>
+		/// Enable GObject creation tracing.
+		/// </summary>
 		public bool gobject_tracing { get; set; }
 
-		/**
-		 * Output C code, don't compile to object code.
-		 */
+		/// <summary>
+		/// Output C code, don't compile to object code.
+		/// </summary>
 		public bool ccode_only { get; set; }
 
 		/// <summary>
@@ -64,98 +64,98 @@ namespace Vala.Lang.CodeNodes {
 		/// </summary>
 		public bool dry_run { get; set; }
 
-		/**
-		 * Output C header file.
-		 */
+		/// <summary>
+		/// Output C header file.
+		/// </summary>
 		public string header_filename { get; set; }
 
-		/**
-		 * Output internal C header file.
-		 */
+		/// <summary>
+		/// Output internal C header file.
+		/// </summary>
 		public string internal_header_filename { get; set; }
 
 		public bool use_header { get; set; }
 
-		/**
-		 * Base directory used for header_filename in the VAPIs.
-		 */
+		/// <summary>
+		/// Base directory used for header_filename in the VAPIs.
+		/// </summary>
 		public string includedir { get; set; }
 
-		/**
-		 * Output symbols file.
-		 */
+		/// <summary>
+		/// Output symbols file.
+		/// </summary>
 		public string symbols_filename { get; set; }
 
-		/**
-		 * Compile but do not link.
-		 */
+		/// <summary>
+		/// Compile but do not link.
+		/// </summary>
 		public bool compile_only { get; set; }
 
-		/**
-		 * Output filename.
-		 */
+		/// <summary>
+		/// Output filename.
+		/// </summary>
 		public string output { get; set; }
 
-		/**
-		 * Base source directory.
-		 */
+		/// <summary>
+		/// Base source directory.
+		/// </summary>
 		public string basedir { get; set; }
 
-		/**
-		 * Code output directory.
-		 */
+		/// <summary>
+		/// Code output directory.
+		/// </summary>
 		public string directory { get; set; }
 
-		/**
-		 * List of directories where to find .vapi files.
-		 */
+		/// <summary>
+		/// List of directories where to find .vapi files.
+		/// </summary>
 		public string[] vapi_directories;
 
-		/**
-		 * List of directories where to find .gir files.
-		 */
+		/// <summary>
+		/// List of directories where to find .gir files.
+		/// </summary>
 		public string[] gir_directories;
 
-		/**
-		 * List of directories where to find .metadata files for .gir files.
-		 */
+		/// <summary>
+		/// List of directories where to find .metadata files for .gir files.
+		/// </summary>
 		public string[] metadata_directories;
 
-		/**
-		 * Produce debug information.
-		 */
+		/// <summary>
+		/// Produce debug information.
+		/// </summary>
 		public bool debug { get; set; }
 
-		/**
-		 * Optimization level.
-		 */
+		/// <summary>
+		/// Optimization level.
+		/// </summary>
 		public int optlevel { get; set; }
 
-		/**
-		 * Enable memory profiler.
-		 */
+		/// <summary>
+		/// Enable memory profiler.
+		/// </summary>
 		public bool mem_profiler { get; set; }
 
-		/**
-		 * Specifies the optional module initialization method.
-		 */
+		/// <summary>
+		/// Specifies the optional module initialization method.
+		/// </summary>
 		public Method module_init_method { get; set; }
 
-		/**
-		 * Keep temporary files produced by the compiler.
-		 */
+		/// <summary>
+		/// Keep temporary files produced by the compiler.
+		/// </summary>
 		public bool save_temps { get; set; }
 
 		public Profile profile { get; set; }
 
-		/**
-		 * Target major version number of glib for code generation.
-		 */
+		/// <summary>
+		/// Target major version number of glib for code generation.
+		/// </summary>
 		public int target_glib_major { get; set; }
 
-		/**
-		 * Target minor version number of glib for code generation.
-		 */
+		/// <summary>
+		/// Target minor version number of glib for code generation.
+		/// </summary>
 		public int target_glib_minor { get; set; }
 
 		public bool verbose_mode { get; set; }
@@ -166,15 +166,15 @@ namespace Vala.Lang.CodeNodes {
 
 		public bool use_fast_vapi { get; set; }
 
-		/**
-		 * Include comments in generated vapi.
-		 */
+		/// <summary>
+		/// Include comments in generated vapi.
+		/// </summary>
 		public bool vapi_comments { get; set; }
 
-		/**
-		 * Returns true if the target version of glib is greater than or 
-		 * equal to the specified version.
-		 */
+		/// <summary>
+		/// Returns true if the target version of glib is greater than or
+		/// equal to the specified version.
+		/// </summary>
 		public bool require_glib_version(int major, int minor) {
 			return (target_glib_major > major) || (target_glib_major == major && target_glib_minor >= minor);
 		}
@@ -211,9 +211,9 @@ namespace Vala.Lang.CodeNodes {
 			context_stack_key = new List<CodeContext>();
 		}
 
-		/**
-		 * The root namespace of the symbol tree.
-		 */
+		/// <summary>
+		/// The root namespace of the symbol tree.
+		/// </summary>
 		public Namespace root {
 			get { return _root; }
 		}
@@ -224,14 +224,14 @@ namespace Vala.Lang.CodeNodes {
 
 		public FlowAnalyzer flow_analyzer { get; private set; }
 
-		/**
-		 * The selected code generator.
-		 */
+		/// <summary>
+		/// The selected code generator.
+		/// </summary>
 		public CodeGenerator codegen { get; set; }
 
-		/**
-		 * Mark attributes used by the compiler and report unused at the end.
-		 */
+		/// <summary>
+		/// Mark attributes used by the compiler and report unused at the end.
+		/// </summary>
 		public UsedAttr used_attr { get; set; }
 
 		public CodeContext() {
@@ -241,18 +241,18 @@ namespace Vala.Lang.CodeNodes {
 			used_attr = new UsedAttr();
 		}
 
-		/**
-		 * Return the topmost context from the context stack.
-		 */
+		/// <summary>
+		/// Return the topmost context from the context stack.
+		/// </summary>
 		public static CodeContext get() {
 			List<CodeContext> context_stack = context_stack_key;
 
 			return context_stack[context_stack.Count - 1];
 		}
 
-		/**
-		 * Push the specified context to the context stack.
-		 */
+		/// <summary>
+		/// Push the specified context to the context stack.
+		/// </summary>
 		public static void push(CodeContext context) {
 			List<CodeContext> context_stack = context_stack_key;
 			if (context_stack == null) {
@@ -263,87 +263,87 @@ namespace Vala.Lang.CodeNodes {
 			context_stack.Add(context);
 		}
 
-		/**
-		 * Remove the topmost context from the context stack.
-		 */
+		/// <summary>
+		/// Remove the topmost context from the context stack.
+		/// </summary>
 		public static void pop() {
 			List<CodeContext> context_stack = context_stack_key;
 
 			context_stack.RemoveAt(context_stack.Count - 1);
 		}
 
-		/**
-		 * Returns a copy of the list of source files.
-		 *
-		 * @return list of source files
-		 */
+		/// <summary>
+		/// Returns a copy of the list of source files.
+		/// 
+		/// <returns>list of source files</returns>
+		/// </summary>
 		public List<SourceFile> get_source_files() {
 			return source_files;
 		}
 
-		/**
-		 * Returns a copy of the list of C source files.
-		 *
-		 * @return list of C source files
-		 */
+		/// <summary>
+		/// Returns a copy of the list of C source files.
+		/// 
+		/// <returns>list of C source files</returns>
+		/// </summary>
 		public List<string> get_c_source_files() {
 			return c_source_files;
 		}
 
-		/**
-		 * Adds the specified file to the list of source files.
-		 *
-		 * @param file a source file
-		 */
+		/// <summary>
+		/// Adds the specified file to the list of source files.
+		/// 
+		/// <param name="file">a source file</param>
+		/// </summary>
 		public void add_source_file(SourceFile file) {
 			source_files.Add(file);
 		}
 
-		/**
-		 * Adds the specified file to the list of C source files.
-		 *
-		 * @param file a C source file
-		 */
+		/// <summary>
+		/// Adds the specified file to the list of C source files.
+		/// 
+		/// <param name="file">a C source file</param>
+		/// </summary>
 		public void add_c_source_file(string file) {
 			c_source_files.Add(file);
 		}
 
-		/**
-		 * Returns a copy of the list of used packages.
-		 *
-		 * @return list of used packages
-		 */
+		/// <summary>
+		/// Returns a copy of the list of used packages.
+		/// 
+		/// <returns>list of used packages</returns>
+		/// </summary>
 		public List<string> get_packages() {
 			return packages;
 		}
 
-		/**
-		 * Returns whether the specified package is being used.
-		 *
-		 * @param pkg a package name
-		 * @return    true if the specified package is being used
-		 */
+		/// <summary>
+		/// Returns whether the specified package is being used.
+		/// 
+		/// <param name="pkg">a package name</param>
+		/// <returns>true if the specified package is being used</returns>
+		/// </summary>
 		public bool has_package(string pkg) {
 			return packages.Contains(pkg);
 		}
 
-		/**
-		 * Adds the specified package to the list of used packages.
-		 *
-		 * @param pkg a package name
-		 */
+		/// <summary>
+		/// Adds the specified package to the list of used packages.
+		/// 
+		/// <param name="pkg">a package name</param>
+		/// </summary>
 		public void add_package(string pkg) {
 			packages.Add(pkg);
 		}
 
-		/**
-		 * Pull the specified package into the context.
-		 * The method is tolerant if the package has been already loaded.
-		 *
-		 * @param pkg a package name
-		 * @return false if the package could not be loaded
-		 *
-		 */
+		/// <summary>
+		/// Pull the specified package into the context.
+		/// The method is tolerant if the package has been already loaded.
+		/// 
+		/// <param name="pkg">a package name</param>
+		/// <returns>false if the package could not be loaded</returns>
+		/// 
+		/// </summary>
 		public bool add_external_package(string pkg) {
 			if (has_package(pkg)) {
 				// ignore multiple occurrences of the same package
@@ -377,13 +377,13 @@ namespace Vala.Lang.CodeNodes {
 			return true;
 		}
 
-		/**
-		 * Read the given filename and pull in packages.
-		 * The method is tolerant if the file does not exist.
-		 *
-		 * @param filename a filename
-		 * @return false if an error occurs while reading the file or if a package could not be added
-		 */
+		/// <summary>
+		/// Read the given filename and pull in packages.
+		/// The method is tolerant if the file does not exist.
+		/// 
+		/// <param name="filename">a filename</param>
+		/// <returns>false if an error occurs while reading the file or if a package could not be added</returns>
+		/// </summary>
 		public bool add_packages_from_file(string filename) {
 			if (!File.Exists(filename)) {
 				return true;
@@ -406,15 +406,15 @@ namespace Vala.Lang.CodeNodes {
 			return true;
 		}
 
-		/**
-		 * Add the specified source file to the context. Only .vala, .vapi, .gs,
-		 * and .c extensions are supported.
-		 *
-		 * @param filename a filename
-		 * @param is_source true to force adding the file as .vala or .gs
-		 * @param cmdline true if the file came from the command line.
-		 * @return false if the file is not recognized or the file does not exist
-		 */
+		/// <summary>
+		/// Add the specified source file to the context. Only .vala, .vapi, .gs,
+		/// and .c extensions are supported.
+		/// 
+		/// <param name="filename">a filename</param>
+		/// <param name="is_source">true to force adding the file as .vala or .gs</param>
+		/// <param name="cmdline">true if the file came from the command line.</param>
+		/// <returns>false if the file is not recognized or the file does not exist</returns>
+		/// </summary>
 		public bool add_source_filename(string filename, bool is_source = false, bool cmdline = false) {
 			if (!File.Exists(filename)) {
 				Report.error(null, "%s not found".printf(filename));
@@ -449,12 +449,12 @@ namespace Vala.Lang.CodeNodes {
 			return true;
 		}
 
-		/**
-		 * Visits the complete code tree file by file.
-		 * It is possible to add new source files while visiting the tree.
-		 *
-		 * @param visitor the visitor to be called when traversing
-		 */
+		/// <summary>
+		/// Visits the complete code tree file by file.
+		/// It is possible to add new source files while visiting the tree.
+		/// 
+		/// <param name="visitor">the visitor to be called when traversing</param>
+		/// </summary>
 		public void accept(CodeVisitor visitor) {
 			root.accept(visitor);
 
@@ -467,9 +467,9 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Resolve and analyze.
-		 */
+		/// <summary>
+		/// Resolve and analyze.
+		/// </summary>
 		public void check() {
 			resolver.resolve(this);
 

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a section that should only to processed once.
-	 */
+	/// <summary>
+	/// Represents a section that should only to processed once.
+	/// </summary>
 	public class CCodeOnceSection : CCodeFragment {
-		/**
-		 * The name of the guarding define.
-		 */
+		/// <summary>
+		/// The name of the guarding define.
+		/// </summary>
 		public string define { get; set; }
 
 		public CCodeOnceSection(string def) {

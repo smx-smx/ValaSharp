@@ -13,13 +13,13 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace CCodeGen {
-	/**
-	 * C function to register an interface at runtime.
-	 */
+	/// <summary>
+	/// C function to register an interface at runtime.
+	/// </summary>
 	public class InterfaceRegisterFunction : TypeRegisterFunction {
-		/**
-		 * Specifies the interface to be registered.
-		 */
+		/// <summary>
+		/// Specifies the interface to be registered.
+		/// </summary>
 		public Interface interface_reference { get; set; }
 
 		public InterfaceRegisterFunction(Interface iface, CodeContext context) {

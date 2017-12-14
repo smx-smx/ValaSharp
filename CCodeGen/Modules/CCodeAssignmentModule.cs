@@ -14,9 +14,9 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace CCodeGen.Modules {
-	/**
-	 * The link between an assignment and generated code.
-	 */
+	/// <summary>
+	/// The link between an assignment and generated code.
+	/// </summary>
 	public class CCodeAssignmentModule : CCodeMemberAccessModule {
 		TargetValue emit_simple_assignment(Assignment assignment) {
 			Variable variable = (Variable)assignment.left.symbol_reference;

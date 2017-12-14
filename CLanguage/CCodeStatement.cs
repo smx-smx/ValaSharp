@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents a statement in the C code.
- */
+	/// <summary>
+	/// Represents a statement in the C code.
+	/// </summary>
 	public abstract class CCodeStatement : CCodeNode {
 	}
 

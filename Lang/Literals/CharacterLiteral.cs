@@ -10,13 +10,13 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Literals {
-	/**
- * Represents a single literal character.
- */
+	/// <summary>
+	/// Represents a single literal character.
+	/// </summary>
 	public class CharacterLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public string value {
 			get {
 				return _value;
@@ -32,13 +32,13 @@ namespace Vala.Lang.Literals {
 
 		private string _value;
 
-		/**
-		 * Creates a new character literal.
-		 *
-		 * @param c      character
-		 * @param source reference to source code
-		 * @return       newly created character literal
-		 */
+		/// <summary>
+		/// Creates a new character literal.
+		/// 
+		/// <param name="c">character</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created character literal</returns>
+		/// </summary>
 		public CharacterLiteral(string c, SourceReference source = null) {
 			value = c;
 			source_reference = source;
@@ -50,12 +50,12 @@ namespace Vala.Lang.Literals {
 			visitor.visit_expression(this);
 		}
 
-		/**
-		 * Returns the unicode character value this character literal
-		 * represents.
-		 *
-		 * @return unicode character value
-		 */
+		/// <summary>
+		/// Returns the unicode character value this character literal
+		/// represents.
+		/// 
+		/// <returns>unicode character value</returns>
+		/// </summary>
 		public char get_char() {
 			return value[1];
 		}

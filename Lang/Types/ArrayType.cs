@@ -13,9 +13,9 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
 	public class ArrayType : ReferenceType {
-		/**
-	 * The element type.
-	 */
+		/// <summary>
+		/// The element type.
+		/// </summary>
 		public DataType element_type {
 			get { return _element_type; }
 			set {
@@ -30,9 +30,9 @@ namespace Vala.Lang.Types {
 
 		public bool fixed_length { get; set; }
 
-		/**
-		 * The length of this fixed-length array.
-		 */
+		/// <summary>
+		/// The length of this fixed-length array.
+		/// </summary>
 		public Expression length {
 			get { return _length; }
 			set {
@@ -43,9 +43,9 @@ namespace Vala.Lang.Types {
 			}
 		}
 
-		/**
-		 * The rank of this array.
-		 */
+		/// <summary>
+		/// The rank of this array.
+		/// </summary>
 		public int rank { get; set; }
 
 		private DataType _element_type;

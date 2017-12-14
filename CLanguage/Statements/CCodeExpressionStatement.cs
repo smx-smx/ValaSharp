@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
- * Represents a C code statement that evaluates a given expression.
- */
+	/// <summary>
+	/// Represents a C code statement that evaluates a given expression.
+	/// </summary>
 	public class CCodeExpressionStatement : CCodeStatement {
-		/**
-		 * The expression to evaluate.
-		 */
+		/// <summary>
+		/// The expression to evaluate.
+		/// </summary>
 		public CCodeExpression expression { get; set; }
 
 		public CCodeExpressionStatement(CCodeExpression expr) {

@@ -13,21 +13,21 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace CCodeGen {
-	/**
-	 * C function to register a class at runtime.
-	 */
+	/// <summary>
+	/// C function to register a class at runtime.
+	/// </summary>
 	public class ClassRegisterFunction : TypeRegisterFunction {
-		/**
-		 * Specifies the class to be registered.
-		 */
+		/// <summary>
+		/// Specifies the class to be registered.
+		/// </summary>
 		public Class class_reference { get; set; }
 
-		/**
-		 * Creates a new C function to register the specified class at runtime.
-		 *
-		 * @param cl a class
-		 * @return   newly created class register function
-		 */
+		/// <summary>
+		/// Creates a new C function to register the specified class at runtime.
+		/// 
+		/// <param name="cl">a class</param>
+		/// <returns>newly created class register function</returns>
+		/// </summary>
 		public ClassRegisterFunction(Class cl, CodeContext context) {
 			class_reference = cl;
 			this.context = context;

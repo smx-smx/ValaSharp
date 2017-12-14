@@ -11,9 +11,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.Symbols {
 	public class Constant : Symbol, Lockable {
-		/**
-	 * The data type of this constant.
-	 */
+		/// <summary>
+		/// The data type of this constant.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -22,9 +22,9 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * The value of this constant.
-		 */
+		/// <summary>
+		/// The value of this constant.
+		/// </summary>
 		public Expression value {
 			get { return _value; }
 			set {
@@ -41,15 +41,15 @@ namespace Vala.Lang.Symbols {
 
 		private Expression _value;
 
-		/**
-		 * Creates a new constant.
-		 *
-		 * @param name             constant name
-		 * @param type_reference   constant type
-		 * @param value            constant value
-		 * @param source_reference reference to source code
-		 * @return                 newly created constant
-		 */
+		/// <summary>
+		/// Creates a new constant.
+		/// 
+		/// <param name="name">constant name</param>
+		/// <param name="type_reference">constant type</param>
+		/// <param name="value">constant value</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created constant</returns>
+		/// </summary>
 		public Constant(string name, DataType type_reference, Expression value, SourceReference source_reference, Comment comment = null)
 			: base(name, source_reference, comment) {
 			if (type_reference != null) {

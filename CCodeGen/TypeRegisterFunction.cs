@@ -15,9 +15,9 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace CCodeGen {
-	/**
-	 * C function to register a type at runtime.
-	 */
+	/// <summary>
+	/// C function to register a type at runtime.
+	/// </summary>
 	public abstract class TypeRegisterFunction {
 		CCodeFragment source_declaration_fragment = new CCodeFragment();
 		CCodeFragment declaration_fragment = new CCodeFragment();
@@ -25,9 +25,9 @@ namespace CCodeGen {
 
 		public CodeContext context { get; set; }
 
-		/**
-		 * Constructs the C function from the specified type.
-		 */
+		/// <summary>
+		/// Constructs the C function from the specified type.
+		/// </summary>
 		public void init_from_type(bool plugin, bool declaration_only) {
 			bool use_thread_safe = !plugin;
 
@@ -251,87 +251,87 @@ namespace CCodeGen {
 			definition_fragment.append(fun);
 		}
 
-		/**
-		 * Returns the data type to be registered.
-		 *
-		 * @return type to be registered
-		 */
+		/// <summary>
+		/// Returns the data type to be registered.
+		/// 
+		/// <returns>type to be registered</returns>
+		/// </summary>
 		public abstract TypeSymbol get_type_declaration();
 
-		/**
-		 * Returns the name of the type struct in C code.
-		 *
-		 * @return C struct name
-		 */
+		/// <summary>
+		/// Returns the name of the type struct in C code.
+		/// 
+		/// <returns>C struct name</returns>
+		/// </summary>
 		public virtual string get_type_struct_name() {
 			assert_not_reached();
 			return null;
 		}
-		/**
-		 * Returns the name of the base_init function in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the base_init function in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_base_init_func_name() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the name of the class_finalize function in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the class_finalize function in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_class_finalize_func_name() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the name of the base_finalize function in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the base_finalize function in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_base_finalize_func_name() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the name of the class_init function in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the class_init function in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_class_init_func_name() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the size of the instance struct in C code.
-		 *
-		 * @return C instance struct size
-		 */
+		/// <summary>
+		/// Returns the size of the instance struct in C code.
+		/// 
+		/// <returns>C instance struct size</returns>
+		/// </summary>
 		public virtual string get_instance_struct_size() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the name of the instance_init function in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the instance_init function in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_instance_init_func_name() {
 			assert_not_reached();
 			return null;
 		}
 
-		/**
-		 * Returns the name of the parent type in C code.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the name of the parent type in C code.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_parent_type_name() {
 			assert_not_reached();
 			return null;
@@ -339,83 +339,83 @@ namespace CCodeGen {
 
 
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable init function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable init function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_init_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable peek pointer function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable peek pointer function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_peek_pointer_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable free function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable free function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_free_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable copy function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable copy function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_copy_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable lcopy function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable lcopy function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_lcopy_value_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the C-name of the new generated GTypeValueTable collect value function or null when not available.
-		 *
-		 * @return C function name
-		 */
+		/// <summary>
+		/// Returns the C-name of the new generated GTypeValueTable collect value function or null when not available.
+		/// 
+		/// <returns>C function name</returns>
+		/// </summary>
 		public virtual string get_gtype_value_table_collect_value_function_name() {
 			return null;
 		}
 
-		/**
-		 * Returns the set of type flags to be applied when registering.
-		 *
-		 * @return type flags
-		 */
+		/// <summary>
+		/// Returns the set of type flags to be applied when registering.
+		/// 
+		/// <returns>type flags</returns>
+		/// </summary>
 		public virtual string get_type_flags() {
 			return "0";
 		}
 
-		/**
-		 * Returns additional C declarations to setup interfaces.
-		 *
-		 * @return C declarations
-		 */
+		/// <summary>
+		/// Returns additional C declarations to setup interfaces.
+		/// 
+		/// <returns>C declarations</returns>
+		/// </summary>
 		public virtual CCodeFragment get_type_interface_init_declaration() {
 			return new CCodeFragment();
 		}
 
-		/**
-		 * Returns additional C initialization statements to setup interfaces.
-		 *
-		 * @return C statements
-		 */
+		/// <summary>
+		/// Returns additional C initialization statements to setup interfaces.
+		/// 
+		/// <returns>C statements</returns>
+		/// </summary>
 		public virtual void get_type_interface_init_statements(CCodeBlock block, bool plugin) {
 		}
 
@@ -423,27 +423,27 @@ namespace CCodeGen {
 			return source_declaration_fragment;
 		}
 
-		/**
-		 * Returns the declaration for this type register function in C code.
-		 *
-		 * @return C function declaration fragment
-		 */
+		/// <summary>
+		/// Returns the declaration for this type register function in C code.
+		/// 
+		/// <returns>C function declaration fragment</returns>
+		/// </summary>
 		public CCodeFragment get_declaration() {
 			return declaration_fragment;
 		}
 
-		/**
-		 * Returns the definition for this type register function in C code.
-		 *
-		 * @return C function definition fragment
-		 */
+		/// <summary>
+		/// Returns the definition for this type register function in C code.
+		/// 
+		/// <returns>C function definition fragment</returns>
+		/// </summary>
 		public CCodeFragment get_definition() {
 			return definition_fragment;
 		}
 
-		/**
-		 * Returns the accessibility for this type.
-		 */
+		/// <summary>
+		/// Returns the accessibility for this type.
+		/// </summary>
 		public abstract SymbolAccessibility get_accessibility();
 	}
 }

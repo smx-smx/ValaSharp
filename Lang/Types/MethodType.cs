@@ -7,9 +7,9 @@ using Vala.Lang.Methods;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * The type of a method referencea.
-	 */
+	/// <summary>
+	/// The type of a method referencea.
+	/// </summary>
 	public class MethodType : DataType {
 		public Method method_symbol { get; set; }
 

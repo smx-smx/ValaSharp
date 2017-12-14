@@ -14,38 +14,38 @@ namespace Vala.Lang.Expressions {
 	public class InitializerList : Expression {
 		private List<Expression> initializers = new List<Expression>();
 
-		/**
-		 * Appends the specified expression to this initializer 
-		 *
-		 * @param expr an expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to this initializer
+		/// 
+		/// <param name="expr">an expression</param>
+		/// </summary>
 		public void append(Expression expr) {
 			initializers.Add(expr);
 			expr.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the expression 
-		 *
-		 * @return expression list
-		 */
+		/// <summary>
+		/// Returns a copy of the expression
+		/// 
+		/// <returns>expression list</returns>
+		/// </summary>
 		public List<Expression> get_initializers() {
 			return initializers;
 		}
 
-		/**
-		 * Returns the initializer count in this initializer 
-		 */
+		/// <summary>
+		/// Returns the initializer count in this initializer
+		/// </summary>
 		public int size {
 			get { return initializers.Count; }
 		}
 
-		/**
-		 * Creates a new initializer 
-		 *
-		 * @param source_reference reference to source code
-		 * @return                 newly created initializer list
-		 */
+		/// <summary>
+		/// Creates a new initializer
+		/// 
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created initializer list</returns>
+		/// </summary>
 		public InitializerList(SourceReference source_reference) {
 			this.source_reference = source_reference;
 		}

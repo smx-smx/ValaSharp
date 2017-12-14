@@ -7,23 +7,23 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.CodeNodes {
 	public class ValaAttribute : CodeNode, IComparable {
-		/**
-	 * The name of the attribute type.
-	 */
+		/// <summary>
+		/// The name of the attribute type.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * Contains all specified attribute arguments.
-		 */
+		/// <summary>
+		/// Contains all specified attribute arguments.
+		/// </summary>
 		public Dictionary<string, string> args = new Dictionary<string, string>();
 
-		/**
-		 * Creates a new attribute.
-		 *
-		 * @param name             attribute type name
-		 * @param source_reference reference to source code
-		 * @return                 newly created attribute
-		 */
+		/// <summary>
+		/// Creates a new attribute.
+		/// 
+		/// <param name="name">attribute type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created attribute</returns>
+		/// </summary>
 		public ValaAttribute(string name, SourceReference source_reference = null) {
 			this.name = name;
 			this.source_reference = source_reference;
@@ -37,32 +37,32 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Adds an attribute argument.
-		 *
-		 * @param key    argument name
-		 * @param value  argument value
-		 */
+		/// <summary>
+		/// Adds an attribute argument.
+		/// 
+		/// <param name="key">argument name</param>
+		/// <param name="value">argument value</param>
+		/// </summary>
 		public void add_argument(string key, string value) {
 			args[key] = value;
 		}
 
-		/**
-		 * Returns whether this attribute has the specified named argument.
-		 *
-		 * @param name argument name
-		 * @return     true if the argument has been found, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether this attribute has the specified named argument.
+		/// 
+		/// <param name="name">argument name</param>
+		/// <returns>true if the argument has been found, false otherwise</returns>
+		/// </summary>
 		public bool has_argument(string name) {
 			return args.ContainsKey(name);
 		}
 
-		/**
-		 * Returns the string value of the specified named argument.
-		 *
-		 * @param name argument name
-		 * @return     string value
-		 */
+		/// <summary>
+		/// Returns the string value of the specified named argument.
+		/// 
+		/// <param name="name">argument name</param>
+		/// <returns>string value</returns>
+		/// </summary>
 		public string get_string(string name, string default_value = null) {
 			string value;
 			args.TryGetValue(name, out value);
@@ -77,12 +77,12 @@ namespace Vala.Lang.CodeNodes {
 			return noquotes.compress();
 		}
 
-		/**
-		 * Returns the integer value of the specified named argument.
-		 *
-		 * @param name argument name
-		 * @return     integer value
-		 */
+		/// <summary>
+		/// Returns the integer value of the specified named argument.
+		/// 
+		/// <param name="name">argument name</param>
+		/// <returns>integer value</returns>
+		/// </summary>
 		public int get_integer(string name, int default_value = 0) {
 			string value;
 			args.TryGetValue(name, out value);
@@ -94,12 +94,12 @@ namespace Vala.Lang.CodeNodes {
 			return int.Parse(value);
 		}
 
-		/**
-		 * Returns the double value of the specified named argument.
-		 *
-		 * @param name argument name
-		 * @return     double value
-		 */
+		/// <summary>
+		/// Returns the double value of the specified named argument.
+		/// 
+		/// <param name="name">argument name</param>
+		/// <returns>double value</returns>
+		/// </summary>
 		public double get_double(string name, double default_value = 0) {
 			string value;
 			args.TryGetValue(name, out value);
@@ -111,12 +111,12 @@ namespace Vala.Lang.CodeNodes {
 			return double.Parse(value);
 		}
 
-		/**
-		 * Returns the boolean value of the specified named argument.
-		 *
-		 * @param name argument name
-		 * @return     boolean value
-		 */
+		/// <summary>
+		/// Returns the boolean value of the specified named argument.
+		/// 
+		/// <param name="name">argument name</param>
+		/// <returns>boolean value</returns>
+		/// </summary>
 		public bool get_bool(string name, bool default_value = false) {
 			string value;
 			args.TryGetValue(name, out value);

@@ -9,25 +9,25 @@ using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 
 namespace Vala.Lang {
-	/**
- * Represents a switch section in the source code.
- */
+	/// <summary>
+	/// Represents a switch section in the source code.
+	/// </summary>
 	public class SwitchSection : Block {
 		private List<SwitchLabel> labels = new List<SwitchLabel>();
 
-		/**
-		 * Creates a new switch section.
-		 *
-		 * @param source_reference reference to source code
-		 * @return                 newly created switch section
-		 */
+		/// <summary>
+		/// Creates a new switch section.
+		/// 
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created switch section</returns>
+		/// </summary>
 		public SwitchSection(SourceReference source_reference) : base(source_reference) { }
 
-		/**
-		 * Appends the specified label to the list of switch labels.
-		 *
-		 * @param label a switch label
-		 */
+		/// <summary>
+		/// Appends the specified label to the list of switch labels.
+		/// 
+		/// <param name="label">a switch label</param>
+		/// </summary>
 		public void add_label(SwitchLabel label) {
 			if (labels.Count == 0) {
 				this.source_reference = label.source_reference;
@@ -37,11 +37,11 @@ namespace Vala.Lang {
 			label.section = this;
 		}
 
-		/**
-		 * Returns a copy of the list of switch labels.
-		 *
-		 * @return switch label list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of switch labels.
+		/// 
+		/// <returns>switch label list</returns>
+		/// </summary>
 		public List<SwitchLabel> get_labels() {
 			return labels;
 		}

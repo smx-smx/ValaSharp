@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents an include preprocessor directive in the C code.
- */
+	/// <summary>
+	/// Represents an include preprocessor directive in the C code.
+	/// </summary>
 	public class CCodeIncludeDirective : CCodeNode {
-		/**
-		 * The file to be included.
-		 */
+		/// <summary>
+		/// The file to be included.
+		/// </summary>
 		public string filename { get; set; }
 
-		/**
-		 * Specifies whether the specified file should be searched in the local
-		 * directory.
-		 */
+		/// <summary>
+		/// Specifies whether the specified file should be searched in the local
+		/// directory.
+		/// </summary>
 		public bool local { get; set; }
 
 		public CCodeIncludeDirective(string _filename, bool _local = false) {

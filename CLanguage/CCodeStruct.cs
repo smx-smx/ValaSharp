@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a struct declaration in the C code.
-	 */
+	/// <summary>
+	/// Represents a struct declaration in the C code.
+	/// </summary>
 	public class CCodeStruct : CCodeNode {
-		/**
-		 * The struct name.
-		 */
+		/// <summary>
+		/// The struct name.
+		/// </summary>
 		public string name { get; set; }
 
 		public bool is_empty { get { return declarations.Count == 0; } }
@@ -22,21 +22,21 @@ namespace CLanguage {
 			this.name = name;
 		}
 
-		/**
-		 * Adds the specified declaration as member to this struct.
-		 *
-		 * @param decl a variable declaration
-		 */
+		/// <summary>
+		/// Adds the specified declaration as member to this struct.
+		/// 
+		/// <param name="decl">a variable declaration</param>
+		/// </summary>
 		public void add_declaration(CCodeDeclaration decl) {
 			declarations.Add(decl);
 		}
 
-		/**
-		 * Adds a variable with the specified type and name to this struct.
-		 *
-		 * @param type_name field type
-		 * @param name      member name
-		 */
+		/// <summary>
+		/// Adds a variable with the specified type and name to this struct.
+		/// 
+		/// <param name="type_name">field type</param>
+		/// <param name="name">member name</param>
+		/// </summary>
 		public void add_field(string type_name, string name, CCodeModifiers modifiers = 0, CCodeDeclaratorSuffix declarator_suffix = null) {
 			var decl = new CCodeDeclaration(type_name);
 			decl.add_declarator(new CCodeVariableDeclarator(name, null, declarator_suffix));

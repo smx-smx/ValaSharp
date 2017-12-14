@@ -10,16 +10,16 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an access to base class members in the source code.
-	 */
+	/// <summary>
+	/// Represents an access to base class members in the source code.
+	/// </summary>
 	public class BaseAccess : Expression {
-		/**
-		 * Creates a new base access expression.
-		 *
-		 * @param source reference to source code
-		 * @return       newly created base access expression
-		 */
+		/// <summary>
+		/// Creates a new base access expression.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created base access expression</returns>
+		/// </summary>
 		public BaseAccess(SourceReference source = null) {
 			source_reference = source;
 		}

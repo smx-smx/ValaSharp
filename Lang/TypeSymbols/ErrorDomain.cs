@@ -14,31 +14,31 @@ namespace Vala.Lang.TypeSymbols {
 		private List<ErrorCode> codes = new List<ErrorCode>();
 		private List<Method> methods = new List<Method>();
 
-		/**
-		 * Creates a new error domain.
-		 *
-		 * @param name             type name
-		 * @param source_reference reference to source code
-		 * @return                 newly created error domain
-		 */
+		/// <summary>
+		/// Creates a new error domain.
+		/// 
+		/// <param name="name">type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created error domain</returns>
+		/// </summary>
 		public ErrorDomain(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 		}
 
-		/**
-		 * Appends the specified code to the list of error codes.
-		 *
-		 * @param ecode an error code
-		 */
+		/// <summary>
+		/// Appends the specified code to the list of error codes.
+		/// 
+		/// <param name="ecode">an error code</param>
+		/// </summary>
 		public void add_code(ErrorCode ecode) {
 			codes.Add(ecode);
 			scope.add(ecode.name, ecode);
 		}
 
-		/**
-		 * Adds the specified method as a member to this error domain.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a member to this error domain.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m is CreationMethod) {
 				Report.error(m.source_reference, "construction methods may only be declared within classes and structs");
@@ -55,20 +55,20 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(m.name, m);
 		}
 
-		/**
-		 * Returns a copy of the list of error codes.
-		 *
-		 * @return list of error codes
-		 */
+		/// <summary>
+		/// Returns a copy of the list of error codes.
+		/// 
+		/// <returns>list of error codes</returns>
+		/// </summary>
 		public List<ErrorCode> get_codes() {
 			return codes;
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return list of methods
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>list of methods</returns>
+		/// </summary>
 		public List<Method> get_methods() {
 			return methods;
 		}

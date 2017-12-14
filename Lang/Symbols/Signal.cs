@@ -13,9 +13,9 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Symbols {
 	public class Signal : Symbol, Lockable, Callable {
-		/**
-	 * The return type of handlers of this signal.
-	 */
+		/// <summary>
+		/// The return type of handlers of this signal.
+		/// </summary>
 		public DataType return_type {
 			get { return _return_type; }
 			set {
@@ -34,22 +34,24 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * Specifies whether this signal has virtual method handler.
-		 */
+		/// <summary>
+		/// Specifies whether this signal has virtual method handler.
+		/// </summary>
 		public bool is_virtual { get; set; }
 
 		private List<Parameter> parameters = new List<Parameter>();
-		/**
-		 * Refers to the default signal handler, which is an anonymous
-		 * function in the scope.
-		 * */
+		/// <summary>
+		/// Refers to the default signal handler, which is an anonymous
+		/// function in the scope.
+		/// 
+		/// </summary>
 		public Method default_handler { get; private set; }
 
-		/**
-		 * Refers to the public signal emitter method, which is an anonymous
-		 * function in the scope.
-		 * */
+		/// <summary>
+		/// Refers to the public signal emitter method, which is an anonymous
+		/// function in the scope.
+		/// 
+		/// </summary>
 		public Method emitter { get; private set; }
 
 		private bool lock_used = false;
@@ -58,23 +60,23 @@ namespace Vala.Lang.Symbols {
 
 		private Block _body;
 
-		/**
-		 * Creates a new signal.
-		 *
-		 * @param name              signal name
-		 * @param return_type       signal return type
-		 * @param source_reference  reference to source code
-		 * @return                  newly created signal
-		 */
+		/// <summary>
+		/// Creates a new signal.
+		/// 
+		/// <param name="name">signal name</param>
+		/// <param name="return_type">signal return type</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created signal</returns>
+		/// </summary>
 		public Signal(string name, DataType return_type, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 			this.return_type = return_type;
 		}
 
-		/**
-		 * Appends parameter to signal handler.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends parameter to signal handler.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		public void add_parameter(Parameter param) {
 			parameters.Add(param);
 			scope.add(param.name, param);
@@ -84,11 +86,11 @@ namespace Vala.Lang.Symbols {
 			return parameters;
 		}
 
-		/**
-		 * Returns generated delegate to be used for signal handlers.
-		 *
-		 * @return delegate
-		 */
+		/// <summary>
+		/// Returns generated delegate to be used for signal handlers.
+		/// 
+		/// <returns>delegate</returns>
+		/// </summary>
 		public ValaDelegate get_delegate(DataType sender_type, CodeNode node_reference) {
 			var actual_return_type = return_type.get_actual_type(sender_type, null, node_reference);
 

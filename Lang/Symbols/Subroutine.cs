@@ -16,9 +16,9 @@ namespace Vala.Lang.Symbols {
 
 		public BasicBlock exit_block { get; set; }
 
-		/**
-		 * Specifies the generated `result` variable for postconditions.
-		 */
+		/// <summary>
+		/// Specifies the generated `result` variable for postconditions.
+		/// </summary>
 		public LocalVariable result_var { get; set; }
 
 		public abstract bool has_result { get; }

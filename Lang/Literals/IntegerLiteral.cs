@@ -11,24 +11,24 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Literals {
-	/**
-	 * Represents an integer literal in the source code.
-	 */
+	/// <summary>
+	/// Represents an integer literal in the source code.
+	/// </summary>
 	public class IntegerLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public string value { get; set; }
 
 		public string type_suffix { get; set; }
 
-		/**
-		 * Creates a new integer literal.
-		 *
-		 * @param i      literal value
-		 * @param source reference to source code
-		 * @return       newly created integer literal
-		 */
+		/// <summary>
+		/// Creates a new integer literal.
+		/// 
+		/// <param name="i">literal value</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created integer literal</returns>
+		/// </summary>
 		public IntegerLiteral(string i, SourceReference source = null) {
 			value = i;
 			source_reference = source;

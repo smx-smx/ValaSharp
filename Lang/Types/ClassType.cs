@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * A class type.
-	 */
+	/// <summary>
+	/// A class type.
+	/// </summary>
 	public class ClassType : ReferenceType {
 		private WeakReference<Class> class_symbol_weak = new WeakReference<Class>(null);
 
-		/**
-		 * The referred class.
-		 */
+		/// <summary>
+		/// The referred class.
+		/// </summary>
 		public Class class_symbol {
 			get {
 				return class_symbol_weak.GetTarget();

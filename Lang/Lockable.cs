@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Vala.Lang {
-	/**
-	 * Represents a lockable object.
-	 */
+	/// <summary>
+	/// Represents a lockable object.
+	/// </summary>
 	public interface Lockable {
-		/**
-		 * Indicates a specific lockable object beeing actually locked somewhere.
-		 */
+		/// <summary>
+		/// Indicates a specific lockable object beeing actually locked somewhere.
+		/// </summary>
 		bool get_lock_used();
 
-		/**
-		 * Set this lockable object as beeing locked somewhere.
-		 */
+		/// <summary>
+		/// Set this lockable object as beeing locked somewhere.
+		/// </summary>
 		void set_lock_used(bool used);
 	}
 }

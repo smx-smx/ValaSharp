@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Expressions {
-	/**
-	 * Represents a parenthesized expression in the C code.
-	 */
+	/// <summary>
+	/// Represents a parenthesized expression in the C code.
+	/// </summary>
 	public class CCodeParenthesizedExpression : CCodeExpression {
-		/**
-		 * The expression in the parenthesis.
-		 */
+		/// <summary>
+		/// The expression in the parenthesis.
+		/// </summary>
 		public CCodeExpression inner { get; set; }
 
 		public CCodeParenthesizedExpression(CCodeExpression expr) {

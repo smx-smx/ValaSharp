@@ -15,16 +15,16 @@ namespace Vala.Lang {
 	public class Parameter : Variable {
 		public ParameterDirection direction { get; set; } = ParameterDirection.IN;
 
-		/**
-		 * Specifies whether the methods accepts an indefinite number of
-		 * parameters.
-		 */
+		/// <summary>
+		/// Specifies whether the methods accepts an indefinite number of
+		/// parameters.
+		/// </summary>
 		public bool ellipsis { get; set; }
 
-		/**
-		 * Specifies whether the methods accepts an indefinite number of
-		 * parameters.
-		 */
+		/// <summary>
+		/// Specifies whether the methods accepts an indefinite number of
+		/// parameters.
+		/// </summary>
 		public bool params_array { get; set; }
 
 		public bool captured { get; set; }
@@ -35,28 +35,28 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * The base parameter of this parameter relative to the base method.
-		 */
+		/// <summary>
+		/// The base parameter of this parameter relative to the base method.
+		/// </summary>
 		public Parameter base_parameter { get; set; }
 
-		/**
-		 * Creates a new formal parameter.
-		 *
-		 * @param name              parameter name
-		 * @param variable_type     parameter type
-		 * @param source_reference  reference to source code
-		 * @return                  newly created formal parameter
-		 */
+		/// <summary>
+		/// Creates a new formal parameter.
+		/// 
+		/// <param name="name">parameter name</param>
+		/// <param name="variable_type">parameter type</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created formal parameter</returns>
+		/// </summary>
 		public Parameter(string name, DataType variable_type, SourceReference source_reference = null)
 			: base(variable_type, name, null, source_reference) {
 			access = SymbolAccessibility.PUBLIC;
 		}
 
-		/**
-		 * Creates a new ellipsis parameter representing an indefinite number of
-		 * parameters.
-		 */
+		/// <summary>
+		/// Creates a new ellipsis parameter representing an indefinite number of
+		/// parameters.
+		/// </summary>
 		public static Parameter with_ellipsis(SourceReference source_reference = null) {
 			Parameter param = new Parameter(null, null, source_reference);
 			param.ellipsis = true;

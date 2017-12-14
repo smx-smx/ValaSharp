@@ -7,15 +7,15 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Methods {
-	/**
-	 * Represents the Array.copy method.
-	 */
+	/// <summary>
+	/// Represents the Array.copy method.
+	/// </summary>
 	public class ArrayCopyMethod : Method {
-		/**
-		 * Creates a new array copy method.
-		 *
-		 * @return newly created method
-		 */
+		/// <summary>
+		/// Creates a new array copy method.
+		/// 
+		/// <returns>newly created method</returns>
+		/// </summary>
 		public ArrayCopyMethod(SourceReference source_reference)
 			: base("copy", new InvalidType(), source_reference) {
 			external = true;

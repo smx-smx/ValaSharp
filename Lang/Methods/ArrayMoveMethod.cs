@@ -7,15 +7,15 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Methods {
-	/**
-	 * Represents the Array.move method.
-	 */
+	/// <summary>
+	/// Represents the Array.move method.
+	/// </summary>
 	public class ArrayMoveMethod : Method {
-		/**
-		 * Creates a new array move method.
-		 *
-		 * @return newly created method
-		 */
+		/// <summary>
+		/// Creates a new array move method.
+		/// 
+		/// <returns>newly created method</returns>
+		/// </summary>
 		public ArrayMoveMethod(SourceReference source_reference)
 			: base("move", new VoidType(), source_reference) {
 			external = true;

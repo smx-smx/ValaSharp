@@ -13,9 +13,9 @@ using static GLibPorts.GLib;
 
 namespace CCodeGen {
 
-	/**
-	 * Interface to the C compiler.
-	 */
+	/// <summary>
+	/// Interface to the C compiler.
+	/// </summary>
 	public class CCodeCompiler {
 		public string path { get; set; }
 
@@ -45,12 +45,12 @@ namespace CCodeGen {
 			}
 		}
 
-		/**
-		 * Compile generated C code to object code and optionally link object
-		 * files.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Compile generated C code to object code and optionally link object
+		/// files.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void compile(CodeContext context, string cc_command, string[] cc_options, string pkg_config_command = null) {
 			bool use_pkgconfig = false;
 

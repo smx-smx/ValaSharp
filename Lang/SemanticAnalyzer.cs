@@ -162,11 +162,11 @@ namespace Vala.Lang {
 		public SemanticAnalyzer() {
 		}
 
-		/**
-		 * Analyze and check code in the specified context.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Analyze and check code in the specified context.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void analyze(CodeContext context) {
 			this.context = context;
 

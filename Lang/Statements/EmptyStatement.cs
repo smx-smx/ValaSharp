@@ -13,12 +13,12 @@ namespace Vala.Lang.Statements {
 			get { return this; }
 		}
 
-		/**
-	 * Creates a new empty statement.
-	 *
-	 * @param source reference to source code
-	 * @return       newly created empty statement
-	 */
+		/// <summary>
+		/// Creates a new empty statement.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created empty statement</returns>
+		/// </summary>
 		public EmptyStatement(SourceReference source) {
 			source_reference = source;
 		}

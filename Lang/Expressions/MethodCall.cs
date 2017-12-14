@@ -14,13 +14,13 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an invocation expression in the source code.
-	 */
+	/// <summary>
+	/// Represents an invocation expression in the source code.
+	/// </summary>
 	public class MethodCall : Expression {
-		/**
-		 * The method to call.
-		 */
+		/// <summary>
+		/// The method to call.
+		/// </summary>
 		public Expression call {
 			get { return _call; }
 			set {
@@ -33,9 +33,9 @@ namespace Vala.Lang.Expressions {
 
 		public bool is_assert { get; private set; }
 
-		/**
-		 * Whether this chain up uses the constructv function with va_list.
-		 */
+		/// <summary>
+		/// Whether this chain up uses the constructv function with va_list.
+		/// </summary>
 		public bool is_constructv_chainup { get; private set; }
 
 		public bool is_chainup { get; private set; }
@@ -44,33 +44,33 @@ namespace Vala.Lang.Expressions {
 
 		private List<Expression> argument_list = new List<Expression>();
 
-		/**
-		 * Creates a new invocation expression.
-		 *
-		 * @param call             method to call
-		 * @param source_reference reference to source code
-		 * @return                 newly created invocation expression
-		 */
+		/// <summary>
+		/// Creates a new invocation expression.
+		/// 
+		/// <param name="call">method to call</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created invocation expression</returns>
+		/// </summary>
 		public MethodCall(Expression call, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.call = call;
 		}
 
-		/**
-		 * Appends the specified expression to the list of arguments.
-		 *
-		 * @param arg an argument
-		 */
+		/// <summary>
+		/// Appends the specified expression to the list of arguments.
+		/// 
+		/// <param name="arg">an argument</param>
+		/// </summary>
 		public void add_argument(Expression arg) {
 			argument_list.Add(arg);
 			arg.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the argument list.
-		 *
-		 * @return argument list
-		 */
+		/// <summary>
+		/// Returns a copy of the argument list.
+		/// 
+		/// <returns>argument list</returns>
+		/// </summary>
 		public List<Expression> get_argument_list() {
 			return argument_list;
 		}

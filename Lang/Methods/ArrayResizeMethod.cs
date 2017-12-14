@@ -7,15 +7,15 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Methods {
-	/**
-	 * Represents the Array.resize method.
-	 */
+	/// <summary>
+	/// Represents the Array.resize method.
+	/// </summary>
 	public class ArrayResizeMethod : Method {
-		/**
-		 * Creates a new array resize method.
-		 *
-		 * @return newly created method
-		 */
+		/// <summary>
+		/// Creates a new array resize method.
+		/// 
+		/// <returns>newly created method</returns>
+		/// </summary>
 		public ArrayResizeMethod(SourceReference source_reference)
 			: base("resize", new VoidType(), source_reference) {
 			external = true;

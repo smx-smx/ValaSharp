@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
 namespace CLanguage {
-	/**
- * Represents a section that should be processed on condition.
- */
+	/// <summary>
+	/// Represents a section that should be processed on condition.
+	/// </summary>
 	public class CCodeGGnucSection : CCodeFragment {
-		/**
-		 * The expression
-		 */
+		/// <summary>
+		/// The expression
+		/// </summary>
 		public GGnucSectionType section_type { get; set; }
 
 		public CCodeGGnucSection(GGnucSectionType t) {
@@ -42,11 +42,11 @@ namespace CLanguage {
 	public static class GGnucSectionTypeExtensions {
 		public static string ToString(this GGnucSectionType @this) {
 			switch (@this) {
-				case GGnucSectionType.IGNORE_DEPRECATIONS:
-					return "IGNORE_DEPRECATIONS";
-				default:
-					assert_not_reached();
-					return null;
+			case GGnucSectionType.IGNORE_DEPRECATIONS:
+				return "IGNORE_DEPRECATIONS";
+			default:
+				assert_not_reached();
+				return null;
 			}
 		}
 	}

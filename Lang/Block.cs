@@ -16,10 +16,10 @@ namespace Vala.Lang {
 			get { return this; }
 		}
 
-		/**
-	 * Specifies whether this block contains a jump statement. This
-	 * information can be used to remove unreachable block cleanup code.
-	 */
+		/// <summary>
+		/// Specifies whether this block contains a jump statement. This
+		/// information can be used to remove unreachable block cleanup code.
+		/// </summary>
 		public bool contains_jump_statement { get; set; }
 
 		public bool captured { get; set; }
@@ -28,19 +28,19 @@ namespace Vala.Lang {
 		private List<LocalVariable> local_variables = new List<LocalVariable>();
 		private List<Constant> local_constants = new List<Constant>();
 
-		/**
-		 * Creates a new block.
-		 *
-		 * @param source_reference  reference to source code
-		 */
+		/// <summary>
+		/// Creates a new block.
+		/// 
+		/// <param name="source_reference">reference to source code</param>
+		/// </summary>
 		public Block(SourceReference source_reference) : base(null, source_reference) {
 		}
 
-		/**
-		 * Append a statement to this block.
-		 *
-		 * @param stmt a statement
-		 */
+		/// <summary>
+		/// Append a statement to this block.
+		/// 
+		/// <param name="stmt">a statement</param>
+		/// </summary>
 		public void add_statement(Statement stmt) {
 			stmt.node.parent_node = this;
 			statement_list.Add(stmt);
@@ -51,11 +51,11 @@ namespace Vala.Lang {
 			statement_list.Insert(index, stmt);
 		}
 
-		/**
-		 * Returns a copy of the list of statements.
-		 *
-		 * @return statement list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of statements.
+		/// 
+		/// <returns>statement list</returns>
+		/// </summary>
 		public List<Statement> get_statements() {
 			var list = new List<Statement>();
 			foreach (Statement stmt in statement_list) {
@@ -71,11 +71,11 @@ namespace Vala.Lang {
 			return list;
 		}
 
-		/**
-		 * Add a local variable to this block.
-		 *
-		 * @param local a variable declarator
-		 */
+		/// <summary>
+		/// Add a local variable to this block.
+		/// 
+		/// <param name="local">a variable declarator</param>
+		/// </summary>
 		public void add_local_variable(LocalVariable local) {
 			var parent_block = parent_symbol;
 			while (parent_block is Block || parent_block is Method || parent_block is PropertyAccessor) {
@@ -92,11 +92,11 @@ namespace Vala.Lang {
 			local_variables.Remove(local);
 		}
 
-		/**
-		 * Returns a copy of the list of local variables.
-		 *
-		 * @return variable declarator list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of local variables.
+		/// 
+		/// <returns>variable declarator list</returns>
+		/// </summary>
 		public List<LocalVariable> get_local_variables() {
 			return local_variables;
 		}

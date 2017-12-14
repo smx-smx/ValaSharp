@@ -6,19 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents an access to an array member in the C code.
-	 */
+	/// <summary>
+	/// Represents an access to an array member in the C code.
+	/// </summary>
 	public class CCodeElementAccess : CCodeExpression {
-		/**
-		 * Expression representing the container on which we want to access.
-		 */
+		/// <summary>
+		/// Expression representing the container on which we want to access.
+		/// </summary>
 		public CCodeExpression container { get; set; }
 
-		/**
-		 * Expression representing the index we want to access inside the
-		 * container.
-		 */
+		/// <summary>
+		/// Expression representing the index we want to access inside the
+		/// container.
+		/// </summary>
 		public CCodeExpression index { get; set; }
 
 		public CCodeElementAccess(CCodeExpression cont, CCodeExpression i) {

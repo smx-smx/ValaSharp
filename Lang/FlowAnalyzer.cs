@@ -14,9 +14,9 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang {
-	/**
-	 * Code visitor building the control flow graph.
-	 */
+	/// <summary>
+	/// Code visitor building the control flow graph.
+	/// </summary>
 	public class FlowAnalyzer : CodeVisitor {
 		private class JumpTarget {
 			public bool is_break_target { get; set; }
@@ -103,11 +103,11 @@ namespace Vala.Lang {
 		public FlowAnalyzer() {
 		}
 
-		/**
-		 * Build control flow graph in the specified context.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Build control flow graph in the specified context.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void analyze(CodeContext context) {
 			this.context = context;
 

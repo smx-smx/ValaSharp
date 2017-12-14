@@ -7,9 +7,9 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
-	* Interface for all statement types.
-	*/
+	/// <summary>
+	/// Interface for all statement types.
+	/// </summary>
 	public interface Statement {
 		CodeNode node { get; }
 	}

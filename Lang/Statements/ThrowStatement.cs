@@ -11,17 +11,17 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a throw statement in the source code.
- */
+	/// <summary>
+	/// Represents a throw statement in the source code.
+	/// </summary>
 	public class ThrowStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * The error expression to throw.
-		 */
+		/// <summary>
+		/// The error expression to throw.
+		/// </summary>
 		public Expression error_expression {
 			get {
 				return _error_expression;
@@ -36,13 +36,13 @@ namespace Vala.Lang.Statements {
 
 		private Expression _error_expression;
 
-		/**
-		 * Creates a new throw statement.
-		 *
-		 * @param error_expression the error expression
-		 * @param source_reference reference to source code
-		 * @return                 newly created throw statement
-		 */
+		/// <summary>
+		/// Creates a new throw statement.
+		/// 
+		/// <param name="error_expression">the error expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created throw statement</returns>
+		/// </summary>
 		public ThrowStatement(Expression error_expression, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.error_expression = error_expression;

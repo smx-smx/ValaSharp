@@ -10,13 +10,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents a type cast in the source code.
-	 */
+	/// <summary>
+	/// Represents a type cast in the source code.
+	/// </summary>
 	public class CastExpression : Expression {
-		/**
-		 * The expression to be cast.
-		 */
+		/// <summary>
+		/// The expression to be cast.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -27,9 +27,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The target type.
-		 */
+		/// <summary>
+		/// The target type.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -38,9 +38,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Checked casts return NULL instead of raising an error.
-		 */
+		/// <summary>
+		/// Checked casts return NULL instead of raising an error.
+		/// </summary>
 		public bool is_silent_cast { get; set; }
 
 		public bool is_non_null_cast { get; set; }
@@ -49,13 +49,13 @@ namespace Vala.Lang.Expressions {
 
 		private DataType _data_type;
 
-		/**
-		 * Creates a new cast expression.
-		 *
-		 * @param inner           expression to be cast
-		 * @param type_reference  target type
-		 * @return                newly created cast expression
-		 */
+		/// <summary>
+		/// Creates a new cast expression.
+		/// 
+		/// <param name="inner">expression to be cast</param>
+		/// <param name="type_reference">target type</param>
+		/// <returns>newly created cast expression</returns>
+		/// </summary>
 		public CastExpression(Expression inner, DataType type_reference, SourceReference source_reference, bool is_silent_cast) {
 			this.type_reference = type_reference;
 			this.source_reference = source_reference;

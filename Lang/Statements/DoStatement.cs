@@ -9,17 +9,17 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a do iteration statement in the source code.
- */
+	/// <summary>
+	/// Represents a do iteration statement in the source code.
+	/// </summary>
 	public class DoStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the loop body.
-		 */
+		/// <summary>
+		/// Specifies the loop body.
+		/// </summary>
 		public Block body {
 			get {
 				return _body;
@@ -30,9 +30,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the loop condition.
-		 */
+		/// <summary>
+		/// Specifies the loop condition.
+		/// </summary>
 		public Expression condition {
 			get {
 				return _condition;
@@ -46,14 +46,14 @@ namespace Vala.Lang.Statements {
 		private Expression _condition;
 		private Block _body;
 
-		/**
-		 * Creates a new do statement.
-		 *
-		 * @param body              loop body
-		 * @param condition         loop condition
-		 * @param source_reference  reference to source code
-		 * @return                  newly created do statement
-		 */
+		/// <summary>
+		/// Creates a new do statement.
+		/// 
+		/// <param name="body">loop body</param>
+		/// <param name="condition">loop condition</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created do statement</returns>
+		/// </summary>
 		public DoStatement(Block body, Expression condition, SourceReference source_reference = null) {
 			this.condition = condition;
 			this.source_reference = source_reference;

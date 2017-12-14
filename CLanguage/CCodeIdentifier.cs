@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a identifier in the C code.
-	 */
+	/// <summary>
+	/// Represents a identifier in the C code.
+	/// </summary>
 	public class CCodeIdentifier : CCodeExpression {
-		/**
-		 * The name of this identifier.
-		 */
+		/// <summary>
+		/// The name of this identifier.
+		/// </summary>
 		public string name { get; set; }
 
 		public CCodeIdentifier(string _name) {

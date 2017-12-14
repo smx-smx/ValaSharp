@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Vala.Lang.Types {
-	/**
- * A reference to an instance field without a specific instance.
- */
+	/// <summary>
+	/// A reference to an instance field without a specific instance.
+	/// </summary>
 	public class FieldPrototype : DataType {
 		public Field field_symbol { get; set; }
 

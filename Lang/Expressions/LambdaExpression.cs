@@ -13,69 +13,69 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents a lambda expression in the source code. Lambda expressions are
- * anonymous methods with implicitly typed parameters.
- */
+	/// <summary>
+	/// Represents a lambda expression in the source code. Lambda expressions are
+	/// anonymous methods with implicitly typed parameters.
+	/// </summary>
 	public class LambdaExpression : Expression {
-		/**
-		 * The expression body of this lambda expression. Only one of
-		 * expression_body or statement_body may be set.
-		 */
+		/// <summary>
+		/// The expression body of this lambda expression. Only one of
+		/// expression_body or statement_body may be set.
+		/// </summary>
 		public Expression expression_body { get; set; }
 
-		/**
-		 * The statement body of this lambda expression. Only one of
-		 * expression_body or statement_body may be set.
-		 */
+		/// <summary>
+		/// The statement body of this lambda expression. Only one of
+		/// expression_body or statement_body may be set.
+		/// </summary>
 		public Block statement_body { get; set; }
 
-		/**
-		 * The generated method.
-		 */
+		/// <summary>
+		/// The generated method.
+		/// </summary>
 		public Method method { get; set; }
 
 		private List<Parameter> parameters = new List<Parameter>();
 
-		/**
-		 * Creates a new lambda expression.
-		 *
-		 * @param expression_body  expression body
-		 * @param source_reference reference to source code
-		 * @return                 newly created lambda expression
-		 */
+		/// <summary>
+		/// Creates a new lambda expression.
+		/// 
+		/// <param name="expression_body">expression body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created lambda expression</returns>
+		/// </summary>
 		public LambdaExpression(Expression expression_body, SourceReference source_reference) {
 			this.source_reference = source_reference;
 			this.expression_body = expression_body;
 		}
 
-		/**
-		 * Creates a new lambda expression with statement body.
-		 *
-		 * @param statement_body   statement body
-		 * @param source_reference reference to source code
-		 * @return                 newly created lambda expression
-		 */
+		/// <summary>
+		/// Creates a new lambda expression with statement body.
+		/// 
+		/// <param name="statement_body">statement body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created lambda expression</returns>
+		/// </summary>
 		public static LambdaExpression with_statement_body(Block statement_body, SourceReference source_reference) {
 			LambdaExpression @this = new LambdaExpression(null, source_reference);
 			@this.statement_body = statement_body;
 			return @this;
 		}
 
-		/**
-		 * Appends implicitly typed parameter.
-		 *
-		 * @param param parameter name
-		 */
+		/// <summary>
+		/// Appends implicitly typed parameter.
+		/// 
+		/// <param name="param">parameter name</param>
+		/// </summary>
 		public void add_parameter(Parameter param) {
 			parameters.Add(param);
 		}
 
-		/**
-		 * Returns copy of parameter list.
-		 *
-		 * @return parameter list
-		 */
+		/// <summary>
+		/// Returns copy of parameter list.
+		/// 
+		/// <returns>parameter list</returns>
+		/// </summary>
 		public List<Parameter> get_parameters() {
 			return parameters;
 		}

@@ -12,29 +12,29 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang {
 	public class Field : Variable, Lockable {
-		/**
-	 * Specifies whether this field may only be accessed with an instance of
-	 * the contained type.
-	 */
+		/// <summary>
+		/// Specifies whether this field may only be accessed with an instance of
+		/// the contained type.
+		/// </summary>
 		public MemberBinding binding { get; set; } = MemberBinding.INSTANCE;
 
-		/**
-		 * Specifies whether the field is volatile. Volatile fields are
-		 * necessary to allow multi-threaded access.
-		 */
+		/// <summary>
+		/// Specifies whether the field is volatile. Volatile fields are
+		/// necessary to allow multi-threaded access.
+		/// </summary>
 		public bool is_volatile { get; set; }
 
 		private bool lock_used = false;
 
-		/**
-		 * Creates a new field.
-		 *
-		 * @param name              field name
-		 * @param variable_type     field type
-		 * @param initializer       initializer expression
-		 * @param source_reference  reference to source code
-		 * @return                  newly created field
-		 */
+		/// <summary>
+		/// Creates a new field.
+		/// 
+		/// <param name="name">field name</param>
+		/// <param name="variable_type">field type</param>
+		/// <param name="initializer">initializer expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created field</returns>
+		/// </summary>
 		public Field(string name, DataType variable_type, Expression initializer, SourceReference source_reference = null, Comment comment = null)
 			: base(variable_type, name, initializer, source_reference, comment) {
 		}

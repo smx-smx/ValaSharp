@@ -11,9 +11,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
 	public class ReferenceTransferExpression : Expression {
-		/**
-	 * The variable whose reference is to be transferred.
-	 */
+		/// <summary>
+		/// The variable whose reference is to be transferred.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -26,12 +26,12 @@ namespace Vala.Lang.Expressions {
 
 		private Expression _inner;
 
-		/**
-		 * Creates a new reference transfer expression.
-		 *
-		 * @param inner variable whose reference is to be transferred
-		 * @return      newly created reference transfer expression
-		 */
+		/// <summary>
+		/// Creates a new reference transfer expression.
+		/// 
+		/// <param name="inner">variable whose reference is to be transferred</param>
+		/// <returns>newly created reference transfer expression</returns>
+		/// </summary>
 		public ReferenceTransferExpression(Expression inner, SourceReference source_reference = null) {
 			this.inner = inner;
 			this.source_reference = source_reference;

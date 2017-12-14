@@ -12,9 +12,9 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang {
 	public class Property : Symbol, Lockable {
-		/**
-	 * The property type.
-	 */
+		/// <summary>
+		/// The property type.
+		/// </summary>
 		public DataType property_type {
 			get { return _data_type; }
 			set {
@@ -25,9 +25,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * The get accessor of this property if available.
-		 */
+		/// <summary>
+		/// The get accessor of this property if available.
+		/// </summary>
 		public PropertyAccessor get_accessor {
 			get { return _get_accessor; }
 			set {
@@ -38,9 +38,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * The set/construct accessor of this property if available.
-		 */
+		/// <summary>
+		/// The set/construct accessor of this property if available.
+		/// </summary>
 		public PropertyAccessor set_accessor {
 			get { return _set_accessor; }
 			set {
@@ -51,50 +51,50 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Represents the generated `this` parameter in this property.
-		 */
+		/// <summary>
+		/// Represents the generated `this` parameter in this property.
+		/// </summary>
 		public Parameter this_parameter { get; set; }
 
-		/**
-		 * Specifies whether automatic accessor code generation should be
-		 * disabled.
-		 */
+		/// <summary>
+		/// Specifies whether automatic accessor code generation should be
+		/// disabled.
+		/// </summary>
 		public bool interface_only { get; set; }
 
-		/**
-		 * Specifies whether this property is abstract. Abstract properties have
-		 * no accessor bodies, may only be specified within abstract classes and
-		 * interfaces, and must be overriden by derived non-abstract classes.
-		 */
+		/// <summary>
+		/// Specifies whether this property is abstract. Abstract properties have
+		/// no accessor bodies, may only be specified within abstract classes and
+		/// interfaces, and must be overriden by derived non-abstract classes.
+		/// </summary>
 		public bool is_abstract { get; set; }
 
-		/**
-		 * Specifies whether this property is virtual. Virtual properties may be
-		 * overridden by derived classes.
-		 */
+		/// <summary>
+		/// Specifies whether this property is virtual. Virtual properties may be
+		/// overridden by derived classes.
+		/// </summary>
 		public bool is_virtual { get; set; }
 
-		/**
-		 * Specifies whether this property overrides a virtual or abstract
-		 * property of a base type.
-		 */
+		/// <summary>
+		/// Specifies whether this property overrides a virtual or abstract
+		/// property of a base type.
+		/// </summary>
 		public bool overrides { get; set; }
 
-		/**
-		 * Reference the the Field that holds this property
-		 */
+		/// <summary>
+		/// Reference the the Field that holds this property
+		/// </summary>
 		public Field field { get; set; }
 
-		/**
-		 * Specifies whether this field may only be accessed with an instance of
-		 * the contained type.
-		 */
+		/// <summary>
+		/// Specifies whether this field may only be accessed with an instance of
+		/// the contained type.
+		/// </summary>
 		public MemberBinding binding { get; set; } = MemberBinding.INSTANCE;
 
-		/**
-		 * The nick of this property
-		 */
+		/// <summary>
+		/// The nick of this property
+		/// </summary>
 		public string nick {
 			get {
 				if (_nick == null) {
@@ -107,9 +107,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * The blurb of this property
-		 */
+		/// <summary>
+		/// The blurb of this property
+		/// </summary>
 		public string blurb {
 			get {
 				if (_blurb == null) {
@@ -122,9 +122,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies whether this a property triggers a notify.
-		 */
+		/// <summary>
+		/// Specifies whether this a property triggers a notify.
+		/// </summary>
 		public bool notify {
 			get {
 				if (_notify == null) {
@@ -134,11 +134,11 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies the virtual or abstract property this property overrides.
-		 * Reference must be weak as virtual properties set base_property to
-		 * themselves.
-		 */
+		/// <summary>
+		/// Specifies the virtual or abstract property this property overrides.
+		/// Reference must be weak as virtual properties set base_property to
+		/// themselves.
+		/// </summary>
 		public Property base_property {
 			get {
 				find_base_properties();
@@ -146,9 +146,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies the abstract interface property this property implements.
-		 */
+		/// <summary>
+		/// Specifies the abstract interface property this property implements.
+		/// </summary>
 		public Property base_interface_property {
 			get {
 				find_base_properties();
@@ -156,9 +156,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies the default value of this property.
-		 */
+		/// <summary>
+		/// Specifies the default value of this property.
+		/// </summary>
 		public Expression initializer {
 			get {
 				return _initializer;
@@ -193,16 +193,16 @@ namespace Vala.Lang {
 		private string _blurb;
 		private bool? _notify;
 
-		/**
-		 * Creates a new property.
-		 *
-		 * @param name              property name
-		 * @param property_type     property type
-		 * @param get_accessor      get accessor
-		 * @param set_accessor      set/construct accessor
-		 * @param source_reference  reference to source code
-		 * @return                  newly created property
-		 */
+		/// <summary>
+		/// Creates a new property.
+		/// 
+		/// <param name="name">property name</param>
+		/// <param name="property_type">property type</param>
+		/// <param name="get_accessor">get accessor</param>
+		/// <param name="set_accessor">set/construct accessor</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created property</returns>
+		/// </summary>
 		public Property(
 			string name, DataType property_type, PropertyAccessor get_accessor,
 			PropertyAccessor set_accessor, SourceReference source_reference = null, Comment comment = null
@@ -239,14 +239,14 @@ namespace Vala.Lang {
 			lock_used = used;
 		}
 
-		/**
-		 * Checks whether the accessors of this property are compatible
-		 * with the specified base property.
-		 *
-		 * @param base_property a property
-		 * @param invalid_match error string about which check failed
-		 * @return true if the specified property is compatible to this property
-		 */
+		/// <summary>
+		/// Checks whether the accessors of this property are compatible
+		/// with the specified base property.
+		/// 
+		/// <param name="base_property">a property</param>
+		/// <param name="invalid_match">error string about which check failed</param>
+		/// <returns>true if the specified property is compatible to this property</returns>
+		/// </summary>
 		public bool compatible(Property base_property, out string invalid_match) {
 			if ((get_accessor == null && base_property.get_accessor != null) ||
 				(get_accessor != null && base_property.get_accessor == null)) {

@@ -17,9 +17,9 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace CCodeGen.Modules {
-	/**
-	 * The link between a method and generated code.
-	 */
+	/// <summary>
+	/// The link between a method and generated code.
+	/// </summary>
 	public abstract class CCodeMethodModule : CCodeStructModule {
 
 		private bool ellipses_to_valist = false;
@@ -303,12 +303,12 @@ namespace CCodeGen.Modules {
 			}
 		}
 
-		/**
-		 * This function generates the code the given method. If the method is
-		 * a constructor, _construct is generated, unless it's variadic, in which
-		 * case _constructv is generated (and _construct is generated together
-		 * with _new in visit_creation_method).
-		 */
+		/// <summary>
+		/// This function generates the code the given method. If the method is
+		/// a constructor, _construct is generated, unless it's variadic, in which
+		/// case _constructv is generated (and _construct is generated together
+		/// with _new in visit_creation_method).
+		/// </summary>
 		public override void visit_method(Method m) {
 			string real_name = get_ccode_real_name(m);
 			if (m is CreationMethod && m.is_variadic()) {

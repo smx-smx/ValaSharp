@@ -16,9 +16,9 @@ namespace Vala.Lang.Methods {
 	public class Method : Subroutine, Callable {
 		List<TypeParameter> type_parameters;
 
-		/**
-		 * The return type of this method.
-		 */
+		/// <summary>
+		/// The return type of this method.
+		/// </summary>
 		public DataType return_type {
 			get { return _return_type; }
 			set {
@@ -31,34 +31,34 @@ namespace Vala.Lang.Methods {
 			get { return !(return_type is VoidType); }
 		}
 
-		/**
-		 * Specifies whether this method may only be called with an instance of
-		 * the contained type.
-		 */
+		/// <summary>
+		/// Specifies whether this method may only be called with an instance of
+		/// the contained type.
+		/// </summary>
 		public MemberBinding binding { get; set; } = MemberBinding.INSTANCE;
 
-		/**
-		 * Specifies whether this method is abstract. Abstract methods have no
-		 * body, may only be specified within abstract classes, and must be
-		 * overriden by derived non-abstract classes.
-		 */
+		/// <summary>
+		/// Specifies whether this method is abstract. Abstract methods have no
+		/// body, may only be specified within abstract classes, and must be
+		/// overriden by derived non-abstract classes.
+		/// </summary>
 		public bool is_abstract { get; set; }
 
-		/**
-		 * Specifies whether this method is virtual. Virtual methods may be
-		 * overridden by derived classes.
-		 */
+		/// <summary>
+		/// Specifies whether this method is virtual. Virtual methods may be
+		/// overridden by derived classes.
+		/// </summary>
 		public bool is_virtual { get; set; }
 
-		/**
-		 * Specifies whether this method overrides a virtual or abstract method
-		 * of a base type.
-		 */
+		/// <summary>
+		/// Specifies whether this method overrides a virtual or abstract method
+		/// of a base type.
+		/// </summary>
 		public bool overrides { get; set; }
 
-		/**
-		 * Specifies whether this method should be inlined.
-		 */
+		/// <summary>
+		/// Specifies whether this method should be inlined.
+		/// </summary>
 		public bool is_inline { get; set; }
 
 		public bool returns_floating_reference {
@@ -84,11 +84,11 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Specifies the virtual or abstract method this method overrides.
-		 * Reference must be weak as virtual and abstract methods set 
-		 * base_method to themselves.
-		 */
+		/// <summary>
+		/// Specifies the virtual or abstract method this method overrides.
+		/// Reference must be weak as virtual and abstract methods set
+		/// base_method to themselves.
+		/// </summary>
 		public Method base_method {
 			get {
 				find_base_methods();
@@ -96,9 +96,9 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Specifies the abstract interface method this method implements.
-		 */
+		/// <summary>
+		/// Specifies the abstract interface method this method implements.
+		/// </summary>
 		public Method base_interface_method {
 			get {
 				find_base_methods();
@@ -106,9 +106,9 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Specifies the explicit interface containing the method this method implements.
-		 */
+		/// <summary>
+		/// Specifies the explicit interface containing the method this method implements.
+		/// </summary>
 		public DataType base_interface_type {
 			get { return _base_interface_type; }
 			set {
@@ -119,14 +119,14 @@ namespace Vala.Lang.Methods {
 
 		public bool entry_point { get; private set; }
 
-		/**
-		 * Specifies the generated `this` parameter for instance methods.
-		 */
+		/// <summary>
+		/// Specifies the generated `this` parameter for instance methods.
+		/// </summary>
 		public Parameter this_parameter { get; set; }
 
-		/**
-		 * Specifies whether this method expects printf-style format arguments.
-		 */
+		/// <summary>
+		/// Specifies whether this method expects printf-style format arguments.
+		/// </summary>
 		public bool printf_format {
 			get {
 				return get_attribute("PrintfFormat") != null;
@@ -136,9 +136,9 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Specifies whether this method expects scanf-style format arguments.
-		 */
+		/// <summary>
+		/// Specifies whether this method expects scanf-style format arguments.
+		/// </summary>
 		public bool scanf_format {
 			get {
 				return get_attribute("ScanfFormat") != null;
@@ -148,10 +148,10 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Specifies whether a construct function with a GType parameter is
-		 * available. This is only applicable to creation methods.
-		 */
+		/// <summary>
+		/// Specifies whether a construct function with a GType parameter is
+		/// available. This is only applicable to creation methods.
+		/// </summary>
 		public bool has_construct_function {
 			get {
 				return get_attribute_bool("CCode", "has_construct_function", true);
@@ -215,24 +215,24 @@ namespace Vala.Lang.Methods {
 		static List<Expression> _empty_expression_list;
 		static List<TypeParameter> _empty_type_parameter_list;
 
-		/**
-		 * Creates a new method.
-		 *
-		 * @param name              method name
-		 * @param return_type       method return type
-		 * @param source_reference  reference to source code
-		 * @return                  newly created method
-		 */
+		/// <summary>
+		/// Creates a new method.
+		/// 
+		/// <param name="name">method name</param>
+		/// <param name="return_type">method return type</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created method</returns>
+		/// </summary>
 		public Method(string name, DataType return_type, SourceReference source_reference = null, Comment comment = null)
 			: base(name, source_reference, comment) {
 			this.return_type = return_type;
 		}
 
-		/**
-		 * Appends parameter to this method.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends parameter to this method.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		public void add_parameter(Parameter param) {
 			// default C parameter position
 			parameters.Add(param);
@@ -243,9 +243,9 @@ namespace Vala.Lang.Methods {
 			return parameters;
 		}
 
-		/**
-		 * Remove all parameters from this method.
-		 */
+		/// <summary>
+		/// Remove all parameters from this method.
+		/// </summary>
 		public void clear_parameters() {
 			foreach (Parameter param in parameters) {
 				if (!param.ellipsis) {
@@ -310,14 +310,14 @@ namespace Vala.Lang.Methods {
 			}
 		}
 
-		/**
-		 * Checks whether the parameters and return type of this method are
-		 * compatible with the specified method
-		 *
-		 * @param base_method a method
-		 * @param invalid_match error string about which check failed
-		 * @return true if the specified method is compatible to this method
-		 */
+		/// <summary>
+		/// Checks whether the parameters and return type of this method are
+		/// compatible with the specified method
+		/// 
+		/// <param name="base_method">a method</param>
+		/// <param name="invalid_match">error string about which check failed</param>
+		/// <returns>true if the specified method is compatible to this method</returns>
+		/// </summary>
 		public bool compatible(Method base_method, out string invalid_match) {
 			// method is always compatible to itself
 			if (this == base_method) {
@@ -423,11 +423,11 @@ namespace Vala.Lang.Methods {
 			return true;
 		}
 
-		/**
-		 * Appends the specified parameter to the list of type parameters.
-		 *
-		 * @param p a type parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of type parameters.
+		/// 
+		/// <param name="p">a type parameter</param>
+		/// </summary>
 		public void add_type_parameter(TypeParameter p) {
 			if (type_parameters == null) {
 				type_parameters = new List<TypeParameter>();
@@ -436,11 +436,11 @@ namespace Vala.Lang.Methods {
 			scope.add(p.name, p);
 		}
 
-		/**
-		 * Returns a copy of the type parameter list.
-		 *
-		 * @return list of type parameters
-		 */
+		/// <summary>
+		/// Returns a copy of the type parameter list.
+		/// 
+		/// <returns>list of type parameters</returns>
+		/// </summary>
 		public List<TypeParameter> get_type_parameters() {
 			if (type_parameters != null) {
 				return type_parameters;
@@ -466,11 +466,11 @@ namespace Vala.Lang.Methods {
 			return -1;
 		}
 
-		/**
-		 * Adds a precondition to this method.
-		 *
-		 * @param precondition a boolean precondition expression
-		 */
+		/// <summary>
+		/// Adds a precondition to this method.
+		/// 
+		/// <param name="precondition">a boolean precondition expression</param>
+		/// </summary>
 		public void add_precondition(Expression precondition) {
 			if (preconditions == null) {
 				preconditions = new List<Expression>();
@@ -479,11 +479,11 @@ namespace Vala.Lang.Methods {
 			precondition.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the list of preconditions of this method.
-		 *
-		 * @return list of preconditions
-		 */
+		/// <summary>
+		/// Returns a copy of the list of preconditions of this method.
+		/// 
+		/// <returns>list of preconditions</returns>
+		/// </summary>
 		public List<Expression> get_preconditions() {
 			if (preconditions != null) {
 				return preconditions;
@@ -494,11 +494,11 @@ namespace Vala.Lang.Methods {
 			return _empty_expression_list;
 		}
 
-		/**
-		 * Adds a postcondition to this method.
-		 *
-		 * @param postcondition a boolean postcondition expression
-		 */
+		/// <summary>
+		/// Adds a postcondition to this method.
+		/// 
+		/// <param name="postcondition">a boolean postcondition expression</param>
+		/// </summary>
 		public void add_postcondition(Expression postcondition) {
 			if (postconditions == null) {
 				postconditions = new List<Expression>();
@@ -507,11 +507,11 @@ namespace Vala.Lang.Methods {
 			postcondition.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the list of postconditions of this method.
-		 *
-		 * @return list of postconditions
-		 */
+		/// <summary>
+		/// Returns a copy of the list of postconditions of this method.
+		/// 
+		/// <returns>list of postconditions</returns>
+		/// </summary>
 		public List<Expression> get_postconditions() {
 			if (postconditions != null) {
 				return postconditions;

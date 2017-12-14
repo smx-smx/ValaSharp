@@ -5,23 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Expressions {
-	/**
- * Represents a conditional expression in C code.
- */
+	/// <summary>
+	/// Represents a conditional expression in C code.
+	/// </summary>
 	public class CCodeConditionalExpression : CCodeExpression {
-		/**
-		 * The condition.
-		 */
+		/// <summary>
+		/// The condition.
+		/// </summary>
 		public CCodeExpression condition { get; set; }
 
-		/**
-		 * The expression to be evaluated if the condition holds.
-		 */
+		/// <summary>
+		/// The expression to be evaluated if the condition holds.
+		/// </summary>
 		public CCodeExpression true_expression { get; set; }
 
-		/**
-		 * The expression to be evaluated if the condition doesn't hold.
-		 */
+		/// <summary>
+		/// The expression to be evaluated if the condition doesn't hold.
+		/// </summary>
 		public CCodeExpression false_expression { get; set; }
 
 		public CCodeConditionalExpression(CCodeExpression cond, CCodeExpression true_expr, CCodeExpression false_expr) {

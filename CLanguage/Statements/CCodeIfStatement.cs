@@ -6,23 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
-	 * Represents an if selection statement in the C code.
-	 */
+	/// <summary>
+	/// Represents an if selection statement in the C code.
+	/// </summary>
 	public class CCodeIfStatement : CCodeStatement {
-		/**
-		 * The boolean condition to evaluate.
-		 */
+		/// <summary>
+		/// The boolean condition to evaluate.
+		/// </summary>
 		public CCodeExpression condition { get; set; }
 
-		/**
-		 * The statement to be evaluated if the condition holds.
-		 */
+		/// <summary>
+		/// The statement to be evaluated if the condition holds.
+		/// </summary>
 		public CCodeStatement true_statement { get; set; }
 
-		/**
-		 * The optional statement to be evaluated if the condition doesn't hold.
-		 */
+		/// <summary>
+		/// The optional statement to be evaluated if the condition doesn't hold.
+		/// </summary>
 		public CCodeStatement false_statement { get; set; }
 
 		public CCodeIfStatement(CCodeExpression cond, CCodeStatement true_stmt, CCodeStatement false_stmt = null) {
@@ -31,10 +31,10 @@ namespace CLanguage.Statements {
 			false_statement = false_stmt;
 		}
 
-		/**
-		 * Specifies whether this if statement is part of an else if statement.
-		 * This only affects the output formatting.
-		 */
+		/// <summary>
+		/// Specifies whether this if statement is part of an else if statement.
+		/// This only affects the output formatting.
+		/// </summary>
 		public bool else_if { get; set; }
 
 		public override void write(CCodeWriter writer) {

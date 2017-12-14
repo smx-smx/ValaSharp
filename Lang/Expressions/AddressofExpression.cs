@@ -10,13 +10,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents an address-of expression in the source code, e.g. `&foo`.
- */
+	/// <summary>
+	/// Represents an address-of expression in the source code, e.g. `&foo`.
+	/// </summary>
 	public class AddressofExpression : Expression {
-		/**
-		 * The variable whose address is to be computed.
-		 */
+		/// <summary>
+		/// The variable whose address is to be computed.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -29,12 +29,12 @@ namespace Vala.Lang.Expressions {
 
 		private Expression _inner;
 
-		/**
-		 * Creates a new address-of expression.
-		 *
-		 * @param inner variable whose address is to be computed
-		 * @return      newly created address-of expression
-		 */
+		/// <summary>
+		/// Creates a new address-of expression.
+		/// 
+		/// <param name="inner">variable whose address is to be computed</param>
+		/// <returns>newly created address-of expression</returns>
+		/// </summary>
 		public AddressofExpression(Expression inner, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.inner = inner;

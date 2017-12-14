@@ -9,17 +9,17 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents an if selection statement in the source code.
-	 */
+	/// <summary>
+	/// Represents an if selection statement in the source code.
+	/// </summary>
 	public class IfStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * The boolean condition to evaluate.
-		 */
+		/// <summary>
+		/// The boolean condition to evaluate.
+		/// </summary>
 		public Expression condition {
 			get {
 				return _condition;
@@ -30,9 +30,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * The statement to be evaluated if the condition holds.
-		 */
+		/// <summary>
+		/// The statement to be evaluated if the condition holds.
+		/// </summary>
 		public Block true_statement {
 			get { return _true_statement; }
 			set {
@@ -41,9 +41,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * The optional statement to be evaluated if the condition doesn't hold.
-		 */
+		/// <summary>
+		/// The optional statement to be evaluated if the condition doesn't hold.
+		/// </summary>
 		public Block false_statement {
 			get { return _false_statement; }
 			set {
@@ -57,14 +57,14 @@ namespace Vala.Lang.Statements {
 		private Block _true_statement;
 		private Block _false_statement;
 
-		/**
-		 * Creates a new if statement.
-		 *
-		 * @param cond       a boolean condition
-		 * @param true_stmt  statement to be evaluated if condition is true
-		 * @param false_stmt statement to be evaluated if condition is false
-		 * @return           newly created if statement
-		 */
+		/// <summary>
+		/// Creates a new if statement.
+		/// 
+		/// <param name="cond">a boolean condition</param>
+		/// <param name="true_stmt">statement to be evaluated if condition is true</param>
+		/// <param name="false_stmt">statement to be evaluated if condition is false</param>
+		/// <returns>newly created if statement</returns>
+		/// </summary>
 		public IfStatement(Expression cond, Block true_stmt, Block false_stmt, SourceReference source) {
 			condition = cond;
 			true_statement = true_stmt;

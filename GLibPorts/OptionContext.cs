@@ -44,28 +44,28 @@ namespace GLibPorts {
 			main_group.translation_domain = translation_domain;
 
 			main_group.post_parse_hook = (context, group, data) => {
-				foreach(OptionEntry entry in group.entries) {
+				foreach (OptionEntry entry in group.entries) {
 					switch (entry.arg) {
-						case OptionArg.NONE:
-							((OptionEntry<bool>)entry).notify();
-							break;
-						case OptionArg.FILENAME:
-						case OptionArg.STRING:
-							((OptionEntry<string>)entry).notify();
-							break;
-						case OptionArg.FILENAME_ARRAY:
-						case OptionArg.STRING_ARRAY:
-							((OptionEntry<IList<string>>)entry).notify();
-							break;
-						case OptionArg.INT:
-							((OptionEntry<int>)entry).notify();
-							break;
-						case OptionArg.INT64:
-							((OptionEntry<Int64>)entry).notify();
-							break;
-						case OptionArg.DOUBLE:
-							((OptionEntry<double>)entry).notify();
-							break;
+					case OptionArg.NONE:
+						((OptionEntry<bool>)entry).notify();
+						break;
+					case OptionArg.FILENAME:
+					case OptionArg.STRING:
+						((OptionEntry<string>)entry).notify();
+						break;
+					case OptionArg.FILENAME_ARRAY:
+					case OptionArg.STRING_ARRAY:
+						((OptionEntry<IList<string>>)entry).notify();
+						break;
+					case OptionArg.INT:
+						((OptionEntry<int>)entry).notify();
+						break;
+					case OptionArg.INT64:
+						((OptionEntry<Int64>)entry).notify();
+						break;
+					case OptionArg.DOUBLE:
+						((OptionEntry<double>)entry).notify();
+						break;
 					}
 				}
 				return true;
@@ -83,11 +83,11 @@ namespace GLibPorts {
 
 		private bool NO_ARG(OptionEntry entry) {
 			switch (entry.arg) {
-				case OptionArg.NONE:
-				case OptionArg.CALLBACK:
-					return true;
-				default:
-					return entry.flags.HasFlag(OptionFlags.NO_ARG);
+			case OptionArg.NONE:
+			case OptionArg.CALLBACK:
+				return true;
+			default:
+				return entry.flags.HasFlag(OptionFlags.NO_ARG);
 			}
 		}
 
@@ -104,64 +104,64 @@ namespace GLibPorts {
 			Debug.Assert(value != null || OPTIONAL_ARG(entry) || NO_ARG(entry));
 
 			switch (entry.arg) {
-				case OptionArg.NONE: {
-						OptionEntry<bool> centry = entry as OptionEntry<bool>;
-						centry.arg_data = !centry.flags.HasFlag(OptionFlags.REVERSE);
-						break;
-					}
-				case OptionArg.STRING:
-				case OptionArg.FILENAME: {
-						OptionEntry<string> centry = entry as OptionEntry<string>;
-						centry.arg_data = value;
-						break;
-					}
-				case OptionArg.STRING_ARRAY:
-				case OptionArg.FILENAME_ARRAY: {
-						OptionEntry<IList<string>> centry = entry as OptionEntry<IList<string>>;
-						if (centry.arg_data == null)
-							centry.arg_data = new List<string>();
-						centry.arg_data.Add(value);
-						break;
-					}
-				case OptionArg.INT: {
-						OptionEntry<int> centry = entry as OptionEntry<int>;
-						centry.arg_data = int.Parse(value);
-						break;
-					}
-				case OptionArg.CALLBACK: {
-						OptionEntry<OptionArgFunc> centry = entry as OptionEntry<OptionArgFunc>;
-						string data = null;
-						if (
-							centry.flags.HasFlag(OptionFlags.OPTIONAL_ARG) ||
-							centry.flags.HasFlag(OptionFlags.NO_ARG)
-						) {
-							data = null;
-						} else if (centry.flags.HasFlag(OptionFlags.FILENAME)) {
-							data = value;
-						}
-						if (centry.flags.HasFlag(OptionFlags.NO_ARG | OptionFlags.OPTIONAL_ARG) && data == null) {
-							return false;
-						}
-
-						bool retval = centry.arg_data(option_name, data, group.user_data);
-						if (!retval) {
-							throw new Exception("Error parsing option " + option_name);
-						}
-						return retval;
-					}
-				case OptionArg.DOUBLE: {
-						OptionEntry<double> centry = entry as OptionEntry<double>;
-						centry.arg_data = double.Parse(value);
-						break;
-					}
-				case OptionArg.INT64: {
-						OptionEntry<Int64> centry = entry as OptionEntry<Int64>;
-						centry.arg_data = Int64.Parse(value);
-						break;
-					}
-				default:
-					Debug.Assert(false);
+			case OptionArg.NONE: {
+					OptionEntry<bool> centry = entry as OptionEntry<bool>;
+					centry.arg_data = !centry.flags.HasFlag(OptionFlags.REVERSE);
 					break;
+				}
+			case OptionArg.STRING:
+			case OptionArg.FILENAME: {
+					OptionEntry<string> centry = entry as OptionEntry<string>;
+					centry.arg_data = value;
+					break;
+				}
+			case OptionArg.STRING_ARRAY:
+			case OptionArg.FILENAME_ARRAY: {
+					OptionEntry<IList<string>> centry = entry as OptionEntry<IList<string>>;
+					if (centry.arg_data == null)
+						centry.arg_data = new List<string>();
+					centry.arg_data.Add(value);
+					break;
+				}
+			case OptionArg.INT: {
+					OptionEntry<int> centry = entry as OptionEntry<int>;
+					centry.arg_data = int.Parse(value);
+					break;
+				}
+			case OptionArg.CALLBACK: {
+					OptionEntry<OptionArgFunc> centry = entry as OptionEntry<OptionArgFunc>;
+					string data = null;
+					if (
+						centry.flags.HasFlag(OptionFlags.OPTIONAL_ARG) ||
+						centry.flags.HasFlag(OptionFlags.NO_ARG)
+					) {
+						data = null;
+					} else if (centry.flags.HasFlag(OptionFlags.FILENAME)) {
+						data = value;
+					}
+					if (centry.flags.HasFlag(OptionFlags.NO_ARG | OptionFlags.OPTIONAL_ARG) && data == null) {
+						return false;
+					}
+
+					bool retval = centry.arg_data(option_name, data, group.user_data);
+					if (!retval) {
+						throw new Exception("Error parsing option " + option_name);
+					}
+					return retval;
+				}
+			case OptionArg.DOUBLE: {
+					OptionEntry<double> centry = entry as OptionEntry<double>;
+					centry.arg_data = double.Parse(value);
+					break;
+				}
+			case OptionArg.INT64: {
+					OptionEntry<Int64> centry = entry as OptionEntry<Int64>;
+					centry.arg_data = Int64.Parse(value);
+					break;
+				}
+			default:
+				Debug.Assert(false);
+				break;
 			}
 			return true;
 		}
@@ -235,12 +235,12 @@ namespace GLibPorts {
 					continue;
 
 				switch (group.entries[j].arg) {
-					case OptionArg.CALLBACK:
-					case OptionArg.STRING_ARRAY:
-					case OptionArg.FILENAME_ARRAY:
-						break;
-					default:
-						return false;
+				case OptionArg.CALLBACK:
+				case OptionArg.STRING_ARRAY:
+				case OptionArg.FILENAME_ARRAY:
+					break;
+				default:
+					return false;
 				}
 
 				if (!parse_arg(group, group.entries[j], argv[idx], ""))
@@ -486,8 +486,8 @@ namespace GLibPorts {
 
 								if (!parsed) {
 									/* Try the groups */
-									foreach(OptionGroup group in this.groups) {
-										if(!parse_short_option(
+									foreach (OptionGroup group in this.groups) {
+										if (!parse_short_option(
 											group, i, ref new_i, arg[j], ref argc, ref argv,
 											out parsed
 										)) {
@@ -512,7 +512,7 @@ namespace GLibPorts {
 								string new_arg = null;
 								StringBuilder sb = new StringBuilder();
 								int arg_index = 0;
-								for(int j=0; j<arg_length; j++) {
+								for (int j = 0; j < arg_length; j++) {
 									if (!nulled_out[j]) {
 										if (new_arg == null) {
 											sb[arg_index++] = arg[j];
@@ -529,7 +529,7 @@ namespace GLibPorts {
 							has_unknown = true;
 						}
 
-						if(!parsed && !ignore_unknown_options) {
+						if (!parsed && !ignore_unknown_options) {
 							throw new Exception("Unknown option " + argv[i]);
 						}
 
@@ -547,7 +547,7 @@ namespace GLibPorts {
 							separator_pos = 0;
 					}
 				}
-				if(separator_pos > 0) {
+				if (separator_pos > 0) {
 
 				}
 			}

@@ -9,13 +9,13 @@ using Vala.Lang.Parser;
 using Vala.Lang.Statements;
 
 namespace Vala.Lang.CodeNodes {
-	/**
- * Represents a switch label in the source code.
- */
+	/// <summary>
+	/// Represents a switch label in the source code.
+	/// </summary>
 	public class SwitchLabel : CodeNode {
-		/**
-		 * Specifies the label expression.
-		 */
+		/// <summary>
+		/// Specifies the label expression.
+		/// </summary>
 		public Expression expression { get; set; }
 
 		private WeakReference<SwitchSection> section_weak = new WeakReference<SwitchSection>(null);
@@ -29,24 +29,24 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Creates a new switch case label.
-		 *
-		 * @param expr   label expression
-		 * @param source reference to source code
-		 * @return       newly created switch case label
-		 */
+		/// <summary>
+		/// Creates a new switch case label.
+		/// 
+		/// <param name="expr">label expression</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created switch case label</returns>
+		/// </summary>
 		public SwitchLabel(Expression expr, SourceReference source = null) {
 			expression = expr;
 			source_reference = source;
 		}
 
-		/**
-		 * Creates a new switch default label.
-		 *
-		 * @param source reference to source code
-		 * @return       newly created switch default label
-		 */
+		/// <summary>
+		/// Creates a new switch default label.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created switch default label</returns>
+		/// </summary>
 		public static SwitchLabel with_default(SourceReference source = null) {
 			return new SwitchLabel(null, source);
 		}

@@ -9,9 +9,9 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang
 {
-	/**
-	 * Simple reader for a subset of XML.
-	 */
+	/// <summary>
+/// Simple reader for a subset of XML.
+/// </summary>
 	public class MarkupReader
 	{
 		public string filename { get; private set; }

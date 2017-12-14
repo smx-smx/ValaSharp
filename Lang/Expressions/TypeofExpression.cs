@@ -9,13 +9,13 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents a typeof expression in the source code.
- */
+	/// <summary>
+	/// Represents a typeof expression in the source code.
+	/// </summary>
 	public class TypeofExpression : Expression {
-		/**
-		 * The type to be retrieved.
-		 */
+		/// <summary>
+		/// The type to be retrieved.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -26,13 +26,13 @@ namespace Vala.Lang.Expressions {
 
 		private DataType _data_type;
 
-		/**
-		 * Creates a new typeof expression.
-		 *
-		 * @param type   a data type
-		 * @param source reference to source code
-		 * @return       newly created typeof expression
-		 */
+		/// <summary>
+		/// Creates a new typeof expression.
+		/// 
+		/// <param name="type">a data type</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created typeof expression</returns>
+		/// </summary>
 		public TypeofExpression(DataType type, SourceReference source) {
 			type_reference = type;
 			source_reference = source;

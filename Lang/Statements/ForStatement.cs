@@ -9,17 +9,17 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a for iteration statement in the source code.
- */
+	/// <summary>
+	/// Represents a for iteration statement in the source code.
+	/// </summary>
 	public class ForStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the loop condition.
-		 */
+		/// <summary>
+		/// Specifies the loop condition.
+		/// </summary>
 		public Expression condition {
 			get {
 				return _condition;
@@ -32,9 +32,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the loop body.
-		 */
+		/// <summary>
+		/// Specifies the loop body.
+		/// </summary>
 		public Block body {
 			get {
 				return _body;
@@ -51,54 +51,54 @@ namespace Vala.Lang.Statements {
 		private Expression _condition;
 		private Block _body;
 
-		/**
-		 * Creates a new for statement.
-		 *
-		 * @param condition        loop condition
-		 * @param body             loop body
-		 * @param source_reference reference to source code
-		 * @return                 newly created for statement
-		 */
+		/// <summary>
+		/// Creates a new for statement.
+		/// 
+		/// <param name="condition">loop condition</param>
+		/// <param name="body">loop body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created for statement</returns>
+		/// </summary>
 		public ForStatement(Expression condition, Block body, SourceReference source_reference = null) {
 			this.condition = condition;
 			this.body = body;
 			this.source_reference = source_reference;
 		}
 
-		/**
-		 * Appends the specified expression to the list of initializers.
-		 *
-		 * @param init an initializer expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the list of initializers.
+		/// 
+		/// <param name="init">an initializer expression</param>
+		/// </summary>
 		public void add_initializer(Expression init) {
 			init.parent_node = this;
 			initializer.Add(init);
 		}
 
-		/**
-		 * Returns a copy of the list of initializers.
-		 *
-		 * @return initializer list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of initializers.
+		/// 
+		/// <returns>initializer list</returns>
+		/// </summary>
 		public List<Expression> get_initializer() {
 			return initializer;
 		}
 
-		/**
-		 * Appends the specified expression to the iterator.
-		 *
-		 * @param iter an iterator expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the iterator.
+		/// 
+		/// <param name="iter">an iterator expression</param>
+		/// </summary>
 		public void add_iterator(Expression iter) {
 			iter.parent_node = this;
 			iterator.Add(iter);
 		}
 
-		/**
-		 * Returns a copy of the iterator.
-		 *
-		 * @return iterator
-		 */
+		/// <summary>
+		/// Returns a copy of the iterator.
+		/// 
+		/// <returns>iterator</returns>
+		/// </summary>
 		public List<Expression> get_iterator() {
 			return iterator;
 		}

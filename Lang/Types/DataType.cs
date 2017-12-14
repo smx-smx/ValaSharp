@@ -9,20 +9,20 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
 	public abstract class DataType : CodeNode {
-		/**
-		* Specifies that the expression or variable owns the value.
-		*/
+		/// <summary>
+		/// Specifies that the expression or variable owns the value.
+		/// </summary>
 		public bool value_owned { get; set; }
 
-		/**
-		 * Specifies that the expression may be null.
-		 */
+		/// <summary>
+		/// Specifies that the expression may be null.
+		/// </summary>
 		public bool nullable { get; set; }
 
 		private WeakReference<TypeSymbol> data_type_weak = new WeakReference<TypeSymbol>(null);
-		/**
-		 * The referred data type.
-		 */
+		/// <summary>
+		/// The referred data type.
+		/// </summary>
 		public TypeSymbol data_type {
 			get {
 				return data_type_weak.GetTarget();
@@ -32,30 +32,30 @@ namespace Vala.Lang.Types {
 			}
 		}
 
-		/**
-		 * The referred generic type parameter.
-		 */
+		/// <summary>
+		/// The referred generic type parameter.
+		/// </summary>
 		public TypeParameter type_parameter { get; set; }
 
-		/**
-		 * Specifies that the expression transfers a floating reference.
-		 */
+		/// <summary>
+		/// Specifies that the expression transfers a floating reference.
+		/// </summary>
 		public bool floating_reference { get; set; }
 
-		/**
-		 * Specifies that the type supports dynamic lookup.
-		 */
+		/// <summary>
+		/// Specifies that the type supports dynamic lookup.
+		/// </summary>
 		public bool is_dynamic { get; set; }
 
 
 		private List<DataType> type_argument_list;
 		private static List<DataType> _empty_type_list;
 
-		/**
-		 * Appends the specified type as generic type argument.
-		 *
-		 * @param arg a type reference
-		 */
+		/// <summary>
+		/// Appends the specified type as generic type argument.
+		/// 
+		/// <param name="arg">a type reference</param>
+		/// </summary>
 		public void add_type_argument(DataType arg) {
 			if (type_argument_list == null) {
 				type_argument_list = new List<DataType>();
@@ -64,11 +64,11 @@ namespace Vala.Lang.Types {
 			arg.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the list of generic type arguments.
-		 *
-		 * @return type argument list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of generic type arguments.
+		/// 
+		/// <returns>type argument list</returns>
+		/// </summary>
 		public List<DataType> get_type_arguments() {
 			if (type_argument_list != null) {
 				return type_argument_list;
@@ -87,9 +87,9 @@ namespace Vala.Lang.Types {
 			return type_argument_list.Count > 0;
 		}
 
-		/**
-		 * Removes all generic type arguments.
-		 */
+		/// <summary>
+		/// Removes all generic type arguments.
+		/// </summary>
 		public void remove_all_type_arguments() {
 			type_argument_list = null;
 		}
@@ -161,21 +161,21 @@ namespace Vala.Lang.Types {
 			return s;
 		}
 
-		/**
-		 * Creates a shallow copy of this type reference.
-		 *
-		 * @return copy of this type reference
-		 */
+		/// <summary>
+		/// Creates a shallow copy of this type reference.
+		/// 
+		/// <returns>copy of this type reference</returns>
+		/// </summary>
 		public abstract DataType copy();
 
-		/**
-		 * Checks two type references for equality. May only be used with
-		 * resolved type references.
-		 *
-		 * @param type2 a type reference
-		 * @return      true if this type reference is equal to type2, false
-		 *              otherwise
-		 */
+		/// <summary>
+		/// Checks two type references for equality. May only be used with
+		/// resolved type references.
+		/// 
+		/// <param name="type2">a type reference</param>
+		/// <returns>true if this type reference is equal to type2, false</returns>
+		/// otherwise
+		/// </summary>
 		public virtual bool equals(DataType type2) {
 			if (type2.is_disposable() != is_disposable()) {
 				return false;
@@ -212,13 +212,13 @@ namespace Vala.Lang.Types {
 			return true;
 		}
 
-		/**
-		 * Checks whether this type reference is at least as strict as the
-		 * specified type reference type2.
-		 *
-		 * @param type2 a type reference
-		 * @return      true if this type reference is stricter or equal
-		 */
+		/// <summary>
+		/// Checks whether this type reference is at least as strict as the
+		/// specified type reference type2.
+		/// 
+		/// <param name="type2">a type reference</param>
+		/// <returns>true if this type reference is stricter or equal</returns>
+		/// </summary>
 		public virtual bool stricter(DataType type2) {
 			if (type2.is_disposable() != is_disposable()) {
 				return false;
@@ -343,29 +343,29 @@ namespace Vala.Lang.Types {
 			return false;
 		}
 
-		/**
-		 * Returns whether instances of this type are invokable.
-		 *
-		 * @return true if invokable, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether instances of this type are invokable.
+		/// 
+		/// <returns>true if invokable, false otherwise</returns>
+		/// </summary>
 		public virtual bool is_invokable() {
 			return false;
 		}
 
-		/**
-		 * Returns the return type of this invokable.
-		 *
-		 * @return return type
-		 */
+		/// <summary>
+		/// Returns the return type of this invokable.
+		/// 
+		/// <returns>return type</returns>
+		/// </summary>
 		public virtual DataType get_return_type() {
 			return null;
 		}
 
-		/**
-		 * Returns copy of the list of invocation parameters.
-		 *
-		 * @return parameter list
-		 */
+		/// <summary>
+		/// Returns copy of the list of invocation parameters.
+		/// 
+		/// <returns>parameter list</returns>
+		/// </summary>
 		public virtual List<Parameter> get_parameters() {
 			return null;
 		}
@@ -404,10 +404,10 @@ namespace Vala.Lang.Types {
 			return null;
 		}
 
-		/**
-		 * Checks whether this data type references a real struct. A real struct
-		 * is a struct which is not a simple (fundamental) type.
-		 */
+		/// <summary>
+		/// Checks whether this data type references a real struct. A real struct
+		/// is a struct which is not a simple (fundamental) type.
+		/// </summary>
 		public virtual bool is_real_struct_type() {
 			var s = data_type as Struct;
 			if (s != null && !s.is_simple_type()) {
@@ -420,11 +420,11 @@ namespace Vala.Lang.Types {
 			return is_real_struct_type() && !nullable;
 		}
 
-		/**
-		 * Returns whether the value needs to be disposed, i.e. whether
-		 * allocated memory or other resources need to be released when
-		 * the value is no longer needed.
-		 */
+		/// <summary>
+		/// Returns whether the value needs to be disposed, i.e. whether
+		/// allocated memory or other resources need to be released when
+		/// the value is no longer needed.
+		/// </summary>
 		public virtual bool is_disposable() {
 			if (!value_owned) {
 				return false;
@@ -457,10 +457,10 @@ namespace Vala.Lang.Types {
 			return result;
 		}
 
-		/**
-		 * Search for the type parameter in this formal type and match it in
-		 * value_type.
-		 */
+		/// <summary>
+		/// Search for the type parameter in this formal type and match it in
+		/// value_type.
+		/// </summary>
 		public virtual DataType infer_type_argument(TypeParameter type_param, DataType value_type) {
 			var value_type_arg_it = value_type.get_type_arguments().GetEnumerator();
 			foreach (var formal_type_arg in this.get_type_arguments()) {

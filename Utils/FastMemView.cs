@@ -90,15 +90,15 @@ namespace Utils {
 
 		public void Seek(long pos, SeekOrigin begin) {
 			switch (begin) {
-				case SeekOrigin.Begin:
-					Position = pos;
-					break;
-				case SeekOrigin.Current:
-					Position += pos;
-					break;
-				case SeekOrigin.End:
-					Position = mf.Size - pos;
-					break;
+			case SeekOrigin.Begin:
+				Position = pos;
+				break;
+			case SeekOrigin.Current:
+				Position += pos;
+				break;
+			case SeekOrigin.End:
+				Position = mf.Size - pos;
+				break;
 			}
 		}
 

@@ -9,14 +9,14 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
 
-	/**
-	 * A class type.
-	 */
+	/// <summary>
+	/// A class type.
+	/// </summary>
 	public class ObjectType : ReferenceType {
 		private WeakReference<ObjectTypeSymbol> type_symbol_weak = new WeakReference<ObjectTypeSymbol>(null);
-		/**
-		 * The referred class or interface.
-		 */
+		/// <summary>
+		/// The referred class or interface.
+		/// </summary>
 		public ObjectTypeSymbol type_symbol {
 			get {
 				return type_symbol_weak.GetTarget();

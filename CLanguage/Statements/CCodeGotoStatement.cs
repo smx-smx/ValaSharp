@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
-	 * Represents a goto statement in the C code.
-	 */
+	/// <summary>
+	/// Represents a goto statement in the C code.
+	/// </summary>
 	public class CCodeGotoStatement : CCodeStatement {
-		/**
-		 * The name of the target label.
-		 */
+		/// <summary>
+		/// The name of the target label.
+		/// </summary>
 		public string name { get; set; }
 
 		public CCodeGotoStatement(string name) {

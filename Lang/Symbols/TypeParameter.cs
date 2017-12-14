@@ -9,13 +9,13 @@ using Vala.Lang.Parser;
 
 namespace Vala.Lang.Symbols {
 	public class TypeParameter : Symbol {
-		/**
-		* Creates a new generic type parameter.
-		*
-		* @param name              parameter name
-		* @param source_reference  reference to source code
-		* @return                  newly created generic type parameter
-		*/
+		/// <summary>
+		/// Creates a new generic type parameter.
+		/// 
+		/// <param name="name">parameter name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created generic type parameter</returns>
+		/// </summary>
 		public TypeParameter(string name, SourceReference source_reference) : base(name, source_reference) {
 		}
 
@@ -23,13 +23,13 @@ namespace Vala.Lang.Symbols {
 			visitor.visit_type_parameter(this);
 		}
 
-		/**
-		* Checks two type parameters for equality.
-		*
-		* @param param2 a type parameter
-		* @return      true if this type parameter is equal to param2, false
-		*              otherwise
-		*/
+		/// <summary>
+		/// Checks two type parameters for equality.
+		/// 
+		/// <param name="param2">a type parameter</param>
+		/// <returns>true if this type parameter is equal to param2, false</returns>
+		/// otherwise
+		/// </summary>
 		public bool equals(TypeParameter param2) {
 			/* only type parameters with a common scope are comparable */
 			if (!owner.is_subscope_of(param2.owner) && !param2.owner.is_subscope_of(owner)) {

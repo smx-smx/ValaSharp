@@ -290,7 +290,7 @@ namespace ValaCompilerLib {
 				return quit();
 			}
 
-			if(!opts.dry_run)
+			if (!opts.dry_run)
 				context.codegen.emit(context);
 
 			parser.Dispose();

@@ -15,9 +15,9 @@ namespace Vala.Lang.Statements {
 			get { return this; }
 		}
 
-		/**
-	 * Specifies the expression to evaluate.
-	 */
+		/// <summary>
+		/// Specifies the expression to evaluate.
+		/// </summary>
 		public Expression expression {
 			get {
 				return _expression;
@@ -30,13 +30,13 @@ namespace Vala.Lang.Statements {
 
 		private Expression _expression;
 
-		/**
-		 * Creates a new expression statement.
-		 *
-		 * @param expression        expression to evaluate
-		 * @param source_reference  reference to source code
-		 * @return                  newly created expression statement
-		 */
+		/// <summary>
+		/// Creates a new expression statement.
+		/// 
+		/// <param name="expression">expression to evaluate</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created expression statement</returns>
+		/// </summary>
 		public ExpressionStatement(Expression expression, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.expression = expression;

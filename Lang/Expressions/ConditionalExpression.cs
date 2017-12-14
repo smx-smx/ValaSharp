@@ -9,13 +9,13 @@ using Vala.Lang.Statements;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents a conditional expression in the source code.
-	 */
+	/// <summary>
+	/// Represents a conditional expression in the source code.
+	/// </summary>
 	public class ConditionalExpression : Expression {
-		/**
-		 * The condition.
-		 */
+		/// <summary>
+		/// The condition.
+		/// </summary>
 		public Expression condition {
 			get {
 				return _condition;
@@ -26,9 +26,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The expression to be evaluated if the condition holds.
-		 */
+		/// <summary>
+		/// The expression to be evaluated if the condition holds.
+		/// </summary>
 		public Expression true_expression {
 			get {
 				return _true_expression;
@@ -39,9 +39,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The expression to be evaluated if the condition doesn't hold.
-		 */
+		/// <summary>
+		/// The expression to be evaluated if the condition doesn't hold.
+		/// </summary>
 		public Expression false_expression {
 			get {
 				return _false_expression;
@@ -56,14 +56,14 @@ namespace Vala.Lang.Expressions {
 		Expression _true_expression;
 		Expression _false_expression;
 
-		/**
-		 * Creates a new conditional expression.
-		 *
-		 * @param cond       a condition
-		 * @param true_expr  expression to be evaluated if condition is true
-		 * @param false_expr expression to be evaluated if condition is false
-		 * @return           newly created conditional expression
-		 */
+		/// <summary>
+		/// Creates a new conditional expression.
+		/// 
+		/// <param name="cond">a condition</param>
+		/// <param name="true_expr">expression to be evaluated if condition is true</param>
+		/// <param name="false_expr">expression to be evaluated if condition is false</param>
+		/// <returns>newly created conditional expression</returns>
+		/// </summary>
 		public ConditionalExpression(Expression cond, Expression true_expr, Expression false_expr, SourceReference source) {
 			condition = cond;
 			true_expression = true_expr;

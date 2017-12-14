@@ -11,9 +11,9 @@ namespace Vala.Lang {
 		private WeakReference<Symbol> owner_weak = new WeakReference<Symbol>(null);
 		private WeakReference<Scope> parent_scope_weak = new WeakReference<Scope>(null);
 
-		/**
-	 * The symbol that owns this scope.
-	 */
+		/// <summary>
+		/// The symbol that owns this scope.
+		/// </summary>
 		public Symbol owner {
 			get {
 				return owner_weak.GetTarget();
@@ -23,9 +23,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * The parent of this scope.
-		 */
+		/// <summary>
+		/// The parent of this scope.
+		/// </summary>
 		public Scope parent_scope {
 			get {
 				return parent_scope_weak.GetTarget();
@@ -38,22 +38,22 @@ namespace Vala.Lang {
 		private Dictionary<string, Symbol> symbol_table;
 		private List<Symbol> anonymous_members;
 
-		/**
-		 * Creates a new scope.
-		 *
-		 * @return newly created scope
-		 */
+		/// <summary>
+		/// Creates a new scope.
+		/// 
+		/// <returns>newly created scope</returns>
+		/// </summary>
 		public Scope(Symbol owner = null) {
 			this.owner = owner;
 		}
 
-		/**
-		 * Adds the specified symbol with the specified name to the symbol table
-		 * of this scope.
-		 *
-		 * @param name name for the specified symbol
-		 * @param sym  a symbol
-		 */
+		/// <summary>
+		/// Adds the specified symbol with the specified name to the symbol table
+		/// of this scope.
+		/// 
+		/// <param name="name">name for the specified symbol</param>
+		/// <param name="sym">a symbol</param>
+		/// </summary>
 		public void add(string name, Symbol sym) {
 			if (name != null) {
 				if (symbol_table == null) {
@@ -84,13 +84,13 @@ namespace Vala.Lang {
 			symbol_table.Remove(name);
 		}
 
-		/**
-		 * Returns the symbol stored in the symbol table with the specified
-		 * name.
-		 *
-		 * @param name name of the symbol to be returned
-		 * @return     found symbol or null
-		 */
+		/// <summary>
+		/// Returns the symbol stored in the symbol table with the specified
+		/// name.
+		/// 
+		/// <param name="name">name of the symbol to be returned</param>
+		/// <returns>found symbol or null</returns>
+		/// </summary>
 		public Symbol lookup(string name) {
 			if (symbol_table == null) {
 				return null;
@@ -103,13 +103,13 @@ namespace Vala.Lang {
 			return sym;
 		}
 
-		/**
-		 * Returns whether the specified scope is an ancestor of this scope.
-		 *
-		 * @param scope a scope or null for the root scope
-		 * @return      true if this scope is a subscope of the specified
-		 *              scope, false otherwise
-		 */
+		/// <summary>
+		/// Returns whether the specified scope is an ancestor of this scope.
+		/// 
+		/// <param name="scope">a scope or null for the root scope</param>
+		/// <returns>true if this scope is a subscope of the specified</returns>
+		/// scope, false otherwise
+		/// </summary>
 		public bool is_subscope_of(Scope scope) {
 			if (scope == this) {
 				return true;

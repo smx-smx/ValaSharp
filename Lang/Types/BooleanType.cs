@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * A boolean type.
-	 */
+	/// <summary>
+	/// A boolean type.
+	/// </summary>
 	public class BooleanType : ValaValueType {
 		public BooleanType(Struct type_symbol) : base(type_symbol) { }
 

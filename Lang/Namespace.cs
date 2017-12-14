@@ -31,22 +31,22 @@ namespace Vala.Lang {
 
 		private List<UsingDirective> using_directives = new List<UsingDirective>();
 
-		/**
-		 * Creates a new namespace.
-		 *
-		 * @param name             namespace name
-		 * @param source_reference reference to source code
-		 * @return                 newly created namespace
-		 */
+		/// <summary>
+		/// Creates a new namespace.
+		/// 
+		/// <param name="name">namespace name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created namespace</returns>
+		/// </summary>
 		public Namespace(string name, SourceReference source_reference = null) : base(name, source_reference) {
 			access = SymbolAccessibility.PUBLIC;
 		}
 
-		/**
-		 * Adds a new using directive with the specified namespace.
-		 *
-		 * @param ns reference to namespace
-		 */
+		/// <summary>
+		/// Adds a new using directive with the specified namespace.
+		/// 
+		/// <param name="ns">reference to namespace</param>
+		/// </summary>
 		public void add_using_directive(UsingDirective ns) {
 			using_directives.Add(ns);
 		}
@@ -55,20 +55,20 @@ namespace Vala.Lang {
 			comments.Add(comment);
 		}
 
-		/**
-		 * Returns a copy of the list of namespaces.
-		 *
-		 * @return comment list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of namespaces.
+		/// 
+		/// <returns>comment list</returns>
+		/// </summary>
 		public List<Comment> get_comments() {
 			return comments;
 		}
 
-		/**
-		 * Adds the specified namespace to this source file.
-		 *
-		 * @param ns a namespace
-		 */
+		/// <summary>
+		/// Adds the specified namespace to this source file.
+		/// 
+		/// <param name="ns">a namespace</param>
+		/// </summary>
 		public override void add_namespace(Namespace ns) {
 			if (ns.owner == null) {
 				ns.source_reference.file.add_node(ns);
@@ -128,20 +128,20 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Returns a copy of the list of namespaces.
-		 *
-		 * @return namespace list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of namespaces.
+		/// 
+		/// <returns>namespace list</returns>
+		/// </summary>
 		public List<Namespace> get_namespaces() {
 			return namespaces;
 		}
 
-		/**
-		 * Adds the specified class to this namespace.
-		 *
-		 * @param cl a class
-		 */
+		/// <summary>
+		/// Adds the specified class to this namespace.
+		/// 
+		/// <param name="cl">a class</param>
+		/// </summary>
 		public override void add_class(Class cl) {
 			// namespaces do not support private memebers
 			if (cl.access == SymbolAccessibility.PRIVATE) {
@@ -156,11 +156,11 @@ namespace Vala.Lang {
 			scope.add(cl.name, cl);
 		}
 
-		/**
-		 * Adds the specified interface to this namespace.
-		 *
-		 * @param iface an interface
-		 */
+		/// <summary>
+		/// Adds the specified interface to this namespace.
+		/// 
+		/// <param name="iface">an interface</param>
+		/// </summary>
 		public override void add_interface(Interface iface) {
 			// namespaces do not support private memebers
 			if (iface.access == SymbolAccessibility.PRIVATE) {
@@ -176,11 +176,11 @@ namespace Vala.Lang {
 
 		}
 
-		/**
-		 * Adds the specified struct to this namespace.
-		 *
-		 * @param st a struct
-		 */
+		/// <summary>
+		/// Adds the specified struct to this namespace.
+		/// 
+		/// <param name="st">a struct</param>
+		/// </summary>
 		public override void add_struct(Struct st) {
 			// namespaces do not support private memebers
 			if (st.access == SymbolAccessibility.PRIVATE) {
@@ -195,21 +195,21 @@ namespace Vala.Lang {
 			scope.add(st.name, st);
 		}
 
-		/**
-		 * Removes the specified struct from this namespace.
-		 *
-		 * @param st a struct
-		 */
+		/// <summary>
+		/// Removes the specified struct from this namespace.
+		/// 
+		/// <param name="st">a struct</param>
+		/// </summary>
 		public void remove_struct(Struct st) {
 			structs.Remove(st);
 			scope.remove(st.name);
 		}
 
-		/**
-		 * Adds the specified enum to this namespace.
-		 *
-		 * @param en an enum
-		 */
+		/// <summary>
+		/// Adds the specified enum to this namespace.
+		/// 
+		/// <param name="en">an enum</param>
+		/// </summary>
 		public override void add_enum(ValaEnum en) {
 			// namespaces do not support private memebers
 			if (en.access == SymbolAccessibility.PRIVATE) {
@@ -224,11 +224,11 @@ namespace Vala.Lang {
 			scope.add(en.name, en);
 		}
 
-		/**
-		 * Adds the specified error domain to this namespace.
-		 *
-		 * @param edomain an error domain
-		 */
+		/// <summary>
+		/// Adds the specified error domain to this namespace.
+		/// 
+		/// <param name="edomain">an error domain</param>
+		/// </summary>
 		public override void add_error_domain(ErrorDomain edomain) {
 			// namespaces do not support private memebers
 			if (edomain.access == SymbolAccessibility.PRIVATE) {
@@ -243,11 +243,11 @@ namespace Vala.Lang {
 			scope.add(edomain.name, edomain);
 		}
 
-		/**
-		 * Adds the specified delegate to this namespace.
-		 *
-		 * @param d a delegate
-		 */
+		/// <summary>
+		/// Adds the specified delegate to this namespace.
+		/// 
+		/// <param name="d">a delegate</param>
+		/// </summary>
 		public override void add_delegate(ValaDelegate d) {
 			// namespaces do not support private memebers
 			if (d.access == SymbolAccessibility.PRIVATE) {
@@ -262,92 +262,92 @@ namespace Vala.Lang {
 			scope.add(d.name, d);
 		}
 
-		/**
-		 * Returns a copy of the list of structs.
-		 *
-		 * @return struct list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of structs.
+		/// 
+		/// <returns>struct list</returns>
+		/// </summary>
 		public List<Struct> get_structs() {
 			return structs;
 		}
 
-		/**
-		 * Returns a copy of the list of classes.
-		 *
-		 * @return class list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of classes.
+		/// 
+		/// <returns>class list</returns>
+		/// </summary>
 		public List<Class> get_classes() {
 			return classes;
 		}
 
-		/**
-		 * Returns a copy of the list of interfaces.
-		 *
-		 * @return interface list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of interfaces.
+		/// 
+		/// <returns>interface list</returns>
+		/// </summary>
 		public List<Interface> get_interfaces() {
 			return interfaces;
 		}
 
-		/**
-		 * Returns a copy of the list of enums.
-		 *
-		 * @return enum list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of enums.
+		/// 
+		/// <returns>enum list</returns>
+		/// </summary>
 		public List<ValaEnum> get_enums() {
 			return enums;
 		}
 
-		/**
-		 * Returns a copy of the list of error domains.
-		 *
-		 * @return error domain list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of error domains.
+		/// 
+		/// <returns>error domain list</returns>
+		/// </summary>
 		public List<ErrorDomain> get_error_domains() {
 			return error_domains;
 		}
 
-		/**
-		 * Returns a copy of the list of fields.
-		 *
-		 * @return field list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of fields.
+		/// 
+		/// <returns>field list</returns>
+		/// </summary>
 		public List<Field> get_fields() {
 			return fields;
 		}
 
-		/**
-		 * Returns a copy of the list of constants.
-		 *
-		 * @return constant list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of constants.
+		/// 
+		/// <returns>constant list</returns>
+		/// </summary>
 		public List<Constant> get_constants() {
 			return constants;
 		}
 
-		/**
-		 * Returns a copy of the list of delegates.
-		 *
-		 * @return delegate list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of delegates.
+		/// 
+		/// <returns>delegate list</returns>
+		/// </summary>
 		public List<ValaDelegate> get_delegates() {
 			return delegates;
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return method list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>method list</returns>
+		/// </summary>
 		public List<Method> get_methods() {
 			return methods;
 		}
 
-		/**
-		 * Adds the specified constant to this namespace.
-		 *
-		 * @param constant a constant
-		 */
+		/// <summary>
+		/// Adds the specified constant to this namespace.
+		/// 
+		/// <param name="constant">a constant</param>
+		/// </summary>
 		public override void add_constant(Constant constant) {
 			// namespaces do not support private memebers
 			if (constant.access == SymbolAccessibility.PRIVATE) {
@@ -362,11 +362,11 @@ namespace Vala.Lang {
 			scope.add(constant.name, constant);
 		}
 
-		/**
-		 * Adds the specified field to this namespace.
-		 *
-		 * @param f a field
-		 */
+		/// <summary>
+		/// Adds the specified field to this namespace.
+		/// 
+		/// <param name="f">a field</param>
+		/// </summary>
 		public override void add_field(Field f) {
 			if (f.binding == MemberBinding.INSTANCE) {
 				// default to static member binding
@@ -396,11 +396,11 @@ namespace Vala.Lang {
 			scope.add(f.name, f);
 		}
 
-		/**
-		 * Adds the specified method to this namespace.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method to this namespace.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m.binding == MemberBinding.INSTANCE) {
 				// default to static member binding

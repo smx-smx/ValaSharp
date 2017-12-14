@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
- * Represents a switch selection statement in the C code.
- */
+	/// <summary>
+	/// Represents a switch selection statement in the C code.
+	/// </summary>
 	public class CCodeSwitchStatement : CCodeBlock {
-		/**
-		 * The switch expression.
-		 */
+		/// <summary>
+		/// The switch expression.
+		/// </summary>
 		public CCodeExpression expression { get; set; }
 
 		public CCodeSwitchStatement(CCodeExpression expression) {

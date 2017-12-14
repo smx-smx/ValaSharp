@@ -14,9 +14,9 @@ using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Expressions {
 	public class MemberAccess : Expression {
-		/**
-		 * The parent of the member.
-		 */
+		/// <summary>
+		/// The parent of the member.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -29,43 +29,43 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The name of the member.
-		 */
+		/// <summary>
+		/// The name of the member.
+		/// </summary>
 		public string member_name { get; set; }
 
-		/**
-		 * Pointer member access.
-		 */
+		/// <summary>
+		/// Pointer member access.
+		/// </summary>
 		public bool pointer_member_access { get; set; }
 
-		/**
-		 * Represents access to an instance member without an actual instance,
-		 * e.g. `MyClass.an_instance_method`.
-		 */
+		/// <summary>
+		/// Represents access to an instance member without an actual instance,
+		/// e.g. `MyClass.an_instance_method`.
+		/// </summary>
 		public bool prototype_access { get; set; }
 
-		/**
-		 * Specifies whether the member is used for object creation.
-		 */
+		/// <summary>
+		/// Specifies whether the member is used for object creation.
+		/// </summary>
 		public bool creation_member { get; set; }
 
-		/**
-		 * Qualified access to global symbol.
-		 */
+		/// <summary>
+		/// Qualified access to global symbol.
+		/// </summary>
 		public bool qualified { get; set; }
 
 		private Expression _inner;
 		private List<DataType> type_argument_list = new List<DataType>();
 
-		/**
-		 * Creates a new member access expression.
-		 *
-		 * @param inner            parent of the member
-		 * @param member_name      member name
-		 * @param source_reference reference to source code
-		 * @return                 newly created member access expression
-		 */
+		/// <summary>
+		/// Creates a new member access expression.
+		/// 
+		/// <param name="inner">parent of the member</param>
+		/// <param name="member_name">member name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created member access expression</returns>
+		/// </summary>
 		public MemberAccess(Expression inner, string member_name, SourceReference source_reference = null) {
 			this.inner = inner;
 			this.member_name = member_name;
@@ -83,21 +83,21 @@ namespace Vala.Lang.Expressions {
 			return @this;
 		}
 
-		/**
-		 * Appends the specified type as generic type argument.
-		 *
-		 * @param arg a type reference
-		 */
+		/// <summary>
+		/// Appends the specified type as generic type argument.
+		/// 
+		/// <param name="arg">a type reference</param>
+		/// </summary>
 		public void add_type_argument(DataType arg) {
 			type_argument_list.Add(arg);
 			arg.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the list of generic type arguments.
-		 *
-		 * @return type argument list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of generic type arguments.
+		/// 
+		/// <returns>type argument list</returns>
+		/// </summary>
 		public List<DataType> get_type_arguments() {
 			return type_argument_list;
 		}

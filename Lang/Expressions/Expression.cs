@@ -10,11 +10,11 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
 	public abstract class Expression : CodeNode {
-		/**
-	 * The static type of the value of this expression.
-	 * 
-	 * The semantic analyzer computes this value.
-	 */
+		/// <summary>
+		/// The static type of the value of this expression.
+		/// 
+		/// The semantic analyzer computes this value.
+		/// </summary>
 		public DataType value_type { get; set; }
 
 		public DataType formal_value_type { get; set; }
@@ -30,9 +30,9 @@ namespace Vala.Lang.Expressions {
 
 		private WeakReference<Symbol> symbol_reference_weak = new WeakReference<Symbol>(null);
 
-		/**
-		 * The symbol this expression refers to.
-		 */
+		/// <summary>
+		/// The symbol this expression refers to.
+		/// </summary>
 		public Symbol symbol_reference {
 			get {
 				return symbol_reference_weak.GetTarget();
@@ -42,39 +42,39 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Specifies that this expression is used as lvalue, i.e. the
-		 * left hand side of an assignment.
-		 */
+		/// <summary>
+		/// Specifies that this expression is used as lvalue, i.e. the
+		/// left hand side of an assignment.
+		/// </summary>
 		public bool lvalue { get; set; }
 
 		public TargetValue target_value { get; set; }
 
-		/**
-		 * Returns whether this expression is constant, i.e. whether this
-		 * expression only consists of literals and other constants.
-		 */
+		/// <summary>
+		/// Returns whether this expression is constant, i.e. whether this
+		/// expression only consists of literals and other constants.
+		/// </summary>
 		public virtual bool is_constant() {
 			return false;
 		}
 
-		/**
-		 * Returns whether this expression is pure, i.e. whether this expression
-		 * is free of side-effects.
-		 */
+		/// <summary>
+		/// Returns whether this expression is pure, i.e. whether this expression
+		/// is free of side-effects.
+		/// </summary>
 		public abstract bool is_pure();
 
-		/**
-		 * Returns whether this expression is guaranteed to be non-null.
-		 */
+		/// <summary>
+		/// Returns whether this expression is guaranteed to be non-null.
+		/// </summary>
 		public virtual bool is_non_null() {
 			return false;
 		}
 
-		/**
-		 * Check whether symbol_references in this expression are at least
-		 * as accessible as the specified symbol.
-		 */
+		/// <summary>
+		/// Check whether symbol_references in this expression are at least
+		/// as accessible as the specified symbol.
+		/// </summary>
 		public virtual bool is_accessible(Symbol sym) {
 			return true;
 		}

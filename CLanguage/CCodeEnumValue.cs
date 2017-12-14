@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents an enum value in the C code.
-	 */
+	/// <summary>
+	/// Represents an enum value in the C code.
+	/// </summary>
 	public class CCodeEnumValue : CCodeNode {
-		/**
-		 * The name of this enum value.
-		 */
+		/// <summary>
+		/// The name of this enum value.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * The numerical representation of this enum value.
-		 */
+		/// <summary>
+		/// The numerical representation of this enum value.
+		/// </summary>
 		public CCodeExpression value { get; set; }
 
 		public CCodeEnumValue(string name, CCodeExpression value = null) {

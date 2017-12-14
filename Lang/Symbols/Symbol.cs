@@ -16,9 +16,9 @@ namespace Vala.Lang.Symbols {
 	/// </summary>
 	public abstract class Symbol : CodeNode {
 
-		/**
-		 * The parent of this symbol.
-		 */
+		/// <summary>
+		/// The parent of this symbol.
+		/// </summary>
 		public Symbol parent_symbol {
 			get {
 				if (owner == null) {
@@ -29,9 +29,9 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * The scope this symbol is a part of
-		 */
+		/// <summary>
+		/// The scope this symbol is a part of
+		/// </summary>
 		public Scope owner {
 			get {
 				return _owner;
@@ -42,32 +42,32 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * The symbol name.
-		 */
+		/// <summary>
+		/// The symbol name.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * Specifies whether this symbol is active.
-		 *
-		 * Symbols may become inactive when they only apply to a part of a
-		 * scope. This is used for local variables not declared at the beginning
-		 * of the block to determine which variables need to be freed before
-		 * jump statements.
-		 */
+		/// <summary>
+		/// Specifies whether this symbol is active.
+		/// 
+		/// Symbols may become inactive when they only apply to a part of a
+		/// scope. This is used for local variables not declared at the beginning
+		/// of the block to determine which variables need to be freed before
+		/// jump statements.
+		/// </summary>
 		public bool active { get; set; } = true;
 
-		/**
-		 * Specifies whether this symbol has been accessed.
-		 */
+		/// <summary>
+		/// Specifies whether this symbol has been accessed.
+		/// </summary>
 		public bool used { get; set; }
 
-		/**
-		 * Specifies the accessibility of this symbol. Public accessibility
-		 * doesn't limit access. Default accessibility limits access to this
-		 * program or library. Private accessibility limits access to instances
-		 * of the contained type.
-		 */
+		/// <summary>
+		/// Specifies the accessibility of this symbol. Public accessibility
+		/// doesn't limit access. Default accessibility limits access to this
+		/// program or library. Private accessibility limits access to instances
+		/// of the contained type.
+		/// </summary>
 		public SymbolAccessibility access { get; set; }
 
 		public Comment comment { get; set; }
@@ -75,9 +75,9 @@ namespace Vala.Lang.Symbols {
 
 		private VersionAttribute _version;
 
-		/**
-		 * The associated [Version] attribute
-		 */
+		/// <summary>
+		/// The associated [Version] attribute
+		/// </summary>
 		public VersionAttribute version {
 			get {
 				if (_version == null) {
@@ -88,17 +88,17 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * Specifies whether this method explicitly hides a member of a base
-		 * type.
-		 */
+		/// <summary>
+		/// Specifies whether this method explicitly hides a member of a base
+		/// type.
+		/// </summary>
 		public bool hides { get; set; }
 
-		/**
-		 * Check if this symbol is just internal API (and therefore doesn't need 
-		 * to be listed in header files for instance) by traversing parent symbols
-		 * and checking their accessibility.
-		 */
+		/// <summary>
+		/// Check if this symbol is just internal API (and therefore doesn't need
+		/// to be listed in header files for instance) by traversing parent symbols
+		/// and checking their accessibility.
+		/// </summary>
 		public bool is_internal_symbol() {
 			if (!external && external_package) {
 				// non-external symbols in VAPI files are internal symbols
@@ -130,31 +130,31 @@ namespace Vala.Lang.Symbols {
 			return false;
 		}
 
-		/**
-		 * The scope this symbol opens.
-		 */
+		/// <summary>
+		/// The scope this symbol opens.
+		/// </summary>
 		public Scope scope {
 			get { return _scope; }
 		}
 
-		/**
-		 * Specifies whether the implementation is external, for example in
-		 * a separate C source file or in an external library.
-		 */
+		/// <summary>
+		/// Specifies whether the implementation is external, for example in
+		/// a separate C source file or in an external library.
+		/// </summary>
 		public bool external { get; set; }
 
-		/**
-		 * Specifies whether the implementation is in an external library.
-		 */
+		/// <summary>
+		/// Specifies whether the implementation is in an external library.
+		/// </summary>
 		public bool external_package {
 			get {
 				return source_type == SourceFileType.PACKAGE;
 			}
 		}
 
-		/**
-		 * Specifies whether the implementation came from the commandline.
-		 */
+		/// <summary>
+		/// Specifies whether the implementation came from the commandline.
+		/// </summary>
 		public bool from_commandline {
 			get {
 				if (source_reference != null) {
@@ -165,10 +165,10 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * Gets the SourceFileType of the source file that this symbol
-		 * came from, or SourceFileType.NONE.
-		 */
+		/// <summary>
+		/// Gets the SourceFileType of the source file that this symbol
+		/// came from, or SourceFileType.NONE.
+		/// </summary>
 		public SourceFileType source_type {
 			get {
 				if (source_reference != null) {
@@ -199,12 +199,12 @@ namespace Vala.Lang.Symbols {
 			_scope = new Scope(this);
 		}
 
-		/**
-		 * Returns the fully expanded name of this symbol for use in
-		 * human-readable messages.
-		 *
-		 * @return full name
-		 */
+		/// <summary>
+		/// Returns the fully expanded name of this symbol for use in
+		/// human-readable messages.
+		/// 
+		/// <returns>full name</returns>
+		/// </summary>
 		public string get_full_name() {
 			if (parent_symbol == null) {
 				return name;
@@ -225,12 +225,12 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * Converts a string from CamelCase to lower_case.
-		 *
-		 * @param camel_case a string in camel case
-		 * @return           the specified string converted to lower case
-		 */
+		/// <summary>
+		/// Converts a string from CamelCase to lower_case.
+		/// 
+		/// <param name="camel_case">a string in camel case</param>
+		/// <returns>the specified string converted to lower case</returns>
+		/// </summary>
 		public static string camel_case_to_lower_case(string camel_case) {
 			if (camel_case.Contains('_')) {
 				// do not insert additional underscores if input is not real camel case
@@ -274,12 +274,12 @@ namespace Vala.Lang.Symbols {
 			return result_builder.ToString();
 		}
 
-		/**
-		 * Converts a string from lower_case to CamelCase.
-		 *
-		 * @param lower_case a string in lower case
-		 * @return           the specified string converted to camel case
-		 */
+		/// <summary>
+		/// Converts a string from lower_case to CamelCase.
+		/// 
+		/// <param name="lower_case">a string in lower case</param>
+		/// <returns>the specified string converted to camel case</returns>
+		/// </summary>
 		public static string lower_case_to_camel_case(string lower_case) {
 			var result_builder = new StringBuilder("");
 

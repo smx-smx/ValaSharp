@@ -25,22 +25,22 @@ namespace Vala.Lang {
 		private bool? _deprecated;
 		private bool? _experimental;
 
-		/**
-		 * Constructs a new VersionAttribute.
-		 *
-		 * @param symbol the owner
-		 * @return a new VersionAttribute
-		 * @see Vala.Symbol
-		 */
+		/// <summary>
+		/// Constructs a new VersionAttribute.
+		/// 
+		/// <param name="symbol">the owner</param>
+		/// <returns>a new VersionAttribute</returns>
+		/// <see cref="Vala.Symbol"/>
+		/// </summary>
 		public VersionAttribute(Symbol symbol) {
 			this.symbol = symbol;
 		}
 
 
 
-		/**
-		 * Specifies whether this symbol has been deprecated.
-		 */
+		/// <summary>
+		/// Specifies whether this symbol has been deprecated.
+		/// </summary>
 		public bool deprecated {
 			get {
 				if (_deprecated == null) {
@@ -58,9 +58,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies what version this symbol has been deprecated since.
-		 */
+		/// <summary>
+		/// Specifies what version this symbol has been deprecated since.
+		/// </summary>
 		public string deprecated_since {
 			get {
 				return symbol.get_attribute_string("Version", "deprecated_since")
@@ -72,9 +72,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies the replacement if this symbol has been deprecated.
-		 */
+		/// <summary>
+		/// Specifies the replacement if this symbol has been deprecated.
+		/// </summary>
 		public string replacement {
 			get {
 				return symbol.get_attribute_string("Version", "replacement")
@@ -88,9 +88,9 @@ namespace Vala.Lang {
 
 
 
-		/**
-		 * Specifies whether this symbol is experimental.
-		 */
+		/// <summary>
+		/// Specifies whether this symbol is experimental.
+		/// </summary>
 		public bool experimental {
 			get {
 				if (_experimental == null) {
@@ -106,9 +106,9 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies until which version this symbol is experimental.
-		 */
+		/// <summary>
+		/// Specifies until which version this symbol is experimental.
+		/// </summary>
 		public string experimental_until {
 			get {
 				return symbol.get_attribute_string("Version", "experimental_until");
@@ -120,9 +120,9 @@ namespace Vala.Lang {
 
 
 
-		/**
-		 * The minimum version for {@link Vala.VersionAttribute.symbol}
-		 */
+		/// <summary>
+		/// The minimum version for {@link Vala.VersionAttribute.symbol}
+		/// </summary>
 		public string since {
 			get {
 				return symbol.get_attribute_string("Version", "since");
@@ -134,10 +134,10 @@ namespace Vala.Lang {
 
 
 
-		/**
-		 * Check to see if the symbol is experimental, deprecated or not available
-		 * and emit a warning if it is.
-		 */
+		/// <summary>
+		/// Check to see if the symbol is experimental, deprecated or not available
+		/// and emit a warning if it is.
+		/// </summary>
 		public bool check(SourceReference source_ref = null) {
 			bool result = false;
 
@@ -180,14 +180,14 @@ namespace Vala.Lang {
 		}
 
 
-		/**
-		 * A simple version comparison function.
-		 *
-		 * @param v1str a version number
-		 * @param v2str a version number
-		 * @return an integer less than, equal to, or greater than zero, if v1str is <, == or > than v2str
-		 * @see GLib.CompareFunc
-		 */
+		/// <summary>
+		/// A simple version comparison function.
+		/// 
+		/// <param name="v1str">a version number</param>
+		/// <param name="v2str">a version number</param>
+		/// <returns>an integer less than, equal to, or greater than zero, if v1str is <, == or > than v2str</returns>
+		/// <see cref="GLib.CompareFunc"/>
+		/// </summary>
 		public static int cmp_versions(string v1str, string v2str) {
 			string[] v1arr = v1str.Split('.');
 			string[] v2arr = v2str.Split('.');

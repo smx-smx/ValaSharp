@@ -8,30 +8,30 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang {
-	/**
-	 * Represents a class or instance destructor.
-	 */
+	/// <summary>
+	/// Represents a class or instance destructor.
+	/// </summary>
 	public class Destructor : Subroutine {
-		/**
-		 * Specifies the generated `this` parameter for instance methods.
-		 */
+		/// <summary>
+		/// Specifies the generated `this` parameter for instance methods.
+		/// </summary>
 		public Parameter this_parameter { get; set; }
 
-		/**
-		 * Specifies whether this is an instance or a class destructor.
-		 */
+		/// <summary>
+		/// Specifies whether this is an instance or a class destructor.
+		/// </summary>
 		public MemberBinding binding { get; set; } = MemberBinding.INSTANCE;
 
 		public override bool has_result {
 			get { return false; }
 		}
 
-		/**
-		 * Creates a new destructor.
-		 *
-		 * @param source_reference reference to source code
-		 * @return                 newly created destructor
-		 */
+		/// <summary>
+		/// Creates a new destructor.
+		/// 
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created destructor</returns>
+		/// </summary>
 		public Destructor(SourceReference source_reference = null) : base(null, source_reference) { }
 
 		public override void accept(CodeVisitor visitor) {

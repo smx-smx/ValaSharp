@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Vala;
 
 namespace CLanguage {
-	/**
-	 * Represents a function pointer declarator in the C code.
-	 */
+	/// <summary>
+	/// Represents a function pointer declarator in the C code.
+	/// </summary>
 	public class CCodeFunctionDeclarator : CCodeDeclarator {
-		/**
-		 * The declarator name.
-		 */
+		/// <summary>
+		/// The declarator name.
+		/// </summary>
 		public string name { get; set; }
 
 		private List<CCodeParameter> parameters = new List<CCodeParameter>();
@@ -21,11 +21,11 @@ namespace CLanguage {
 			this.name = name;
 		}
 
-		/**
-		 * Appends the specified parameter to the list of function parameters.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of function parameters.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		public void add_parameter(CCodeParameter param) {
 			parameters.Add(param);
 		}

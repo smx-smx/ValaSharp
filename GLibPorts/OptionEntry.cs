@@ -16,7 +16,7 @@ namespace GLibPorts {
 
 	public class OptionEntry<T> : OptionEntry {
 		public delegate void OptionEntryFunc(T value);
-		
+
 		public T arg_data;
 		public OptionEntryFunc onValue = null;
 
@@ -29,7 +29,7 @@ namespace GLibPorts {
 			OptionFlags flags, OptionArg arg,
 			string description, string arg_desc,
 			OptionEntryFunc onValue
-		){
+		) {
 			this.long_name = long_name;
 			this.short_name = Convert.ToChar(short_name);
 

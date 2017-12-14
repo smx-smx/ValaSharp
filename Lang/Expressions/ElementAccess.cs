@@ -12,9 +12,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
 	public class ElementAccess : Expression {
-		/**
-	 * Expression representing the container on which we want to access.
-	 */
+		/// <summary>
+		/// Expression representing the container on which we want to access.
+		/// </summary>
 		public Expression container {
 			get {
 				return _container;
@@ -25,9 +25,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Expressions representing the indices we want to access inside the container.
-		 */
+		/// <summary>
+		/// Expressions representing the indices we want to access inside the container.
+		/// </summary>
 		private List<Expression> indices = new List<Expression>();
 
 		Expression _container;

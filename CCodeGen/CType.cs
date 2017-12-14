@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Vala.Lang.Types;
 
 namespace CCodeGen {
-	/**
- * A C type, used only for code generation purposes.
- */
+	/// <summary>
+	/// A C type, used only for code generation purposes.
+	/// </summary>
 	public class CType : DataType {
-		/**
-		 * The name of the C type.
-		 */
+		/// <summary>
+		/// The name of the C type.
+		/// </summary>
 		public string ctype_name { get; set; }
 
 		public CType(string ctype_name) {

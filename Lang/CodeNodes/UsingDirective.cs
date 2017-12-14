@@ -8,17 +8,17 @@ using Vala.Lang.Symbols;
 
 namespace Vala.Lang.CodeNodes {
 	public class UsingDirective : CodeNode {
-		/**
-	 * The symbol of the namespace this using directive is referring to.
-	 */
+		/// <summary>
+		/// The symbol of the namespace this using directive is referring to.
+		/// </summary>
 		public Symbol namespace_symbol { get; set; }
 
-		/**
-		 * Creates a new using directive.
-		 *
-		 * @param namespace_symbol namespace symbol
-		 * @return                 newly created using directive
-		 */
+		/// <summary>
+		/// Creates a new using directive.
+		/// 
+		/// <param name="namespace_symbol">namespace symbol</param>
+		/// <returns>newly created using directive</returns>
+		/// </summary>
 		public UsingDirective(Symbol namespace_symbol, SourceReference source_reference = null) {
 			this.namespace_symbol = namespace_symbol;
 			this.source_reference = source_reference;

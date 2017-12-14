@@ -7,18 +7,18 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Symbols {
-	/**
-	 * An unresolved reference to a symbol.
-	 */
+	/// <summary>
+	/// An unresolved reference to a symbol.
+	/// </summary>
 	public class UnresolvedSymbol : Symbol {
-		/**
-		 * The parent of the symbol or null.
-		 */
+		/// <summary>
+		/// The parent of the symbol or null.
+		/// </summary>
 		public UnresolvedSymbol inner { get; set; }
 
-		/**
-		 * Qualified access to global symbol.
-		 */
+		/// <summary>
+		/// Qualified access to global symbol.
+		/// </summary>
 		public bool qualified { get; set; }
 
 		public UnresolvedSymbol(UnresolvedSymbol inner, string name, SourceReference source_reference = null)

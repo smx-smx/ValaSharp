@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a typedef in the C code.
-	 */
+	/// <summary>
+	/// Represents a typedef in the C code.
+	/// </summary>
 	public class CCodeTypeDefinition : CCodeNode {
-		/**
-		 * The type name.
-		 */
+		/// <summary>
+		/// The type name.
+		/// </summary>
 		public string type_name { get; set; }
 
-		/**
-		 * The type declarator.
-		 */
+		/// <summary>
+		/// The type declarator.
+		/// </summary>
 		public CCodeDeclarator declarator { get; set; }
 
 		public CCodeTypeDefinition(string type, CCodeDeclarator decl) {

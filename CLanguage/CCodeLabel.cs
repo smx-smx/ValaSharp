@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a label declaration in the C code.
-	 */
+	/// <summary>
+	/// Represents a label declaration in the C code.
+	/// </summary>
 	public class CCodeLabel : CCodeStatement {
-		/**
-		 * The name of this label.
-		 */
+		/// <summary>
+		/// The name of this label.
+		/// </summary>
 		public string name { get; set; }
 
 		public CCodeLabel(string name) {

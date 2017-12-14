@@ -15,9 +15,9 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Parser {
-	/**
- * Code visitor parsing all Vala source files.
- */
+	/// <summary>
+	/// Code visitor parsing all Vala source files.
+	/// </summary>
 	public class Parser : CodeVisitor, IDisposable {
 		Scanner scanner;
 
@@ -67,12 +67,12 @@ namespace Vala.Lang.Parser {
 			tokens = new TokenInfo[BUFFER_SIZE];
 		}
 
-		/**
-		 * Parses all .vala and .vapi source files in the specified code
-		 * context and builds a code tree.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Parses all .vala and .vapi source files in the specified code
+		/// context and builds a code tree.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void parse(CodeContext context) {
 			this.context = context;
 			context.accept(this);
@@ -180,91 +180,91 @@ namespace Vala.Lang.Parser {
 		void skip_identifier() {
 			// also accept keywords as identifiers where there is no conflict
 			switch (current()) {
-				case TokenType.ABSTRACT:
-				case TokenType.AS:
-				case TokenType.ASYNC:
-				case TokenType.BASE:
-				case TokenType.BREAK:
-				case TokenType.CASE:
-				case TokenType.CATCH:
-				case TokenType.CLASS:
-				case TokenType.CONST:
-				case TokenType.CONSTRUCT:
-				case TokenType.CONTINUE:
-				case TokenType.DEFAULT:
-				case TokenType.DELEGATE:
-				case TokenType.DELETE:
-				case TokenType.DO:
-				case TokenType.DYNAMIC:
-				case TokenType.ELSE:
-				case TokenType.ENUM:
-				case TokenType.ENSURES:
-				case TokenType.ERRORDOMAIN:
-				case TokenType.EXTERN:
-				case TokenType.FALSE:
-				case TokenType.FINALLY:
-				case TokenType.FOR:
-				case TokenType.FOREACH:
-				case TokenType.GET:
-				case TokenType.IDENTIFIER:
-				case TokenType.IF:
-				case TokenType.IN:
-				case TokenType.INLINE:
-				case TokenType.INTERFACE:
-				case TokenType.INTERNAL:
-				case TokenType.IS:
-				case TokenType.LOCK:
-				case TokenType.NAMESPACE:
-				case TokenType.NEW:
-				case TokenType.NULL:
-				case TokenType.OUT:
-				case TokenType.OVERRIDE:
-				case TokenType.OWNED:
-				case TokenType.PARAMS:
-				case TokenType.PRIVATE:
-				case TokenType.PROTECTED:
-				case TokenType.PUBLIC:
-				case TokenType.REF:
-				case TokenType.REQUIRES:
-				case TokenType.RETURN:
-				case TokenType.SEALED:
-				case TokenType.SET:
-				case TokenType.SIGNAL:
-				case TokenType.SIZEOF:
-				case TokenType.STATIC:
-				case TokenType.STRUCT:
-				case TokenType.SWITCH:
-				case TokenType.THIS:
-				case TokenType.THROW:
-				case TokenType.THROWS:
-				case TokenType.TRUE:
-				case TokenType.TRY:
-				case TokenType.TYPEOF:
-				case TokenType.UNOWNED:
-				case TokenType.USING:
-				case TokenType.VAR:
-				case TokenType.VIRTUAL:
-				case TokenType.VOID:
-				case TokenType.VOLATILE:
-				case TokenType.WEAK:
-				case TokenType.WHILE:
-				case TokenType.YIELD:
+			case TokenType.ABSTRACT:
+			case TokenType.AS:
+			case TokenType.ASYNC:
+			case TokenType.BASE:
+			case TokenType.BREAK:
+			case TokenType.CASE:
+			case TokenType.CATCH:
+			case TokenType.CLASS:
+			case TokenType.CONST:
+			case TokenType.CONSTRUCT:
+			case TokenType.CONTINUE:
+			case TokenType.DEFAULT:
+			case TokenType.DELEGATE:
+			case TokenType.DELETE:
+			case TokenType.DO:
+			case TokenType.DYNAMIC:
+			case TokenType.ELSE:
+			case TokenType.ENUM:
+			case TokenType.ENSURES:
+			case TokenType.ERRORDOMAIN:
+			case TokenType.EXTERN:
+			case TokenType.FALSE:
+			case TokenType.FINALLY:
+			case TokenType.FOR:
+			case TokenType.FOREACH:
+			case TokenType.GET:
+			case TokenType.IDENTIFIER:
+			case TokenType.IF:
+			case TokenType.IN:
+			case TokenType.INLINE:
+			case TokenType.INTERFACE:
+			case TokenType.INTERNAL:
+			case TokenType.IS:
+			case TokenType.LOCK:
+			case TokenType.NAMESPACE:
+			case TokenType.NEW:
+			case TokenType.NULL:
+			case TokenType.OUT:
+			case TokenType.OVERRIDE:
+			case TokenType.OWNED:
+			case TokenType.PARAMS:
+			case TokenType.PRIVATE:
+			case TokenType.PROTECTED:
+			case TokenType.PUBLIC:
+			case TokenType.REF:
+			case TokenType.REQUIRES:
+			case TokenType.RETURN:
+			case TokenType.SEALED:
+			case TokenType.SET:
+			case TokenType.SIGNAL:
+			case TokenType.SIZEOF:
+			case TokenType.STATIC:
+			case TokenType.STRUCT:
+			case TokenType.SWITCH:
+			case TokenType.THIS:
+			case TokenType.THROW:
+			case TokenType.THROWS:
+			case TokenType.TRUE:
+			case TokenType.TRY:
+			case TokenType.TYPEOF:
+			case TokenType.UNOWNED:
+			case TokenType.USING:
+			case TokenType.VAR:
+			case TokenType.VIRTUAL:
+			case TokenType.VOID:
+			case TokenType.VOLATILE:
+			case TokenType.WEAK:
+			case TokenType.WHILE:
+			case TokenType.YIELD:
+				next();
+				return;
+			case TokenType.INTEGER_LITERAL:
+			case TokenType.REAL_LITERAL:
+				// also accept integer and real literals
+				// as long as they contain at least one character
+				// and no decimal point
+				// for example, 2D and 3D
+				string id = get_current_string();
+				if (Char.IsLetter(id[id.Length - 1]) && !id.Contains('.')) {
 					next();
 					return;
-				case TokenType.INTEGER_LITERAL:
-				case TokenType.REAL_LITERAL:
-					// also accept integer and real literals
-					// as long as they contain at least one character
-					// and no decimal point
-					// for example, 2D and 3D
-					string id = get_current_string();
-					if (Char.IsLetter(id[id.Length - 1]) && !id.Contains('.')) {
-						next();
-						return;
-					}
-					break;
-				default:
-					throw new ParseException(ParseError.SYNTAX, "expected identifier");
+				}
+				break;
+			default:
+				throw new ParseException(ParseError.SYNTAX, "expected identifier");
 			}
 		}
 
@@ -277,49 +277,49 @@ namespace Vala.Lang.Parser {
 			var begin = get_location();
 
 			switch (current()) {
-				case TokenType.TRUE:
-					next();
-					return new BooleanLiteral(true, get_src(begin));
-				case TokenType.FALSE:
-					next();
-					return new BooleanLiteral(false, get_src(begin));
-				case TokenType.INTEGER_LITERAL:
-					next();
-					return new IntegerLiteral(get_last_string(), get_src(begin));
-				case TokenType.REAL_LITERAL:
-					next();
-					return new RealLiteral(get_last_string(), get_src(begin));
-				case TokenType.CHARACTER_LITERAL:
-					next();
-					// FIXME validate and unescape here and just pass unichar to CharacterLiteral
-					var lit = new CharacterLiteral(get_last_string(), get_src(begin));
-					if (lit.error) {
-						Report.error(lit.source_reference, "invalid character literal");
-					}
-					return lit;
-				case TokenType.REGEX_LITERAL:
-					next();
-					string match_part = get_last_string();
-					SourceReference src_begin = get_src(begin);
-					expect(TokenType.CLOSE_REGEX_LITERAL);
-					string close_token = get_last_string();
-					return new RegexLiteral("%s/%s".printf(close_token, match_part), src_begin);
-				case TokenType.STRING_LITERAL:
-					next();
-					return new StringLiteral(get_last_string(), get_src(begin));
-				case TokenType.TEMPLATE_STRING_LITERAL:
-					next();
-					return new StringLiteral("\"%s\"".printf(get_last_string()), get_src(begin));
-				case TokenType.VERBATIM_STRING_LITERAL:
-					next();
-					string raw_string = get_last_string();
-					string escaped_string = raw_string.Substring(3, raw_string.Length - 6).escape("");
-					return new StringLiteral("\"%s\"".printf(escaped_string), get_src(begin));
-				case TokenType.NULL:
-					next();
-					return new NullLiteral(get_src(begin));
-				default:
-					throw new ParseException(ParseError.SYNTAX, "expected literal");
+			case TokenType.TRUE:
+				next();
+				return new BooleanLiteral(true, get_src(begin));
+			case TokenType.FALSE:
+				next();
+				return new BooleanLiteral(false, get_src(begin));
+			case TokenType.INTEGER_LITERAL:
+				next();
+				return new IntegerLiteral(get_last_string(), get_src(begin));
+			case TokenType.REAL_LITERAL:
+				next();
+				return new RealLiteral(get_last_string(), get_src(begin));
+			case TokenType.CHARACTER_LITERAL:
+				next();
+				// FIXME validate and unescape here and just pass unichar to CharacterLiteral
+				var lit = new CharacterLiteral(get_last_string(), get_src(begin));
+				if (lit.error) {
+					Report.error(lit.source_reference, "invalid character literal");
+				}
+				return lit;
+			case TokenType.REGEX_LITERAL:
+				next();
+				string match_part = get_last_string();
+				SourceReference src_begin = get_src(begin);
+				expect(TokenType.CLOSE_REGEX_LITERAL);
+				string close_token = get_last_string();
+				return new RegexLiteral("%s/%s".printf(close_token, match_part), src_begin);
+			case TokenType.STRING_LITERAL:
+				next();
+				return new StringLiteral(get_last_string(), get_src(begin));
+			case TokenType.TEMPLATE_STRING_LITERAL:
+				next();
+				return new StringLiteral("\"%s\"".printf(get_last_string()), get_src(begin));
+			case TokenType.VERBATIM_STRING_LITERAL:
+				next();
+				string raw_string = get_last_string();
+				string escaped_string = raw_string.Substring(3, raw_string.Length - 6).escape("");
+				return new StringLiteral("\"%s\"".printf(escaped_string), get_src(begin));
+			case TokenType.NULL:
+				next();
+				return new NullLiteral(get_src(begin));
+			default:
+				throw new ParseException(ParseError.SYNTAX, "expected literal");
 			}
 		}
 
@@ -591,81 +591,81 @@ namespace Vala.Lang.Parser {
 			Expression expr;
 
 			switch (current()) {
-				case TokenType.TRUE:
-				case TokenType.FALSE:
-				case TokenType.INTEGER_LITERAL:
-				case TokenType.REAL_LITERAL:
-				case TokenType.CHARACTER_LITERAL:
-				case TokenType.STRING_LITERAL:
-				case TokenType.REGEX_LITERAL:
-				case TokenType.TEMPLATE_STRING_LITERAL:
-				case TokenType.VERBATIM_STRING_LITERAL:
-				case TokenType.NULL:
-					expr = parse_literal();
-					break;
-				case TokenType.OPEN_BRACE:
-					expr = parse_initializer();
-					break;
-				case TokenType.OPEN_BRACKET:
-					expr = parse_simple_name();
-					break;
-				case TokenType.OPEN_PARENS:
-					expr = parse_tuple();
-					break;
-				case TokenType.OPEN_TEMPLATE:
-					expr = parse_template();
-					break;
-				case TokenType.OPEN_REGEX_LITERAL:
-					expr = parse_regex_literal();
-					break;
-				case TokenType.THIS:
-					expr = parse_this_access();
-					break;
-				case TokenType.BASE:
-					expr = parse_base_access();
-					break;
-				case TokenType.NEW:
-					expr = parse_object_or_array_creation_expression();
-					break;
-				case TokenType.YIELD:
-					expr = parse_yield_expression();
-					break;
-				case TokenType.SIZEOF:
-					expr = parse_sizeof_expression();
-					break;
-				case TokenType.TYPEOF:
-					expr = parse_typeof_expression();
-					break;
-				default:
-					expr = parse_simple_name();
-					break;
+			case TokenType.TRUE:
+			case TokenType.FALSE:
+			case TokenType.INTEGER_LITERAL:
+			case TokenType.REAL_LITERAL:
+			case TokenType.CHARACTER_LITERAL:
+			case TokenType.STRING_LITERAL:
+			case TokenType.REGEX_LITERAL:
+			case TokenType.TEMPLATE_STRING_LITERAL:
+			case TokenType.VERBATIM_STRING_LITERAL:
+			case TokenType.NULL:
+				expr = parse_literal();
+				break;
+			case TokenType.OPEN_BRACE:
+				expr = parse_initializer();
+				break;
+			case TokenType.OPEN_BRACKET:
+				expr = parse_simple_name();
+				break;
+			case TokenType.OPEN_PARENS:
+				expr = parse_tuple();
+				break;
+			case TokenType.OPEN_TEMPLATE:
+				expr = parse_template();
+				break;
+			case TokenType.OPEN_REGEX_LITERAL:
+				expr = parse_regex_literal();
+				break;
+			case TokenType.THIS:
+				expr = parse_this_access();
+				break;
+			case TokenType.BASE:
+				expr = parse_base_access();
+				break;
+			case TokenType.NEW:
+				expr = parse_object_or_array_creation_expression();
+				break;
+			case TokenType.YIELD:
+				expr = parse_yield_expression();
+				break;
+			case TokenType.SIZEOF:
+				expr = parse_sizeof_expression();
+				break;
+			case TokenType.TYPEOF:
+				expr = parse_typeof_expression();
+				break;
+			default:
+				expr = parse_simple_name();
+				break;
 			}
 
 			// process primary expressions that start with an inner primary expression
 			bool found = true;
 			while (found) {
 				switch (current()) {
-					case TokenType.DOT:
-						expr = parse_member_access(begin, expr);
-						break;
-					case TokenType.OP_PTR:
-						expr = parse_pointer_member_access(begin, expr);
-						break;
-					case TokenType.OPEN_PARENS:
-						expr = parse_method_call(begin, expr);
-						break;
-					case TokenType.OPEN_BRACKET:
-						expr = parse_element_access(begin, expr);
-						break;
-					case TokenType.OP_INC:
-						expr = parse_post_increment_expression(begin, expr);
-						break;
-					case TokenType.OP_DEC:
-						expr = parse_post_decrement_expression(begin, expr);
-						break;
-					default:
-						found = false;
-						break;
+				case TokenType.DOT:
+					expr = parse_member_access(begin, expr);
+					break;
+				case TokenType.OP_PTR:
+					expr = parse_pointer_member_access(begin, expr);
+					break;
+				case TokenType.OPEN_PARENS:
+					expr = parse_method_call(begin, expr);
+					break;
+				case TokenType.OPEN_BRACKET:
+					expr = parse_element_access(begin, expr);
+					break;
+				case TokenType.OP_INC:
+					expr = parse_post_increment_expression(begin, expr);
+					break;
+				case TokenType.OP_DEC:
+					expr = parse_post_decrement_expression(begin, expr);
+					break;
+				default:
+					found = false;
+					break;
 				}
 			}
 
@@ -1024,13 +1024,13 @@ namespace Vala.Lang.Parser {
 
 		UnaryOperator get_unary_operator(TokenType token_type) {
 			switch (token_type) {
-				case TokenType.PLUS: return UnaryOperator.PLUS;
-				case TokenType.MINUS: return UnaryOperator.MINUS;
-				case TokenType.OP_NEG: return UnaryOperator.LOGICAL_NEGATION;
-				case TokenType.TILDE: return UnaryOperator.BITWISE_COMPLEMENT;
-				case TokenType.OP_INC: return UnaryOperator.INCREMENT;
-				case TokenType.OP_DEC: return UnaryOperator.DECREMENT;
-				default: return UnaryOperator.NONE;
+			case TokenType.PLUS: return UnaryOperator.PLUS;
+			case TokenType.MINUS: return UnaryOperator.MINUS;
+			case TokenType.OP_NEG: return UnaryOperator.LOGICAL_NEGATION;
+			case TokenType.TILDE: return UnaryOperator.BITWISE_COMPLEMENT;
+			case TokenType.OP_INC: return UnaryOperator.INCREMENT;
+			case TokenType.OP_DEC: return UnaryOperator.DECREMENT;
+			default: return UnaryOperator.NONE;
 			}
 		}
 
@@ -1052,100 +1052,100 @@ namespace Vala.Lang.Parser {
 				return new UnaryExpression(_operator, op, get_src(begin));
 			}
 			switch (current()) {
-				case TokenType.HASH:
-					if (!context.deprecated) {
-						Report.warning(get_last_src(), "deprecated syntax, use `(owned)` cast");
-					}
-					next();
-					op = parse_unary_expression();
-					return new ReferenceTransferExpression(op, get_src(begin));
-				case TokenType.OPEN_PARENS:
-					next();
-					switch (current()) {
-						case TokenType.UNOWNED:
-							// inner array type
-							break;
-						case TokenType.OWNED:
-							// (owned) foo
-							next();
-							if (accept(TokenType.CLOSE_PARENS)) {
-								var _op = parse_unary_expression();
-								return new ReferenceTransferExpression(_op, get_src(begin));
-							}
-							break;
-						case TokenType.VOID:
-						case TokenType.DYNAMIC:
-						case TokenType.OPEN_PARENS:
-						case TokenType.IDENTIFIER:
-							if (current() != TokenType.OPEN_PARENS || is_inner_array_type()) {
-								var type = parse_type(true, false);
-								if (accept(TokenType.CLOSE_PARENS)) {
-									// check follower to decide whether to create cast expression
-									Expression inner;
-									switch (current()) {
-										case TokenType.OP_NEG:
-										case TokenType.TILDE:
-										case TokenType.OPEN_PARENS:
-										case TokenType.TRUE:
-										case TokenType.FALSE:
-										case TokenType.INTEGER_LITERAL:
-										case TokenType.REAL_LITERAL:
-										case TokenType.CHARACTER_LITERAL:
-										case TokenType.STRING_LITERAL:
-										case TokenType.TEMPLATE_STRING_LITERAL:
-										case TokenType.VERBATIM_STRING_LITERAL:
-										case TokenType.REGEX_LITERAL:
-										case TokenType.NULL:
-										case TokenType.THIS:
-										case TokenType.BASE:
-										case TokenType.NEW:
-										case TokenType.YIELD:
-										case TokenType.SIZEOF:
-										case TokenType.TYPEOF:
-										case TokenType.IDENTIFIER:
-										case TokenType.PARAMS:
-											inner = parse_unary_expression();
-											return new CastExpression(inner, type, get_src(begin), false);
-										case TokenType.STAR:
-											next();
-											op = parse_unary_expression();
-											inner = new PointerIndirection(op, get_src(begin));
-											return new CastExpression(inner, type, get_src(begin), false);
-										case TokenType.BITWISE_AND:
-											next();
-											op = parse_unary_expression();
-											inner = new AddressofExpression(op, get_src(begin));
-											return new CastExpression(inner, type, get_src(begin), false);
-										default:
-											break;
-									}
-								}
-							}
-							break;
-						case TokenType.OP_NEG:
-							next();
-							if (accept(TokenType.CLOSE_PARENS)) {
-								// (!) non-null cast
-								var inner = parse_unary_expression();
-								return CastExpression.non_null(inner, get_src(begin));
-							}
-							break;
-						default:
-							break;
-					}
-					// no cast expression
-					rollback(begin);
+			case TokenType.HASH:
+				if (!context.deprecated) {
+					Report.warning(get_last_src(), "deprecated syntax, use `(owned)` cast");
+				}
+				next();
+				op = parse_unary_expression();
+				return new ReferenceTransferExpression(op, get_src(begin));
+			case TokenType.OPEN_PARENS:
+				next();
+				switch (current()) {
+				case TokenType.UNOWNED:
+					// inner array type
 					break;
-				case TokenType.STAR:
+				case TokenType.OWNED:
+					// (owned) foo
 					next();
-					op = parse_unary_expression();
-					return new PointerIndirection(op, get_src(begin));
-				case TokenType.BITWISE_AND:
+					if (accept(TokenType.CLOSE_PARENS)) {
+						var _op = parse_unary_expression();
+						return new ReferenceTransferExpression(_op, get_src(begin));
+					}
+					break;
+				case TokenType.VOID:
+				case TokenType.DYNAMIC:
+				case TokenType.OPEN_PARENS:
+				case TokenType.IDENTIFIER:
+					if (current() != TokenType.OPEN_PARENS || is_inner_array_type()) {
+						var type = parse_type(true, false);
+						if (accept(TokenType.CLOSE_PARENS)) {
+							// check follower to decide whether to create cast expression
+							Expression inner;
+							switch (current()) {
+							case TokenType.OP_NEG:
+							case TokenType.TILDE:
+							case TokenType.OPEN_PARENS:
+							case TokenType.TRUE:
+							case TokenType.FALSE:
+							case TokenType.INTEGER_LITERAL:
+							case TokenType.REAL_LITERAL:
+							case TokenType.CHARACTER_LITERAL:
+							case TokenType.STRING_LITERAL:
+							case TokenType.TEMPLATE_STRING_LITERAL:
+							case TokenType.VERBATIM_STRING_LITERAL:
+							case TokenType.REGEX_LITERAL:
+							case TokenType.NULL:
+							case TokenType.THIS:
+							case TokenType.BASE:
+							case TokenType.NEW:
+							case TokenType.YIELD:
+							case TokenType.SIZEOF:
+							case TokenType.TYPEOF:
+							case TokenType.IDENTIFIER:
+							case TokenType.PARAMS:
+								inner = parse_unary_expression();
+								return new CastExpression(inner, type, get_src(begin), false);
+							case TokenType.STAR:
+								next();
+								op = parse_unary_expression();
+								inner = new PointerIndirection(op, get_src(begin));
+								return new CastExpression(inner, type, get_src(begin), false);
+							case TokenType.BITWISE_AND:
+								next();
+								op = parse_unary_expression();
+								inner = new AddressofExpression(op, get_src(begin));
+								return new CastExpression(inner, type, get_src(begin), false);
+							default:
+								break;
+							}
+						}
+					}
+					break;
+				case TokenType.OP_NEG:
 					next();
-					op = parse_unary_expression();
-					return new AddressofExpression(op, get_src(begin));
+					if (accept(TokenType.CLOSE_PARENS)) {
+						// (!) non-null cast
+						var inner = parse_unary_expression();
+						return CastExpression.non_null(inner, get_src(begin));
+					}
+					break;
 				default:
 					break;
+				}
+				// no cast expression
+				rollback(begin);
+				break;
+			case TokenType.STAR:
+				next();
+				op = parse_unary_expression();
+				return new PointerIndirection(op, get_src(begin));
+			case TokenType.BITWISE_AND:
+				next();
+				op = parse_unary_expression();
+				return new AddressofExpression(op, get_src(begin));
+			default:
+				break;
 			}
 
 			var expr = parse_primary_expression();
@@ -1154,18 +1154,18 @@ namespace Vala.Lang.Parser {
 
 		BinaryOperator get_binary_operator(TokenType token_type) {
 			switch (token_type) {
-				case TokenType.STAR: return BinaryOperator.MUL;
-				case TokenType.DIV: return BinaryOperator.DIV;
-				case TokenType.PERCENT: return BinaryOperator.MOD;
-				case TokenType.PLUS: return BinaryOperator.PLUS;
-				case TokenType.MINUS: return BinaryOperator.MINUS;
-				case TokenType.OP_LT: return BinaryOperator.LESS_THAN;
-				case TokenType.OP_GT: return BinaryOperator.GREATER_THAN;
-				case TokenType.OP_LE: return BinaryOperator.LESS_THAN_OR_EQUAL;
-				case TokenType.OP_GE: return BinaryOperator.GREATER_THAN_OR_EQUAL;
-				case TokenType.OP_EQ: return BinaryOperator.EQUALITY;
-				case TokenType.OP_NE: return BinaryOperator.INEQUALITY;
-				default: return BinaryOperator.NONE;
+			case TokenType.STAR: return BinaryOperator.MUL;
+			case TokenType.DIV: return BinaryOperator.DIV;
+			case TokenType.PERCENT: return BinaryOperator.MOD;
+			case TokenType.PLUS: return BinaryOperator.PLUS;
+			case TokenType.MINUS: return BinaryOperator.MINUS;
+			case TokenType.OP_LT: return BinaryOperator.LESS_THAN;
+			case TokenType.OP_GT: return BinaryOperator.GREATER_THAN;
+			case TokenType.OP_LE: return BinaryOperator.LESS_THAN_OR_EQUAL;
+			case TokenType.OP_GE: return BinaryOperator.GREATER_THAN_OR_EQUAL;
+			case TokenType.OP_EQ: return BinaryOperator.EQUALITY;
+			case TokenType.OP_NE: return BinaryOperator.INEQUALITY;
+			default: return BinaryOperator.NONE;
 			}
 		}
 
@@ -1176,16 +1176,16 @@ namespace Vala.Lang.Parser {
 			while (found) {
 				var _operator = get_binary_operator(current());
 				switch (_operator) {
-					case BinaryOperator.MUL:
-					case BinaryOperator.DIV:
-					case BinaryOperator.MOD:
-						next();
-						var right = parse_unary_expression();
-						left = new BinaryExpression(_operator, left, right, get_src(begin));
-						break;
-					default:
-						found = false;
-						break;
+				case BinaryOperator.MUL:
+				case BinaryOperator.DIV:
+				case BinaryOperator.MOD:
+					next();
+					var right = parse_unary_expression();
+					left = new BinaryExpression(_operator, left, right, get_src(begin));
+					break;
+				default:
+					found = false;
+					break;
 				}
 			}
 			return left;
@@ -1198,15 +1198,15 @@ namespace Vala.Lang.Parser {
 			while (found) {
 				var _operator = get_binary_operator(current());
 				switch (_operator) {
-					case BinaryOperator.PLUS:
-					case BinaryOperator.MINUS:
-						next();
-						var right = parse_multiplicative_expression();
-						left = new BinaryExpression(_operator, left, right, get_src(begin));
-						break;
-					default:
-						found = false;
-						break;
+				case BinaryOperator.PLUS:
+				case BinaryOperator.MINUS:
+					next();
+					var right = parse_multiplicative_expression();
+					left = new BinaryExpression(_operator, left, right, get_src(begin));
+					break;
+				default:
+					found = false;
+					break;
 				}
 			}
 			return left;
@@ -1219,28 +1219,28 @@ namespace Vala.Lang.Parser {
 			while (found) {
 				Expression right;
 				switch (current()) {
-					case TokenType.OP_SHIFT_LEFT:
+				case TokenType.OP_SHIFT_LEFT:
+					next();
+					right = parse_additive_expression();
+					left = new BinaryExpression(BinaryOperator.SHIFT_LEFT, left, right, get_src(begin));
+					break;
+				// don't use OP_SHIFT_RIGHT to support >> for nested generics
+				case TokenType.OP_GT:
+					long first_gt_pos = tokens[index].begin.pos;
+					next();
+					// only accept >> when there is no space between the two > signs
+					if (current() == TokenType.OP_GT && tokens[index].begin.pos == first_gt_pos + 1) {
 						next();
 						right = parse_additive_expression();
-						left = new BinaryExpression(BinaryOperator.SHIFT_LEFT, left, right, get_src(begin));
-						break;
-					// don't use OP_SHIFT_RIGHT to support >> for nested generics
-					case TokenType.OP_GT:
-						long first_gt_pos = tokens[index].begin.pos;
-						next();
-						// only accept >> when there is no space between the two > signs
-						if (current() == TokenType.OP_GT && tokens[index].begin.pos == first_gt_pos + 1) {
-							next();
-							right = parse_additive_expression();
-							left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, right, get_src(begin));
-						} else {
-							prev();
-							found = false;
-						}
-						break;
-					default:
+						left = new BinaryExpression(BinaryOperator.SHIFT_RIGHT, left, right, get_src(begin));
+					} else {
+						prev();
 						found = false;
-						break;
+					}
+					break;
+				default:
+					found = false;
+					break;
 				}
 			}
 			return left;
@@ -1256,10 +1256,22 @@ namespace Vala.Lang.Parser {
 				var _operator = get_binary_operator(current());
 				Expression right;
 				switch (_operator) {
-					case BinaryOperator.LESS_THAN:
-					case BinaryOperator.LESS_THAN_OR_EQUAL:
-					case BinaryOperator.GREATER_THAN_OR_EQUAL:
-						next();
+				case BinaryOperator.LESS_THAN:
+				case BinaryOperator.LESS_THAN_OR_EQUAL:
+				case BinaryOperator.GREATER_THAN_OR_EQUAL:
+					next();
+					right = parse_shift_expression();
+					left = new BinaryExpression(_operator, left, right, get_src(begin));
+					if (!first) {
+						var be = (BinaryExpression)left;
+						be.chained = true;
+					}
+					first = false;
+					break;
+				case BinaryOperator.GREATER_THAN:
+					next();
+					// ignore >> and >>= (two tokens due to generics)
+					if (current() != TokenType.OP_GT && current() != TokenType.OP_GE) {
 						right = parse_shift_expression();
 						left = new BinaryExpression(_operator, left, right, get_src(begin));
 						if (!first) {
@@ -1267,40 +1279,28 @@ namespace Vala.Lang.Parser {
 							be.chained = true;
 						}
 						first = false;
-						break;
-					case BinaryOperator.GREATER_THAN:
+					} else {
+						prev();
+						found = false;
+					}
+					break;
+				default:
+					switch (current()) {
+					case TokenType.IS:
 						next();
-						// ignore >> and >>= (two tokens due to generics)
-						if (current() != TokenType.OP_GT && current() != TokenType.OP_GE) {
-							right = parse_shift_expression();
-							left = new BinaryExpression(_operator, left, right, get_src(begin));
-							if (!first) {
-								var be = (BinaryExpression)left;
-								be.chained = true;
-							}
-							first = false;
-						} else {
-							prev();
-							found = false;
-						}
+						var type = parse_type(true, false);
+						left = new TypeCheck(left, type, get_src(begin));
+						break;
+					case TokenType.AS:
+						next();
+						var _type = parse_type(true, false);
+						left = new CastExpression(left, _type, get_src(begin), true);
 						break;
 					default:
-						switch (current()) {
-							case TokenType.IS:
-								next();
-								var type = parse_type(true, false);
-								left = new TypeCheck(left, type, get_src(begin));
-								break;
-							case TokenType.AS:
-								next();
-								var _type = parse_type(true, false);
-								left = new CastExpression(left, _type, get_src(begin), true);
-								break;
-							default:
-								found = false;
-								break;
-						}
+						found = false;
 						break;
+					}
+					break;
 				}
 			}
 			return left;
@@ -1313,15 +1313,15 @@ namespace Vala.Lang.Parser {
 			while (found) {
 				var _operator = get_binary_operator(current());
 				switch (_operator) {
-					case BinaryOperator.EQUALITY:
-					case BinaryOperator.INEQUALITY:
-						next();
-						var right = parse_relational_expression();
-						left = new BinaryExpression(_operator, left, right, get_src(begin));
-						break;
-					default:
-						found = false;
-						break;
+				case BinaryOperator.EQUALITY:
+				case BinaryOperator.INEQUALITY:
+					next();
+					var right = parse_relational_expression();
+					left = new BinaryExpression(_operator, left, right, get_src(begin));
+					break;
+				default:
+					found = false;
+					break;
 				}
 			}
 			return left;
@@ -1458,17 +1458,17 @@ namespace Vala.Lang.Parser {
 
 		AssignmentOperator get_assignment_operator(TokenType token_type) {
 			switch (token_type) {
-				case TokenType.ASSIGN: return AssignmentOperator.SIMPLE;
-				case TokenType.ASSIGN_ADD: return AssignmentOperator.ADD;
-				case TokenType.ASSIGN_SUB: return AssignmentOperator.SUB;
-				case TokenType.ASSIGN_BITWISE_OR: return AssignmentOperator.BITWISE_OR;
-				case TokenType.ASSIGN_BITWISE_AND: return AssignmentOperator.BITWISE_AND;
-				case TokenType.ASSIGN_BITWISE_XOR: return AssignmentOperator.BITWISE_XOR;
-				case TokenType.ASSIGN_DIV: return AssignmentOperator.DIV;
-				case TokenType.ASSIGN_MUL: return AssignmentOperator.MUL;
-				case TokenType.ASSIGN_PERCENT: return AssignmentOperator.PERCENT;
-				case TokenType.ASSIGN_SHIFT_LEFT: return AssignmentOperator.SHIFT_LEFT;
-				default: return AssignmentOperator.NONE;
+			case TokenType.ASSIGN: return AssignmentOperator.SIMPLE;
+			case TokenType.ASSIGN_ADD: return AssignmentOperator.ADD;
+			case TokenType.ASSIGN_SUB: return AssignmentOperator.SUB;
+			case TokenType.ASSIGN_BITWISE_OR: return AssignmentOperator.BITWISE_OR;
+			case TokenType.ASSIGN_BITWISE_AND: return AssignmentOperator.BITWISE_AND;
+			case TokenType.ASSIGN_BITWISE_XOR: return AssignmentOperator.BITWISE_XOR;
+			case TokenType.ASSIGN_DIV: return AssignmentOperator.DIV;
+			case TokenType.ASSIGN_MUL: return AssignmentOperator.MUL;
+			case TokenType.ASSIGN_PERCENT: return AssignmentOperator.PERCENT;
+			case TokenType.ASSIGN_SHIFT_LEFT: return AssignmentOperator.SHIFT_LEFT;
+			default: return AssignmentOperator.NONE;
 			}
 		}
 
@@ -1518,79 +1518,79 @@ namespace Vala.Lang.Parser {
 
 					comment = scanner.pop_comment();
 					switch (current()) {
-						case TokenType.OPEN_BRACE:
-							stmt = parse_block();
-							break;
-						case TokenType.SEMICOLON:
-							stmt = parse_empty_statement();
-							break;
-						case TokenType.IF:
-							stmt = parse_if_statement();
-							break;
-						case TokenType.SWITCH:
-							stmt = parse_switch_statement();
-							break;
-						case TokenType.WHILE:
-							stmt = parse_while_statement();
-							break;
-						case TokenType.DO:
-							stmt = parse_do_statement();
-							break;
-						case TokenType.FOR:
-							stmt = parse_for_statement();
-							break;
-						case TokenType.FOREACH:
-							stmt = parse_foreach_statement();
-							break;
-						case TokenType.BREAK:
-							stmt = parse_break_statement();
-							break;
-						case TokenType.CONTINUE:
-							stmt = parse_continue_statement();
-							break;
-						case TokenType.RETURN:
-							stmt = parse_return_statement();
-							break;
-						case TokenType.YIELD:
-							stmt = parse_yield_statement();
-							break;
-						case TokenType.THROW:
-							stmt = parse_throw_statement();
-							break;
-						case TokenType.TRY:
-							stmt = parse_try_statement();
-							break;
-						case TokenType.LOCK:
-							stmt = parse_lock_statement();
-							break;
-						case TokenType.DELETE:
-							stmt = parse_delete_statement();
-							break;
-						case TokenType.VAR:
+					case TokenType.OPEN_BRACE:
+						stmt = parse_block();
+						break;
+					case TokenType.SEMICOLON:
+						stmt = parse_empty_statement();
+						break;
+					case TokenType.IF:
+						stmt = parse_if_statement();
+						break;
+					case TokenType.SWITCH:
+						stmt = parse_switch_statement();
+						break;
+					case TokenType.WHILE:
+						stmt = parse_while_statement();
+						break;
+					case TokenType.DO:
+						stmt = parse_do_statement();
+						break;
+					case TokenType.FOR:
+						stmt = parse_for_statement();
+						break;
+					case TokenType.FOREACH:
+						stmt = parse_foreach_statement();
+						break;
+					case TokenType.BREAK:
+						stmt = parse_break_statement();
+						break;
+					case TokenType.CONTINUE:
+						stmt = parse_continue_statement();
+						break;
+					case TokenType.RETURN:
+						stmt = parse_return_statement();
+						break;
+					case TokenType.YIELD:
+						stmt = parse_yield_statement();
+						break;
+					case TokenType.THROW:
+						stmt = parse_throw_statement();
+						break;
+					case TokenType.TRY:
+						stmt = parse_try_statement();
+						break;
+					case TokenType.LOCK:
+						stmt = parse_lock_statement();
+						break;
+					case TokenType.DELETE:
+						stmt = parse_delete_statement();
+						break;
+					case TokenType.VAR:
+						is_decl = true;
+						parse_local_variable_declarations(block);
+						break;
+					case TokenType.CONST:
+						is_decl = true;
+						parse_local_constant_declarations(block);
+						break;
+					case TokenType.OP_INC:
+					case TokenType.OP_DEC:
+					case TokenType.BASE:
+					case TokenType.THIS:
+					case TokenType.STAR:
+					case TokenType.NEW:
+						stmt = parse_expression_statement();
+						break;
+					default:
+						bool is_expr = is_expression();
+						if (is_expr) {
+							stmt = parse_expression_statement();
+						} else {
 							is_decl = true;
 							parse_local_variable_declarations(block);
-							break;
-						case TokenType.CONST:
-							is_decl = true;
-							parse_local_constant_declarations(block);
-							break;
-						case TokenType.OP_INC:
-						case TokenType.OP_DEC:
-						case TokenType.BASE:
-						case TokenType.THIS:
-						case TokenType.STAR:
-						case TokenType.NEW:
-							stmt = parse_expression_statement();
-							break;
-						default:
-							bool is_expr = is_expression();
-							if (is_expr) {
-								stmt = parse_expression_statement();
-							} else {
-								is_decl = true;
-								parse_local_variable_declarations(block);
-							}
-							break;
+						}
+						break;
 					}
 
 					if (!is_decl) {
@@ -1617,33 +1617,33 @@ namespace Vala.Lang.Parser {
 			// decide between declaration and expression statement
 			skip_type();
 			switch (current()) {
-				// invocation expression
-				case TokenType.OPEN_PARENS:
-				// postfix increment
-				case TokenType.OP_INC:
-				// postfix decrement
-				case TokenType.OP_DEC:
-				// assignments
-				case TokenType.ASSIGN:
-				case TokenType.ASSIGN_ADD:
-				case TokenType.ASSIGN_BITWISE_AND:
-				case TokenType.ASSIGN_BITWISE_OR:
-				case TokenType.ASSIGN_BITWISE_XOR:
-				case TokenType.ASSIGN_DIV:
-				case TokenType.ASSIGN_MUL:
-				case TokenType.ASSIGN_PERCENT:
-				case TokenType.ASSIGN_SHIFT_LEFT:
-				case TokenType.ASSIGN_SUB:
-				case TokenType.OP_GT: // >>=
-									  // member access
-				case TokenType.DOT:
-				// pointer member access
-				case TokenType.OP_PTR:
-					rollback(begin);
-					return true;
-				default:
-					rollback(begin);
-					return false;
+			// invocation expression
+			case TokenType.OPEN_PARENS:
+			// postfix increment
+			case TokenType.OP_INC:
+			// postfix decrement
+			case TokenType.OP_DEC:
+			// assignments
+			case TokenType.ASSIGN:
+			case TokenType.ASSIGN_ADD:
+			case TokenType.ASSIGN_BITWISE_AND:
+			case TokenType.ASSIGN_BITWISE_OR:
+			case TokenType.ASSIGN_BITWISE_XOR:
+			case TokenType.ASSIGN_DIV:
+			case TokenType.ASSIGN_MUL:
+			case TokenType.ASSIGN_PERCENT:
+			case TokenType.ASSIGN_SHIFT_LEFT:
+			case TokenType.ASSIGN_SUB:
+			case TokenType.OP_GT: // >>=
+								  // member access
+			case TokenType.DOT:
+			// pointer member access
+			case TokenType.OP_PTR:
+				rollback(begin);
+				return true;
+			default:
+				rollback(begin);
+				return false;
 			}
 		}
 
@@ -1651,39 +1651,39 @@ namespace Vala.Lang.Parser {
 			var begin = get_location();
 
 			switch (current()) {
-				case TokenType.OUT:
-				case TokenType.REF:
-					next();
-					if (accept(TokenType.IDENTIFIER) && accept(TokenType.LAMBDA)) {
-						rollback(begin);
-						return true;
-					}
-					break;
-				case TokenType.IDENTIFIER:
-					next();
-					if (accept(TokenType.LAMBDA)) {
-						rollback(begin);
-						return true;
-					}
-					break;
-				case TokenType.OPEN_PARENS:
-					next();
-					if (current() != TokenType.CLOSE_PARENS) {
-						do {
-							if (current() == TokenType.OUT || current() == TokenType.REF) {
-								next();
-							}
-							if (!accept(TokenType.IDENTIFIER)) {
-								rollback(begin);
-								return false;
-							}
-						} while (accept(TokenType.COMMA));
-					}
-					if (accept(TokenType.CLOSE_PARENS) && accept(TokenType.LAMBDA)) {
-						rollback(begin);
-						return true;
-					}
-					break;
+			case TokenType.OUT:
+			case TokenType.REF:
+				next();
+				if (accept(TokenType.IDENTIFIER) && accept(TokenType.LAMBDA)) {
+					rollback(begin);
+					return true;
+				}
+				break;
+			case TokenType.IDENTIFIER:
+				next();
+				if (accept(TokenType.LAMBDA)) {
+					rollback(begin);
+					return true;
+				}
+				break;
+			case TokenType.OPEN_PARENS:
+				next();
+				if (current() != TokenType.CLOSE_PARENS) {
+					do {
+						if (current() == TokenType.OUT || current() == TokenType.REF) {
+							next();
+						}
+						if (!accept(TokenType.IDENTIFIER)) {
+							rollback(begin);
+							return false;
+						}
+					} while (accept(TokenType.COMMA));
+				}
+				if (accept(TokenType.CLOSE_PARENS) && accept(TokenType.LAMBDA)) {
+					rollback(begin);
+					return true;
+				}
+				break;
 			}
 
 			rollback(begin);
@@ -1709,42 +1709,42 @@ namespace Vala.Lang.Parser {
 
 		Statement parse_embedded_statement_without_block(string statement_name, bool accept_empty_body) {
 			switch (current()) {
-				case TokenType.SEMICOLON:
-					if (!accept_empty_body) {
-						Report.warning(get_current_src(), "%s-statement without body".printf(statement_name));
-					}
-					return parse_empty_statement();
-				case TokenType.IF: return parse_if_statement();
-				case TokenType.SWITCH: return parse_switch_statement();
-				case TokenType.WHILE: return parse_while_statement();
-				case TokenType.DO: return parse_do_statement();
-				case TokenType.FOR: return parse_for_statement();
-				case TokenType.FOREACH: return parse_foreach_statement();
-				case TokenType.BREAK: return parse_break_statement();
-				case TokenType.CONTINUE: return parse_continue_statement();
-				case TokenType.RETURN: return parse_return_statement();
-				case TokenType.YIELD: return parse_yield_statement();
-				case TokenType.THROW: return parse_throw_statement();
-				case TokenType.TRY: return parse_try_statement();
-				case TokenType.LOCK: return parse_lock_statement();
-				case TokenType.DELETE: return parse_delete_statement();
-				case TokenType.VAR:
-				case TokenType.CONST:
-					throw new ParseException(ParseError.SYNTAX, "embedded statement cannot be declaration ");
-				case TokenType.OP_INC:
-				case TokenType.OP_DEC:
-				case TokenType.BASE:
-				case TokenType.THIS:
-				case TokenType.OPEN_PARENS:
-				case TokenType.STAR:
-				case TokenType.NEW:
+			case TokenType.SEMICOLON:
+				if (!accept_empty_body) {
+					Report.warning(get_current_src(), "%s-statement without body".printf(statement_name));
+				}
+				return parse_empty_statement();
+			case TokenType.IF: return parse_if_statement();
+			case TokenType.SWITCH: return parse_switch_statement();
+			case TokenType.WHILE: return parse_while_statement();
+			case TokenType.DO: return parse_do_statement();
+			case TokenType.FOR: return parse_for_statement();
+			case TokenType.FOREACH: return parse_foreach_statement();
+			case TokenType.BREAK: return parse_break_statement();
+			case TokenType.CONTINUE: return parse_continue_statement();
+			case TokenType.RETURN: return parse_return_statement();
+			case TokenType.YIELD: return parse_yield_statement();
+			case TokenType.THROW: return parse_throw_statement();
+			case TokenType.TRY: return parse_try_statement();
+			case TokenType.LOCK: return parse_lock_statement();
+			case TokenType.DELETE: return parse_delete_statement();
+			case TokenType.VAR:
+			case TokenType.CONST:
+				throw new ParseException(ParseError.SYNTAX, "embedded statement cannot be declaration ");
+			case TokenType.OP_INC:
+			case TokenType.OP_DEC:
+			case TokenType.BASE:
+			case TokenType.THIS:
+			case TokenType.OPEN_PARENS:
+			case TokenType.STAR:
+			case TokenType.NEW:
+				return parse_expression_statement();
+			default:
+				if (is_expression()) {
 					return parse_expression_statement();
-				default:
-					if (is_expression()) {
-						return parse_expression_statement();
-					} else {
-						throw new ParseException(ParseError.SYNTAX, "embedded statement cannot be declaration");
-					}
+				} else {
+					throw new ParseException(ParseError.SYNTAX, "embedded statement cannot be declaration");
+				}
 			}
 		}
 
@@ -1948,16 +1948,16 @@ namespace Vala.Lang.Parser {
 			if (!accept(TokenType.SEMICOLON)) {
 				bool is_expr;
 				switch (current()) {
-					case TokenType.VAR:
-						is_expr = false;
-						break;
-					case TokenType.OP_INC:
-					case TokenType.OP_DEC:
-						is_expr = true;
-						break;
-					default:
-						is_expr = is_expression();
-						break;
+				case TokenType.VAR:
+					is_expr = false;
+					break;
+				case TokenType.OP_INC:
+				case TokenType.OP_DEC:
+					is_expr = true;
+					break;
+				default:
+					is_expr = is_expression();
+					break;
 				}
 
 				if (is_expr) {
@@ -2132,26 +2132,26 @@ namespace Vala.Lang.Parser {
 
 		string parse_attribute_value() {
 			switch (current()) {
-				case TokenType.NULL:
-				case TokenType.TRUE:
-				case TokenType.FALSE:
+			case TokenType.NULL:
+			case TokenType.TRUE:
+			case TokenType.FALSE:
+			case TokenType.INTEGER_LITERAL:
+			case TokenType.REAL_LITERAL:
+			case TokenType.STRING_LITERAL:
+				next();
+				return get_last_string();
+			case TokenType.MINUS:
+				next();
+				switch (current()) {
 				case TokenType.INTEGER_LITERAL:
 				case TokenType.REAL_LITERAL:
-				case TokenType.STRING_LITERAL:
 					next();
-					return get_last_string();
-				case TokenType.MINUS:
-					next();
-					switch (current()) {
-						case TokenType.INTEGER_LITERAL:
-						case TokenType.REAL_LITERAL:
-							next();
-							return "-" + get_last_string();
-						default:
-							throw new ParseException(ParseError.SYNTAX, "expected number");
-					}
+					return "-" + get_last_string();
 				default:
-					throw new ParseException(ParseError.SYNTAX, "expected literal");
+					throw new ParseException(ParseError.SYNTAX, "expected number");
+				}
+			default:
+				throw new ParseException(ParseError.SYNTAX, "expected literal");
 			}
 		}
 
@@ -2226,129 +2226,129 @@ namespace Vala.Lang.Parser {
 			}
 
 			switch (current()) {
-				case TokenType.CONSTRUCT:
-					rollback(begin);
-					parse_constructor_declaration(parent, attrs);
-					return;
-				case TokenType.TILDE:
-					rollback(begin);
-					parse_destructor_declaration(parent, attrs);
-					return;
+			case TokenType.CONSTRUCT:
+				rollback(begin);
+				parse_constructor_declaration(parent, attrs);
+				return;
+			case TokenType.TILDE:
+				rollback(begin);
+				parse_destructor_declaration(parent, attrs);
+				return;
+			case TokenType.OPEN_BRACE:
+			case TokenType.SEMICOLON:
+			case TokenType.IF:
+			case TokenType.SWITCH:
+			case TokenType.WHILE:
+			case TokenType.DO:
+			case TokenType.FOR:
+			case TokenType.FOREACH:
+			case TokenType.BREAK:
+			case TokenType.CONTINUE:
+			case TokenType.RETURN:
+			case TokenType.YIELD:
+			case TokenType.THROW:
+			case TokenType.TRY:
+			case TokenType.LOCK:
+			case TokenType.DELETE:
+			case TokenType.VAR:
+			case TokenType.OP_INC:
+			case TokenType.OP_DEC:
+			case TokenType.BASE:
+			case TokenType.THIS:
+			case TokenType.STAR:
+			case TokenType.NEW:
+				// statement
+				if (attrs != null) {
+					// no attributes allowed before statements
+					throw new ParseException(ParseError.SYNTAX, "expected statement");
+				}
+				if (!root) {
+					throw new ParseException(ParseError.SYNTAX, "statements outside blocks allowed only in root namespace");
+				}
+				rollback(begin);
+				parse_main_block(parent);
+				return;
+			default:
+				if (root) {
+					bool is_expr = is_expression();
+					if (is_expr) {
+						rollback(begin);
+						parse_main_block(parent);
+						return;
+					}
+				}
+
+				skip_type();
+				switch (current()) {
 				case TokenType.OPEN_BRACE:
 				case TokenType.SEMICOLON:
-				case TokenType.IF:
-				case TokenType.SWITCH:
-				case TokenType.WHILE:
-				case TokenType.DO:
-				case TokenType.FOR:
-				case TokenType.FOREACH:
-				case TokenType.BREAK:
-				case TokenType.CONTINUE:
-				case TokenType.RETURN:
-				case TokenType.YIELD:
-				case TokenType.THROW:
-				case TokenType.TRY:
-				case TokenType.LOCK:
-				case TokenType.DELETE:
-				case TokenType.VAR:
-				case TokenType.OP_INC:
-				case TokenType.OP_DEC:
-				case TokenType.BASE:
-				case TokenType.THIS:
-				case TokenType.STAR:
-				case TokenType.NEW:
-					// statement
-					if (attrs != null) {
-						// no attributes allowed before statements
-						throw new ParseException(ParseError.SYNTAX, "expected statement");
-					}
-					if (!root) {
-						throw new ParseException(ParseError.SYNTAX, "statements outside blocks allowed only in root namespace");
-					}
+				case TokenType.COLON:
 					rollback(begin);
-					parse_main_block(parent);
-					return;
-				default:
-					if (root) {
-						bool is_expr = is_expression();
-						if (is_expr) {
-							rollback(begin);
-							parse_main_block(parent);
-							return;
-						}
-					}
-
-					skip_type();
-					switch (current()) {
-						case TokenType.OPEN_BRACE:
-						case TokenType.SEMICOLON:
-						case TokenType.COLON:
-							rollback(begin);
-							switch (last_keyword) {
-								case TokenType.CLASS:
-									parse_class_declaration(parent, attrs);
-									return;
-								case TokenType.ENUM:
-									parse_enum_declaration(parent, attrs);
-									return;
-								case TokenType.ERRORDOMAIN:
-									parse_errordomain_declaration(parent, attrs);
-									return;
-								case TokenType.INTERFACE:
-									parse_interface_declaration(parent, attrs);
-									return;
-								case TokenType.NAMESPACE:
-									parse_namespace_declaration(parent, attrs);
-									return;
-								case TokenType.STRUCT:
-									parse_struct_declaration(parent, attrs);
-									return;
-								default:
-									break;
-							}
-							break;
-						case TokenType.OPEN_PARENS:
-							rollback(begin);
-							parse_creation_method_declaration(parent, attrs);
-							return;
-						default:
-							skip_type(); // might contain type parameter list
-							switch (current()) {
-								case TokenType.OPEN_PARENS:
-									rollback(begin);
-									switch (last_keyword) {
-										case TokenType.DELEGATE:
-											parse_delegate_declaration(parent, attrs);
-											return;
-										case TokenType.SIGNAL:
-											parse_signal_declaration(parent, attrs);
-											return;
-										default:
-											parse_method_declaration(parent, attrs);
-											return;
-									}
-								case TokenType.ASSIGN:
-								case TokenType.SEMICOLON:
-									rollback(begin);
-									switch (last_keyword) {
-										case TokenType.CONST:
-											parse_constant_declaration(parent, attrs);
-											return;
-										default:
-											parse_field_declaration(parent, attrs);
-											return;
-									}
-								case TokenType.OPEN_BRACE:
-								case TokenType.THROWS:
-									rollback(begin);
-									parse_property_declaration(parent, attrs);
-									return;
-								default:
-									break;
-							}
-							break;
+					switch (last_keyword) {
+					case TokenType.CLASS:
+						parse_class_declaration(parent, attrs);
+						return;
+					case TokenType.ENUM:
+						parse_enum_declaration(parent, attrs);
+						return;
+					case TokenType.ERRORDOMAIN:
+						parse_errordomain_declaration(parent, attrs);
+						return;
+					case TokenType.INTERFACE:
+						parse_interface_declaration(parent, attrs);
+						return;
+					case TokenType.NAMESPACE:
+						parse_namespace_declaration(parent, attrs);
+						return;
+					case TokenType.STRUCT:
+						parse_struct_declaration(parent, attrs);
+						return;
+					default:
+						break;
 					}
 					break;
+				case TokenType.OPEN_PARENS:
+					rollback(begin);
+					parse_creation_method_declaration(parent, attrs);
+					return;
+				default:
+					skip_type(); // might contain type parameter list
+					switch (current()) {
+					case TokenType.OPEN_PARENS:
+						rollback(begin);
+						switch (last_keyword) {
+						case TokenType.DELEGATE:
+							parse_delegate_declaration(parent, attrs);
+							return;
+						case TokenType.SIGNAL:
+							parse_signal_declaration(parent, attrs);
+							return;
+						default:
+							parse_method_declaration(parent, attrs);
+							return;
+						}
+					case TokenType.ASSIGN:
+					case TokenType.SEMICOLON:
+						rollback(begin);
+						switch (last_keyword) {
+						case TokenType.CONST:
+							parse_constant_declaration(parent, attrs);
+							return;
+						default:
+							parse_field_declaration(parent, attrs);
+							return;
+						}
+					case TokenType.OPEN_BRACE:
+					case TokenType.THROWS:
+						rollback(begin);
+						parse_property_declaration(parent, attrs);
+						return;
+					default:
+						break;
+					}
+					break;
+				}
+				break;
 			}
 
 			rollback(begin);
@@ -2398,49 +2398,49 @@ namespace Vala.Lang.Parser {
 		RecoveryState recover() {
 			while (current() != TokenType.EOF) {
 				switch (current()) {
-					case TokenType.ABSTRACT:
-					case TokenType.CLASS:
-					case TokenType.CONST:
-					case TokenType.CONSTRUCT:
-					case TokenType.DELEGATE:
-					case TokenType.ENUM:
-					case TokenType.ERRORDOMAIN:
-					case TokenType.EXTERN:
-					case TokenType.INLINE:
-					case TokenType.INTERFACE:
-					case TokenType.INTERNAL:
-					case TokenType.NAMESPACE:
-					case TokenType.NEW:
-					case TokenType.OVERRIDE:
-					case TokenType.PRIVATE:
-					case TokenType.PROTECTED:
-					case TokenType.PUBLIC:
-					case TokenType.SEALED:
-					case TokenType.SIGNAL:
-					case TokenType.STATIC:
-					case TokenType.STRUCT:
-					case TokenType.VIRTUAL:
-					case TokenType.VOLATILE:
-						return RecoveryState.DECLARATION_BEGIN;
-					case TokenType.BREAK:
-					case TokenType.CONTINUE:
-					case TokenType.DELETE:
-					case TokenType.DO:
-					case TokenType.FOR:
-					case TokenType.FOREACH:
-					case TokenType.IF:
-					case TokenType.LOCK:
-					case TokenType.RETURN:
-					case TokenType.SWITCH:
-					case TokenType.THROW:
-					case TokenType.TRY:
-					case TokenType.VAR:
-					case TokenType.WHILE:
-					case TokenType.YIELD:
-						return RecoveryState.STATEMENT_BEGIN;
-					default:
-						next();
-						break;
+				case TokenType.ABSTRACT:
+				case TokenType.CLASS:
+				case TokenType.CONST:
+				case TokenType.CONSTRUCT:
+				case TokenType.DELEGATE:
+				case TokenType.ENUM:
+				case TokenType.ERRORDOMAIN:
+				case TokenType.EXTERN:
+				case TokenType.INLINE:
+				case TokenType.INTERFACE:
+				case TokenType.INTERNAL:
+				case TokenType.NAMESPACE:
+				case TokenType.NEW:
+				case TokenType.OVERRIDE:
+				case TokenType.PRIVATE:
+				case TokenType.PROTECTED:
+				case TokenType.PUBLIC:
+				case TokenType.SEALED:
+				case TokenType.SIGNAL:
+				case TokenType.STATIC:
+				case TokenType.STRUCT:
+				case TokenType.VIRTUAL:
+				case TokenType.VOLATILE:
+					return RecoveryState.DECLARATION_BEGIN;
+				case TokenType.BREAK:
+				case TokenType.CONTINUE:
+				case TokenType.DELETE:
+				case TokenType.DO:
+				case TokenType.FOR:
+				case TokenType.FOREACH:
+				case TokenType.IF:
+				case TokenType.LOCK:
+				case TokenType.RETURN:
+				case TokenType.SWITCH:
+				case TokenType.THROW:
+				case TokenType.TRY:
+				case TokenType.VAR:
+				case TokenType.WHILE:
+				case TokenType.YIELD:
+					return RecoveryState.STATEMENT_BEGIN;
+				default:
+					next();
+					break;
 				}
 			}
 			return RecoveryState.EOF;
@@ -3161,20 +3161,20 @@ namespace Vala.Lang.Parser {
 
 		SymbolAccessibility parse_access_modifier(SymbolAccessibility default_access = SymbolAccessibility.PRIVATE) {
 			switch (current()) {
-				case TokenType.PRIVATE:
-					next();
-					return SymbolAccessibility.PRIVATE;
-				case TokenType.PROTECTED:
-					next();
-					return SymbolAccessibility.PROTECTED;
-				case TokenType.INTERNAL:
-					next();
-					return SymbolAccessibility.INTERNAL;
-				case TokenType.PUBLIC:
-					next();
-					return SymbolAccessibility.PUBLIC;
-				default:
-					return default_access;
+			case TokenType.PRIVATE:
+				next();
+				return SymbolAccessibility.PRIVATE;
+			case TokenType.PROTECTED:
+				next();
+				return SymbolAccessibility.PROTECTED;
+			case TokenType.INTERNAL:
+				next();
+				return SymbolAccessibility.INTERNAL;
+			case TokenType.PUBLIC:
+				next();
+				return SymbolAccessibility.PUBLIC;
+			default:
+				return default_access;
 			}
 		}
 
@@ -3182,20 +3182,20 @@ namespace Vala.Lang.Parser {
 			ModifierFlags flags = 0;
 			while (true) {
 				switch (current()) {
-					case TokenType.ABSTRACT:
-						next();
-						flags |= ModifierFlags.ABSTRACT;
-						break;
-					case TokenType.EXTERN:
-						next();
-						flags |= ModifierFlags.EXTERN;
-						break;
-					case TokenType.SEALED:
-						next();
-						flags |= ModifierFlags.SEALED;
-						break;
-					default:
-						return flags;
+				case TokenType.ABSTRACT:
+					next();
+					flags |= ModifierFlags.ABSTRACT;
+					break;
+				case TokenType.EXTERN:
+					next();
+					flags |= ModifierFlags.EXTERN;
+					break;
+				case TokenType.SEALED:
+					next();
+					flags |= ModifierFlags.SEALED;
+					break;
+				default:
+					return flags;
 				}
 			}
 		}
@@ -3204,48 +3204,48 @@ namespace Vala.Lang.Parser {
 			ModifierFlags flags = 0;
 			while (true) {
 				switch (current()) {
-					case TokenType.ABSTRACT:
-						next();
-						flags |= ModifierFlags.ABSTRACT;
-						break;
-					case TokenType.ASYNC:
-						next();
-						flags |= ModifierFlags.ASYNC;
-						break;
-					case TokenType.CLASS:
-						next();
-						flags |= ModifierFlags.CLASS;
-						break;
-					case TokenType.EXTERN:
-						next();
-						flags |= ModifierFlags.EXTERN;
-						break;
-					case TokenType.INLINE:
-						next();
-						flags |= ModifierFlags.INLINE;
-						break;
-					case TokenType.NEW:
-						next();
-						flags |= ModifierFlags.NEW;
-						break;
-					case TokenType.OVERRIDE:
-						next();
-						flags |= ModifierFlags.OVERRIDE;
-						break;
-					case TokenType.SEALED:
-						next();
-						flags |= ModifierFlags.SEALED;
-						break;
-					case TokenType.STATIC:
-						next();
-						flags |= ModifierFlags.STATIC;
-						break;
-					case TokenType.VIRTUAL:
-						next();
-						flags |= ModifierFlags.VIRTUAL;
-						break;
-					default:
-						return flags;
+				case TokenType.ABSTRACT:
+					next();
+					flags |= ModifierFlags.ABSTRACT;
+					break;
+				case TokenType.ASYNC:
+					next();
+					flags |= ModifierFlags.ASYNC;
+					break;
+				case TokenType.CLASS:
+					next();
+					flags |= ModifierFlags.CLASS;
+					break;
+				case TokenType.EXTERN:
+					next();
+					flags |= ModifierFlags.EXTERN;
+					break;
+				case TokenType.INLINE:
+					next();
+					flags |= ModifierFlags.INLINE;
+					break;
+				case TokenType.NEW:
+					next();
+					flags |= ModifierFlags.NEW;
+					break;
+				case TokenType.OVERRIDE:
+					next();
+					flags |= ModifierFlags.OVERRIDE;
+					break;
+				case TokenType.SEALED:
+					next();
+					flags |= ModifierFlags.SEALED;
+					break;
+				case TokenType.STATIC:
+					next();
+					flags |= ModifierFlags.STATIC;
+					break;
+				case TokenType.VIRTUAL:
+					next();
+					flags |= ModifierFlags.VIRTUAL;
+					break;
+				default:
+					return flags;
 				}
 			}
 		}
@@ -3439,17 +3439,17 @@ namespace Vala.Lang.Parser {
 				var list = new List<DataType>();
 				do {
 					switch (current()) {
-						case TokenType.VOID:
-						case TokenType.DYNAMIC:
-						case TokenType.UNOWNED:
-						case TokenType.WEAK:
-						case TokenType.IDENTIFIER:
-							var type = parse_type(true, true);
-							list.Add(type);
-							break;
-						default:
-							rollback(begin);
-							return null;
+					case TokenType.VOID:
+					case TokenType.DYNAMIC:
+					case TokenType.UNOWNED:
+					case TokenType.WEAK:
+					case TokenType.IDENTIFIER:
+						var type = parse_type(true, true);
+						list.Add(type);
+						break;
+					default:
+						rollback(begin);
+						return null;
 					}
 				} while (accept(TokenType.COMMA));
 				if (!accept(TokenType.OP_GT)) {
@@ -3459,23 +3459,23 @@ namespace Vala.Lang.Parser {
 				if (maybe_expression) {
 					// check follower to decide whether to keep type argument list
 					switch (current()) {
-						case TokenType.OPEN_PARENS:
-						case TokenType.CLOSE_PARENS:
-						case TokenType.CLOSE_BRACKET:
-						case TokenType.OPEN_BRACE:
-						case TokenType.COLON:
-						case TokenType.SEMICOLON:
-						case TokenType.COMMA:
-						case TokenType.DOT:
-						case TokenType.INTERR:
-						case TokenType.OP_EQ:
-						case TokenType.OP_NE:
-							// keep type argument list
-							break;
-						default:
-							// interpret tokens as expression
-							rollback(begin);
-							return null;
+					case TokenType.OPEN_PARENS:
+					case TokenType.CLOSE_PARENS:
+					case TokenType.CLOSE_BRACKET:
+					case TokenType.OPEN_BRACE:
+					case TokenType.COLON:
+					case TokenType.SEMICOLON:
+					case TokenType.COMMA:
+					case TokenType.DOT:
+					case TokenType.INTERR:
+					case TokenType.OP_EQ:
+					case TokenType.OP_NE:
+						// keep type argument list
+						break;
+					default:
+						// interpret tokens as expression
+						rollback(begin);
+						return null;
 					}
 				}
 				return list;
@@ -3513,32 +3513,32 @@ namespace Vala.Lang.Parser {
 
 		bool is_declaration_keyword(TokenType type) {
 			switch (type) {
-				case TokenType.ABSTRACT:
-				case TokenType.ASYNC:
-				case TokenType.CLASS:
-				case TokenType.CONST:
-				case TokenType.DELEGATE:
-				case TokenType.ENUM:
-				case TokenType.ERRORDOMAIN:
-				case TokenType.EXTERN:
-				case TokenType.INLINE:
-				case TokenType.INTERFACE:
-				case TokenType.INTERNAL:
-				case TokenType.NAMESPACE:
-				case TokenType.NEW:
-				case TokenType.OVERRIDE:
-				case TokenType.PRIVATE:
-				case TokenType.PROTECTED:
-				case TokenType.PUBLIC:
-				case TokenType.SEALED:
-				case TokenType.SIGNAL:
-				case TokenType.STATIC:
-				case TokenType.STRUCT:
-				case TokenType.VIRTUAL:
-				case TokenType.VOLATILE:
-					return true;
-				default:
-					return false;
+			case TokenType.ABSTRACT:
+			case TokenType.ASYNC:
+			case TokenType.CLASS:
+			case TokenType.CONST:
+			case TokenType.DELEGATE:
+			case TokenType.ENUM:
+			case TokenType.ERRORDOMAIN:
+			case TokenType.EXTERN:
+			case TokenType.INLINE:
+			case TokenType.INTERFACE:
+			case TokenType.INTERNAL:
+			case TokenType.NAMESPACE:
+			case TokenType.NEW:
+			case TokenType.OVERRIDE:
+			case TokenType.PRIVATE:
+			case TokenType.PROTECTED:
+			case TokenType.PUBLIC:
+			case TokenType.SEALED:
+			case TokenType.SIGNAL:
+			case TokenType.STATIC:
+			case TokenType.STRUCT:
+			case TokenType.VIRTUAL:
+			case TokenType.VOLATILE:
+				return true;
+			default:
+				return false;
 			}
 		}
 

@@ -19,14 +19,14 @@ namespace Vala.Lang {
 
 		public bool init { get; set; }
 
-		/**
-		 * Creates a new local variable.
-		 *
-		 * @param name              name of the variable
-		 * @param initializer       optional initializer expression
-		 * @param source_reference  reference to source code
-		 * @return                  newly created variable declarator
-		 */
+		/// <summary>
+		/// Creates a new local variable.
+		/// 
+		/// <param name="name">name of the variable</param>
+		/// <param name="initializer">optional initializer expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created variable declarator</returns>
+		/// </summary>
 		public LocalVariable(DataType variable_type, string name, Expression initializer = null, SourceReference source_reference = null)
 			: base(variable_type, name, initializer, source_reference) {
 		}

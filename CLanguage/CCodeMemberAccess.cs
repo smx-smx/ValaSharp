@@ -6,23 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents an access to a struct member in the C code.
-	 */
+	/// <summary>
+	/// Represents an access to a struct member in the C code.
+	/// </summary>
 	public class CCodeMemberAccess : CCodeExpression {
-		/**
-		 * The parent of the member.
-		 */
+		/// <summary>
+		/// The parent of the member.
+		/// </summary>
 		public CCodeExpression inner { get; set; }
 
-		/**
-		 * The name of the member.
-		 */
+		/// <summary>
+		/// The name of the member.
+		/// </summary>
 		public string member_name { get; set; }
 
-		/**
-		 * Specifies whether the member access happens by pointer dereferencing.
-		 */
+		/// <summary>
+		/// Specifies whether the member access happens by pointer dereferencing.
+		/// </summary>
 		public bool is_pointer { get; set; }
 
 		public CCodeMemberAccess(CCodeExpression container, string member, bool pointer = false) {

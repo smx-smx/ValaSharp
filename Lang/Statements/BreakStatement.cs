@@ -8,20 +8,20 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents a break statement in the source code.
-	 */
+	/// <summary>
+	/// Represents a break statement in the source code.
+	/// </summary>
 	public class BreakStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Creates a new break statement.
-		 *
-		 * @param source reference to source code
-		 * @return       newly created break statement
-		 */
+		/// <summary>
+		/// Creates a new break statement.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created break statement</returns>
+		/// </summary>
 		public BreakStatement(SourceReference source) {
 			source_reference = source;
 		}

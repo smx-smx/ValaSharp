@@ -8,21 +8,21 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
 namespace CCodeGen {
-	/**
-	 * C function to register a struct at runtime.
-	 */
+	/// <summary>
+	/// C function to register a struct at runtime.
+	/// </summary>
 	public class StructRegisterFunction : TypeRegisterFunction {
-		/**
-		 * Specifies the struct to be registered.
-		 */
+		/// <summary>
+		/// Specifies the struct to be registered.
+		/// </summary>
 		public Struct struct_reference { get; set; }
 
-		/**
-		 * Creates a new C function to register the specified struct at runtime.
-		 *
-		 * @param st a struct
-		 * @return   newly created struct register function
-		 */
+		/// <summary>
+		/// Creates a new C function to register the specified struct at runtime.
+		/// 
+		/// <param name="st">a struct</param>
+		/// <returns>newly created struct register function</returns>
+		/// </summary>
 		public StructRegisterFunction(Struct st, CodeContext context) {
 			struct_reference = st;
 			this.context = context;

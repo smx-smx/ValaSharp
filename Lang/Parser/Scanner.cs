@@ -9,9 +9,9 @@ using Utils;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Parser {
-	/**
-	 * Lexical scanner for Vala source files.
-	 */
+	/// <summary>
+	/// Lexical scanner for Vala source files.
+	/// </summary>
 	public class Scanner : IDisposable {
 		public SourceFile source_file { get; private set; }
 
@@ -97,157 +97,157 @@ namespace Vala.Lang.Parser {
 				type = TokenType.EOF;
 			} else {
 				switch (current.PeekChar()) {
-					case '/':
-						type = TokenType.CLOSE_REGEX_LITERAL;
-						current.Position++;
-						state_stack.RemoveAt(state_stack.Count - 1);
-						var fl_i = false;
-						var fl_s = false;
-						var fl_m = false;
-						var fl_x = false;
-						while (current.PeekChar() == 'i' || current.PeekChar() == 's' || current.PeekChar() == 'm' || current.PeekChar() == 'x') {
-							switch (current.PeekChar()) {
-								case 'i':
-									if (fl_i) {
-										Report.error(get_source_reference(token_length_in_chars), "modifier 'i' used more than once");
-									}
-									fl_i = true;
-									break;
-								case 's':
-									if (fl_s) {
-										Report.error(get_source_reference(token_length_in_chars), "modifier 's' used more than once");
-									}
-									fl_s = true;
-									break;
-								case 'm':
-									if (fl_m) {
-										Report.error(get_source_reference(token_length_in_chars), "modifier 'm' used more than once");
-									}
-									fl_m = true;
-									break;
-								case 'x':
-									if (fl_x) {
-										Report.error(get_source_reference(token_length_in_chars), "modifier 'x' used more than once");
-									}
-									fl_x = true;
-									break;
+				case '/':
+					type = TokenType.CLOSE_REGEX_LITERAL;
+					current.Position++;
+					state_stack.RemoveAt(state_stack.Count - 1);
+					var fl_i = false;
+					var fl_s = false;
+					var fl_m = false;
+					var fl_x = false;
+					while (current.PeekChar() == 'i' || current.PeekChar() == 's' || current.PeekChar() == 'm' || current.PeekChar() == 'x') {
+						switch (current.PeekChar()) {
+						case 'i':
+							if (fl_i) {
+								Report.error(get_source_reference(token_length_in_chars), "modifier 'i' used more than once");
 							}
+							fl_i = true;
+							break;
+						case 's':
+							if (fl_s) {
+								Report.error(get_source_reference(token_length_in_chars), "modifier 's' used more than once");
+							}
+							fl_s = true;
+							break;
+						case 'm':
+							if (fl_m) {
+								Report.error(get_source_reference(token_length_in_chars), "modifier 'm' used more than once");
+							}
+							fl_m = true;
+							break;
+						case 'x':
+							if (fl_x) {
+								Report.error(get_source_reference(token_length_in_chars), "modifier 'x' used more than once");
+							}
+							fl_x = true;
+							break;
+						}
+						current.Position++;
+						token_length_in_chars++;
+					}
+					break;
+				default:
+					type = TokenType.REGEX_LITERAL;
+					token_length_in_chars = 0;
+					while (current.Position < end && current.PeekChar() != '/') {
+						if (current.PeekChar() == '\\') {
 							current.Position++;
 							token_length_in_chars++;
-						}
-						break;
-					default:
-						type = TokenType.REGEX_LITERAL;
-						token_length_in_chars = 0;
-						while (current.Position < end && current.PeekChar() != '/') {
-							if (current.PeekChar() == '\\') {
+							if (current.Position >= end) {
+								break;
+							}
+
+							int digit_length;
+							switch (current.PeekChar()) {
+							case '\'':
+							case '"':
+							case '\\':
+							case '/':
+							case '^':
+							case '$':
+							case '.':
+							case '[':
+							case ']':
+							case '{':
+							case '}':
+							case '(':
+							case ')':
+							case '?':
+							case '*':
+							case '+':
+							case '-':
+							case '#':
+							case '&':
+							case '~':
+							case ':':
+							case ';':
+							case '<':
+							case '>':
+							case '|':
+							case '%':
+							case '=':
+							case '@':
+							case '0':
+							case 'b':
+							case 'B':
+							case 'f':
+							case 'n':
+							case 'r':
+							case 't':
+							case 'v':
+							case 'a':
+							case 'A':
+							case 'p':
+							case 'P':
+							case 'e':
+							case 'd':
+							case 'D':
+							case 's':
+							case 'S':
+							case 'w':
+							case 'W':
+							case 'G':
+							case 'z':
+							case 'Z':
 								current.Position++;
 								token_length_in_chars++;
-								if (current.Position >= end) {
-									break;
-								}
-
-								int digit_length;
-								switch (current.PeekChar()) {
-									case '\'':
-									case '"':
-									case '\\':
-									case '/':
-									case '^':
-									case '$':
-									case '.':
-									case '[':
-									case ']':
-									case '{':
-									case '}':
-									case '(':
-									case ')':
-									case '?':
-									case '*':
-									case '+':
-									case '-':
-									case '#':
-									case '&':
-									case '~':
-									case ':':
-									case ';':
-									case '<':
-									case '>':
-									case '|':
-									case '%':
-									case '=':
-									case '@':
-									case '0':
-									case 'b':
-									case 'B':
-									case 'f':
-									case 'n':
-									case 'r':
-									case 't':
-									case 'v':
-									case 'a':
-									case 'A':
-									case 'p':
-									case 'P':
-									case 'e':
-									case 'd':
-									case 'D':
-									case 's':
-									case 'S':
-									case 'w':
-									case 'W':
-									case 'G':
-									case 'z':
-									case 'Z':
-										current.Position++;
-										token_length_in_chars++;
-										break;
-									case 'u':
-										// u escape character has four hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length != 4) {
-											Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
-										}
-										break;
-									case 'x':
-										// hexadecimal escape character requires two hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length < 1) {
-											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
-										}
-										break;
-									default:
-										Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
-										break;
-								}
-							} else if (current.PeekChar() == '\n') {
 								break;
-							} else {
-								try {
-									current.PeekUniChar(out int clen);
-									current.Position += clen;
-									token_length_in_chars += clen;
-								} catch (ArgumentException) {
-									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+							case 'u':
+								// u escape character has four hex digits
+								current.Position++;
+								token_length_in_chars++;
+								for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
 								}
+								if (digit_length != 4) {
+									Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
+								}
+								break;
+							case 'x':
+								// hexadecimal escape character requires two hex digits
+								current.Position++;
+								token_length_in_chars++;
+								for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
+								}
+								if (digit_length < 1) {
+									Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
+								}
+								break;
+							default:
+								Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
+								break;
+							}
+						} else if (current.PeekChar() == '\n') {
+							break;
+						} else {
+							try {
+								current.PeekUniChar(out int clen);
+								current.Position += clen;
+								token_length_in_chars += clen;
+							} catch (ArgumentException) {
+								Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
 							}
 						}
-						if (current.Position >= end || current.PeekChar() == '\n') {
-							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
-							state_stack.RemoveAt(state_stack.Count - 1);
-							return read_token(out token_begin, out token_end);
-						}
-						break;
+					}
+					if (current.Position >= end || current.PeekChar() == '\n') {
+						Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
+						state_stack.RemoveAt(state_stack.Count - 1);
+						return read_token(out token_begin, out token_end);
+					}
+					break;
 				}
 			}
 
@@ -264,283 +264,283 @@ namespace Vala.Lang.Parser {
 
 		public static TokenType get_identifier_or_keyword(FastMView begin, int len) {
 			switch (len) {
-				case 2:
-					switch (begin.PeekChar()) {
-						case 'a':
-							if (matches(begin, "as")) return TokenType.AS;
-							break;
-						case 'd':
-							if (matches(begin, "do")) return TokenType.DO;
-							break;
-						case 'i':
-							switch (begin.PeekCharAt(1)) {
-								case 'f':
-									return TokenType.IF;
-								case 'n':
-									return TokenType.IN;
-								case 's':
-									return TokenType.IS;
-							}
-							break;
+			case 2:
+				switch (begin.PeekChar()) {
+				case 'a':
+					if (matches(begin, "as")) return TokenType.AS;
+					break;
+				case 'd':
+					if (matches(begin, "do")) return TokenType.DO;
+					break;
+				case 'i':
+					switch (begin.PeekCharAt(1)) {
+					case 'f':
+						return TokenType.IF;
+					case 'n':
+						return TokenType.IN;
+					case 's':
+						return TokenType.IS;
 					}
 					break;
-				case 3:
-					switch (begin.PeekChar()) {
-						case 'f':
-							if (matches(begin, "for")) return TokenType.FOR;
-							break;
+				}
+				break;
+			case 3:
+				switch (begin.PeekChar()) {
+				case 'f':
+					if (matches(begin, "for")) return TokenType.FOR;
+					break;
+				case 'g':
+					if (matches(begin, "get")) return TokenType.GET;
+					break;
+				case 'n':
+					if (matches(begin, "new")) return TokenType.NEW;
+					break;
+				case 'o':
+					if (matches(begin, "out")) return TokenType.OUT;
+					break;
+				case 'r':
+					if (matches(begin, "ref")) return TokenType.REF;
+					break;
+				case 's':
+					if (matches(begin, "set")) return TokenType.SET;
+					break;
+				case 't':
+					if (matches(begin, "try")) return TokenType.TRY;
+					break;
+				case 'v':
+					if (matches(begin, "var")) return TokenType.VAR;
+					break;
+				}
+				break;
+			case 4:
+				switch (begin.PeekChar()) {
+				case 'b':
+					if (matches(begin, "base")) return TokenType.BASE;
+					break;
+				case 'c':
+					if (matches(begin, "case")) return TokenType.CASE;
+					break;
+				case 'e':
+					switch (begin.PeekCharAt(1)) {
+					case 'l':
+						if (matches(begin, "else")) return TokenType.ELSE;
+						break;
+					case 'n':
+						if (matches(begin, "enum")) return TokenType.ENUM;
+						break;
+					}
+					break;
+				case 'l':
+					if (matches(begin, "lock")) return TokenType.LOCK;
+					break;
+				case 'n':
+					if (matches(begin, "null")) return TokenType.NULL;
+					break;
+				case 't':
+					switch (begin.PeekCharAt(1)) {
+					case 'h':
+						if (matches(begin, "this")) return TokenType.THIS;
+						break;
+					case 'r':
+						if (matches(begin, "true")) return TokenType.TRUE;
+						break;
+					}
+					break;
+				case 'v':
+					if (matches(begin, "void")) return TokenType.VOID;
+					break;
+				case 'w':
+					if (matches(begin, "weak")) return TokenType.WEAK;
+					break;
+				}
+				break;
+			case 5:
+				switch (begin.PeekChar()) {
+				case 'a':
+					if (matches(begin, "async")) return TokenType.ASYNC;
+					break;
+				case 'b':
+					if (matches(begin, "break")) return TokenType.BREAK;
+					break;
+				case 'c':
+					switch (begin.PeekCharAt(1)) {
+					case 'a':
+						if (matches(begin, "catch")) return TokenType.CATCH;
+						break;
+					case 'l':
+						if (matches(begin, "class")) return TokenType.CLASS;
+						break;
+					case 'o':
+						if (matches(begin, "const")) return TokenType.CONST;
+						break;
+					}
+					break;
+				case 'f':
+					if (matches(begin, "false")) return TokenType.FALSE;
+					break;
+				case 'o':
+					if (matches(begin, "owned")) return TokenType.OWNED;
+					break;
+				case 't':
+					if (matches(begin, "throw")) return TokenType.THROW;
+					break;
+				case 'u':
+					if (matches(begin, "using")) return TokenType.USING;
+					break;
+				case 'w':
+					if (matches(begin, "while")) return TokenType.WHILE;
+					break;
+				case 'y':
+					if (matches(begin, "yield")) return TokenType.YIELD;
+					break;
+				}
+				break;
+			case 6:
+				switch (begin.PeekChar()) {
+				case 'd':
+					if (matches(begin, "delete")) return TokenType.DELETE;
+					break;
+				case 'e':
+					if (matches(begin, "extern")) return TokenType.EXTERN;
+					break;
+				case 'i':
+					if (matches(begin, "inline")) return TokenType.INLINE;
+					break;
+				case 'p':
+					switch (begin.PeekCharAt(1)) {
+					case 'a':
+						if (matches(begin, "params")) return TokenType.PARAMS;
+						break;
+					case 'u':
+						if (matches(begin, "public")) return TokenType.PUBLIC;
+						break;
+					}
+					break;
+				case 'r':
+					if (matches(begin, "return")) return TokenType.RETURN;
+					break;
+				case 's':
+					switch (begin.PeekCharAt(1)) {
+					case 'e':
+						if (matches(begin, "sealed")) return TokenType.SEALED;
+						break;
+					case 'i':
+						switch (begin.PeekCharAt(2)) {
 						case 'g':
-							if (matches(begin, "get")) return TokenType.GET;
+							if (matches(begin, "signal")) return TokenType.SIGNAL;
 							break;
-						case 'n':
-							if (matches(begin, "new")) return TokenType.NEW;
+						case 'z':
+							if (matches(begin, "sizeof")) return TokenType.SIZEOF;
 							break;
-						case 'o':
-							if (matches(begin, "out")) return TokenType.OUT;
-							break;
-						case 'r':
-							if (matches(begin, "ref")) return TokenType.REF;
-							break;
-						case 's':
-							if (matches(begin, "set")) return TokenType.SET;
-							break;
-						case 't':
-							if (matches(begin, "try")) return TokenType.TRY;
-							break;
-						case 'v':
-							if (matches(begin, "var")) return TokenType.VAR;
-							break;
-					}
-					break;
-				case 4:
-					switch (begin.PeekChar()) {
-						case 'b':
-							if (matches(begin, "base")) return TokenType.BASE;
-							break;
-						case 'c':
-							if (matches(begin, "case")) return TokenType.CASE;
-							break;
-						case 'e':
-							switch (begin.PeekCharAt(1)) {
-								case 'l':
-									if (matches(begin, "else")) return TokenType.ELSE;
-									break;
-								case 'n':
-									if (matches(begin, "enum")) return TokenType.ENUM;
-									break;
-							}
-							break;
-						case 'l':
-							if (matches(begin, "lock")) return TokenType.LOCK;
-							break;
-						case 'n':
-							if (matches(begin, "null")) return TokenType.NULL;
-							break;
-						case 't':
-							switch (begin.PeekCharAt(1)) {
-								case 'h':
-									if (matches(begin, "this")) return TokenType.THIS;
-									break;
-								case 'r':
-									if (matches(begin, "true")) return TokenType.TRUE;
-									break;
-							}
-							break;
-						case 'v':
-							if (matches(begin, "void")) return TokenType.VOID;
-							break;
-						case 'w':
-							if (matches(begin, "weak")) return TokenType.WEAK;
-							break;
-					}
-					break;
-				case 5:
-					switch (begin.PeekChar()) {
+						}
+						break;
+					case 't':
+						switch (begin.PeekCharAt(2)) {
 						case 'a':
-							if (matches(begin, "async")) return TokenType.ASYNC;
-							break;
-						case 'b':
-							if (matches(begin, "break")) return TokenType.BREAK;
-							break;
-						case 'c':
-							switch (begin.PeekCharAt(1)) {
-								case 'a':
-									if (matches(begin, "catch")) return TokenType.CATCH;
-									break;
-								case 'l':
-									if (matches(begin, "class")) return TokenType.CLASS;
-									break;
-								case 'o':
-									if (matches(begin, "const")) return TokenType.CONST;
-									break;
-							}
-							break;
-						case 'f':
-							if (matches(begin, "false")) return TokenType.FALSE;
-							break;
-						case 'o':
-							if (matches(begin, "owned")) return TokenType.OWNED;
-							break;
-						case 't':
-							if (matches(begin, "throw")) return TokenType.THROW;
-							break;
-						case 'u':
-							if (matches(begin, "using")) return TokenType.USING;
-							break;
-						case 'w':
-							if (matches(begin, "while")) return TokenType.WHILE;
-							break;
-						case 'y':
-							if (matches(begin, "yield")) return TokenType.YIELD;
-							break;
-					}
-					break;
-				case 6:
-					switch (begin.PeekChar()) {
-						case 'd':
-							if (matches(begin, "delete")) return TokenType.DELETE;
-							break;
-						case 'e':
-							if (matches(begin, "extern")) return TokenType.EXTERN;
-							break;
-						case 'i':
-							if (matches(begin, "inline")) return TokenType.INLINE;
-							break;
-						case 'p':
-							switch (begin.PeekCharAt(1)) {
-								case 'a':
-									if (matches(begin, "params")) return TokenType.PARAMS;
-									break;
-								case 'u':
-									if (matches(begin, "public")) return TokenType.PUBLIC;
-									break;
-							}
+							if (matches(begin, "static")) return TokenType.STATIC;
 							break;
 						case 'r':
-							if (matches(begin, "return")) return TokenType.RETURN;
+							if (matches(begin, "struct")) return TokenType.STRUCT;
 							break;
-						case 's':
-							switch (begin.PeekCharAt(1)) {
-								case 'e':
-									if (matches(begin, "sealed")) return TokenType.SEALED;
-									break;
-								case 'i':
-									switch (begin.PeekCharAt(2)) {
-										case 'g':
-											if (matches(begin, "signal")) return TokenType.SIGNAL;
-											break;
-										case 'z':
-											if (matches(begin, "sizeof")) return TokenType.SIZEOF;
-											break;
-									}
-									break;
-								case 't':
-									switch (begin.PeekCharAt(2)) {
-										case 'a':
-											if (matches(begin, "static")) return TokenType.STATIC;
-											break;
-										case 'r':
-											if (matches(begin, "struct")) return TokenType.STRUCT;
-											break;
-									}
-									break;
-								case 'w':
-									if (matches(begin, "switch")) return TokenType.SWITCH;
-									break;
-							}
-							break;
-						case 't':
-							switch (begin.PeekCharAt(1)) {
-								case 'h':
-									if (matches(begin, "throws")) return TokenType.THROWS;
-									break;
-								case 'y':
-									if (matches(begin, "typeof")) return TokenType.TYPEOF;
-									break;
-							}
-							break;
+						}
+						break;
+					case 'w':
+						if (matches(begin, "switch")) return TokenType.SWITCH;
+						break;
 					}
 					break;
-				case 7:
-					switch (begin.PeekChar()) {
-						case 'd':
-							switch (begin.PeekCharAt(1)) {
-								case 'e':
-									if (matches(begin, "default")) return TokenType.DEFAULT;
-									break;
-								case 'y':
-									if (matches(begin, "dynamic")) return TokenType.DYNAMIC;
-									break;
-							}
-							break;
-						case 'e':
-							if (matches(begin, "ensures")) return TokenType.ENSURES;
-							break;
-						case 'f':
-							switch (begin.PeekCharAt(1)) {
-								case 'i':
-									if (matches(begin, "finally")) return TokenType.FINALLY;
-									break;
-								case 'o':
-									if (matches(begin, "foreach")) return TokenType.FOREACH;
-									break;
-							}
-							break;
-						case 'p':
-							if (matches(begin, "private")) return TokenType.PRIVATE;
-							break;
-						case 'u':
-							if (matches(begin, "unowned")) return TokenType.UNOWNED;
-							break;
-						case 'v':
-							if (matches(begin, "virtual")) return TokenType.VIRTUAL;
-							break;
+				case 't':
+					switch (begin.PeekCharAt(1)) {
+					case 'h':
+						if (matches(begin, "throws")) return TokenType.THROWS;
+						break;
+					case 'y':
+						if (matches(begin, "typeof")) return TokenType.TYPEOF;
+						break;
 					}
 					break;
-				case 8:
-					switch (begin.PeekChar()) {
-						case 'a':
-							if (matches(begin, "abstract")) return TokenType.ABSTRACT;
-							break;
-						case 'c':
-							if (matches(begin, "continue")) return TokenType.CONTINUE;
-							break;
-						case 'd':
-							if (matches(begin, "delegate")) return TokenType.DELEGATE;
-							break;
-						case 'i':
-							if (matches(begin, "internal")) return TokenType.INTERNAL;
-							break;
-						case 'o':
-							if (matches(begin, "override")) return TokenType.OVERRIDE;
-							break;
-						case 'r':
-							if (matches(begin, "requires")) return TokenType.REQUIRES;
-							break;
-						case 'v':
-							if (matches(begin, "volatile")) return TokenType.VOLATILE;
-							break;
+				}
+				break;
+			case 7:
+				switch (begin.PeekChar()) {
+				case 'd':
+					switch (begin.PeekCharAt(1)) {
+					case 'e':
+						if (matches(begin, "default")) return TokenType.DEFAULT;
+						break;
+					case 'y':
+						if (matches(begin, "dynamic")) return TokenType.DYNAMIC;
+						break;
 					}
 					break;
-				case 9:
-					switch (begin.PeekChar()) {
-						case 'c':
-							if (matches(begin, "construct")) return TokenType.CONSTRUCT;
-							break;
-						case 'i':
-							if (matches(begin, "interface")) return TokenType.INTERFACE;
-							break;
-						case 'n':
-							if (matches(begin, "namespace")) return TokenType.NAMESPACE;
-							break;
-						case 'p':
-							if (matches(begin, "protected")) return TokenType.PROTECTED;
-							break;
+				case 'e':
+					if (matches(begin, "ensures")) return TokenType.ENSURES;
+					break;
+				case 'f':
+					switch (begin.PeekCharAt(1)) {
+					case 'i':
+						if (matches(begin, "finally")) return TokenType.FINALLY;
+						break;
+					case 'o':
+						if (matches(begin, "foreach")) return TokenType.FOREACH;
+						break;
 					}
 					break;
-				case 11:
-					if (matches(begin, "errordomain")) return TokenType.ERRORDOMAIN;
+				case 'p':
+					if (matches(begin, "private")) return TokenType.PRIVATE;
 					break;
+				case 'u':
+					if (matches(begin, "unowned")) return TokenType.UNOWNED;
+					break;
+				case 'v':
+					if (matches(begin, "virtual")) return TokenType.VIRTUAL;
+					break;
+				}
+				break;
+			case 8:
+				switch (begin.PeekChar()) {
+				case 'a':
+					if (matches(begin, "abstract")) return TokenType.ABSTRACT;
+					break;
+				case 'c':
+					if (matches(begin, "continue")) return TokenType.CONTINUE;
+					break;
+				case 'd':
+					if (matches(begin, "delegate")) return TokenType.DELEGATE;
+					break;
+				case 'i':
+					if (matches(begin, "internal")) return TokenType.INTERNAL;
+					break;
+				case 'o':
+					if (matches(begin, "override")) return TokenType.OVERRIDE;
+					break;
+				case 'r':
+					if (matches(begin, "requires")) return TokenType.REQUIRES;
+					break;
+				case 'v':
+					if (matches(begin, "volatile")) return TokenType.VOLATILE;
+					break;
+				}
+				break;
+			case 9:
+				switch (begin.PeekChar()) {
+				case 'c':
+					if (matches(begin, "construct")) return TokenType.CONSTRUCT;
+					break;
+				case 'i':
+					if (matches(begin, "interface")) return TokenType.INTERFACE;
+					break;
+				case 'n':
+					if (matches(begin, "namespace")) return TokenType.NAMESPACE;
+					break;
+				case 'p':
+					if (matches(begin, "protected")) return TokenType.PROTECTED;
+					break;
+				}
+				break;
+			case 11:
+				if (matches(begin, "errordomain")) return TokenType.ERRORDOMAIN;
+				break;
 			}
 			return TokenType.IDENTIFIER;
 		}
@@ -589,34 +589,34 @@ namespace Vala.Lang.Parser {
 				bool real_literal = (type == TokenType.REAL_LITERAL);
 
 				switch (current.PeekChar()) {
-					case 'l':
-					case 'L':
-						if (type == TokenType.INTEGER_LITERAL) {
-							current.Position++;
-							if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
-								current.Position++;
-							}
-						}
-						break;
-					case 'u':
-					case 'U':
-						if (type == TokenType.INTEGER_LITERAL) {
-							current.Position++;
-							if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
-								current.Position++;
-								if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
-									current.Position++;
-								}
-							}
-						}
-						break;
-					case 'f':
-					case 'F':
-					case 'd':
-					case 'D':
-						type = TokenType.REAL_LITERAL;
+				case 'l':
+				case 'L':
+					if (type == TokenType.INTEGER_LITERAL) {
 						current.Position++;
-						break;
+						if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
+							current.Position++;
+						}
+					}
+					break;
+				case 'u':
+				case 'U':
+					if (type == TokenType.INTEGER_LITERAL) {
+						current.Position++;
+						if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
+							current.Position++;
+							if (current.Position < end && Char.ToLower(current.PeekChar()) == 'l') {
+								current.Position++;
+							}
+						}
+					}
+					break;
+				case 'f':
+				case 'F':
+				case 'd':
+				case 'D':
+					type = TokenType.REAL_LITERAL;
+					current.Position++;
+					break;
 				}
 
 				if (!real_literal && is_ident_char(current.PeekChar())) {
@@ -643,112 +643,112 @@ namespace Vala.Lang.Parser {
 				type = TokenType.EOF;
 			} else {
 				switch (current.PeekChar()) {
-					case '"':
-						type = TokenType.CLOSE_TEMPLATE;
-						current.Position++;
-						state_stack.RemoveAt(state_stack.Count - 1);
-						break;
-					case '$':
-						token_begin.pos++; // $ is not part of following token
-						current.Position++;
-						if (Char.IsLetter(current.PeekChar()) || current.PeekChar() == '_') {
-							int len = 0;
-							while (current.Position < end && is_ident_char(current.PeekChar())) {
-								current.Position++;
-								len++;
-							}
-							type = TokenType.IDENTIFIER;
-							state_stack.Add(State.TEMPLATE_PART);
-						} else if (current.PeekChar() == '(') {
+				case '"':
+					type = TokenType.CLOSE_TEMPLATE;
+					current.Position++;
+					state_stack.RemoveAt(state_stack.Count - 1);
+					break;
+				case '$':
+					token_begin.pos++; // $ is not part of following token
+					current.Position++;
+					if (Char.IsLetter(current.PeekChar()) || current.PeekChar() == '_') {
+						int len = 0;
+						while (current.Position < end && is_ident_char(current.PeekChar())) {
 							current.Position++;
-							column += 2;
-							state_stack.Add(State.PARENS);
-							return read_token(out token_begin, out token_end);
-						} else if (current.PeekChar() == '$') {
-							type = TokenType.TEMPLATE_STRING_LITERAL;
-							current.Position++;
-							state_stack.Add(State.TEMPLATE_PART);
-						} else {
-							Report.error(get_source_reference(1), "unexpected character");
-							return read_template_token(out token_begin, out token_end);
+							len++;
 						}
-						break;
-					default:
+						type = TokenType.IDENTIFIER;
+						state_stack.Add(State.TEMPLATE_PART);
+					} else if (current.PeekChar() == '(') {
+						current.Position++;
+						column += 2;
+						state_stack.Add(State.PARENS);
+						return read_token(out token_begin, out token_end);
+					} else if (current.PeekChar() == '$') {
 						type = TokenType.TEMPLATE_STRING_LITERAL;
-						token_length_in_chars = 0;
-						while (current.Position < end && current.PeekChar() != '"' && current.PeekChar() != '$') {
-							if (current.PeekChar() == '\\') {
+						current.Position++;
+						state_stack.Add(State.TEMPLATE_PART);
+					} else {
+						Report.error(get_source_reference(1), "unexpected character");
+						return read_template_token(out token_begin, out token_end);
+					}
+					break;
+				default:
+					type = TokenType.TEMPLATE_STRING_LITERAL;
+					token_length_in_chars = 0;
+					while (current.Position < end && current.PeekChar() != '"' && current.PeekChar() != '$') {
+						if (current.PeekChar() == '\\') {
+							current.Position++;
+							token_length_in_chars++;
+							if (current.Position >= end) {
+								break;
+							}
+
+							int digit_length;
+							switch (current.PeekChar()) {
+							case '\'':
+							case '"':
+							case '\\':
+							case '0':
+							case 'b':
+							case 'f':
+							case 'n':
+							case 'r':
+							case 't':
+							case 'v':
 								current.Position++;
 								token_length_in_chars++;
-								if (current.Position >= end) {
-									break;
-								}
-
-								int digit_length;
-								switch (current.PeekChar()) {
-									case '\'':
-									case '"':
-									case '\\':
-									case '0':
-									case 'b':
-									case 'f':
-									case 'n':
-									case 'r':
-									case 't':
-									case 'v':
-										current.Position++;
-										token_length_in_chars++;
-										break;
-									case 'u':
-										// u escape character has four hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length != 4) {
-											Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
-										}
-										break;
-									case 'x':
-										// hexadecimal escape character requires two hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length < 1) {
-											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
-										}
-										break;
-									default:
-										Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
-										break;
-								}
-							} else if (current.PeekChar() == '\n') {
+								break;
+							case 'u':
+								// u escape character has four hex digits
 								current.Position++;
-								line++;
-								column = 1;
-								token_length_in_chars = 1;
-							} else {
-								try {
-									current.PeekUniChar(out int clen);
-									current.Position += clen;
-									token_length_in_chars += clen;
-								} catch (ArgumentException) {
-									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+								token_length_in_chars++;
+								for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
 								}
+								if (digit_length != 4) {
+									Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
+								}
+								break;
+							case 'x':
+								// hexadecimal escape character requires two hex digits
+								current.Position++;
+								token_length_in_chars++;
+								for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
+								}
+								if (digit_length < 1) {
+									Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
+								}
+								break;
+							default:
+								Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
+								break;
+							}
+						} else if (current.PeekChar() == '\n') {
+							current.Position++;
+							line++;
+							column = 1;
+							token_length_in_chars = 1;
+						} else {
+							try {
+								current.PeekUniChar(out int clen);
+								current.Position += clen;
+								token_length_in_chars += clen;
+							} catch (ArgumentException) {
+								Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
 							}
 						}
-						if (current.Position >= end) {
-							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
-							state_stack.RemoveAt(state_stack.Count - 1);
-							return read_token(out token_begin, out token_end);
-						}
-						state_stack.Add(State.TEMPLATE_PART);
-						break;
+					}
+					if (current.Position >= end) {
+						Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"");
+						state_stack.RemoveAt(state_stack.Count - 1);
+						return read_token(out token_begin, out token_end);
+					}
+					state_stack.Add(State.TEMPLATE_PART);
+					break;
 				}
 			}
 
@@ -813,358 +813,280 @@ namespace Vala.Lang.Parser {
 				type = read_number();
 			} else {
 				switch (current.PeekChar()) {
-					case '{':
-						type = TokenType.OPEN_BRACE;
-						current.Position++;
-						state_stack.Add(State.BRACE);
-						break;
-					case '}':
-						type = TokenType.CLOSE_BRACE;
-						current.Position++;
-						if (state_stack.Count > 0) {
-							state_stack.RemoveAt(state_stack.Count - 1);
-						}
-						break;
-					case '(':
-						type = TokenType.OPEN_PARENS;
-						current.Position++;
-						state_stack.Add(State.PARENS);
-						break;
-					case ')':
-						type = TokenType.CLOSE_PARENS;
-						current.Position++;
-						if (state_stack.Count > 0) {
-							state_stack.RemoveAt(state_stack.Count - 1);
-						}
-						if (in_template()) {
-							type = TokenType.COMMA;
-						}
-						break;
-					case '[':
-						type = TokenType.OPEN_BRACKET;
-						current.Position++;
-						state_stack.Add(State.BRACKET);
-						break;
-					case ']':
-						type = TokenType.CLOSE_BRACKET;
-						current.Position++;
-						if (state_stack.Count > 0) {
-							state_stack.RemoveAt(state_stack.Count - 1);
-						}
-						break;
-					case '.':
-						type = TokenType.DOT;
-						current.Position++;
-						if (current.Position < end - 1) {
-							if (current.PeekChar() == '.' && current.PeekCharAt(1) == '.') {
-								type = TokenType.ELLIPSIS;
-								current.Position += 2;
-							}
-						}
-						break;
-					case ':':
-						type = TokenType.COLON;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == ':') {
-							type = TokenType.DOUBLE_COLON;
-							current.Position++;
-						}
-						break;
-					case ',':
+				case '{':
+					type = TokenType.OPEN_BRACE;
+					current.Position++;
+					state_stack.Add(State.BRACE);
+					break;
+				case '}':
+					type = TokenType.CLOSE_BRACE;
+					current.Position++;
+					if (state_stack.Count > 0) {
+						state_stack.RemoveAt(state_stack.Count - 1);
+					}
+					break;
+				case '(':
+					type = TokenType.OPEN_PARENS;
+					current.Position++;
+					state_stack.Add(State.PARENS);
+					break;
+				case ')':
+					type = TokenType.CLOSE_PARENS;
+					current.Position++;
+					if (state_stack.Count > 0) {
+						state_stack.RemoveAt(state_stack.Count - 1);
+					}
+					if (in_template()) {
 						type = TokenType.COMMA;
+					}
+					break;
+				case '[':
+					type = TokenType.OPEN_BRACKET;
+					current.Position++;
+					state_stack.Add(State.BRACKET);
+					break;
+				case ']':
+					type = TokenType.CLOSE_BRACKET;
+					current.Position++;
+					if (state_stack.Count > 0) {
+						state_stack.RemoveAt(state_stack.Count - 1);
+					}
+					break;
+				case '.':
+					type = TokenType.DOT;
+					current.Position++;
+					if (current.Position < end - 1) {
+						if (current.PeekChar() == '.' && current.PeekCharAt(1) == '.') {
+							type = TokenType.ELLIPSIS;
+							current.Position += 2;
+						}
+					}
+					break;
+				case ':':
+					type = TokenType.COLON;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == ':') {
+						type = TokenType.DOUBLE_COLON;
 						current.Position++;
-						break;
-					case ';':
-						type = TokenType.SEMICOLON;
+					}
+					break;
+				case ',':
+					type = TokenType.COMMA;
+					current.Position++;
+					break;
+				case ';':
+					type = TokenType.SEMICOLON;
+					current.Position++;
+					break;
+				case '#':
+					type = TokenType.HASH;
+					current.Position++;
+					break;
+				case '?':
+					type = TokenType.INTERR;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '?') {
+						type = TokenType.OP_COALESCING;
 						current.Position++;
-						break;
-					case '#':
-						type = TokenType.HASH;
-						current.Position++;
-						break;
-					case '?':
-						type = TokenType.INTERR;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '?') {
-							type = TokenType.OP_COALESCING;
+					}
+					break;
+				case '|':
+					type = TokenType.BITWISE_OR;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.ASSIGN_BITWISE_OR;
 							current.Position++;
-						}
-						break;
-					case '|':
-						type = TokenType.BITWISE_OR;
-						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.ASSIGN_BITWISE_OR;
-									current.Position++;
-									break;
-								case '|':
-									type = TokenType.OP_OR;
-									current.Position++;
-									break;
-							}
-						}
-						break;
-					case '&':
-						type = TokenType.BITWISE_AND;
-						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.ASSIGN_BITWISE_AND;
-									current.Position++;
-									break;
-								case '&':
-									type = TokenType.OP_AND;
-									current.Position++;
-									break;
-							}
-						}
-						break;
-					case '^':
-						type = TokenType.CARRET;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '=') {
-							type = TokenType.ASSIGN_BITWISE_XOR;
+							break;
+						case '|':
+							type = TokenType.OP_OR;
 							current.Position++;
+							break;
 						}
-						break;
-					case '~':
-						type = TokenType.TILDE;
-						current.Position++;
-						break;
-					case '=':
-						type = TokenType.ASSIGN;
-						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.OP_EQ;
-									current.Position++;
-									break;
-								case '>':
-									type = TokenType.LAMBDA;
-									current.Position++;
-									break;
-							}
-						}
-						break;
-					case '<':
-						type = TokenType.OP_LT;
-						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.OP_LE;
-									current.Position++;
-									break;
-								case '<':
-									type = TokenType.OP_SHIFT_LEFT;
-									current.Position++;
-									if (current.Position < end && current.PeekChar() == '=') {
-										type = TokenType.ASSIGN_SHIFT_LEFT;
-										current.Position++;
-									}
-									break;
-							}
-						}
-						break;
-					case '>':
-						type = TokenType.OP_GT;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '=') {
-							type = TokenType.OP_GE;
+					}
+					break;
+				case '&':
+					type = TokenType.BITWISE_AND;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.ASSIGN_BITWISE_AND;
 							current.Position++;
-						}
-						break;
-					case '!':
-						type = TokenType.OP_NEG;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '=') {
-							type = TokenType.OP_NE;
+							break;
+						case '&':
+							type = TokenType.OP_AND;
 							current.Position++;
+							break;
 						}
-						break;
-					case '+':
-						type = TokenType.PLUS;
+					}
+					break;
+				case '^':
+					type = TokenType.CARRET;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '=') {
+						type = TokenType.ASSIGN_BITWISE_XOR;
 						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.ASSIGN_ADD;
-									current.Position++;
-									break;
-								case '+':
-									type = TokenType.OP_INC;
-									current.Position++;
-									break;
-							}
-						}
-						break;
-					case '-':
-						type = TokenType.MINUS;
-						current.Position++;
-						if (current.Position < end) {
-							switch (current.PeekChar()) {
-								case '=':
-									type = TokenType.ASSIGN_SUB;
-									current.Position++;
-									break;
-								case '-':
-									type = TokenType.OP_DEC;
-									current.Position++;
-									break;
-								case '>':
-									type = TokenType.OP_PTR;
-									current.Position++;
-									break;
-							}
-						}
-						break;
-					case '*':
-						type = TokenType.STAR;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '=') {
-							type = TokenType.ASSIGN_MUL;
+					}
+					break;
+				case '~':
+					type = TokenType.TILDE;
+					current.Position++;
+					break;
+				case '=':
+					type = TokenType.ASSIGN;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.OP_EQ;
 							current.Position++;
+							break;
+						case '>':
+							type = TokenType.LAMBDA;
+							current.Position++;
+							break;
 						}
-						break;
-					case '/':
-						switch (previous) {
-							case TokenType.ASSIGN:
-							case TokenType.COMMA:
-							case TokenType.MINUS:
-							case TokenType.OP_AND:
-							case TokenType.OP_COALESCING:
-							case TokenType.OP_EQ:
-							case TokenType.OP_GE:
-							case TokenType.OP_GT:
-							case TokenType.OP_LE:
-							case TokenType.OP_LT:
-							case TokenType.OP_NE:
-							case TokenType.OP_NEG:
-							case TokenType.OP_OR:
-							case TokenType.OPEN_BRACE:
-							case TokenType.OPEN_PARENS:
-							case TokenType.PLUS:
-							case TokenType.RETURN:
-								type = TokenType.OPEN_REGEX_LITERAL;
-								state_stack.Add(State.REGEX_LITERAL);
+					}
+					break;
+				case '<':
+					type = TokenType.OP_LT;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.OP_LE;
+							current.Position++;
+							break;
+						case '<':
+							type = TokenType.OP_SHIFT_LEFT;
+							current.Position++;
+							if (current.Position < end && current.PeekChar() == '=') {
+								type = TokenType.ASSIGN_SHIFT_LEFT;
 								current.Position++;
-								break;
-							default:
-								type = TokenType.DIV;
-								current.Position++;
-								if (current.Position < end && current.PeekChar() == '=') {
-									type = TokenType.ASSIGN_DIV;
-									current.Position++;
-								}
-								break;
-						}
-						break;
-					case '%':
-						type = TokenType.PERCENT;
-						current.Position++;
-						if (current.Position < end && current.PeekChar() == '=') {
-							type = TokenType.ASSIGN_PERCENT;
-							current.Position++;
-						}
-						break;
-					case '\'':
-					case '"':
-						if (begin.PeekChar() == '\'') {
-							type = TokenType.CHARACTER_LITERAL;
-						} else if (current.Position < end - 6 && begin.PeekCharAt(1) == '"' && begin.PeekCharAt(2) == '"') {
-							type = TokenType.VERBATIM_STRING_LITERAL;
-							token_length_in_chars = 6;
-							current.Position += 3;
-							while (current.Position < end - 4) {
-								if (current.PeekChar() == '"' && current.PeekCharAt(1) == '"' && current.PeekCharAt(2) == '"' && current.PeekCharAt(3) != '"') {
-									break;
-								} else if (current.PeekChar() == '\n') {
-									current.Position++;
-									line++;
-									column = 1;
-									token_length_in_chars = 3;
-								} else {
-									try {
-										current.PeekUniChar(out int clen);
-										current.Position += clen;
-										token_length_in_chars += clen;
-									} catch (ArgumentException) {
-										Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
-									}
-								}
-							}
-							if (current.PeekChar() == '"' && current.PeekCharAt(1) == '"' && current.PeekCharAt(2) == '"') {
-								current.Position += 3;
-							} else {
-								Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"\"\"");
 							}
 							break;
-						} else {
-							type = TokenType.STRING_LITERAL;
 						}
-						token_length_in_chars = 2;
+					}
+					break;
+				case '>':
+					type = TokenType.OP_GT;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '=') {
+						type = TokenType.OP_GE;
 						current.Position++;
-						while (current.Position < end && current.PeekChar() != begin.PeekChar()) {
-							if (current.PeekChar() == '\\') {
-								current.Position++;
-								token_length_in_chars++;
-								if (current.Position >= end) {
-									break;
-								}
-
-								int digit_length;
-								switch (current.PeekChar()) {
-									case '\'':
-									case '"':
-									case '\\':
-									case '0':
-									case 'b':
-									case 'f':
-									case 'n':
-									case 'r':
-									case 't':
-									case 'v':
-									case '$':
-										current.Position++;
-										token_length_in_chars++;
-										break;
-									case 'u':
-										// u escape character has four hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length != 4) {
-											Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
-										}
-										break;
-									case 'x':
-										// hexadecimal escape character requires two hex digits
-										current.Position++;
-										token_length_in_chars++;
-										for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
-											current.Position++;
-											token_length_in_chars++;
-										}
-										if (digit_length < 1) {
-											Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
-										}
-										break;
-									default:
-										Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
-										break;
-								}
+					}
+					break;
+				case '!':
+					type = TokenType.OP_NEG;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '=') {
+						type = TokenType.OP_NE;
+						current.Position++;
+					}
+					break;
+				case '+':
+					type = TokenType.PLUS;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.ASSIGN_ADD;
+							current.Position++;
+							break;
+						case '+':
+							type = TokenType.OP_INC;
+							current.Position++;
+							break;
+						}
+					}
+					break;
+				case '-':
+					type = TokenType.MINUS;
+					current.Position++;
+					if (current.Position < end) {
+						switch (current.PeekChar()) {
+						case '=':
+							type = TokenType.ASSIGN_SUB;
+							current.Position++;
+							break;
+						case '-':
+							type = TokenType.OP_DEC;
+							current.Position++;
+							break;
+						case '>':
+							type = TokenType.OP_PTR;
+							current.Position++;
+							break;
+						}
+					}
+					break;
+				case '*':
+					type = TokenType.STAR;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '=') {
+						type = TokenType.ASSIGN_MUL;
+						current.Position++;
+					}
+					break;
+				case '/':
+					switch (previous) {
+					case TokenType.ASSIGN:
+					case TokenType.COMMA:
+					case TokenType.MINUS:
+					case TokenType.OP_AND:
+					case TokenType.OP_COALESCING:
+					case TokenType.OP_EQ:
+					case TokenType.OP_GE:
+					case TokenType.OP_GT:
+					case TokenType.OP_LE:
+					case TokenType.OP_LT:
+					case TokenType.OP_NE:
+					case TokenType.OP_NEG:
+					case TokenType.OP_OR:
+					case TokenType.OPEN_BRACE:
+					case TokenType.OPEN_PARENS:
+					case TokenType.PLUS:
+					case TokenType.RETURN:
+						type = TokenType.OPEN_REGEX_LITERAL;
+						state_stack.Add(State.REGEX_LITERAL);
+						current.Position++;
+						break;
+					default:
+						type = TokenType.DIV;
+						current.Position++;
+						if (current.Position < end && current.PeekChar() == '=') {
+							type = TokenType.ASSIGN_DIV;
+							current.Position++;
+						}
+						break;
+					}
+					break;
+				case '%':
+					type = TokenType.PERCENT;
+					current.Position++;
+					if (current.Position < end && current.PeekChar() == '=') {
+						type = TokenType.ASSIGN_PERCENT;
+						current.Position++;
+					}
+					break;
+				case '\'':
+				case '"':
+					if (begin.PeekChar() == '\'') {
+						type = TokenType.CHARACTER_LITERAL;
+					} else if (current.Position < end - 6 && begin.PeekCharAt(1) == '"' && begin.PeekCharAt(2) == '"') {
+						type = TokenType.VERBATIM_STRING_LITERAL;
+						token_length_in_chars = 6;
+						current.Position += 3;
+						while (current.Position < end - 4) {
+							if (current.PeekChar() == '"' && current.PeekCharAt(1) == '"' && current.PeekCharAt(2) == '"' && current.PeekCharAt(3) != '"') {
+								break;
 							} else if (current.PeekChar() == '\n') {
 								current.Position++;
 								line++;
 								column = 1;
-								token_length_in_chars = 1;
+								token_length_in_chars = 3;
 							} else {
 								try {
 									current.PeekUniChar(out int clen);
@@ -1174,29 +1096,107 @@ namespace Vala.Lang.Parser {
 									Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
 								}
 							}
-							if (current.Position < end && begin.PeekChar() == '\'' && current.PeekChar() != '\'') {
-								// multiple characters in single character literal
-								Report.error(get_source_reference(token_length_in_chars), "invalid character literal");
-							}
 						}
-						if (current.Position < end) {
-							current.Position++;
+						if (current.PeekChar() == '"' && current.PeekCharAt(1) == '"' && current.PeekCharAt(2) == '"') {
+							current.Position += 3;
 						} else {
-							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected %c".printf(begin.PeekChar()));
+							Report.error(get_source_reference(token_length_in_chars), "syntax error, expected \"\"\"");
 						}
 						break;
-					default:
-						try {
-							current.PeekUniChar(out int clen);
-							current.Position += clen;
-							token_length_in_chars += clen;
-						} catch (ArgumentException) {
-							Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+					} else {
+						type = TokenType.STRING_LITERAL;
+					}
+					token_length_in_chars = 2;
+					current.Position++;
+					while (current.Position < end && current.PeekChar() != begin.PeekChar()) {
+						if (current.PeekChar() == '\\') {
+							current.Position++;
+							token_length_in_chars++;
+							if (current.Position >= end) {
+								break;
+							}
+
+							int digit_length;
+							switch (current.PeekChar()) {
+							case '\'':
+							case '"':
+							case '\\':
+							case '0':
+							case 'b':
+							case 'f':
+							case 'n':
+							case 'r':
+							case 't':
+							case 'v':
+							case '$':
+								current.Position++;
+								token_length_in_chars++;
+								break;
+							case 'u':
+								// u escape character has four hex digits
+								current.Position++;
+								token_length_in_chars++;
+								for (digit_length = 0; digit_length < 4 && current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
+								}
+								if (digit_length != 4) {
+									Report.error(get_source_reference(token_length_in_chars), "\\u requires four hex digits");
+								}
+								break;
+							case 'x':
+								// hexadecimal escape character requires two hex digits
+								current.Position++;
+								token_length_in_chars++;
+								for (digit_length = 0; current.Position < end && GChar.IsXDigit(current.PeekChar()); digit_length++) {
+									current.Position++;
+									token_length_in_chars++;
+								}
+								if (digit_length < 1) {
+									Report.error(get_source_reference(token_length_in_chars), "\\x requires at least one hex digit");
+								}
+								break;
+							default:
+								Report.error(get_source_reference(token_length_in_chars), "invalid escape sequence");
+								break;
+							}
+						} else if (current.PeekChar() == '\n') {
+							current.Position++;
+							line++;
+							column = 1;
+							token_length_in_chars = 1;
+						} else {
+							try {
+								current.PeekUniChar(out int clen);
+								current.Position += clen;
+								token_length_in_chars += clen;
+							} catch (ArgumentException) {
+								Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+							}
 						}
+						if (current.Position < end && begin.PeekChar() == '\'' && current.PeekChar() != '\'') {
+							// multiple characters in single character literal
+							Report.error(get_source_reference(token_length_in_chars), "invalid character literal");
+						}
+					}
+					if (current.Position < end) {
+						current.Position++;
+					} else {
+						Report.error(get_source_reference(token_length_in_chars), "syntax error, expected %c".printf(begin.PeekChar()));
+					}
+					break;
+				default:
+					try {
+						current.PeekUniChar(out int clen);
+						current.Position += clen;
+						token_length_in_chars += clen;
+					} catch (ArgumentException) {
+						Report.error(get_source_reference(token_length_in_chars), "invalid UTF-8 character");
+					}
 
 
-						column++;
-						return read_token(out token_begin, out token_end);
+					column++;
+					return read_token(out token_begin, out token_end);
 				}
 			}
 
@@ -1614,11 +1614,11 @@ namespace Vala.Lang.Parser {
 			}
 		}
 
-		/**
-		 * Clears and returns the content of the comment stack.
-		 *
-		 * @return saved comment
-		 */
+		/// <summary>
+		/// Clears and returns the content of the comment stack.
+		/// 
+		/// <returns>saved comment</returns>
+		/// </summary>
 		public Comment pop_comment() {
 			if (_comment == null) {
 				return null;

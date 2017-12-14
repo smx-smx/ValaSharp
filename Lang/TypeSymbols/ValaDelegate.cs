@@ -11,9 +11,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.TypeSymbols {
 	public class ValaDelegate : TypeSymbol, Callable {
-		/**
-	 * The return type of this callback.
-	 */
+		/// <summary>
+		/// The return type of this callback.
+		/// </summary>
 		public DataType return_type {
 			get { return _return_type; }
 			set {
@@ -22,11 +22,11 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Specifies whether callback supports calling instance methods.
-		 * The reference to the object instance will be appended to the end of
-		 * the argument list in the generated C code.
-		 */
+		/// <summary>
+		/// Specifies whether callback supports calling instance methods.
+		/// The reference to the object instance will be appended to the end of
+		/// the argument list in the generated C code.
+		/// </summary>
 		public bool has_target {
 			get {
 				if (_has_target == null) {
@@ -53,24 +53,24 @@ namespace Vala.Lang.TypeSymbols {
 		private DataType _return_type;
 		private bool? _has_target;
 
-		/**
-		 * Creates a new delegate.
-		 *
-		 * @param name              delegate type name
-		 * @param return_type       return type
-		 * @param source_reference  reference to source code
-		 * @return                  newly created delegate
-		 */
+		/// <summary>
+		/// Creates a new delegate.
+		/// 
+		/// <param name="name">delegate type name</param>
+		/// <param name="return_type">return type</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created delegate</returns>
+		/// </summary>
 		public ValaDelegate(string name, DataType return_type, SourceReference source_reference = null, Comment comment = null)
 			: base(name, source_reference, comment) {
 			this.return_type = return_type;
 		}
 
-		/**
-		 * Appends the specified parameter to the list of type parameters.
-		 *
-		 * @param p a type parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of type parameters.
+		/// 
+		/// <param name="p">a type parameter</param>
+		/// </summary>
 		public void add_type_parameter(TypeParameter p) {
 			type_parameters.Add(p);
 			scope.add(p.name, p);
@@ -91,32 +91,32 @@ namespace Vala.Lang.TypeSymbols {
 			return -1;
 		}
 
-		/**
-		 * Appends paramater to this callback function.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends paramater to this callback function.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		public void add_parameter(Parameter param) {
 			parameters.Add(param);
 			scope.add(param.name, param);
 		}
 
-		/**
-		 * Return copy of parameter list.
-		 *
-		 * @return parameter list
-		 */
+		/// <summary>
+		/// Return copy of parameter list.
+		/// 
+		/// <returns>parameter list</returns>
+		/// </summary>
 		public List<Parameter> get_parameters() {
 			return parameters;
 		}
 
-		/**
-		 * Checks whether the arguments and return type of the specified method
-		 * matches this callback.
-		 *
-		 * @param m a method
-		 * @return  true if the specified method is compatible to this callback
-		 */
+		/// <summary>
+		/// Checks whether the arguments and return type of the specified method
+		/// matches this callback.
+		/// 
+		/// <param name="m">a method</param>
+		/// <returns>true if the specified method is compatible to this callback</returns>
+		/// </summary>
 		public bool matches_method(Method m, DataType dt) {
 			if (m.coroutine && !(parent_symbol is Signal)) {
 				// async delegates are not yet supported

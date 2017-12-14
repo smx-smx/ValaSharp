@@ -18,21 +18,21 @@ namespace Vala.Lang.Symbols {
 		public abstract List<Signal> get_signals();
 		public abstract List<Property> get_properties();
 
-		/**
-		 * Appends the specified parameter to the list of type parameters.
-		 *
-		 * @param p a type parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of type parameters.
+		/// 
+		/// <param name="p">a type parameter</param>
+		/// </summary>
 		public void add_type_parameter(TypeParameter p) {
 			type_parameters.Add(p);
 			scope.add(p.name, p);
 		}
 
-		/**
-		 * Returns a copy of the type parameter list.
-		 *
-		 * @return list of type parameters
-		 */
+		/// <summary>
+		/// Returns a copy of the type parameter list.
+		/// 
+		/// <returns>list of type parameters</returns>
+		/// </summary>
 		public List<TypeParameter> get_type_parameters() {
 			return type_parameters;
 		}
@@ -58,17 +58,17 @@ namespace Vala.Lang.Symbols {
 			return result;
 		}
 
-		/**
-		 * Adds the specified method as a hidden member to this class,
-		 * primarily used for default signal handlers.
-		 *
-		 * The hidden methods are not part of the `methods` collection.
-		 *
-		 * There may also be other use cases, eg, convert array.resize() to
-		 * this type of method?
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a hidden member to this class,
+		/// primarily used for default signal handlers.
+		/// 
+		/// The hidden methods are not part of the `methods` collection.
+		/// 
+		/// There may also be other use cases, eg, convert array.resize() to
+		/// this type of method?
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public void add_hidden_method(Method m) {
 			if (m.binding == MemberBinding.INSTANCE) {
 				if (m.this_parameter != null) {

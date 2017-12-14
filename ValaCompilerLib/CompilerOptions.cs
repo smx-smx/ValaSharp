@@ -84,11 +84,11 @@ namespace ValaCompilerLib {
 
 		private bool option_parse_color(string option_name, string val, IntPtr data) {
 			switch (val) {
-				case "auto": colored_output = Report.Colored.AUTO; break;
-				case "never": colored_output = Report.Colored.NEVER; break;
-				case null:
-				case "always": colored_output = Report.Colored.ALWAYS; break;
-				default: throw new Exception($"Invalid --color argument '{val}'");
+			case "auto": colored_output = Report.Colored.AUTO; break;
+			case "never": colored_output = Report.Colored.NEVER; break;
+			case null:
+			case "always": colored_output = Report.Colored.ALWAYS; break;
+			default: throw new Exception($"Invalid --color argument '{val}'");
 			}
 			return true;
 		}

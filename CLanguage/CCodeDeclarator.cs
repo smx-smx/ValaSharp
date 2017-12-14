@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents a variable or function pointer declarator in the C code.
- */
+	/// <summary>
+	/// Represents a variable or function pointer declarator in the C code.
+	/// </summary>
 	public abstract class CCodeDeclarator : CCodeNode {
-		/**
-		 * Writes initialization statements for this declarator with the
-		 * specified C code writer if necessary.
-		 *
-		 * @param writer a C code writer
-		 */
+		/// <summary>
+		/// Writes initialization statements for this declarator with the
+		/// specified C code writer if necessary.
+		/// 
+		/// <param name="writer">a C code writer</param>
+		/// </summary>
 		public virtual void write_initialization(CCodeWriter writer) {
 		}
 	}

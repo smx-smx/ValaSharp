@@ -8,17 +8,17 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents an endless loop.
-	 */
+	/// <summary>
+	/// Represents an endless loop.
+	/// </summary>
 	public class Loop : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the loop body.
-		 */
+		/// <summary>
+		/// Specifies the loop body.
+		/// </summary>
 		public Block body {
 			get {
 				return _body;
@@ -31,13 +31,13 @@ namespace Vala.Lang.Statements {
 
 		private Block _body;
 
-		/**
-		 * Creates a new loop.
-		 *
-		 * @param body             loop body
-		 * @param source_reference reference to source code
-		 * @return                 newly created while statement
-		 */
+		/// <summary>
+		/// Creates a new loop.
+		/// 
+		/// <param name="body">loop body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created while statement</returns>
+		/// </summary>
 		public Loop(Block body, SourceReference source_reference = null) {
 			this.body = body;
 			this.source_reference = source_reference;

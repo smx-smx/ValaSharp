@@ -9,13 +9,13 @@ using Vala.Lang.Parser;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents a type check (`is`) expression in the source code.
- */
+	/// <summary>
+	/// Represents a type check (`is`) expression in the source code.
+	/// </summary>
 	public class TypeCheck : Expression {
-		/**
-		 * The expression to be checked.
-		 */
+		/// <summary>
+		/// The expression to be checked.
+		/// </summary>
 		public Expression expression {
 			get { return _expression; }
 			set {
@@ -24,9 +24,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The type to be matched against.
-		 */
+		/// <summary>
+		/// The type to be matched against.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -38,14 +38,14 @@ namespace Vala.Lang.Expressions {
 		Expression _expression;
 		private DataType _data_type;
 
-		/**
-		 * Creates a new type check expression.
-		 *
-		 * @param expr   an expression
-		 * @param type   a data type
-		 * @param source reference to source code
-		 * @return       newly created type check expression
-		 */
+		/// <summary>
+		/// Creates a new type check expression.
+		/// 
+		/// <param name="expr">an expression</param>
+		/// <param name="type">a data type</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created type check expression</returns>
+		/// </summary>
 		public TypeCheck(Expression expr, DataType type, SourceReference source) {
 			expression = expr;
 			type_reference = type;

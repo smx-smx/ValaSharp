@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
 namespace CLanguage.Expressions {
-	/**
-	 * Represents an invalid expression.
-	 */
+	/// <summary>
+	/// Represents an invalid expression.
+	/// </summary>
 	public class CCodeInvalidExpression : CCodeExpression {
 		public CCodeInvalidExpression() {
 		}

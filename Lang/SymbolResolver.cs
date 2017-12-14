@@ -12,19 +12,19 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang {
-	/**
-	 * Code visitor resolving symbol names.
-	 */
+	/// <summary>
+	/// Code visitor resolving symbol names.
+	/// </summary>
 	public class SymbolResolver : CodeVisitor {
 		CodeContext context;
 		Symbol root_symbol;
 		Scope current_scope;
 
-		/**
-		 * Resolve symbol names in the specified code context.
-		 *
-		 * @param context a code context
-		 */
+		/// <summary>
+		/// Resolve symbol names in the specified code context.
+		/// 
+		/// <param name="context">a code context</param>
+		/// </summary>
 		public void resolve(CodeContext context) {
 			this.context = context;
 			root_symbol = context.root;

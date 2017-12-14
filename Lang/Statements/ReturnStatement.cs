@@ -12,17 +12,17 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents a return statement in the source code.
-	 */
+	/// <summary>
+	/// Represents a return statement in the source code.
+	/// </summary>
 	public class ReturnStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * The optional expression to return.
-		 */
+		/// <summary>
+		/// The optional expression to return.
+		/// </summary>
 		public Expression return_expression {
 			get { return _return_expression; }
 			set {
@@ -35,13 +35,13 @@ namespace Vala.Lang.Statements {
 
 		private Expression _return_expression;
 
-		/**
-		 * Creates a new return statement.
-		 *
-		 * @param return_expression the return expression
-		 * @param source_reference  reference to source code
-		 * @return                  newly created return statement
-		 */
+		/// <summary>
+		/// Creates a new return statement.
+		/// 
+		/// <param name="return_expression">the return expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created return statement</returns>
+		/// </summary>
 		public ReturnStatement(Expression return_expression = null, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.return_expression = return_expression;

@@ -11,9 +11,9 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents an array slice expression e.g "a[1:5]".
- */
+	/// <summary>
+	/// Represents an array slice expression e.g "a[1:5]".
+	/// </summary>
 	public class SliceExpression : Expression {
 		public Expression container {
 			get {

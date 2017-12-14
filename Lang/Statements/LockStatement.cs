@@ -9,26 +9,26 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a lock statement e.g. {{{ lock (a); }}} or {{{ lock (a) { f(a); } }}}.
- *
- * If the statement is empty, the mutex remains locked until a corresponding UnlockStatement
- * occurs. Otherwise it's translated into a try/finally statement which unlocks the mutex
- * after the block is finished.
- */
+	/// <summary>
+	/// Represents a lock statement e.g. {{{ lock (a); }}} or {{{ lock (a) { f(a); } }}}.
+	/// 
+	/// If the statement is empty, the mutex remains locked until a corresponding UnlockStatement
+	/// occurs. Otherwise it's translated into a try/finally statement which unlocks the mutex
+	/// after the block is finished.
+	/// </summary>
 	public class LockStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Expression representing the resource to be locked.
-		 */
+		/// <summary>
+		/// Expression representing the resource to be locked.
+		/// </summary>
 		public Expression resource { get; set; }
 
-		/**
-		 * The statement during its execution the resource is locked.
-		 */
+		/// <summary>
+		/// The statement during its execution the resource is locked.
+		/// </summary>
 		public Block body { get; set; }
 
 		public LockStatement(Expression resource, Block body, SourceReference source_reference = null) {

@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Vala.Lang {
-	/**
-	 * Represents an enum in the C code.
-	 */
+	/// <summary>
+	/// Represents an enum in the C code.
+	/// </summary>
 	public class CCodeEnum : CCodeNode {
-		/**
-		 * The name of this enum.
-		 */
+		/// <summary>
+		/// The name of this enum.
+		/// </summary>
 		public string name { get; set; }
 
 		private List<CCodeEnumValue> values = new List<CCodeEnumValue>();
@@ -21,11 +21,11 @@ namespace Vala.Lang {
 			this.name = name;
 		}
 
-		/**
-		 * Adds the specified value to this enum.
-		 *
-		 * @param value optional numerical value
-		 */
+		/// <summary>
+		/// Adds the specified value to this enum.
+		/// 
+		/// <param name="value">optional numerical value</param>
+		/// </summary>
 		public void add_value(CCodeEnumValue value) {
 			values.Add(value);
 		}

@@ -7,29 +7,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a variable declarator in the C code.
-	 */
+	/// <summary>
+	/// Represents a variable declarator in the C code.
+	/// </summary>
 	public class CCodeVariableDeclarator : CCodeDeclarator {
-		/**
-		 * The variable name.
-		 */
+		/// <summary>
+		/// The variable name.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * The optional initializer expression.
-		 */
+		/// <summary>
+		/// The optional initializer expression.
+		/// </summary>
 		public CCodeExpression initializer { get; set; }
 
-		/**
-		 * The optional declarator suffix.
-		 */
+		/// <summary>
+		/// The optional declarator suffix.
+		/// </summary>
 		public CCodeDeclaratorSuffix declarator_suffix { get; set; }
 
-		/**
-		 * Initializer only used to zero memory, safe to initialize as part
-		 * of declaration at beginning of block instead of separate assignment.
-		 */
+		/// <summary>
+		/// Initializer only used to zero memory, safe to initialize as part
+		/// of declaration at beginning of block instead of separate assignment.
+		/// </summary>
 		public bool init0 { get; set; }
 
 		public CCodeVariableDeclarator(string name, CCodeExpression initializer = null, CCodeDeclaratorSuffix declarator_suffix = null) {

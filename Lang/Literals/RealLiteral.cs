@@ -10,22 +10,22 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Literals {
-	/**
-	 * Represents a real literal in the source code.
-	 */
+	/// <summary>
+	/// Represents a real literal in the source code.
+	/// </summary>
 	public class RealLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public string value { get; set; }
 
-		/**
-		 * Creates a new real literal.
-		 *
-		 * @param r      literal value
-		 * @param source reference to source code
-		 * @return       newly created real literal
-		 */
+		/// <summary>
+		/// Creates a new real literal.
+		/// 
+		/// <param name="r">literal value</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created real literal</returns>
+		/// </summary>
 		public RealLiteral(string r, SourceReference source = null) {
 			value = r;
 			source_reference = source;
@@ -37,11 +37,11 @@ namespace Vala.Lang.Literals {
 			visitor.visit_expression(this);
 		}
 
-		/**
-		 * Returns the type name of the value this literal represents.
-		 *
-		 * @return the name of literal type
-		 */
+		/// <summary>
+		/// Returns the type name of the value this literal represents.
+		/// 
+		/// <returns>the name of literal type</returns>
+		/// </summary>
 		public string get_type_name() {
 			if (value.EndsWith("f") || value.EndsWith("F")) {
 				return "float";

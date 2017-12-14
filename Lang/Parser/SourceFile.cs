@@ -11,9 +11,9 @@ using Utils;
 
 namespace Vala.Lang.Parser {
 	public class SourceFile {
-		/**
-		 * The name of this source file.
-		 */
+		/// <summary>
+		/// The name of this source file.
+		/// </summary>
 		public string filename { get; set; }
 
 		public string Relative_filename {
@@ -44,9 +44,9 @@ namespace Vala.Lang.Parser {
 		private string _installed_version = null;
 		private bool _version_requested = false;
 
-		/**
-		 * The installed package version or null
-		 */
+		/// <summary>
+		/// The installed package version or null
+		/// </summary>
 		public string installed_version {
 			get {
 				if (_version_requested) {
@@ -97,33 +97,33 @@ namespace Vala.Lang.Parser {
 		}
 
 
-		/**
-		 * Specifies whether this file is a VAPI package file.
-		 */
+		/// <summary>
+		/// Specifies whether this file is a VAPI package file.
+		/// </summary>
 		public SourceFileType file_type { get; set; }
 
-		/**
-		 * Specifies whether this file came from the command line directly.
-		 */
+		/// <summary>
+		/// Specifies whether this file came from the command line directly.
+		/// </summary>
 		public bool from_commandline { get; set; }
 
-		/**
-		 *  GIR Namespace for this source file, if it's a VAPI package
-		 */
+		/// <summary>
+		/// GIR Namespace for this source file, if it's a VAPI package
+		/// </summary>
 
 		public string gir_namespace { get; set; }
 
-		/**
-		 *  GIR Namespace version for this source file, if it's a VAPI package
-		 */
+		/// <summary>
+		/// GIR Namespace version for this source file, if it's a VAPI package
+		/// </summary>
 
 		public string gir_version { get; set; }
 
 		private WeakReference<CodeContext> context_weak = new WeakReference<CodeContext>(null);
 
-		/**
-		 * The context this source file belongs to.
-		 */
+		/// <summary>
+		/// The context this source file belongs to.
+		/// </summary>
 		public CodeContext context {
 			get {
 				return context_weak.GetTarget();
@@ -141,15 +141,15 @@ namespace Vala.Lang.Parser {
 			}
 		}
 
-		/**
-		 * If the file has been used (ie: if anything in the file has
-		 * been emitted into C code as a definition or declaration).
-		 */
+		/// <summary>
+		/// If the file has been used (ie: if anything in the file has
+		/// been emitted into C code as a definition or declaration).
+		/// </summary>
 		public bool used { get; set; }
 
-		/**
-		 * Whether this source-file was explicitly passed on the commandline.
-		 */
+		/// <summary>
+		/// Whether this source-file was explicitly passed on the commandline.
+		/// </summary>
 		public bool is_explicit { get; set; }
 
 		private List<Comment> comments = new List<Comment>();
@@ -170,12 +170,12 @@ namespace Vala.Lang.Parser {
 		private string _content = null;
 
 
-		/**
-		 * Creates a new source file.
-		 *
-		 * @param filename source file name
-		 * @return         newly created source file
-		 */
+		/// <summary>
+		/// Creates a new source file.
+		/// 
+		/// <param name="filename">source file name</param>
+		/// <returns>newly created source file</returns>
+		/// </summary>
 		public SourceFile(CodeContext context, SourceFileType type, string filename, string content = null, bool cmdline = false) {
 			this.context = context;
 			this.file_type = type;
@@ -184,27 +184,27 @@ namespace Vala.Lang.Parser {
 			this.from_commandline = cmdline;
 		}
 
-		/**
-		 * Adds a header comment to this source file.
-		 */
+		/// <summary>
+		/// Adds a header comment to this source file.
+		/// </summary>
 		public void add_comment(Comment comment) {
 			comments.Add(comment);
 		}
 
-		/**
-		 * Returns a copy of the list of header comments.
-		 *
-		 * @return list of comments
-		 */
+		/// <summary>
+		/// Returns a copy of the list of header comments.
+		/// 
+		/// <returns>list of comments</returns>
+		/// </summary>
 		public List<Comment> get_comments() {
 			return comments;
 		}
 
-		/**
-		 * Adds a new using directive with the specified namespace.
-		 *
-		 * @param ns reference to namespace
-		 */
+		/// <summary>
+		/// Adds a new using directive with the specified namespace.
+		/// 
+		/// <param name="ns">reference to namespace</param>
+		/// </summary>
 		public void add_using_directive(UsingDirective ns) {
 			// do not modify current_using_directives, it should be considered immutable
 			// for correct symbol resolving
@@ -216,11 +216,11 @@ namespace Vala.Lang.Parser {
 			current_using_directives.Add(ns);
 		}
 
-		/**
-		 * Adds the specified code node to this source file.
-		 *
-		 * @param node a code node
-		 */
+		/// <summary>
+		/// Adds the specified code node to this source file.
+		/// 
+		/// <param name="node">a code node</param>
+		/// </summary>
 		public void add_node(CodeNode node) {
 			nodes.Add(node);
 		}
@@ -229,11 +229,11 @@ namespace Vala.Lang.Parser {
 			nodes.Remove(node);
 		}
 
-		/**
-		 * Returns a copy of the list of code nodes.
-		 *
-		 * @return code node list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of code nodes.
+		/// 
+		/// <returns>code node list</returns>
+		/// </summary>
 		public List<CodeNode> get_nodes() {
 			return nodes;
 		}
@@ -285,11 +285,11 @@ namespace Vala.Lang.Parser {
 			}
 		}
 
-		/**
-		 * Returns the filename to use when generating C source files.
-		 *
-		 * @return generated C source filename
-		 */
+		/// <summary>
+		/// Returns the filename to use when generating C source files.
+		/// 
+		/// <returns>generated C source filename</returns>
+		/// </summary>
 		public string get_csource_filename() {
 			if (csource_filename == null) {
 				if (context.run_output) {
@@ -304,12 +304,12 @@ namespace Vala.Lang.Parser {
 			return csource_filename;
 		}
 
-		/**
-		 * Returns the filename to use when including the generated C header
-		 * file.
-		 *
-		 * @return C header filename to include
-		 */
+		/// <summary>
+		/// Returns the filename to use when including the generated C header
+		/// file.
+		/// 
+		/// <returns>C header filename to include</returns>
+		/// </summary>
 		public string get_cinclude_filename() {
 			if (cinclude_filename == null) {
 				if (context.header_filename != null) {
@@ -324,12 +324,12 @@ namespace Vala.Lang.Parser {
 			return cinclude_filename;
 		}
 
-		/**
-		 * Returns the requested line from this file, loading it if needed.
-		 *
-		 * @param lineno 1-based line number
-		 * @return       the specified source line
-		 */
+		/// <summary>
+		/// Returns the requested line from this file, loading it if needed.
+		/// 
+		/// <param name="lineno">1-based line number</param>
+		/// <returns>the specified source line</returns>
+		/// </summary>
 		public string get_source_line(int lineno) {
 			if (source_array == null) {
 				if (content != null) {
@@ -344,9 +344,9 @@ namespace Vala.Lang.Parser {
 			return source_array[lineno - 1];
 		}
 
-		/**
-		 * Parses the input file into ::source_array.
-		 */
+		/// <summary>
+		/// Parses the input file into ::source_array.
+		/// </summary>
 		private void read_source_file() {
 			string cont = mapped_file.GetContents();
 			read_source_lines(cont);

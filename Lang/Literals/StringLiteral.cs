@@ -9,34 +9,34 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Literals {
-	/**
-	 * Represents a string literal in the source code.
-	 */
+	/// <summary>
+	/// Represents a string literal in the source code.
+	/// </summary>
 	public class StringLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public string value { get; set; }
 
 		public bool translate { get; set; }
 
-		/**
-		 * Creates a new string literal.
-		 *
-		 * @param value             the literal value
-		 * @param source_reference  reference to source code
-		 * @return                  newly created string literal
-		 */
+		/// <summary>
+		/// Creates a new string literal.
+		/// 
+		/// <param name="value">the literal value</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created string literal</returns>
+		/// </summary>
 		public StringLiteral(string value, SourceReference source_reference = null) {
 			this.value = value;
 			this.source_reference = source_reference;
 		}
 
-		/**
-		 * Evaluates the literal string value.
-		 *
-		 * @return the unescaped string
-		 */
+		/// <summary>
+		/// Evaluates the literal string value.
+		/// 
+		/// <returns>the unescaped string</returns>
+		/// </summary>
 		public string eval() {
 			if (value == null) {
 				return null;

@@ -9,17 +9,17 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents an unlock statement e.g. {{{ unlock (a); }}}.
- */
+	/// <summary>
+	/// Represents an unlock statement e.g. {{{ unlock (a); }}}.
+	/// </summary>
 	public class UnlockStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Expression representing the resource to be unlocked.
-		 */
+		/// <summary>
+		/// Expression representing the resource to be unlocked.
+		/// </summary>
 		public Expression resource { get; set; }
 
 		public UnlockStatement(Expression resource, SourceReference source_reference = null) {

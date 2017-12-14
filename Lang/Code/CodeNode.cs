@@ -21,9 +21,9 @@ namespace Vala.Lang.CodeNodes {
 
 		private WeakReference<CodeNode> parent_node_weak = new WeakReference<CodeNode>(null);
 
-		/**
-	 * Parent of this code node.
-	 */
+		/// <summary>
+		/// Parent of this code node.
+		/// </summary>
 		public CodeNode parent_node {
 			get {
 				return parent_node_weak.GetTarget();
@@ -33,17 +33,17 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * References the location in the source file where this code node has
-		 * been written.
-		 */
+		/// <summary>
+		/// References the location in the source file where this code node has
+		/// been written.
+		/// </summary>
 		public SourceReference source_reference { get; set; }
 
 		public bool unreachable { get; set; }
 
-		/**
-		 * Contains all attributes that have been specified for this code node.
-		 */
+		/// <summary>
+		/// Contains all attributes that have been specified for this code node.
+		/// </summary>
 		public List<ValaAttribute> attributes = new List<ValaAttribute>();
 
 		public string type_name {
@@ -52,14 +52,14 @@ namespace Vala.Lang.CodeNodes {
 
 		public bool is_checked { get; set; }
 
-		/**
-		 * Specifies whether a fatal error has been detected in this code node.
-		 */
+		/// <summary>
+		/// Specifies whether a fatal error has been detected in this code node.
+		/// </summary>
 		public bool error { get; set; }
 
-		/**
-		 * Specifies that this node or a child node may throw an exception.
-		 */
+		/// <summary>
+		/// Specifies that this node or a child node may throw an exception.
+		/// </summary>
 		public bool tree_can_fail {
 			get { return _error_types != null && _error_types.Count > 0; }
 		}
@@ -71,9 +71,9 @@ namespace Vala.Lang.CodeNodes {
 		static int last_temp_nr = 0;
 		static int next_attribute_cache_index = 0;
 
-		/**
-		 * Specifies the exceptions that can be thrown by this node or a child node
-		 */
+		/// <summary>
+		/// Specifies the exceptions that can be thrown by this node or a child node
+		/// </summary>
 		public List<DataType> get_error_types() {
 			if (_error_types != null) {
 				return _error_types;
@@ -84,10 +84,10 @@ namespace Vala.Lang.CodeNodes {
 			return _empty_type_list;
 		}
 
-		/**
-		 * Adds an error type to the exceptions that can be thrown by this node
-		 * or a child node 
-		 */
+		/// <summary>
+		/// Adds an error type to the exceptions that can be thrown by this node
+		/// or a child node
+		/// </summary>
 		public void add_error_type(DataType error_type) {
 			if (_error_types == null) {
 				_error_types = new List<DataType>();
@@ -96,29 +96,29 @@ namespace Vala.Lang.CodeNodes {
 			error_type.parent_node = this;
 		}
 
-		/**
-		 * Adds a collection of error types to the exceptions that can be thrown by this node
-		 * or a child node 
-		 */
+		/// <summary>
+		/// Adds a collection of error types to the exceptions that can be thrown by this node
+		/// or a child node
+		/// </summary>
 		public void add_error_types(List<DataType> error_types) {
 			foreach (DataType error_type in error_types) {
 				add_error_type(error_type);
 			}
 		}
 
-		/**
-		 * Visits this code node with the specified CodeVisitor.
-		 *
-		 * @param visitor the visitor to be called while traversing
-		 */
+		/// <summary>
+		/// Visits this code node with the specified CodeVisitor.
+		/// 
+		/// <param name="visitor">the visitor to be called while traversing</param>
+		/// </summary>
 		public virtual void accept(CodeVisitor visitor) {
 		}
 
-		/**
-		 * Visits all children of this code node with the specified CodeVisitor.
-		 *
-		 * @param visitor the visitor to be called while traversing
-		 */
+		/// <summary>
+		/// Visits all children of this code node with the specified CodeVisitor.
+		/// 
+		/// <param name="visitor">the visitor to be called while traversing</param>
+		/// </summary>
 		public virtual void accept_children(CodeVisitor visitor) {
 		}
 
@@ -135,12 +135,12 @@ namespace Vala.Lang.CodeNodes {
 		public virtual void replace_expression(Expression old_node, Expression new_node) {
 		}
 
-		/**
-		 * Returns the specified attribute.
-		 *
-		 * @param name attribute name
-		 * @return     attribute
-		 */
+		/// <summary>
+		/// Returns the specified attribute.
+		/// 
+		/// <param name="name">attribute name</param>
+		/// <returns>attribute</returns>
+		/// </summary>
 		public ValaAttribute get_attribute(string name) {
 			// FIXME: use hash table
 			foreach (ValaAttribute a in attributes) {
@@ -152,13 +152,13 @@ namespace Vala.Lang.CodeNodes {
 			return null;
 		}
 
-		/**
-		 * Returns true if the specified attribute argument is set.
-		 *
-		 * @param  attribute attribute name
-		 * @param  argument  argument name
-		 * @return           true if the attribute has the given argument
-		 */
+		/// <summary>
+		/// Returns true if the specified attribute argument is set.
+		/// 
+		/// <param name="">attribute attribute name</param>
+		/// <param name="">argument  argument name</param>
+		/// <returns>true if the attribute has the given argument</returns>
+		/// </summary>
 		public bool has_attribute_argument(string attribute, string argument) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -167,12 +167,12 @@ namespace Vala.Lang.CodeNodes {
 			return a.has_argument(argument);
 		}
 
-		/**
-		 * Sets the specified named attribute to this code node.
-		 *
-		 * @param name  attribute name
-		 * @param value true to add the attribute, false to remove it
-		 */
+		/// <summary>
+		/// Sets the specified named attribute to this code node.
+		/// 
+		/// <param name="name">attribute name</param>
+		/// <param name="value">true to add the attribute, false to remove it</param>
+		/// </summary>
 		public void set_attribute(string name, bool value, SourceReference source_reference = null) {
 			var a = get_attribute(name);
 			if (value && a == null) {
@@ -182,12 +182,12 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Remove the specified named attribute argument
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 */
+		/// <summary>
+		/// Remove the specified named attribute argument
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// </summary>
 		public void remove_attribute_argument(string attribute, string argument) {
 			var a = get_attribute(attribute);
 			if (a != null) {
@@ -198,13 +198,13 @@ namespace Vala.Lang.CodeNodes {
 			}
 		}
 
-		/**
-		 * Returns the string value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @return          string value
-		 */
+		/// <summary>
+		/// Returns the string value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <returns>string value</returns>
+		/// </summary>
 		public string get_attribute_string(string attribute, string argument, string default_value = null) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -213,13 +213,13 @@ namespace Vala.Lang.CodeNodes {
 			return a.get_string(argument, default_value);
 		}
 
-		/**
-		 * Returns the integer value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @return          integer value
-		 */
+		/// <summary>
+		/// Returns the integer value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <returns>integer value</returns>
+		/// </summary>
 		public int get_attribute_integer(string attribute, string argument, int default_value = 0) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -228,13 +228,13 @@ namespace Vala.Lang.CodeNodes {
 			return a.get_integer(argument, default_value);
 		}
 
-		/**
-		 * Returns the double value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @return          double value
-		 */
+		/// <summary>
+		/// Returns the double value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <returns>double value</returns>
+		/// </summary>
 		public double get_attribute_double(string attribute, string argument, double default_value = 0) {
 			if (attributes == null) {
 				return default_value;
@@ -246,13 +246,13 @@ namespace Vala.Lang.CodeNodes {
 			return a.get_double(argument, default_value);
 		}
 
-		/**
-		 * Returns the bool value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @return          bool value
-		 */
+		/// <summary>
+		/// Returns the bool value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <returns>bool value</returns>
+		/// </summary>
 		public bool get_attribute_bool(string attribute, string argument, bool default_value = false) {
 			if (attributes == null) {
 				return default_value;
@@ -264,13 +264,13 @@ namespace Vala.Lang.CodeNodes {
 			return a.get_bool(argument, default_value);
 		}
 
-		/**
-		 * Sets the string value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @param value     string value
-		 */
+		/// <summary>
+		/// Sets the string value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <param name="value">string value</param>
+		/// </summary>
 		public void set_attribute_string(string attribute, string argument, string value, SourceReference source_reference = null) {
 			if (value == null) {
 				remove_attribute_argument(attribute, argument);
@@ -285,13 +285,13 @@ namespace Vala.Lang.CodeNodes {
 			a.add_argument(argument, "\"%s\"".printf(value));
 		}
 
-		/**
-		 * Sets the integer value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @param value     integer value
-		 */
+		/// <summary>
+		/// Sets the integer value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <param name="value">integer value</param>
+		/// </summary>
 		public void set_attribute_integer(string attribute, string argument, int value, SourceReference source_reference = null) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -301,13 +301,13 @@ namespace Vala.Lang.CodeNodes {
 			a.add_argument(argument, value.ToString());
 		}
 
-		/**
-		 * Sets the integer value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @param value     double value
-		 */
+		/// <summary>
+		/// Sets the integer value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <param name="value">double value</param>
+		/// </summary>
 		public void set_attribute_double(string attribute, string argument, double value, SourceReference source_reference = null) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -318,13 +318,13 @@ namespace Vala.Lang.CodeNodes {
 			a.add_argument(argument, value.ToString("0.00", CultureInfo.InvariantCulture));
 		}
 
-		/**
-		 * Sets the boolean value of the specified attribute argument.
-		 *
-		 * @param attribute attribute name
-		 * @param argument  argument name
-		 * @param value     bool value
-		 */
+		/// <summary>
+		/// Sets the boolean value of the specified attribute argument.
+		/// 
+		/// <param name="attribute">attribute name</param>
+		/// <param name="argument">argument name</param>
+		/// <param name="value">bool value</param>
+		/// </summary>
 		public void set_attribute_bool(string attribute, string argument, bool value, SourceReference source_reference = null) {
 			var a = get_attribute(attribute);
 			if (a == null) {
@@ -334,12 +334,12 @@ namespace Vala.Lang.CodeNodes {
 			a.add_argument(argument, value.ToString());
 		}
 
-		/**
-		 * Returns the attribute cache at the specified index.
-		 *
-		 * @param index attribute cache index
-		 * @return      attribute cache
-		 */
+		/// <summary>
+		/// Returns the attribute cache at the specified index.
+		/// 
+		/// <param name="index">attribute cache index</param>
+		/// <returns>attribute cache</returns>
+		/// </summary>
 		public AttributeCache get_attribute_cache(int index) {
 			if (index >= attributes_cache.Length) {
 				return null;
@@ -347,12 +347,12 @@ namespace Vala.Lang.CodeNodes {
 			return attributes_cache[index];
 		}
 
-		/**
-		 * Sets the specified attribute cache to this code node.
-		 *
-		 * @param index attribute cache index
-		 * @param cache attribute cache
-		 */
+		/// <summary>
+		/// Sets the specified attribute cache to this code node.
+		/// 
+		/// <param name="index">attribute cache index</param>
+		/// <param name="cache">attribute cache</param>
+		/// </summary>
 		public void set_attribute_cache(int index, AttributeCache cache) {
 			if (index >= attributes_cache.Length) {
 				Array.Resize(ref attributes_cache, index * 2 + 1);
@@ -360,11 +360,11 @@ namespace Vala.Lang.CodeNodes {
 			attributes_cache[index] = cache;
 		}
 
-		/**
-		 * Returns a string that represents this code node.
-		 *
-		 * @return a string representation
-		 */
+		/// <summary>
+		/// Returns a string that represents this code node.
+		/// 
+		/// <returns>a string representation</returns>
+		/// </summary>
 		public virtual string ToString() {
 			var str = new StringBuilder();
 
@@ -387,11 +387,11 @@ namespace Vala.Lang.CodeNodes {
 			return "." + (++last_temp_nr).ToString();
 		}
 
-		/**
-		 * Returns a new cache index for accessing the attributes cache of code nodes
-		 *
-		 * @return a new cache index
-		 */
+		/// <summary>
+		/// Returns a new cache index for accessing the attributes cache of code nodes
+		/// 
+		/// <returns>a new cache index</returns>
+		/// </summary>
 		public static int get_attribute_cache_index() {
 			return next_attribute_cache_index++;
 		}

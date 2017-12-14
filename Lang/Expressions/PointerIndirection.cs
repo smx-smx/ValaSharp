@@ -10,13 +10,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents a pointer indirection in the source code, e.g. `*pointer`.
-	 */
+	/// <summary>
+	/// Represents a pointer indirection in the source code, e.g. `*pointer`.
+	/// </summary>
 	public class PointerIndirection : Expression {
-		/**
-		 * The pointer to dereference.
-		 */
+		/// <summary>
+		/// The pointer to dereference.
+		/// </summary>
 		public Expression inner {
 			get {
 				return _inner;
@@ -29,12 +29,12 @@ namespace Vala.Lang.Expressions {
 
 		private Expression _inner;
 
-		/**
-		 * Creates a new pointer indirection.
-		 *
-		 * @param inner pointer to be dereferenced
-		 * @return      newly created pointer indirection
-		 */
+		/// <summary>
+		/// Creates a new pointer indirection.
+		/// 
+		/// <param name="inner">pointer to be dereferenced</param>
+		/// <returns>newly created pointer indirection</returns>
+		/// </summary>
 		public PointerIndirection(Expression inner, SourceReference source_reference = null) {
 			this.source_reference = source_reference;
 			this.inner = inner;

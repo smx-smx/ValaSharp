@@ -11,9 +11,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.TypeSymbols {
 	public class ValaEnum : TypeSymbol {
-		/**
-	 * Specifies whether this is a flags enum.
-	 */
+		/// <summary>
+		/// Specifies whether this is a flags enum.
+		/// </summary>
 		public bool is_flags {
 			get {
 				if (_is_flags == null) {
@@ -29,21 +29,21 @@ namespace Vala.Lang.TypeSymbols {
 
 		private bool? _is_flags;
 
-		/**
-		 * Creates a new enum.
-		 *
-		 * @param name             type name
-		 * @param source_reference reference to source code
-		 * @return                 newly created enum
-		 */
+		/// <summary>
+		/// Creates a new enum.
+		/// 
+		/// <param name="name">type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created enum</returns>
+		/// </summary>
 		public ValaEnum(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 		}
 
-		/**
-		 * Appends the specified enum value to the list of values.
-		 *
-		 * @param value an enum value
-		 */
+		/// <summary>
+		/// Appends the specified enum value to the list of values.
+		/// 
+		/// <param name="value">an enum value</param>
+		/// </summary>
 		public void add_value(EnumValue value) {
 			value.access = SymbolAccessibility.PUBLIC;
 
@@ -51,11 +51,11 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(value.name, value);
 		}
 
-		/**
-		 * Adds the specified method as a member to this enum.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a member to this enum.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m is CreationMethod) {
 				Report.error(m.source_reference, "construction methods may only be declared within classes and structs");
@@ -76,21 +76,21 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(m.name, m);
 		}
 
-		/**
-		 * Adds the specified constant as a member to this enum.
-		 *
-		 * @param c a constant
-		 */
+		/// <summary>
+		/// Adds the specified constant as a member to this enum.
+		/// 
+		/// <param name="c">a constant</param>
+		/// </summary>
 		public override void add_constant(Constant c) {
 			constants.Add(c);
 			scope.add(c.name, c);
 		}
 
-		/**
-		 * Returns a copy of the list of enum values.
-		 *
-		 * @return list of enum values
-		 */
+		/// <summary>
+		/// Returns a copy of the list of enum values.
+		/// 
+		/// <returns>list of enum values</returns>
+		/// </summary>
 		public List<EnumValue> get_values() {
 			return values;
 		}
@@ -100,20 +100,20 @@ namespace Vala.Lang.TypeSymbols {
 			values.Clear();
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return list of methods
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>list of methods</returns>
+		/// </summary>
 		public List<Method> get_methods() {
 			return methods;
 		}
 
-		/**
-		 * Returns a copy of the list of constants.
-		 *
-		 * @return list of constants
-		 */
+		/// <summary>
+		/// Returns a copy of the list of constants.
+		/// 
+		/// <returns>list of constants</returns>
+		/// </summary>
 		public List<Constant> get_constants() {
 			return constants;
 		}

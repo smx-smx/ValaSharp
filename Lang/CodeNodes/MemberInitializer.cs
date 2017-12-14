@@ -9,19 +9,19 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.CodeNodes {
-	/**
-	 * Represents a member initializer, i.e. an element of an object initializer, in
-	 * the source code.
-	 */
+	/// <summary>
+	/// Represents a member initializer, i.e. an element of an object initializer, in
+	/// the source code.
+	/// </summary>
 	public class MemberInitializer : CodeNode {
-		/**
-		 * Member name.
-		 */
+		/// <summary>
+		/// Member name.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * Initializer expression.
-		 */
+		/// <summary>
+		/// Initializer expression.
+		/// </summary>
 		public Expression initializer {
 			get { return _initializer; }
 			set {
@@ -32,9 +32,9 @@ namespace Vala.Lang.CodeNodes {
 
 		private WeakReference<Symbol> symbol_reference_weak = new WeakReference<Symbol>(null);
 
-		/**
-		 * The symbol this expression refers to.
-		 */
+		/// <summary>
+		/// The symbol this expression refers to.
+		/// </summary>
 		public Symbol symbol_reference {
 			get {
 				return symbol_reference_weak.GetTarget();
@@ -46,14 +46,14 @@ namespace Vala.Lang.CodeNodes {
 
 		Expression _initializer;
 
-		/**
-		 * Creates a new member initializer.
-		 *
-		 * @param name             member name
-		 * @param initializer      initializer expression
-		 * @param source_reference reference to source code
-		 * @return                 newly created member initializer
-		 */
+		/// <summary>
+		/// Creates a new member initializer.
+		/// 
+		/// <param name="name">member name</param>
+		/// <param name="initializer">initializer expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created member initializer</returns>
+		/// </summary>
 		public MemberInitializer(string name, Expression initializer, SourceReference source_reference = null) {
 			this.initializer = initializer;
 			this.source_reference = source_reference;

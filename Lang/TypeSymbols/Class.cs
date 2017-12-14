@@ -11,22 +11,22 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.TypeSymbols {
 	public class Class : ObjectTypeSymbol {
-		/**
-	 * Specifies the base class.
-	 */
+		/// <summary>
+		/// Specifies the base class.
+		/// </summary>
 		public Class base_class { get; set; }
 
-		/**
-		 * Specifies whether this class is abstract. Abstract classes may not be
-		 * instantiated.
-		 */
+		/// <summary>
+		/// Specifies whether this class is abstract. Abstract classes may not be
+		/// instantiated.
+		/// </summary>
 		public bool is_abstract { get; set; }
 
-		/**
-		 * Instances of compact classes are fast to create and have a
-		 * compact memory layout. Compact classes don't support runtime
-		 * type information or virtual methods.
-		 */
+		/// <summary>
+		/// Instances of compact classes are fast to create and have a
+		/// compact memory layout. Compact classes don't support runtime
+		/// type information or virtual methods.
+		/// </summary>
 		public bool is_compact {
 			get {
 				if (_is_compact == null) {
@@ -47,9 +47,9 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Instances of immutable classes are immutable after construction.
-		 */
+		/// <summary>
+		/// Instances of immutable classes are immutable after construction.
+		/// </summary>
 		public bool is_immutable {
 			get {
 				if (_is_immutable == null) {
@@ -70,14 +70,14 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Specifies whether this class has private fields.
-		 */
+		/// <summary>
+		/// Specifies whether this class has private fields.
+		/// </summary>
 		public bool has_private_fields { get; set; }
 
-		/**
-		 * Specifies whether this class has class fields.
-		 */
+		/// <summary>
+		/// Specifies whether this class has class fields.
+		/// </summary>
 		public bool has_class_private_fields { get; private set; }
 
 		private bool? _is_compact;
@@ -97,65 +97,65 @@ namespace Vala.Lang.TypeSymbols {
 		private List<ValaEnum> enums = new List<ValaEnum>();
 		private List<ValaDelegate> delegates = new List<ValaDelegate>();
 
-		/**
-		 * Returns a copy of the list of classes.
-		 *
-		 * @return list of classes
-		 */
+		/// <summary>
+		/// Returns a copy of the list of classes.
+		/// 
+		/// <returns>list of classes</returns>
+		/// </summary>
 		public List<Class> get_classes() {
 			return classes;
 		}
 
-		/**
-		 * Returns a copy of the list of structs.
-		 *
-		 * @return list of structs
-		 */
+		/// <summary>
+		/// Returns a copy of the list of structs.
+		/// 
+		/// <returns>list of structs</returns>
+		/// </summary>
 		public List<Struct> get_structs() {
 			return structs;
 		}
 
-		/**
-		 * Returns a copy of the list of enums.
-		 *
-		 * @return list of enums
-		 */
+		/// <summary>
+		/// Returns a copy of the list of enums.
+		/// 
+		/// <returns>list of enums</returns>
+		/// </summary>
 		public List<ValaEnum> get_enums() {
 			return enums;
 		}
 
-		/**
-		 * Returns a copy of the list of delegates.
-		 *
-		 * @return list of delegates
-		 */
+		/// <summary>
+		/// Returns a copy of the list of delegates.
+		/// 
+		/// <returns>list of delegates</returns>
+		/// </summary>
 		public List<ValaDelegate> get_delegates() {
 			return delegates;
 		}
 
-		/**
-		 * Specifies the default construction method.
-		 */
+		/// <summary>
+		/// Specifies the default construction method.
+		/// </summary>
 		public CreationMethod default_construction_method { get; set; }
 
-		/**
-		 * Specifies the instance constructor.
-		 */
+		/// <summary>
+		/// Specifies the instance constructor.
+		/// </summary>
 		public Constructor constructor { get; set; }
 
-		/**
-		 * Specifies the class constructor.
-		 */
+		/// <summary>
+		/// Specifies the class constructor.
+		/// </summary>
 		public Constructor class_constructor { get; set; }
 
-		/**
-		 * Specifies the static class constructor.
-		 */
+		/// <summary>
+		/// Specifies the static class constructor.
+		/// </summary>
 		public Constructor static_constructor { get; set; }
 
-		/**
-		 * Specifies the instance destructor.
-		 */
+		/// <summary>
+		/// Specifies the instance destructor.
+		/// </summary>
 		public Destructor destructor {
 			get { return _destructor; }
 			set {
@@ -170,19 +170,19 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Specifies the class destructor.
-		 */
+		/// <summary>
+		/// Specifies the class destructor.
+		/// </summary>
 		public Destructor static_destructor { get; set; }
 
-		/**
-		 * Specifies the class destructor.
-		 */
+		/// <summary>
+		/// Specifies the class destructor.
+		/// </summary>
 		public Destructor class_destructor { get; set; }
 
-		/**
-		 * Specifies whether this class denotes an error base.
-		 */
+		/// <summary>
+		/// Specifies whether this class denotes an error base.
+		/// </summary>
 		public bool is_error_base {
 			get {
 				return get_attribute("ErrorBase") != null;
@@ -191,52 +191,52 @@ namespace Vala.Lang.TypeSymbols {
 
 		Destructor _destructor;
 
-		/**
-		 * Creates a new class.
-		 *
-		 * @param name             type name
-		 * @param source_reference reference to source code
-		 * @param comment          class documentation
-		 * @return                 newly created class
-		 */
+		/// <summary>
+		/// Creates a new class.
+		/// 
+		/// <param name="name">type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <param name="comment">class documentation</param>
+		/// <returns>newly created class</returns>
+		/// </summary>
 		public Class(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) {
 		}
 
-		/**
-		 * Adds the specified class or interface to the list of base types of
-		 * this class.
-		 *
-		 * @param type a class or interface reference
-		 */
+		/// <summary>
+		/// Adds the specified class or interface to the list of base types of
+		/// this class.
+		/// 
+		/// <param name="type">a class or interface reference</param>
+		/// </summary>
 		public void add_base_type(DataType type) {
 			base_types.Add(type);
 			type.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the base type list.
-		 *
-		 * @return list of base types
-		 */
+		/// <summary>
+		/// Returns a copy of the base type list.
+		/// 
+		/// <returns>list of base types</returns>
+		/// </summary>
 		public List<DataType> get_base_types() {
 			return base_types;
 		}
 
-		/**
-		 * Adds the specified constant as a member to this class.
-		 *
-		 * @param c a constant
-		 */
+		/// <summary>
+		/// Adds the specified constant as a member to this class.
+		/// 
+		/// <param name="c">a constant</param>
+		/// </summary>
 		public override void add_constant(Constant c) {
 			constants.Add(c);
 			scope.add(c.name, c);
 		}
 
-		/**
-		 * Adds the specified field as a member to this class.
-		 *
-		 * @param f a field
-		 */
+		/// <summary>
+		/// Adds the specified field as a member to this class.
+		/// 
+		/// <param name="f">a field</param>
+		/// </summary>
 		public override void add_field(Field f) {
 			fields.Add(f);
 			if (f.access == SymbolAccessibility.PRIVATE && f.binding == MemberBinding.INSTANCE) {
@@ -247,29 +247,29 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(f.name, f);
 		}
 
-		/**
-		 * Returns a copy of the list of fields.
-		 *
-		 * @return list of fields
-		 */
+		/// <summary>
+		/// Returns a copy of the list of fields.
+		/// 
+		/// <returns>list of fields</returns>
+		/// </summary>
 		public List<Field> get_fields() {
 			return fields;
 		}
 
-		/**
-		 * Returns a copy of the list of constants.
-		 *
-		 * @return list of constants
-		 */
+		/// <summary>
+		/// Returns a copy of the list of constants.
+		/// 
+		/// <returns>list of constants</returns>
+		/// </summary>
 		public List<Constant> get_constants() {
 			return constants;
 		}
 
-		/**
-		 * Adds the specified method as a member to this class.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a member to this class.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m.binding == MemberBinding.INSTANCE || m is CreationMethod) {
 				if (m.this_parameter != null) {
@@ -309,20 +309,20 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return list of methods
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>list of methods</returns>
+		/// </summary>
 		public override List<Method> get_methods() {
 			return methods;
 		}
 
-		/**
-		 * Adds the specified property as a member to this class.
-		 *
-		 * @param prop a property
-		 */
+		/// <summary>
+		/// Adds the specified property as a member to this class.
+		/// 
+		/// <param name="prop">a property</param>
+		/// </summary>
 		public override void add_property(Property prop) {
 			properties.Add(prop);
 			scope.add(prop.name, prop);
@@ -335,69 +335,69 @@ namespace Vala.Lang.TypeSymbols {
 			}
 		}
 
-		/**
-		 * Returns a copy of the list of properties.
-		 *
-		 * @return list of properties
-		 */
+		/// <summary>
+		/// Returns a copy of the list of properties.
+		/// 
+		/// <returns>list of properties</returns>
+		/// </summary>
 		public override List<Property> get_properties() {
 			return properties;
 		}
 
-		/**
-		 * Adds the specified signal as a member to this class.
-		 *
-		 * @param sig a signal
-		 */
+		/// <summary>
+		/// Adds the specified signal as a member to this class.
+		/// 
+		/// <param name="sig">a signal</param>
+		/// </summary>
 		public override void add_signal(Signal sig) {
 			signals.Add(sig);
 			scope.add(sig.name, sig);
 		}
 
-		/**
-		 * Returns a copy of the list of signals.
-		 *
-		 * @return list of signals
-		 */
+		/// <summary>
+		/// Returns a copy of the list of signals.
+		/// 
+		/// <returns>list of signals</returns>
+		/// </summary>
 		public override List<Signal> get_signals() {
 			return signals;
 		}
 
-		/**
-		 * Adds the specified class as an inner class.
-		 *
-		 * @param cl a class
-		 */
+		/// <summary>
+		/// Adds the specified class as an inner class.
+		/// 
+		/// <param name="cl">a class</param>
+		/// </summary>
 		public override void add_class(Class cl) {
 			classes.Add(cl);
 			scope.add(cl.name, cl);
 		}
 
-		/**
-		 * Adds the specified struct as an inner struct.
-		 *
-		 * @param st a struct
-		 */
+		/// <summary>
+		/// Adds the specified struct as an inner struct.
+		/// 
+		/// <param name="st">a struct</param>
+		/// </summary>
 		public override void add_struct(Struct st) {
 			structs.Add(st);
 			scope.add(st.name, st);
 		}
 
-		/**
-		 * Adds the specified enum as an inner enum.
-		 *
-		 * @param en an enum
-		 */
+		/// <summary>
+		/// Adds the specified enum as an inner enum.
+		/// 
+		/// <param name="en">an enum</param>
+		/// </summary>
 		public override void add_enum(ValaEnum en) {
 			enums.Add(en);
 			scope.add(en.name, en);
 		}
 
-		/**
-		 * Adds the specified delegate as an inner delegate.
-		 *
-		 * @param d a delegate
-		 */
+		/// <summary>
+		/// Adds the specified delegate as an inner delegate.
+		/// 
+		/// <param name="d">a delegate</param>
+		/// </summary>
 		public override void add_delegate(ValaDelegate d) {
 			delegates.Add(d);
 			scope.add(d.name, d);

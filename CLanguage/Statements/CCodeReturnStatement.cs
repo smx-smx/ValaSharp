@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
 
-	/**
-	 * Represents a return statement in the C code.
-	 */
+	/// <summary>
+	/// Represents a return statement in the C code.
+	/// </summary>
 	public class CCodeReturnStatement : CCodeStatement {
-		/**
-		 * The optional expression to return.
-		 */
+		/// <summary>
+		/// The optional expression to return.
+		/// </summary>
 		public CCodeExpression return_expression { get; set; }
 
 		public CCodeReturnStatement(CCodeExpression expr = null) {

@@ -15,20 +15,20 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an expression with two operands in the source code.
-	 *
-	 * Supports +, -, *, /, %, <<, >>, <, >, <=, >=, ==, !=, &, |, ^, &&, ||, ??.
-	 */
+	/// <summary>
+	/// Represents an expression with two operands in the source code.
+	/// 
+	/// Supports +, -, *, /, %, <<, >>, <, >, <=, >=, ==, !=, &, |, ^, &&, ||, ??.
+	/// </summary>
 	public class BinaryExpression : Expression {
-		/**
-		 * The binary operator.
-		 */
+		/// <summary>
+		/// The binary operator.
+		/// </summary>
 		public BinaryOperator Operator { get; set; }
 
-		/**
-		 * The left operand.
-		 */
+		/// <summary>
+		/// The left operand.
+		/// </summary>
 		public Expression left {
 			get {
 				return _left;
@@ -39,9 +39,9 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The right operand.
-		 */
+		/// <summary>
+		/// The right operand.
+		/// </summary>
 		public Expression right {
 			get {
 				return _right;
@@ -57,15 +57,15 @@ namespace Vala.Lang.Expressions {
 		private Expression _left;
 		private Expression _right;
 
-		/**
-		 * Creates a new binary expression.
-		 *
-		 * @param op      binary operator
-		 * @param _left   left operand
-		 * @param _right  right operand
-		 * @param source  reference to source code
-		 * @return        newly created binary expression
-		 */
+		/// <summary>
+		/// Creates a new binary expression.
+		/// 
+		/// <param name="op">binary operator</param>
+		/// <param name="_left">left operand</param>
+		/// <param name="_right">right operand</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created binary expression</returns>
+		/// </summary>
 		public BinaryExpression(BinaryOperator op, Expression _left, Expression _right, SourceReference source = null) {
 			Operator = op;
 			left = _left;
@@ -95,26 +95,26 @@ namespace Vala.Lang.Expressions {
 
 		private string get_operator_string() {
 			switch (Operator) {
-				case BinaryOperator.PLUS: return "+";
-				case BinaryOperator.MINUS: return "-";
-				case BinaryOperator.MUL: return "*";
-				case BinaryOperator.DIV: return "/";
-				case BinaryOperator.MOD: return "%";
-				case BinaryOperator.SHIFT_LEFT: return "<<";
-				case BinaryOperator.SHIFT_RIGHT: return ">>";
-				case BinaryOperator.LESS_THAN: return "<";
-				case BinaryOperator.GREATER_THAN: return ">";
-				case BinaryOperator.LESS_THAN_OR_EQUAL: return "<=";
-				case BinaryOperator.GREATER_THAN_OR_EQUAL: return ">=";
-				case BinaryOperator.EQUALITY: return "==";
-				case BinaryOperator.INEQUALITY: return "!=";
-				case BinaryOperator.BITWISE_AND: return "&";
-				case BinaryOperator.BITWISE_OR: return "|";
-				case BinaryOperator.BITWISE_XOR: return "^";
-				case BinaryOperator.AND: return "&&";
-				case BinaryOperator.OR: return "||";
-				case BinaryOperator.IN: return "in";
-				case BinaryOperator.COALESCE: return "??";
+			case BinaryOperator.PLUS: return "+";
+			case BinaryOperator.MINUS: return "-";
+			case BinaryOperator.MUL: return "*";
+			case BinaryOperator.DIV: return "/";
+			case BinaryOperator.MOD: return "%";
+			case BinaryOperator.SHIFT_LEFT: return "<<";
+			case BinaryOperator.SHIFT_RIGHT: return ">>";
+			case BinaryOperator.LESS_THAN: return "<";
+			case BinaryOperator.GREATER_THAN: return ">";
+			case BinaryOperator.LESS_THAN_OR_EQUAL: return "<=";
+			case BinaryOperator.GREATER_THAN_OR_EQUAL: return ">=";
+			case BinaryOperator.EQUALITY: return "==";
+			case BinaryOperator.INEQUALITY: return "!=";
+			case BinaryOperator.BITWISE_AND: return "&";
+			case BinaryOperator.BITWISE_OR: return "|";
+			case BinaryOperator.BITWISE_XOR: return "^";
+			case BinaryOperator.AND: return "&&";
+			case BinaryOperator.OR: return "||";
+			case BinaryOperator.IN: return "in";
+			case BinaryOperator.COALESCE: return "??";
 			}
 			assert_not_reached();
 			return null;

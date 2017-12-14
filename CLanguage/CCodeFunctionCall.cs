@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a function call in the C code.
-	 */
+	/// <summary>
+	/// Represents a function call in the C code.
+	/// </summary>
 	public class CCodeFunctionCall : CCodeExpression {
-		/**
-		 * The function to be called.
-		 */
+		/// <summary>
+		/// The function to be called.
+		/// </summary>
 		public CCodeExpression call { get; set; }
 
 		private List<CCodeExpression> arguments = new List<CCodeExpression>();
@@ -21,11 +21,11 @@ namespace CLanguage {
 			this.call = call;
 		}
 
-		/**
-		 * Appends the specified expression to the list of arguments.
-		 *
-		 * @param expr a C code expression
-		 */
+		/// <summary>
+		/// Appends the specified expression to the list of arguments.
+		/// 
+		/// <param name="expr">a C code expression</param>
+		/// </summary>
 		public void add_argument(CCodeExpression expr) {
 			arguments.Add(expr);
 		}
@@ -34,11 +34,11 @@ namespace CLanguage {
 			arguments.Insert(index, expr);
 		}
 
-		/**
-		 * Returns a copy of the list of arguments.
-		 *
-		 * @return list of arguments
-		 */
+		/// <summary>
+		/// Returns a copy of the list of arguments.
+		/// 
+		/// <returns>list of arguments</returns>
+		/// </summary>
 		public List<CCodeExpression> get_arguments() {
 			return arguments;
 		}

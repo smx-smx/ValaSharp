@@ -26,86 +26,86 @@ namespace Vala.Lang.TypeSymbols {
 		private List<ValaEnum> enums = new List<ValaEnum>();
 		private List<ValaDelegate> delegates = new List<ValaDelegate>();
 
-		/**
-		 * Returns a copy of the list of classes.
-		 *
-		 * @return list of classes
-		 */
+		/// <summary>
+		/// Returns a copy of the list of classes.
+		/// 
+		/// <returns>list of classes</returns>
+		/// </summary>
 		public List<Class> get_classes() {
 			return classes;
 		}
 
-		/**
-		 * Returns a copy of the list of structs.
-		 *
-		 * @return list of structs
-		 */
+		/// <summary>
+		/// Returns a copy of the list of structs.
+		/// 
+		/// <returns>list of structs</returns>
+		/// </summary>
 		public List<Struct> get_structs() {
 			return structs;
 		}
 
-		/**
-		 * Returns a copy of the list of enums.
-		 *
-		 * @return list of enums
-		 */
+		/// <summary>
+		/// Returns a copy of the list of enums.
+		/// 
+		/// <returns>list of enums</returns>
+		/// </summary>
 		public List<ValaEnum> get_enums() {
 			return enums;
 		}
 
-		/**
-		 * Returns a copy of the list of delegates.
-		 *
-		 * @return list of delegates
-		 */
+		/// <summary>
+		/// Returns a copy of the list of delegates.
+		/// 
+		/// <returns>list of delegates</returns>
+		/// </summary>
 		public List<ValaDelegate> get_delegates() {
 			return delegates;
 		}
 
-		/**
-		 * Creates a new interface.
-		 *
-		 * @param name              type name
-		 * @param source_reference  reference to source code
-		 * @return                  newly created interface
-		 */
+		/// <summary>
+		/// Creates a new interface.
+		/// 
+		/// <param name="name">type name</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created interface</returns>
+		/// </summary>
 		public Interface(string name, SourceReference source_reference = null, Comment comment = null) : base(name, source_reference, comment) { }
 
-		/**
-		 * Adds the specified interface or class to the list of prerequisites of
-		 * this interface.
-		 *
-		 * @param type an interface or class reference
-		 */
+		/// <summary>
+		/// Adds the specified interface or class to the list of prerequisites of
+		/// this interface.
+		/// 
+		/// <param name="type">an interface or class reference</param>
+		/// </summary>
 		public void add_prerequisite(DataType type) {
 			prerequisites.Add(type);
 			type.parent_node = this;
 		}
 
-		/**
-		 * Prepends the specified interface or class to the list of
-		 * prerequisites of this interface.
-		 *
-		 * @param type an interface or class reference
-		 */
+		/// <summary>
+		/// Prepends the specified interface or class to the list of
+		/// prerequisites of this interface.
+		/// 
+		/// <param name="type">an interface or class reference</param>
+		/// </summary>
 		public void prepend_prerequisite(DataType type) {
 			prerequisites.Insert(0, type);
 		}
 
-		/**
-		 * Returns a copy of the base type list.
-		 *
-		 * @return list of base types
-		 */
+		/// <summary>
+		/// Returns a copy of the base type list.
+		/// 
+		/// <returns>list of base types</returns>
+		/// </summary>
 		public List<DataType> get_prerequisites() {
 			return prerequisites;
 		}
 
-		/**
-		 * Adds the specified method as a member to this interface.
-		 *
-		 * @param m a method
-		 */
+		/// <summary>
+		/// Adds the specified method as a member to this interface.
+		/// 
+		/// <param name="m">a method</param>
+		/// </summary>
 		public override void add_method(Method m) {
 			if (m is CreationMethod) {
 				Report.error(m.source_reference, "construction methods may only be declared within classes and structs");
@@ -126,59 +126,59 @@ namespace Vala.Lang.TypeSymbols {
 			scope.add(m.name, m);
 		}
 
-		/**
-		 * Returns a copy of the list of methods.
-		 *
-		 * @return list of methods
-		 */
+		/// <summary>
+		/// Returns a copy of the list of methods.
+		/// 
+		/// <returns>list of methods</returns>
+		/// </summary>
 		public override List<Method> get_methods() {
 			return methods;
 		}
 
-		/**
-		 * Adds the specified field as a member to this interface. The field
-		 * must be private and static.
-		 *
-		 * @param f a field
-		 */
+		/// <summary>
+		/// Adds the specified field as a member to this interface. The field
+		/// must be private and static.
+		/// 
+		/// <param name="f">a field</param>
+		/// </summary>
 		public override void add_field(Field f) {
 			fields.Add(f);
 			scope.add(f.name, f);
 		}
 
-		/**
-		 * Returns a copy of the list of fields.
-		 *
-		 * @return list of fields
-		 */
+		/// <summary>
+		/// Returns a copy of the list of fields.
+		/// 
+		/// <returns>list of fields</returns>
+		/// </summary>
 		public List<Field> get_fields() {
 			return fields;
 		}
 
-		/**
-		 * Adds the specified constant as a member to this interface.
-		 *
-		 * @param c a constant
-		 */
+		/// <summary>
+		/// Adds the specified constant as a member to this interface.
+		/// 
+		/// <param name="c">a constant</param>
+		/// </summary>
 		public override void add_constant(Constant c) {
 			constants.Add(c);
 			scope.add(c.name, c);
 		}
 
-		/**
-		 * Returns a copy of the list of constants.
-		 *
-		 * @return list of constants
-		 */
+		/// <summary>
+		/// Returns a copy of the list of constants.
+		/// 
+		/// <returns>list of constants</returns>
+		/// </summary>
 		public List<Constant> get_constants() {
 			return constants;
 		}
 
-		/**
-		 * Adds the specified property as a member to this interface.
-		 *
-		 * @param prop a property
-		 */
+		/// <summary>
+		/// Adds the specified property as a member to this interface.
+		/// 
+		/// <param name="prop">a property</param>
+		/// </summary>
 		public override void add_property(Property prop) {
 			if (prop.field != null) {
 				Report.error(prop.source_reference, "automatic properties are not allowed in interfaces");
@@ -194,30 +194,30 @@ namespace Vala.Lang.TypeSymbols {
 			prop.scope.add(prop.this_parameter.name, prop.this_parameter);
 		}
 
-		/**
-		 * Returns a copy of the list of properties.
-		 *
-		 * @return list of properties
-		 */
+		/// <summary>
+		/// Returns a copy of the list of properties.
+		/// 
+		/// <returns>list of properties</returns>
+		/// </summary>
 		public override List<Property> get_properties() {
 			return properties;
 		}
 
-		/**
-		 * Adds the specified signal as a member to this interface.
-		 *
-		 * @param sig a signal
-		 */
+		/// <summary>
+		/// Adds the specified signal as a member to this interface.
+		/// 
+		/// <param name="sig">a signal</param>
+		/// </summary>
 		public override void add_signal(Signal sig) {
 			signals.Add(sig);
 			scope.add(sig.name, sig);
 		}
 
-		/**
-		 * Returns a copy of the list of signals.
-		 *
-		 * @return list of signals
-		 */
+		/// <summary>
+		/// Returns a copy of the list of signals.
+		/// 
+		/// <returns>list of signals</returns>
+		/// </summary>
 		public override List<Signal> get_signals() {
 			return signals;
 		}
@@ -226,41 +226,41 @@ namespace Vala.Lang.TypeSymbols {
 			return virtuals;
 		}
 
-		/**
-		 * Adds the specified class as an inner class.
-		 *
-		 * @param cl a class
-		 */
+		/// <summary>
+		/// Adds the specified class as an inner class.
+		/// 
+		/// <param name="cl">a class</param>
+		/// </summary>
 		public override void add_class(Class cl) {
 			classes.Add(cl);
 			scope.add(cl.name, cl);
 		}
 
-		/**
-		 * Adds the specified struct as an inner struct.
-		 *
-		 * @param st a struct
-		 */
+		/// <summary>
+		/// Adds the specified struct as an inner struct.
+		/// 
+		/// <param name="st">a struct</param>
+		/// </summary>
 		public override void add_struct(Struct st) {
 			structs.Add(st);
 			scope.add(st.name, st);
 		}
 
-		/**
-		 * Adds the specified enum as an inner enum.
-		 *
-		 * @param en an enum
-		 */
+		/// <summary>
+		/// Adds the specified enum as an inner enum.
+		/// 
+		/// <param name="en">an enum</param>
+		/// </summary>
 		public override void add_enum(ValaEnum en) {
 			enums.Add(en);
 			scope.add(en.name, en);
 		}
 
-		/**
-		 * Adds the specified delegate as an inner delegate.
-		 *
-		 * @param d a delegate
-		 */
+		/// <summary>
+		/// Adds the specified delegate as an inner delegate.
+		/// 
+		/// <param name="d">a delegate</param>
+		/// </summary>
 		public override void add_delegate(ValaDelegate d) {
 			delegates.Add(d);
 			scope.add(d.name, d);

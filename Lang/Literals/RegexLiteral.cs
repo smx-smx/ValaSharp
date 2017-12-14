@@ -9,22 +9,22 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Literals {
-	/**
- * Represents a regular expression literal in the source code.
- */
+	/// <summary>
+	/// Represents a regular expression literal in the source code.
+	/// </summary>
 	public class RegexLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public string value { get; set; }
 
-		/**
-		 * Creates a new regular expression literal.
-		 *
-		 * @param value             the literal value
-		 * @param source_reference  reference to source code
-		 * @return                  newly created string literal
-		 */
+		/// <summary>
+		/// Creates a new regular expression literal.
+		/// 
+		/// <param name="value">the literal value</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created string literal</returns>
+		/// </summary>
 		public RegexLiteral(string value, SourceReference source_reference = null) {
 			this.value = value;
 			this.source_reference = source_reference;

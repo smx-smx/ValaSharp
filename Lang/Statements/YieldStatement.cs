@@ -9,17 +9,17 @@ using Vala.Lang.Expressions;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
- * Represents a yield statement in the source code.
- */
+	/// <summary>
+	/// Represents a yield statement in the source code.
+	/// </summary>
 	public class YieldStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * The expression to yield or the method call to yield to.
-		 */
+		/// <summary>
+		/// The expression to yield or the method call to yield to.
+		/// </summary>
 		public Expression yield_expression {
 			get { return _yield_expression; }
 			set {
@@ -32,13 +32,13 @@ namespace Vala.Lang.Statements {
 
 		private Expression _yield_expression;
 
-		/**
-		 * Creates a new yield statement.
-		 *
-		 * @param yield_expression the yield expression
-		 * @param source_reference reference to source code
-		 * @return                 newly created yield statement
-		 */
+		/// <summary>
+		/// Creates a new yield statement.
+		/// 
+		/// <param name="yield_expression">the yield expression</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created yield statement</returns>
+		/// </summary>
 		public YieldStatement(Expression yield_expression, SourceReference source_reference = null) {
 			this.yield_expression = yield_expression;
 			this.source_reference = source_reference;

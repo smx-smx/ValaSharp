@@ -21,9 +21,9 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace CCodeGen.Modules {
-	/**
-	 * Code visitor generating C Code.
-	 */
+	/// <summary>
+	/// Code visitor generating C Code.
+	/// </summary>
 	public abstract class CCodeBaseModule : CodeGenerator {
 		public class EmitContext {
 			public Symbol current_symbol;
@@ -1357,11 +1357,11 @@ namespace CCodeGen.Modules {
 			} else if (cexpr is CCodeUnaryExpression) {
 				var cunary = (CCodeUnaryExpression)cexpr;
 				switch (cunary.Operator) {
-					case CCodeUnaryOperator.PREFIX_INCREMENT:
-					case CCodeUnaryOperator.PREFIX_DECREMENT:
-					case CCodeUnaryOperator.POSTFIX_INCREMENT:
-					case CCodeUnaryOperator.POSTFIX_DECREMENT:
-						return false;
+				case CCodeUnaryOperator.PREFIX_INCREMENT:
+				case CCodeUnaryOperator.PREFIX_DECREMENT:
+				case CCodeUnaryOperator.POSTFIX_INCREMENT:
+				case CCodeUnaryOperator.POSTFIX_DECREMENT:
+					return false;
 				}
 				return is_constant_ccode_expression(cunary.inner);
 			} else if (cexpr is CCodeBinaryExpression) {
@@ -1373,10 +1373,10 @@ namespace CCodeGen.Modules {
 			return (null != cparenthesized && is_constant_ccode_expression(cparenthesized.inner));
 		}
 
-		/**
-		 * Returns whether the passed cexpr is a pure expression, i.e. an
-		 * expression without side-effects.
-		 */
+		/// <summary>
+		/// Returns whether the passed cexpr is a pure expression, i.e. an
+		/// expression without side-effects.
+		/// </summary>
 		public bool is_pure_ccode_expression(CCodeExpression cexpr) {
 			if (cexpr is CCodeConstant || cexpr is CCodeIdentifier) {
 				return true;
@@ -1386,13 +1386,13 @@ namespace CCodeGen.Modules {
 			} else if (cexpr is CCodeUnaryExpression) {
 				var cunary = (CCodeUnaryExpression)cexpr;
 				switch (cunary.Operator) {
-					case CCodeUnaryOperator.PREFIX_INCREMENT:
-					case CCodeUnaryOperator.PREFIX_DECREMENT:
-					case CCodeUnaryOperator.POSTFIX_INCREMENT:
-					case CCodeUnaryOperator.POSTFIX_DECREMENT:
-						return false;
-					default:
-						return is_pure_ccode_expression(cunary.inner);
+				case CCodeUnaryOperator.PREFIX_INCREMENT:
+				case CCodeUnaryOperator.PREFIX_DECREMENT:
+				case CCodeUnaryOperator.POSTFIX_INCREMENT:
+				case CCodeUnaryOperator.POSTFIX_DECREMENT:
+					return false;
+				default:
+					return is_pure_ccode_expression(cunary.inner);
 				}
 			} else if (cexpr is CCodeMemberAccess) {
 				var cma = (CCodeMemberAccess)cexpr;
@@ -2447,9 +2447,9 @@ namespace CCodeGen.Modules {
 			local.active = true;
 		}
 
-		/**
-		 * Create a temporary variable and return lvalue access to it
-		 */
+		/// <summary>
+		/// Create a temporary variable and return lvalue access to it
+		/// </summary>
 		public TargetValue create_temp_value(DataType type, bool init, CodeNode node_reference, bool? value_owned = null) {
 			var local = new LocalVariable(type.copy(), "_tmp%d_".printf(next_temp_var_id++), null, node_reference.source_reference);
 			local.init = init;
@@ -2483,9 +2483,9 @@ namespace CCodeGen.Modules {
 			return value;
 		}
 
-		/**
-		 * Load a temporary variable returning or owned rvalue access to it, depending on the ownership of the value type.
-		 */
+		/// <summary>
+		/// Load a temporary variable returning or owned rvalue access to it, depending on the ownership of the value type.
+		/// </summary>
 		public TargetValue load_temp_value(TargetValue lvalue) {
 			var value = ((GLibValue)lvalue).copy();
 			var deleg_type = value.value_type as DelegateType;
@@ -2501,9 +2501,9 @@ namespace CCodeGen.Modules {
 			return value;
 		}
 
-		/**
-		 * Store a value in a temporary variable and return or owned rvalue access to it, depending on the ownership of the given type.
-		 */
+		/// <summary>
+		/// Store a value in a temporary variable and return or owned rvalue access to it, depending on the ownership of the given type.
+		/// </summary>
 		public TargetValue store_temp_value(TargetValue initializer, CodeNode node_reference, bool? value_owned = null) {
 			var lvalue = create_temp_value(initializer.value_type, false, node_reference, value_owned);
 			store_value(lvalue, initializer, node_reference.source_reference);

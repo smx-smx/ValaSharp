@@ -11,9 +11,9 @@ namespace Vala.Lang.Types {
 	public abstract class ValaValueType : DataType {
 		private WeakReference<TypeSymbol> type_symbol_weak = new WeakReference<TypeSymbol>(null);
 
-		/**
-		* The referred struct or enum.
-		*/
+		/// <summary>
+		/// The referred struct or enum.
+		/// </summary>
 		public TypeSymbol type_symbol {
 			get {
 				return type_symbol_weak.GetTarget();

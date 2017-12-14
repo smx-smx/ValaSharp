@@ -13,16 +13,16 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang {
 	public class PropertyAccessor : Subroutine {
-		/**
-	 * The corresponding property.
-	 */
+		/// <summary>
+		/// The corresponding property.
+		/// </summary>
 		public Property prop {
 			get { return parent_symbol as Property; }
 		}
 
-		/**
-		 * The property type.
-		 */
+		/// <summary>
+		/// The property type.
+		/// </summary>
 		public DataType value_type {
 			get { return _value_type; }
 			private set {
@@ -33,48 +33,48 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Specifies whether this accessor may be used to get the property.
-		 */
+		/// <summary>
+		/// Specifies whether this accessor may be used to get the property.
+		/// </summary>
 		public bool readable { get; private set; }
 
-		/**
-		 * Specifies whether this accessor may be used to set the property.
-		 */
+		/// <summary>
+		/// Specifies whether this accessor may be used to set the property.
+		/// </summary>
 		public bool writable { get; private set; }
 
-		/**
-		 * Specifies whether this accessor may be used to construct the
-		 * property.
-		 */
+		/// <summary>
+		/// Specifies whether this accessor may be used to construct the
+		/// property.
+		/// </summary>
 		public bool construction { get; private set; }
 
-		/**
-		 * True if the body was automatically generated
-		 */
+		/// <summary>
+		/// True if the body was automatically generated
+		/// </summary>
 		public bool automatic_body { get; private set; }
 
 		public override bool has_result {
 			get { return readable; }
 		}
 
-		/**
-		 * Represents the generated value parameter in a set accessor.
-		 */
+		/// <summary>
+		/// Represents the generated value parameter in a set accessor.
+		/// </summary>
 		public Parameter value_parameter { get; private set; }
 
 		private DataType _value_type;
 
-		/**
-		 * Creates a new property accessor.
-		 *
-		 * @param readable           true if get accessor, false otherwise
-		 * @param writable           true if set accessor, false otherwise
-		 * @param construction       true if construct accessor, false otherwise
-		 * @param body               accessor body
-		 * @param source_reference   reference to source code
-		 * @return                   newly created property accessor
-		 */
+		/// <summary>
+		/// Creates a new property accessor.
+		/// 
+		/// <param name="readable">true if get accessor, false otherwise</param>
+		/// <param name="writable">true if set accessor, false otherwise</param>
+		/// <param name="construction">true if construct accessor, false otherwise</param>
+		/// <param name="body">accessor body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created property accessor</returns>
+		/// </summary>
 		public PropertyAccessor(bool readable, bool writable, bool construction, DataType value_type, Block body, SourceReference source_reference, Comment comment = null)
 			: base(null, source_reference, comment) {
 			this.readable = readable;
@@ -101,10 +101,10 @@ namespace Vala.Lang {
 			}
 		}
 
-		/**
-		 * Get the method representing this property accessor
-		 * @return   null if the accessor is neither readable nor writable
-		 */
+		/// <summary>
+		/// Get the method representing this property accessor
+		/// <returns>null if the accessor is neither readable nor writable</returns>
+		/// </summary>
 		public Method get_method() {
 			Method m = null;
 			if (readable) {

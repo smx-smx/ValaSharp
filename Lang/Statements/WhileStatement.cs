@@ -9,17 +9,17 @@ using Vala.Lang.Literals;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents a while iteration statement in the source code.
-	 */
+	/// <summary>
+	/// Represents a while iteration statement in the source code.
+	/// </summary>
 	public class WhileStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * Specifies the loop condition.
-		 */
+		/// <summary>
+		/// Specifies the loop condition.
+		/// </summary>
 		public Expression condition {
 			get {
 				return _condition;
@@ -30,9 +30,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the loop body.
-		 */
+		/// <summary>
+		/// Specifies the loop body.
+		/// </summary>
 		public Block body {
 			get {
 				return _body;
@@ -46,14 +46,14 @@ namespace Vala.Lang.Statements {
 		private Expression _condition;
 		private Block _body;
 
-		/**
-		 * Creates a new while statement.
-		 *
-		 * @param condition         loop condition
-		 * @param body              loop body
-		 * @param source_reference  reference to source code
-		 * @return                  newly created while statement
-		 */
+		/// <summary>
+		/// Creates a new while statement.
+		/// 
+		/// <param name="condition">loop condition</param>
+		/// <param name="body">loop body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created while statement</returns>
+		/// </summary>
 		public WhileStatement(Expression condition, Block body, SourceReference source_reference = null) {
 			this.body = body;
 			this.source_reference = source_reference;

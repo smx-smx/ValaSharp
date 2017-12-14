@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * The type of a generic type parameter.
-	 */
+	/// <summary>
+	/// The type of a generic type parameter.
+	/// </summary>
 	public class GenericType : DataType {
 		public GenericType(TypeParameter type_parameter) {
 			this.type_parameter = type_parameter;

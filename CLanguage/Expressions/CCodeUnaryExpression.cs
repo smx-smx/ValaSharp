@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using static GLibPorts.GLib;
 
 namespace CLanguage.Expressions {
-	/**
-	 * Represents an expression with one operand in the C code.
-	 */
+	/// <summary>
+	/// Represents an expression with one operand in the C code.
+	/// </summary>
 	public class CCodeUnaryExpression : CCodeExpression {
-		/**
-		 * The unary operator.
-		 */
+		/// <summary>
+		/// The unary operator.
+		/// </summary>
 		public CCodeUnaryOperator Operator { get; set; }
 
-		/**
-		 * The operand.
-		 */
+		/// <summary>
+		/// The operand.
+		/// </summary>
 		public CCodeExpression inner { get; set; }
 
 		public CCodeUnaryExpression(CCodeUnaryOperator op, CCodeExpression expr) {
@@ -27,35 +27,35 @@ namespace CLanguage.Expressions {
 
 		public override void write(CCodeWriter writer) {
 			switch (Operator) {
-				case CCodeUnaryOperator.PLUS: writer.write_string("+"); inner.write_inner(writer); break;
-				case CCodeUnaryOperator.MINUS: writer.write_string("-"); inner.write_inner(writer); break;
-				case CCodeUnaryOperator.LOGICAL_NEGATION: writer.write_string("!"); inner.write_inner(writer); break;
-				case CCodeUnaryOperator.BITWISE_COMPLEMENT: writer.write_string("~"); inner.write_inner(writer); break;
-				case CCodeUnaryOperator.POINTER_INDIRECTION:
-					var inner_unary = inner as CCodeUnaryExpression;
-					if (inner_unary != null && inner_unary.Operator == CCodeUnaryOperator.ADDRESS_OF) {
-						// simplify expression
-						inner_unary.inner.write(writer);
-						return;
-					}
-					writer.write_string("*");
-					inner.write_inner(writer);
-					break;
-				case CCodeUnaryOperator.ADDRESS_OF:
-					var _inner_unary_ = inner as CCodeUnaryExpression;
-					if (_inner_unary_ != null && _inner_unary_.Operator == CCodeUnaryOperator.POINTER_INDIRECTION) {
-						// simplify expression
-						_inner_unary_.inner.write(writer);
-						return;
-					}
-					writer.write_string("&");
-					inner.write_inner(writer);
-					break;
-				case CCodeUnaryOperator.PREFIX_INCREMENT: writer.write_string("++"); break;
-				case CCodeUnaryOperator.PREFIX_DECREMENT: writer.write_string("--"); break;
-				case CCodeUnaryOperator.POSTFIX_INCREMENT: inner.write_inner(writer); writer.write_string("++"); break;
-				case CCodeUnaryOperator.POSTFIX_DECREMENT: inner.write_inner(writer); writer.write_string("--"); break;
-				default: assert_not_reached(); break;
+			case CCodeUnaryOperator.PLUS: writer.write_string("+"); inner.write_inner(writer); break;
+			case CCodeUnaryOperator.MINUS: writer.write_string("-"); inner.write_inner(writer); break;
+			case CCodeUnaryOperator.LOGICAL_NEGATION: writer.write_string("!"); inner.write_inner(writer); break;
+			case CCodeUnaryOperator.BITWISE_COMPLEMENT: writer.write_string("~"); inner.write_inner(writer); break;
+			case CCodeUnaryOperator.POINTER_INDIRECTION:
+				var inner_unary = inner as CCodeUnaryExpression;
+				if (inner_unary != null && inner_unary.Operator == CCodeUnaryOperator.ADDRESS_OF) {
+					// simplify expression
+					inner_unary.inner.write(writer);
+					return;
+				}
+				writer.write_string("*");
+				inner.write_inner(writer);
+				break;
+			case CCodeUnaryOperator.ADDRESS_OF:
+				var _inner_unary_ = inner as CCodeUnaryExpression;
+				if (_inner_unary_ != null && _inner_unary_.Operator == CCodeUnaryOperator.POINTER_INDIRECTION) {
+					// simplify expression
+					_inner_unary_.inner.write(writer);
+					return;
+				}
+				writer.write_string("&");
+				inner.write_inner(writer);
+				break;
+			case CCodeUnaryOperator.PREFIX_INCREMENT: writer.write_string("++"); break;
+			case CCodeUnaryOperator.PREFIX_DECREMENT: writer.write_string("--"); break;
+			case CCodeUnaryOperator.POSTFIX_INCREMENT: inner.write_inner(writer); writer.write_string("++"); break;
+			case CCodeUnaryOperator.POSTFIX_DECREMENT: inner.write_inner(writer); writer.write_string("--"); break;
+			default: assert_not_reached(); break;
 			}
 		}
 

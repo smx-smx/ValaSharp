@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
- * Represents a while iteration statement in the C code.
- */
+	/// <summary>
+	/// Represents a while iteration statement in the C code.
+	/// </summary>
 	public class CCodeWhileStatement : CCodeStatement {
-		/**
-		 * The loop condition.
-		 */
+		/// <summary>
+		/// The loop condition.
+		/// </summary>
 		public CCodeExpression condition { get; set; }
 
-		/**
-		 * The loop body.
-		 */
+		/// <summary>
+		/// The loop body.
+		/// </summary>
 		public CCodeStatement body { get; set; }
 
 		public CCodeWhileStatement(CCodeExpression cond, CCodeStatement stmt = null) {

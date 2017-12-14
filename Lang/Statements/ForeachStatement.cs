@@ -13,14 +13,14 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents a foreach statement in the source code. Foreach statements iterate
-	 * over the elements of a collection.
-	 */
+	/// <summary>
+	/// Represents a foreach statement in the source code. Foreach statements iterate
+	/// over the elements of a collection.
+	/// </summary>
 	public class ForeachStatement : Block {
-		/**
-		 * Specifies the element type.
-		 */
+		/// <summary>
+		/// Specifies the element type.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -31,14 +31,14 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the element variable name.
-		 */
+		/// <summary>
+		/// Specifies the element variable name.
+		/// </summary>
 		public string variable_name { get; set; }
 
-		/**
-		 * Specifies the container.
-		 */
+		/// <summary>
+		/// Specifies the container.
+		/// </summary>
 		public Expression collection {
 			get {
 				return _collection;
@@ -49,9 +49,9 @@ namespace Vala.Lang.Statements {
 			}
 		}
 
-		/**
-		 * Specifies the loop body.
-		 */
+		/// <summary>
+		/// Specifies the loop body.
+		/// </summary>
 		public Block body {
 			get {
 				return _body;
@@ -64,19 +64,19 @@ namespace Vala.Lang.Statements {
 
 		public bool use_iterator { get; private set; }
 
-		/**
-		 * Specifies the declarator for the generated element variable.
-		 */
+		/// <summary>
+		/// Specifies the declarator for the generated element variable.
+		/// </summary>
 		public LocalVariable element_variable { get; set; }
 
-		/**
-		 * Specifies the declarator for the generated collection variable.
-		 */
+		/// <summary>
+		/// Specifies the declarator for the generated collection variable.
+		/// </summary>
 		public LocalVariable collection_variable { get; set; }
 
-		/**
-		 * Specifies the declarator for the generated iterator variable.
-		 */
+		/// <summary>
+		/// Specifies the declarator for the generated iterator variable.
+		/// </summary>
 		public LocalVariable iterator_variable { get; set; }
 
 		private Expression _collection;
@@ -84,16 +84,16 @@ namespace Vala.Lang.Statements {
 
 		private DataType _data_type;
 
-		/**
-		 * Creates a new foreach statement.
-		 *
-		 * @param type_reference    element type
-		 * @param variable_name     element variable name
-		 * @param collection        container
-		 * @param body              loop body
-		 * @param source_reference  reference to source code
-		 * @return                  newly created foreach statement
-		 */
+		/// <summary>
+		/// Creates a new foreach statement.
+		/// 
+		/// <param name="type_reference">element type</param>
+		/// <param name="variable_name">element variable name</param>
+		/// <param name="collection">container</param>
+		/// <param name="body">loop body</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created foreach statement</returns>
+		/// </summary>
 		public ForeachStatement(DataType type_reference, string variable_name, Expression collection, Block body, SourceReference source_reference) : base(source_reference) {
 			this.variable_name = variable_name;
 			this.collection = collection;

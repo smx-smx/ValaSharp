@@ -9,30 +9,30 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang {
-	/**
-	 * Represents a class or instance constructor.
-	 */
+	/// <summary>
+	/// Represents a class or instance constructor.
+	/// </summary>
 	public class Constructor : Subroutine {
-		/**
-		 * Specifies the generated `this` parameter for instance methods.
-		 */
+		/// <summary>
+		/// Specifies the generated `this` parameter for instance methods.
+		/// </summary>
 		public Parameter this_parameter { get; set; }
 
-		/**
-		 * Specifies whether this is an instance or a class constructor.
-		 */
+		/// <summary>
+		/// Specifies whether this is an instance or a class constructor.
+		/// </summary>
 		public MemberBinding binding { get; set; } = MemberBinding.INSTANCE;
 
 		public override bool has_result {
 			get { return false; }
 		}
 
-		/**
-		 * Creates a new constructor.
-		 *
-		 * @param source reference to source code
-		 * @return       newly created constructor
-		 */
+		/// <summary>
+		/// Creates a new constructor.
+		/// 
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created constructor</returns>
+		/// </summary>
 		public Constructor(SourceReference source) : base(null, source) { }
 
 		public override void accept(CodeVisitor visitor) {

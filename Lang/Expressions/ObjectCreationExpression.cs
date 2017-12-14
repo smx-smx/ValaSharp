@@ -14,13 +14,13 @@ using Vala.Lang.Types;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an object creation expression in the source code.
-	 */
+	/// <summary>
+	/// Represents an object creation expression in the source code.
+	/// </summary>
 	public class ObjectCreationExpression : Expression {
-		/**
-		 * The object type to create.
-		 */
+		/// <summary>
+		/// The object type to create.
+		/// </summary>
 		public DataType type_reference {
 			get { return _data_type; }
 			set {
@@ -29,10 +29,10 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * The construction method to use or the data type to be created
-		 * with the default construction method.
-		 */
+		/// <summary>
+		/// The construction method to use or the data type to be created
+		/// with the default construction method.
+		/// </summary>
 		public MemberAccess member_name { get; set; }
 
 		public bool is_yield_expression { get; set; }
@@ -45,52 +45,52 @@ namespace Vala.Lang.Expressions {
 
 		private DataType _data_type;
 
-		/**
-		 * Creates a new object creation expression.
-		 *
-		 * @param member_name      object type to create
-		 * @param source_reference reference to source code
-		 * @return                 newly created object creation expression
-		 */
+		/// <summary>
+		/// Creates a new object creation expression.
+		/// 
+		/// <param name="member_name">object type to create</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created object creation expression</returns>
+		/// </summary>
 		public ObjectCreationExpression(MemberAccess member_name, SourceReference source_reference) {
 			this.source_reference = source_reference;
 			this.member_name = member_name;
 		}
 
-		/**
-		 * Appends the specified expression to the list of arguments.
-		 *
-		 * @param arg an argument
-		 */
+		/// <summary>
+		/// Appends the specified expression to the list of arguments.
+		/// 
+		/// <param name="arg">an argument</param>
+		/// </summary>
 		public void add_argument(Expression arg) {
 			argument_list.Add(arg);
 			arg.parent_node = this;
 		}
 
-		/**
-		 * Returns a copy of the argument list.
-		 *
-		 * @return argument list
-		 */
+		/// <summary>
+		/// Returns a copy of the argument list.
+		/// 
+		/// <returns>argument list</returns>
+		/// </summary>
 		public List<Expression> get_argument_list() {
 			return argument_list;
 		}
 
-		/**
-		 * Appends the specified member initializer to the object initializer.
-		 *
-		 * @param init a member initializer
-		 */
+		/// <summary>
+		/// Appends the specified member initializer to the object initializer.
+		/// 
+		/// <param name="init">a member initializer</param>
+		/// </summary>
 		public void add_member_initializer(MemberInitializer init) {
 			object_initializer.Add(init);
 			init.parent_node = this;
 		}
 
-		/**
-		 * Returns the object initializer.
-		 *
-		 * @return member initializer list
-		 */
+		/// <summary>
+		/// Returns the object initializer.
+		/// 
+		/// <returns>member initializer list</returns>
+		/// </summary>
 		public List<MemberInitializer> get_object_initializer() {
 			return object_initializer;
 		}

@@ -16,15 +16,15 @@ using Vala.Lang.Types;
 using static GLibPorts.GLib;
 
 namespace Vala.Lang.Expressions {
-	/**
-	 * Represents an assignment expression in the source code.
-	 *
-	 * Supports =, |=, &=, ^=, +=, -=, *=, /=, %=, <<=, >>=.
-	 */
+	/// <summary>
+	/// Represents an assignment expression in the source code.
+	/// 
+	/// Supports =, |=, &=, ^=, +=, -=, *=, /=, %=, <<=, >>=.
+	/// </summary>
 	public class Assignment : Expression {
-		/**
-		 * Left hand side of the assignment.
-		 */
+		/// <summary>
+		/// Left hand side of the assignment.
+		/// </summary>
 		public Expression left {
 			get { return _left; }
 			set {
@@ -33,14 +33,14 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Assignment operator.
-		 */
+		/// <summary>
+		/// Assignment operator.
+		/// </summary>
 		public AssignmentOperator Operator { get; set; }
 
-		/**
-		 * Right hand side of the assignment.
-		 */
+		/// <summary>
+		/// Right hand side of the assignment.
+		/// </summary>
 		public Expression right {
 			get { return _right; }
 			set {
@@ -52,15 +52,15 @@ namespace Vala.Lang.Expressions {
 		private Expression _left;
 		private Expression _right;
 
-		/**
-		 * Creates a new assignment.
-		 *
-		 * @param left             left hand side
-		 * @param operator         assignment operator
-		 * @param right            right hand side
-		 * @param source_reference reference to source code
-		 * @return                 newly created assignment
-		 */
+		/// <summary>
+		/// Creates a new assignment.
+		/// 
+		/// <param name="left">left hand side</param>
+		/// <param name="operator">assignment operator</param>
+		/// <param name="right">right hand side</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created assignment</returns>
+		/// </summary>
 		public Assignment(Expression left, Expression right, AssignmentOperator Operator = AssignmentOperator.SIMPLE, SourceReference source_reference = null) {
 			this.right = right;
 			this.Operator = Operator;

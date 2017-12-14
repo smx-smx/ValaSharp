@@ -10,13 +10,13 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Expressions {
-	/**
- * Represents a postfix increment or decrement expression.
- */
+	/// <summary>
+	/// Represents a postfix increment or decrement expression.
+	/// </summary>
 	public class PostfixExpression : Expression {
-		/**
-		 * The operand, must be a variable or a property.
-		 */
+		/// <summary>
+		/// The operand, must be a variable or a property.
+		/// </summary>
 		public Expression inner {
 			get { return _inner; }
 			set {
@@ -25,21 +25,21 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		/**
-		 * Specifies whether value should be incremented or decremented.
-		 */
+		/// <summary>
+		/// Specifies whether value should be incremented or decremented.
+		/// </summary>
 		public bool increment { get; set; }
 
 		private Expression _inner;
 
-		/**
-		 * Creates a new postfix expression.
-		 *
-		 * @param _inner  operand expression
-		 * @param inc     true for increment, false for decrement
-		 * @param source  reference to source code
-		 * @return newly  created postfix expression
-		 */
+		/// <summary>
+		/// Creates a new postfix expression.
+		/// 
+		/// <param name="_inner">operand expression</param>
+		/// <param name="inc">true for increment, false for decrement</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly  created postfix expression</returns>
+		/// </summary>
 		public PostfixExpression(Expression _inner, bool inc, SourceReference source) {
 			inner = _inner;
 			increment = inc;

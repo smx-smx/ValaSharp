@@ -21,9 +21,9 @@ using ValaConfig;
 using static GLibPorts.GLib;
 
 namespace Vala.Lang.Code {
-	/**
-	 * Code visitor generating Vala API file for the public interface.
-	 */
+	/// <summary>
+	/// Code visitor generating Vala API file for the public interface.
+	/// </summary>
 	public class CodeWriter : CodeVisitor {
 		static Regex fix_indent_regex;
 
@@ -46,23 +46,23 @@ namespace Vala.Lang.Code {
 			this.type = type;
 		}
 
-		/**
-		 * Allows overriding of a specific cheader in the output
-		 * @param original orignal cheader to override
-		 * @param replacement cheader to replace original with
-		 */
+		/// <summary>
+		/// Allows overriding of a specific cheader in the output
+		/// <param name="original">orignal cheader to override</param>
+		/// <param name="replacement">cheader to replace original with</param>
+		/// </summary>
 		public void set_cheader_override(string original, string replacement) {
 			header_to_override = original;
 			override_header = replacement;
 		}
 
-		/**
-		 * Writes the public interface of the specified code context into the
-		 * specified file.
-		 *
-		 * @param context  a code context
-		 * @param filename a relative or absolute filename
-		 */
+		/// <summary>
+		/// Writes the public interface of the specified code context into the
+		/// specified file.
+		/// 
+		/// <param name="context">a code context</param>
+		/// <param name="filename">a relative or absolute filename</param>
+		/// </summary>
 		public void write_file(CodeContext context, string filename) {
 			var file_exists = File.Exists(filename);
 			var temp_filename = "%s.valatmp".printf(filename);
@@ -1312,33 +1312,33 @@ namespace Vala.Lang.Code {
 
 		public override void visit_unary_expression(UnaryExpression expr) {
 			switch (expr.Operator) {
-				case UnaryOperator.PLUS:
-					write_string("+");
-					break;
-				case UnaryOperator.MINUS:
-					write_string("-");
-					break;
-				case UnaryOperator.LOGICAL_NEGATION:
-					write_string("!");
-					break;
-				case UnaryOperator.BITWISE_COMPLEMENT:
-					write_string("~");
-					break;
-				case UnaryOperator.INCREMENT:
-					write_string("++");
-					break;
-				case UnaryOperator.DECREMENT:
-					write_string("--");
-					break;
-				case UnaryOperator.REF:
-					write_string("ref ");
-					break;
-				case UnaryOperator.OUT:
-					write_string("out ");
-					break;
-				default:
-					assert_not_reached();
-					break;
+			case UnaryOperator.PLUS:
+				write_string("+");
+				break;
+			case UnaryOperator.MINUS:
+				write_string("-");
+				break;
+			case UnaryOperator.LOGICAL_NEGATION:
+				write_string("!");
+				break;
+			case UnaryOperator.BITWISE_COMPLEMENT:
+				write_string("~");
+				break;
+			case UnaryOperator.INCREMENT:
+				write_string("++");
+				break;
+			case UnaryOperator.DECREMENT:
+				write_string("--");
+				break;
+			case UnaryOperator.REF:
+				write_string("ref ");
+				break;
+			case UnaryOperator.OUT:
+				write_string("out ");
+				break;
+			default:
+				assert_not_reached();
+				break;
 			}
 			expr.inner.accept(this);
 		}
@@ -1383,69 +1383,69 @@ namespace Vala.Lang.Code {
 			expr.left.accept(this);
 
 			switch (expr.Operator) {
-				case BinaryOperator.PLUS:
-					write_string(" + ");
-					break;
-				case BinaryOperator.MINUS:
-					write_string(" - ");
-					break;
-				case BinaryOperator.MUL:
-					write_string(" * ");
-					break;
-				case BinaryOperator.DIV:
-					write_string(" / ");
-					break;
-				case BinaryOperator.MOD:
-					write_string(" % ");
-					break;
-				case BinaryOperator.SHIFT_LEFT:
-					write_string(" << ");
-					break;
-				case BinaryOperator.SHIFT_RIGHT:
-					write_string(" >> ");
-					break;
-				case BinaryOperator.LESS_THAN:
-					write_string(" < ");
-					break;
-				case BinaryOperator.GREATER_THAN:
-					write_string(" > ");
-					break;
-				case BinaryOperator.LESS_THAN_OR_EQUAL:
-					write_string(" <= ");
-					break;
-				case BinaryOperator.GREATER_THAN_OR_EQUAL:
-					write_string(" >= ");
-					break;
-				case BinaryOperator.EQUALITY:
-					write_string(" == ");
-					break;
-				case BinaryOperator.INEQUALITY:
-					write_string(" != ");
-					break;
-				case BinaryOperator.BITWISE_AND:
-					write_string(" & ");
-					break;
-				case BinaryOperator.BITWISE_OR:
-					write_string(" | ");
-					break;
-				case BinaryOperator.BITWISE_XOR:
-					write_string(" ^ ");
-					break;
-				case BinaryOperator.AND:
-					write_string(" && ");
-					break;
-				case BinaryOperator.OR:
-					write_string(" || ");
-					break;
-				case BinaryOperator.IN:
-					write_string(" in ");
-					break;
-				case BinaryOperator.COALESCE:
-					write_string(" ?? ");
-					break;
-				default:
-					assert_not_reached();
-					break;
+			case BinaryOperator.PLUS:
+				write_string(" + ");
+				break;
+			case BinaryOperator.MINUS:
+				write_string(" - ");
+				break;
+			case BinaryOperator.MUL:
+				write_string(" * ");
+				break;
+			case BinaryOperator.DIV:
+				write_string(" / ");
+				break;
+			case BinaryOperator.MOD:
+				write_string(" % ");
+				break;
+			case BinaryOperator.SHIFT_LEFT:
+				write_string(" << ");
+				break;
+			case BinaryOperator.SHIFT_RIGHT:
+				write_string(" >> ");
+				break;
+			case BinaryOperator.LESS_THAN:
+				write_string(" < ");
+				break;
+			case BinaryOperator.GREATER_THAN:
+				write_string(" > ");
+				break;
+			case BinaryOperator.LESS_THAN_OR_EQUAL:
+				write_string(" <= ");
+				break;
+			case BinaryOperator.GREATER_THAN_OR_EQUAL:
+				write_string(" >= ");
+				break;
+			case BinaryOperator.EQUALITY:
+				write_string(" == ");
+				break;
+			case BinaryOperator.INEQUALITY:
+				write_string(" != ");
+				break;
+			case BinaryOperator.BITWISE_AND:
+				write_string(" & ");
+				break;
+			case BinaryOperator.BITWISE_OR:
+				write_string(" | ");
+				break;
+			case BinaryOperator.BITWISE_XOR:
+				write_string(" ^ ");
+				break;
+			case BinaryOperator.AND:
+				write_string(" && ");
+				break;
+			case BinaryOperator.OR:
+				write_string(" || ");
+				break;
+			case BinaryOperator.IN:
+				write_string(" in ");
+				break;
+			case BinaryOperator.COALESCE:
+				write_string(" ?? ");
+				break;
+			default:
+				assert_not_reached();
+				break;
 			}
 
 			expr.right.accept(this);
@@ -1606,22 +1606,22 @@ namespace Vala.Lang.Code {
 
 		private bool check_accessibility(Symbol sym) {
 			switch (type) {
-				case CodeWriterType.EXTERNAL:
-					return sym.access == SymbolAccessibility.PUBLIC ||
-						   sym.access == SymbolAccessibility.PROTECTED;
+			case CodeWriterType.EXTERNAL:
+				return sym.access == SymbolAccessibility.PUBLIC ||
+					   sym.access == SymbolAccessibility.PROTECTED;
 
-				case CodeWriterType.INTERNAL:
-				case CodeWriterType.FAST:
-					return sym.access == SymbolAccessibility.INTERNAL ||
-						   sym.access == SymbolAccessibility.PUBLIC ||
-						   sym.access == SymbolAccessibility.PROTECTED;
+			case CodeWriterType.INTERNAL:
+			case CodeWriterType.FAST:
+				return sym.access == SymbolAccessibility.INTERNAL ||
+					   sym.access == SymbolAccessibility.PUBLIC ||
+					   sym.access == SymbolAccessibility.PROTECTED;
 
-				case CodeWriterType.DUMP:
-					return true;
+			case CodeWriterType.DUMP:
+				return true;
 
-				default:
-					assert_not_reached();
-					return false;
+			default:
+				assert_not_reached();
+				return false;
 			}
 		}
 

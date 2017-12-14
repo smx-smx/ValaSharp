@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Expressions {
-	/**
-	 * Represents a type cast in the generated C code.
-	 */
+	/// <summary>
+	/// Represents a type cast in the generated C code.
+	/// </summary>
 	public class CCodeCastExpression : CCodeExpression {
-		/**
-		 * The expression to be cast.
-		 */
+		/// <summary>
+		/// The expression to be cast.
+		/// </summary>
 		public CCodeExpression inner { get; set; }
 
-		/**
-		 * The target type.
-		 */
+		/// <summary>
+		/// The target type.
+		/// </summary>
 		public string type_name { get; set; }
 
 		public CCodeCastExpression(CCodeExpression expr, string type) {

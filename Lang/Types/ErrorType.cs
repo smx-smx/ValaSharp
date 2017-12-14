@@ -9,16 +9,16 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * A class type.
-	 */
+	/// <summary>
+	/// A class type.
+	/// </summary>
 	public class ErrorType : ReferenceType {
 		private WeakReference<ErrorDomain> error_domain_weak = new WeakReference<ErrorDomain>(null);
 		private WeakReference<ErrorCode> error_code_weak = new WeakReference<ErrorCode>(null);
 
-		/**
-		 * The error domain or null for generic error.
-		 */
+		/// <summary>
+		/// The error domain or null for generic error.
+		/// </summary>
 		public ErrorDomain error_domain {
 			get {
 				return error_domain_weak.GetTarget();
@@ -28,9 +28,9 @@ namespace Vala.Lang.Types {
 			}
 		}
 
-		/**
-		 * The error code or null for generic error.
-		 */
+		/// <summary>
+		/// The error code or null for generic error.
+		/// </summary>
 		public ErrorCode error_code {
 			get {
 				return error_code_weak.GetTarget();

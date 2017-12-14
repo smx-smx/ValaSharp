@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * A floating-point type.
-	 */
+	/// <summary>
+	/// A floating-point type.
+	/// </summary>
 	public class FloatingType : ValaValueType {
 		public FloatingType(Struct type_symbol) : base(type_symbol) {
 		}

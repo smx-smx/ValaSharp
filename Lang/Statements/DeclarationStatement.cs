@@ -10,17 +10,17 @@ using Vala.Lang.Symbols;
 using Vala.Lang.Types;
 
 namespace Vala.Lang.Statements {
-	/**
-	 * Represents a local variable or constant declaration statement in the source code.
-	 */
+	/// <summary>
+	/// Represents a local variable or constant declaration statement in the source code.
+	/// </summary>
 	public class DeclarationStatement : CodeNode, Statement {
 		public CodeNode node {
 			get { return this; }
 		}
 
-		/**
-		 * The local variable or constant declaration.
-		 */
+		/// <summary>
+		/// The local variable or constant declaration.
+		/// </summary>
 		public Symbol declaration {
 			get {
 				return _declaration;
@@ -35,13 +35,13 @@ namespace Vala.Lang.Statements {
 
 		Symbol _declaration;
 
-		/**
-		 * Creates a new declaration statement.
-		 *
-		 * @param declaration       local variable declaration
-		 * @param source_reference  reference to source code
-		 * @return                  newly created declaration statement
-		 */
+		/// <summary>
+		/// Creates a new declaration statement.
+		/// 
+		/// <param name="declaration">local variable declaration</param>
+		/// <param name="source_reference">reference to source code</param>
+		/// <returns>newly created declaration statement</returns>
+		/// </summary>
 		public DeclarationStatement(Symbol declaration, SourceReference source_reference) {
 			this.declaration = declaration;
 			this.source_reference = source_reference;

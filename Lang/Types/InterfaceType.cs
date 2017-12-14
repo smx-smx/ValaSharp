@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * An interface type.
-	 */
+	/// <summary>
+	/// An interface type.
+	/// </summary>
 	public class InterfaceType : ReferenceType {
 		private WeakReference<Interface> interface_symbol_weak = new WeakReference<Interface>(null);
 
-		/**
-		 * The referred interface.
-		 */
+		/// <summary>
+		/// The referred interface.
+		/// </summary>
 		public Interface interface_symbol {
 			get {
 				return interface_symbol_weak.GetTarget();

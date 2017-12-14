@@ -14,9 +14,9 @@ using Vala.Lang.TypeSymbols;
 using static GLibPorts.GLib;
 
 namespace CCodeGen {
-	/**
- * Cache for the CCode attribute
- */
+	/// <summary>
+	/// Cache for the CCode attribute
+	/// </summary>
 	public class CCodeAttribute : AttributeCache {
 		private CodeNode node;
 		private Symbol sym;

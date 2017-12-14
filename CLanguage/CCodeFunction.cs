@@ -9,35 +9,35 @@ using System.Threading.Tasks;
 using Vala;
 
 namespace CLanguage {
-	/**
- * Represents a function declaration in the C code.
- */
+	/// <summary>
+	/// Represents a function declaration in the C code.
+	/// </summary>
 	public class CCodeFunction : CCodeNode {
-		/**
-		 * The name of this function.
-		 */
+		/// <summary>
+		/// The name of this function.
+		/// </summary>
 		public string name { get; set; }
 
-		/**
-		 * The function return type.
-		 */
+		/// <summary>
+		/// The function return type.
+		/// </summary>
 		public string return_type { get; set; }
 
 		public bool is_declaration { get; set; }
 
-		/**
-		 * The function body.
-		 */
+		/// <summary>
+		/// The function body.
+		/// </summary>
 		public CCodeBlock block { get; set; }
 
-		/**
-		 * The current line directive.
-		 */
+		/// <summary>
+		/// The current line directive.
+		/// </summary>
 		public CCodeLineDirective current_line { get; set; }
 
-		/**
-		 * The current block to be written into.
-		 */
+		/// <summary>
+		/// The current block to be written into.
+		/// </summary>
 		public CCodeBlock current_block { get; set; }
 
 		private List<CCodeParameter> parameters = new List<CCodeParameter>();
@@ -51,11 +51,11 @@ namespace CLanguage {
 			current_block = block;
 		}
 
-		/**
-		 * Appends the specified parameter to the list of function parameters.
-		 *
-		 * @param param a formal parameter
-		 */
+		/// <summary>
+		/// Appends the specified parameter to the list of function parameters.
+		/// 
+		/// <param name="param">a formal parameter</param>
+		/// </summary>
 		public void add_parameter(CCodeParameter param) {
 			parameters.Add(param);
 		}
@@ -72,11 +72,11 @@ namespace CLanguage {
 			return parameters[position];
 		}
 
-		/**
-		 * Returns a copy of this function.
-		 *
-		 * @return copied function
-		 */
+		/// <summary>
+		/// Returns a copy of this function.
+		/// 
+		/// <returns>copied function</returns>
+		/// </summary>
 		public CCodeFunction copy() {
 			var func = new CCodeFunction(name, return_type);
 			func.modifiers = modifiers;

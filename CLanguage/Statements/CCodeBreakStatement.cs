@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
-	 * Represents a break statement in the C code.
-	 */
+	/// <summary>
+	/// Represents a break statement in the C code.
+	/// </summary>
 	public class CCodeBreakStatement : CCodeStatement {
 		public override void write(CCodeWriter writer) {
 			writer.write_indent(line);

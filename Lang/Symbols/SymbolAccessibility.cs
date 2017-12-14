@@ -16,17 +16,17 @@ namespace Vala.Lang.Symbols {
 	public static class SymbolAccessibilityExtensions {
 		public static string ToString(this SymbolAccessibility @this) {
 			switch (@this) {
-				case SymbolAccessibility.PROTECTED:
-					return "protected";
+			case SymbolAccessibility.PROTECTED:
+				return "protected";
 
-				case SymbolAccessibility.INTERNAL:
-					return "internal";
+			case SymbolAccessibility.INTERNAL:
+				return "internal";
 
-				case SymbolAccessibility.PRIVATE:
-					return "private";
+			case SymbolAccessibility.PRIVATE:
+				return "private";
 
-				case SymbolAccessibility.PUBLIC:
-					return "public";
+			case SymbolAccessibility.PUBLIC:
+				return "public";
 			}
 			assert_not_reached();
 			return null;

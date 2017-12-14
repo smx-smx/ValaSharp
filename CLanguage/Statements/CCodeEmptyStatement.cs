@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage.Statements {
-	/**
- * Represents an empty statement in the C code.
- */
+	/// <summary>
+	/// Represents an empty statement in the C code.
+	/// </summary>
 	public class CCodeEmptyStatement : CCodeStatement {
 		public override void write(CCodeWriter writer) {
 			writer.write_indent();

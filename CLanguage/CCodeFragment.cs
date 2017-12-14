@@ -5,26 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
- * Represents a container for C code nodes.
- */
+	/// <summary>
+	/// Represents a container for C code nodes.
+	/// </summary>
 	public class CCodeFragment : CCodeNode {
 		private List<CCodeNode> children = new List<CCodeNode>();
 
-		/**
-		 * Appends the specified code node to this code fragment.
-		 *
-		 * @param node a C code node
-		 */
+		/// <summary>
+		/// Appends the specified code node to this code fragment.
+		/// 
+		/// <param name="node">a C code node</param>
+		/// </summary>
 		public void append(CCodeNode node) {
 			children.Add(node);
 		}
 
-		/**
-		 * Returns a copy of the list of children.
-		 *
-		 * @return children list
-		 */
+		/// <summary>
+		/// Returns a copy of the list of children.
+		/// 
+		/// <returns>children list</returns>
+		/// </summary>
 		public List<CCodeNode> get_children() {
 			return children;
 		}

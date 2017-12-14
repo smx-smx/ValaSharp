@@ -8,25 +8,25 @@ using Vala.Lang.Parser;
 using Vala.Lang.Symbols;
 
 namespace Vala.Lang.Types {
-	/**
-	 * An unresolved reference to a data type.
-	 */
+	/// <summary>
+	/// An unresolved reference to a data type.
+	/// </summary>
 	public class UnresolvedType : DataType {
-		/**
-		 * The unresolved reference to a type symbol.
-		 */
+		/// <summary>
+		/// The unresolved reference to a type symbol.
+		/// </summary>
 		public UnresolvedSymbol unresolved_symbol { get; set; }
 
 		public UnresolvedType() {
 		}
 
-		/**
-		 * Creates a new type reference.
-		 *
-		 * @param symbol    unresolved type symbol
-		 * @param source    reference to source code
-		 * @return          newly created type reference
-		 */
+		/// <summary>
+		/// Creates a new type reference.
+		/// 
+		/// <param name="symbol">unresolved type symbol</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created type reference</returns>
+		/// </summary>
 		public static UnresolvedType from_symbol(UnresolvedSymbol symbol, SourceReference source = null) {
 			UnresolvedType @this = new UnresolvedType();
 			@this.unresolved_symbol = symbol;
@@ -34,12 +34,12 @@ namespace Vala.Lang.Types {
 			return @this;
 		}
 
-		/**
-		 * Creates a new type reference from a code expression.
-		 *
-		 * @param expr   member access expression
-		 * @return       newly created type reference
-		 */
+		/// <summary>
+		/// Creates a new type reference from a code expression.
+		/// 
+		/// <param name="expr">member access expression</param>
+		/// <returns>newly created type reference</returns>
+		/// </summary>
 		public static UnresolvedType new_from_expression(Expression expr) {
 			var sym = UnresolvedSymbol.new_from_expression(expr);
 

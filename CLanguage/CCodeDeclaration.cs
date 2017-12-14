@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLanguage {
-	/**
-	 * Represents a local variable declaration in the C code.
-	 */
+	/// <summary>
+	/// Represents a local variable declaration in the C code.
+	/// </summary>
 	public class CCodeDeclaration : CCodeStatement {
-		/**
-		 * The type of the local variable.
-		 */
+		/// <summary>
+		/// The type of the local variable.
+		/// </summary>
 		public string type_name { get; set; }
 
 		private List<CCodeDeclarator> declarators = new List<CCodeDeclarator>();
@@ -20,11 +20,11 @@ namespace CLanguage {
 			this.type_name = type_name;
 		}
 
-		/**
-		 * Adds the specified declarator to this declaration.
-		 *
-		 * @param decl a declarator
-		 */
+		/// <summary>
+		/// Adds the specified declarator to this declaration.
+		/// 
+		/// <param name="decl">a declarator</param>
+		/// </summary>
 		public void add_declarator(CCodeDeclarator decl) {
 			declarators.Add(decl);
 		}

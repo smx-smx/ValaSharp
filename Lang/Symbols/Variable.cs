@@ -10,9 +10,9 @@ using Vala.Lang.Types;
 
 namespace Vala.Lang.Symbols {
 	public class Variable : Symbol {
-		/**
-	 * The optional initializer expression.
-	 */
+		/// <summary>
+		/// The optional initializer expression.
+		/// </summary>
 		public Expression initializer {
 			get {
 				return _initializer;
@@ -25,9 +25,9 @@ namespace Vala.Lang.Symbols {
 			}
 		}
 
-		/**
-		 * The variable type.
-		 */
+		/// <summary>
+		/// The variable type.
+		/// </summary>
 		public DataType variable_type {
 			get { return _variable_type; }
 			set {

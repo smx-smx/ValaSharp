@@ -8,22 +8,22 @@ using Vala.Lang.CodeNodes;
 using Vala.Lang.Parser;
 
 namespace Vala.Lang.Literals {
-	/**
-	 * Represents a literal boolean, i.e. true or false.
-	 */
+	/// <summary>
+	/// Represents a literal boolean, i.e. true or false.
+	/// </summary>
 	public class BooleanLiteral : Literal {
-		/**
-		 * The literal value.
-		 */
+		/// <summary>
+		/// The literal value.
+		/// </summary>
 		public bool value { get; set; }
 
-		/**
-		 * Creates a new boolean literal.
-		 *
-		 * @param b      boolean value
-		 * @param source reference to source code
-		 * @return       newly created boolean literal
-		 */
+		/// <summary>
+		/// Creates a new boolean literal.
+		/// 
+		/// <param name="b">boolean value</param>
+		/// <param name="source">reference to source code</param>
+		/// <returns>newly created boolean literal</returns>
+		/// </summary>
 		public BooleanLiteral(bool b, SourceReference source = null) {
 			value = b;
 			source_reference = source;

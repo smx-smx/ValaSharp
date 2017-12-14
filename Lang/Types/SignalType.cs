@@ -9,9 +9,9 @@ using Vala.Lang.Symbols;
 using Vala.Lang.TypeSymbols;
 
 namespace Vala.Lang.Types {
-	/**
- * The type of a signal referencea.
- */
+	/// <summary>
+	/// The type of a signal referencea.
+	/// </summary>
 	public class SignalType : DataType {
 		public Signal signal_symbol { get; set; }
 
