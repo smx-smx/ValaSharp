@@ -531,9 +531,11 @@ namespace Vala.Lang.CodeNodes {
 			return filename;
 		}
 
-		/*
-		 * Returns the .metadata file associated with the given .gir file.
-		 */
+		/// <summary>
+		/// Returns the .metadata file associated with the given .gir file.
+		/// </summary>
+		/// <param name="gir_filename"></param>
+		/// <returns></returns>
 		public string get_metadata_path(string gir_filename) {
 			var basename = Path.GetFileName(gir_filename);
 			var metadata_basename = "%s.metadata".printf(basename.Substring(0, basename.Length - ".gir".Length));
