@@ -166,7 +166,7 @@ namespace ValaCompilerLib {
 					(value) => { ccode_only = value; }
 				),
 				new OptionEntry<bool>(
-					null, 'n', 0, OptionArg.NONE,
+					"dry-run", 'n', 0, OptionArg.NONE,
 					"Dry Run", null,
 					(value) => { dry_run = value; }
 				),
