@@ -3553,19 +3553,18 @@ namespace Vala.Lang.Parser {
 	}
 
 	public class ParseException : Exception {
-		private ParseError err;
-		private string message;
-		private object p;
-		private ParseError error_type;
+		public ParseError err;
+		public ParseError error_type;
+		public new string Message;
 
 		public ParseException(ParseError error_type, string message) {
 			this.error_type = error_type;
-			this.message = message;
+			Message = message;
 		}
 
 		public ParseException(ParseError err, string format, params VariableArgument[] args) {
 			this.err = err;
-			this.message = message.printf(args);
+			Message = format.printf(args);
 		}
 	}
 
