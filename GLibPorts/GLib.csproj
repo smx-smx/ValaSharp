@@ -52,13 +52,13 @@
     <Compile Include="FileUtils.cs" />
     <Compile Include="GChar.cs" />
     <Compile Include="GEnvironment.cs" />
+    <Compile Include="GLib.cs" />
     <Compile Include="GProcess.cs" />
     <Compile Include="gstring.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleFlags.cs" />
     <Compile Include="Native\File.cs" />
-    <Compile Include="Native\Utils.cs" />
     <Compile Include="Native\Varargs.cs" />
     <Compile Include="Native\Win32.cs" />
     <Compile Include="GPath.cs" />

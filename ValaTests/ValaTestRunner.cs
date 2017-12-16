@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using GLibPorts;
 using NUnit.Framework;
 using ValaCompilerLib;
 
@@ -14,7 +15,11 @@ namespace ValaTests {
 		private string vapiDir;
 
 		static ValaTestRunner() {
-			GLibPorts.Native.Utils.GLibInitialize();
+			GLib.GLibInitialize();
+		}
+
+		~ValaTestRunner() {
+			GLib.GLibDispose();
 		}
 
 		public ValaTestRunner() {

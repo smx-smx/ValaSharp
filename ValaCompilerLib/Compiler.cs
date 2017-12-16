@@ -1,5 +1,6 @@
 ﻿using CCodeGen;
 using CCodeGen.Modules;
+using GLibPorts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -445,7 +446,7 @@ namespace ValaCompilerLib {
 		}
 
 		public void Dispose() {
-			GLibPorts.Native.Utils.GLibDispose();
+			GLib.GLibDispose();
 			context = null;
 			CodeContext.DisposeStatic();
 		}

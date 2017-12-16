@@ -29,7 +29,7 @@ namespace ValaCompiler {
 		private CodeContext context;
 
 		static int Main(string[] args) {
-			GLibPorts.Native.Utils.GLibInitialize();
+			GLibInitialize();
 
 			CompilerOptions opts = new CompilerOptions();
 			opts.parse_args(args);
@@ -62,7 +62,7 @@ namespace ValaCompiler {
 			var compiler = new Compiler(opts);
 			int result = compiler.run();
 
-			GLibPorts.Native.Utils.GLibDispose();
+			GLibDispose();
 			return result;
 		}
 	}
