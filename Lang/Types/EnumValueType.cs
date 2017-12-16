@@ -27,7 +27,7 @@ namespace Vala.Lang.Types {
 			if (ToString_method == null) {
 				var string_type = new ObjectType((Class)CodeContext.get().root.scope.lookup("string"));
 				string_type.value_owned = false;
-				ToString_method = new Method("ToString", string_type);
+				ToString_method = new Method("to_string", string_type);
 				ToString_method.access = SymbolAccessibility.PUBLIC;
 				ToString_method.external = true;
 				ToString_method.owner = type_symbol.scope;
@@ -39,7 +39,7 @@ namespace Vala.Lang.Types {
 
 		public override Symbol get_member(string member_name) {
 			var result = base.get_member(member_name);
-			if (result == null && member_name == "ToString") {
+			if (result == null && member_name == "to_string") {
 				return get_ToString_method();
 			}
 			return result;
