@@ -21,7 +21,7 @@ namespace GLibPorts {
 			public static void InitializeStatic() {
 				DisposeStatic();
 				if (Utils.IsUnix()) {
-					Native.Unix.UnixFileStream.InitilizeStatic();
+					Native.Unix.UnixFileStream.InitializeStatic();
 				} else {
 					Native.Win32.Win32FileStream.InitializeStatic();
 				}

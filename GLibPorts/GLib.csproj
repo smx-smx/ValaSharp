@@ -53,7 +53,7 @@
     <Compile Include="Native\IModuleLoader.cs" />
     <Compile Include="Native\Platform.cs" />
     <Compile Include="Native\IStrings.cs" />
-    <Compile Include="Native\Unix\FileStream.cs" />
+    <Compile Include="Native\Unix\UnixFileStream.cs" />
     <Compile Include="Native\Unix\UnixModuleLoader.cs" />
     <Compile Include="Native\Unix\UnixStrings.cs" />
     <Compile Include="Native\Varargs\IVariableCombiner.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Native\Varargs\VariableIntegerArgument.cs" />
     <Compile Include="Native\Varargs\VariableStringArgument.cs" />
     <Compile Include="Native\Varargs\Win32VariableCombiner.cs" />
-    <Compile Include="Native\Win32\FileStream.cs" />
+    <Compile Include="Native\Win32\Win32FileStream.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="GChar.cs" />
     <Compile Include="GEnvironment.cs" />

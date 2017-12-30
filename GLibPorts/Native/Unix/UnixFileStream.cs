@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 
 namespace GLibPorts.Native.Unix {
-	public class UnixFileStream : IFileStream {
+	public class UnixFileStream : IFileStream, IDisposable {
 		private IntPtr stream;
+		private bool _disposed;
 
 		internal UnixFileStream(IntPtr streamHandle) {
 			stream = streamHandle;
 		}
 
-		public static void InitilizeStatic() {
+		public static void InitializeStatic() {
 			GLib.FileStream.stdin = new UnixFileStream(GLib.File.stdin);
 			GLib.FileStream.stderr = new UnixFileStream(GLib.File.stderr);
 			GLib.FileStream.stdout = new UnixFileStream(GLib.File.stdout);
 		}
 
 		public void Dispose() {
-			if(stream != IntPtr.Zero) {
+			if(!_disposed && stream != IntPtr.Zero) {
+				_disposed = true;
 				NativeImports.fclose(stream);
 				stream = IntPtr.Zero;
 			}

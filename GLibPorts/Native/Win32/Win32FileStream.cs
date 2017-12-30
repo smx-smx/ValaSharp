@@ -7,7 +7,7 @@ using GLibPorts.Native;
 using GLibPorts.Native.Varargs;
 
 namespace GLibPorts.Native.Win32 {
-	public class Win32FileStream : IFileStream {
+	public class Win32FileStream : IFileStream, IDisposable {
 		private IntPtr stream;
 
 		internal Win32FileStream(IntPtr streamHandle) {

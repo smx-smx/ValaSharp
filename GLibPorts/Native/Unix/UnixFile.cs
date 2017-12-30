@@ -14,7 +14,7 @@ namespace GLibPorts.Native.Unix {
 			int copy_fd = dup(fd);
 
 			// Open Copy
-			return fdopen(fd, mode);
+			return fdopen(copy_fd, mode);
 		}
 
 		public static void InitializeStatic() {
@@ -25,19 +25,12 @@ namespace GLibPorts.Native.Unix {
 		}
 
 		public static void DisposeStatic() {
-			if (GLib.File.stdin != IntPtr.Zero)
-				fclose(GLib.File.stdin);
-
-			if (GLib.File.stderr != IntPtr.Zero)
-				fclose(GLib.File.stderr);
-
-			if (GLib.File.stdout != IntPtr.Zero)
-				fclose(GLib.File.stdout);
-
-			GLib.File.stdin = IntPtr.Zero;
-			GLib.File.stderr = IntPtr.Zero;
-			GLib.File.stdout = IntPtr.Zero;
-
+			/*
+			 * This is a no-op on Unix.
+			 * The reason is that on Windows a handle copy is a separate handle
+			 * On Unix a handle copy (dup) refers to the same stream.
+			 * This means we free stdout/stdin/stderr in UnixFileStream instead
+			 */
 		}
 
 		public static int fprintf(IntPtr handle, string format, params VariableArgument[] args) {

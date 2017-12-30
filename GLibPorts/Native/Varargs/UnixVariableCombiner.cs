@@ -14,8 +14,9 @@ namespace GLibPorts.Native.Varargs {
 		public IntPtr reg_save_area;
 	}
 
-	public class UnixVariableCombiner : Win32VariableCombiner{
-		private IntPtr _va_list_ptr;
+	public class UnixVariableCombiner : Win32VariableCombiner, IDisposable {
+		private IntPtr _va_list_ptr = IntPtr.Zero;
+		private bool _disposed;
 
 		public UnixVariableCombiner(VariableArgument[] args) : base(args) {
 		}
@@ -29,6 +30,9 @@ namespace GLibPorts.Native.Varargs {
 				va_list.fp_offset = va_list.gp_offset + 256; //16 fp registers * 16 bytes
 				va_list.reg_save_area = IntPtr.Zero;
 				va_list.overflow_arg_area = base.GetPtr();
+			} else {
+				base.Build();
+				return;
 			}
 
 			_va_list_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(va_list));
@@ -46,10 +50,15 @@ namespace GLibPorts.Native.Varargs {
 		}
 
 		public override void Dispose() {
-			base.Dispose();
+			if(!_disposed){
+				_disposed = true;
+				base.Dispose();
 
-			if (_va_list_ptr != IntPtr.Zero)
-				Marshal.FreeHGlobal(_va_list_ptr);
+				if (_va_list_ptr != IntPtr.Zero){
+					Marshal.FreeHGlobal(_va_list_ptr);
+					_va_list_ptr = IntPtr.Zero;
+				}
+			}
 		}
 	}
 }
