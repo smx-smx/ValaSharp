@@ -41,11 +41,13 @@ namespace Vala {
 			if (!args.Any())
 				return format;
 
-			using (var combinedVariables = Platform.MakeVariableCombiner(args)) {
-				var bufferCapacity = Platform.Strings.vscprintf(format, combinedVariables.GetPtr());
+			using (var combined1 = Platform.MakeVariableCombiner(args))
+			using (var combined2 = Platform.MakeVariableCombiner(args))
+			{
+				var bufferCapacity = Platform.Strings.vscprintf(format, combined1.GetPtr());
 				var stringBuilder = new StringBuilder(bufferCapacity + 1);
 
-				Platform.Strings.sprintf(stringBuilder, format, combinedVariables.GetPtr());
+				Platform.Strings.sprintf(stringBuilder, format, combined2.GetPtr());
 
 				return stringBuilder.ToString();
 			}
