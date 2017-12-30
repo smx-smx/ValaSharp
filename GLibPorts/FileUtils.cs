@@ -23,16 +23,50 @@ namespace GLibPorts {
 				length = (ulong)contents.Length;
 				return true;
 			}
+			
+			//TODO(Smx) make an interface for the calls below
+			private static void close_unix(int outputfd) {
+				Native.Unix.NativeImports.close(outputfd);
+			}
+
+			private static void close_win32(int outputfd) {
+				Native.Win32.NativeImports._close(outputfd);
+			}
+
+			private static int mkstemp_unix(string template, out string filename) {
+				filename = Native.Unix.NativeImports.mktemp(template);
+				if (filename == null)
+					return -1;
+				return Native.Unix.NativeImports.open(
+					filename,
+					Native.Unix.NativeImports.O_RDWR | Native.Unix.NativeImports.O_CREAT,
+					0700
+				);
+			}
+
+			private static int mkstemp_win32(string template, out string filename) {
+				filename = Native.Win32.NativeImports.mktemp(template);
+				if (filename == null)
+					return -1;
+				return Native.Win32.NativeImports._open(
+					filename,
+					Native.Win32.NativeImports._O_RDWR | Native.Win32.NativeImports._O_CREAT,
+					0700
+				);
+			}
 
 			public static void close(int outputfd) {
-				Win32._close(outputfd);
+				if (Utils.IsUnix())
+					close_unix(outputfd);
+				else
+					close_win32(outputfd);
 			}
 
 			public static int mkstemp(string template, out string filename) {
-				filename = Win32.mktemp(template);
-				if (filename == null)
-					return -1;
-				return Win32._open(filename, Win32._O_RDWR | Win32._O_CREAT, 0700);
+				if (Utils.IsUnix())
+					return mkstemp_unix(template, out filename);
+				else
+					return mkstemp_win32(template, out filename);
 			}
 		}
 	}

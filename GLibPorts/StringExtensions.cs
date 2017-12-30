@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GLibPorts.Native;
+using GLibPorts.Native.Varargs;
 
 namespace Vala {
 	public static class StringExtensions {
@@ -40,11 +41,11 @@ namespace Vala {
 			if (!args.Any())
 				return format;
 
-			using (var combinedVariables = new CombinedVariables(args)) {
-				var bufferCapacity = Win32._vscprintf(format, combinedVariables.GetPtr());
+			using (var combinedVariables = Platform.MakeVariableCombiner(args)) {
+				var bufferCapacity = Platform.Strings.vscprintf(format, combinedVariables.GetPtr());
 				var stringBuilder = new StringBuilder(bufferCapacity + 1);
 
-				Win32.vsprintf(stringBuilder, format, combinedVariables.GetPtr());
+				Platform.Strings.sprintf(stringBuilder, format, combinedVariables.GetPtr());
 
 				return stringBuilder.ToString();
 			}

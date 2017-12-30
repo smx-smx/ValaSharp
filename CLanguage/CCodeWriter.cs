@@ -1,4 +1,5 @@
 ﻿using GLibPorts;
+using GLibPorts.Native;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,7 +45,7 @@ namespace CLanguage {
 		private string temp_filename;
 		private bool file_exists;
 
-		private GLib.FileStream stream;
+		private IFileStream stream;
 
 		private int indent;
 		private int current_line_number = 1;

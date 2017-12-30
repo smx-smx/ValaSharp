@@ -1,4 +1,5 @@
 ﻿using GLibPorts;
+using GLibPorts.Native;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,7 @@ namespace Vala.Lang.Code {
 
 		private CodeContext context;
 
-		GLib.FileStream stream;
+		IFileStream stream;
 
 		int indent;
 		/* at begin of line */

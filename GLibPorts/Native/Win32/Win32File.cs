@@ -1,18 +1,15 @@
-﻿using System;
+﻿using GLibPorts.Native.Varargs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using static GLibPorts.Native.Win32;
+using static GLibPorts.Native.Win32.NativeImports;
 
-namespace GLibPorts.Native {
-	public class File {
-		public static IntPtr stdin;
-		public static IntPtr stderr;
-		public static IntPtr stdout;
-
+namespace GLibPorts.Native.Win32 {
+	public class Win32File {
 		private static IntPtr openFile(int handle, string mode) {
 			// Get Handle
 			IntPtr handlePtr = GetStdHandle(handle);
@@ -32,29 +29,29 @@ namespace GLibPorts.Native {
 
 		public static void InitializeStatic() {
 			DisposeStatic();
-			stdin = openFile(STD_INPUT_HANDLE, "r");
-			stdout = openFile(STD_OUTPUT_HANDLE, "w");
-			stderr = openFile(STD_ERROR_HANDLE, "w");
+			GLib.File.stdin = openFile(STD_INPUT_HANDLE, "r");
+			GLib.File.stdout = openFile(STD_OUTPUT_HANDLE, "w");
+			GLib.File.stderr = openFile(STD_ERROR_HANDLE, "w");
 		}
 
 		public static void DisposeStatic() {
-			if (stdin != IntPtr.Zero)
-				fclose(stdin);
+			if (GLib.File.stdin != IntPtr.Zero)
+				fclose(GLib.File.stdin);
 
-			if (stderr != IntPtr.Zero)
-				fclose(stderr);
+			if (GLib.File.stderr != IntPtr.Zero)
+				fclose(GLib.File.stderr);
 
-			if (stdout != IntPtr.Zero)
-				fclose(stdout);
+			if (GLib.File.stdout != IntPtr.Zero)
+				fclose(GLib.File.stdout);
 
-			stdin = IntPtr.Zero;
-			stderr = IntPtr.Zero;
-			stdout = IntPtr.Zero;
+			GLib.File.stdin = IntPtr.Zero;
+			GLib.File.stderr = IntPtr.Zero;
+			GLib.File.stdout = IntPtr.Zero;
 
 		}
 
 		public static int fprintf(IntPtr handle, string format, params VariableArgument[] args) {
-			using (var combinedVariables = new CombinedVariables(args)) {
+			using (var combinedVariables = Platform.MakeVariableCombiner(args)) {
 				return vfprintf_s(handle, format, combinedVariables.GetPtr());
 			}
 		}

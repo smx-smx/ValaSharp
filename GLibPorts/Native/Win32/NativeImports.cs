@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLibPorts.Native {
-	internal class Win32 {
+namespace GLibPorts.Native.Win32 {
+	internal class NativeImports {
 		public const int STD_INPUT_HANDLE = -10;
 		public const int STD_OUTPUT_HANDLE = -11;
 		public const int STD_ERROR_HANDLE = -12;

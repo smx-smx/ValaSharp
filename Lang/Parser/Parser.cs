@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GLibPorts.Native;
+using GLibPorts.Native.Varargs;
 using Vala.Lang.CodeNodes;
 using Vala.Lang.Expressions;
 using Vala.Lang.Literals;

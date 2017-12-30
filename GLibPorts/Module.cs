@@ -16,12 +16,18 @@ namespace GLibPorts {
 				this.handle = handle;
 			}
 
+			private static IModuleLoader loader {
+				get {
+					return Platform.ModuleLoader;
+				}
+			}
+
 			public static Module open(string file_name, ModuleFlags flags) {
 				IntPtr handle = IntPtr.Zero;
 				if (file_name == null) {
-					handle = Win32.GetModuleHandle(null);
+					handle = loader.GetModuleHandle(null);
 				} else {
-					handle = Win32.LoadLibrary(file_name);
+					handle = loader.LoadLibrary(file_name);
 				}
 
 				if (handle == IntPtr.Zero)
@@ -31,12 +37,12 @@ namespace GLibPorts {
 			}
 
 			public void symbol(string symbol_name, out IntPtr symbol) {
-				symbol = Win32.GetProcAddress(handle, symbol_name);
+				symbol = loader.GetProcAddress(handle, symbol_name);
 			}
 
 			public void Dispose() {
 				if (handle != IntPtr.Zero) {
-					Win32.FreeLibrary(handle);
+					loader.FreeLibrary(handle);
 					handle = IntPtr.Zero;
 				}
 			}
