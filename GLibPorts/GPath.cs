@@ -12,15 +12,7 @@ namespace GLibPorts {
 				if (file_name == null || file_name.Length < 1)
 					return false;
 
-				if (file_name[0] == System.IO.Path.DirectorySeparatorChar)
-					return true;
-
-				//TODO: test System.IO.Path.IsPathRooted
-				if (!Utils.IsUnix() &&
-					Char.IsLetter(file_name[0]) &&
-					file_name[1] == ':' && file_name[2] == System.IO.Path.DirectorySeparatorChar)
-					return true;
-				return false;
+				return Path.IsPathRooted(file_name);
 			}
 
 			public static string build_path(string separator, params string[] parts) {
