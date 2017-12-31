@@ -114,7 +114,7 @@ namespace CCodeGen.Modules {
 			ccritical.add_argument(new CCodeConstant("__FILE__"));
 			ccritical.add_argument(new CCodeConstant("__LINE__"));
 			ccritical.add_argument(CCodeMemberAccess.pointer(inner_error, "message"));
-			var domain_name = new CCodeFunctionCall(new CCodeIdentifier("g_quark_ToString"));
+			var domain_name = new CCodeFunctionCall(new CCodeIdentifier("g_quark_to_string"));
 			domain_name.add_argument(CCodeMemberAccess.pointer(inner_error, "domain"));
 			ccritical.add_argument(domain_name);
 			ccritical.add_argument(CCodeMemberAccess.pointer(inner_error, "code"));

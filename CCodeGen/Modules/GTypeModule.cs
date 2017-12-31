@@ -2230,7 +2230,7 @@ namespace CCodeGen.Modules {
 			var mtype = expr.call.value_type as MethodType;
 			if (mtype == null || ma == null || ma.inner == null ||
 				!(ma.inner.value_type is EnumValueType) || !get_ccode_has_type_id(ma.inner.value_type.data_type) ||
-				mtype.method_symbol != ((EnumValueType)ma.inner.value_type).get_ToString_method()) {
+				mtype.method_symbol != ((EnumValueType)ma.inner.value_type).get_to_string_method()) {
 				base.visit_method_call(expr);
 				return;
 			}
