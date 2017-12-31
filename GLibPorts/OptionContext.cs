@@ -530,7 +530,7 @@ namespace GLibPorts {
 						}
 
 						if (!parsed && !ignore_unknown_options) {
-							Console.Error.WriteLine("Unknown option " + argv[i]);
+							throw new Exception("Unknown option " + argv[i]);
 						}
 
 					} else {

@@ -32,7 +32,13 @@ namespace ValaCompiler {
 			GLibInitialize();
 
 			CompilerOptions opts = new CompilerOptions();
-			opts.parse_args(args);
+			try {
+				opts.parse_args(args);
+			} catch(Exception e) {
+				stdout.printf("%s\n", e.Message);
+				stdout.printf("Run '%s --help' to see a full list of available command line options.\n", AppDomain.CurrentDomain.FriendlyName);
+				return 1;
+			}
 
 			if (opts.cc_options != null) {
 				for (int i = 0; i < opts.cc_options.Count; i++) {
