@@ -147,7 +147,7 @@ namespace Vala.Lang {
 
 				if (!initializer.value_type.compatible(variable_type)) {
 					error = true;
-					Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(initializer.value_type.ToString(), variable_type.ToString()));
+					Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(initializer.value_type.to_string(), variable_type.to_string()));
 					return false;
 				}
 

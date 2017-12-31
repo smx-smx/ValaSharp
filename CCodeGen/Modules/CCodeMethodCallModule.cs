@@ -43,7 +43,7 @@ namespace CCodeGen.Modules {
 				}
 
 				if (ma.inner != null && ma.inner.value_type is EnumValueType && ((EnumValueType)ma.inner.value_type).get_to_string_method() == m) {
-					// Enum.VALUE.ToString()
+					// Enum.VALUE.to_string()
 					var en = (ValaEnum)ma.inner.value_type.data_type;
 					ccall.call = new CCodeIdentifier(generate_enum_to_string_function(en));
 				} else if (expr.is_constructv_chainup) {

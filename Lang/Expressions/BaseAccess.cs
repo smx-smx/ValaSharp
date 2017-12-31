@@ -30,7 +30,7 @@ namespace Vala.Lang.Expressions {
 			visitor.visit_expression(this);
 		}
 
-		public override string ToString() {
+		public override string to_string() {
 			return "base";
 		}
 

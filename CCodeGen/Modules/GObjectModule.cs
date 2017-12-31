@@ -791,7 +791,7 @@ namespace CCodeGen.Modules {
 							break;
 						}
 						if (!arg.value_type.compatible(prop.property_type)) {
-							Report.error(arg.source_reference, "Cannot convert from `%s' to `%s'".printf(arg.value_type.ToString(), prop.property_type.ToString()));
+							Report.error(arg.source_reference, "Cannot convert from `%s' to `%s'".printf(arg.value_type.to_string(), prop.property_type.to_string()));
 							break;
 						}
 					}

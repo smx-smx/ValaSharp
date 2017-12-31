@@ -51,7 +51,7 @@ namespace CCodeGen.Modules {
 			if (dynamic_method.dynamic_type.data_type == dbus_proxy_type) {
 				generate_marshalling(method, CallType.SYNC, null, method.name, -1);
 			} else {
-				Report.error(method.source_reference, "dynamic methods are not supported for `%s'".printf(dynamic_method.dynamic_type.ToString()));
+				Report.error(method.source_reference, "dynamic methods are not supported for `%s'".printf(dynamic_method.dynamic_type.to_string()));
 			}
 
 			pop_function();

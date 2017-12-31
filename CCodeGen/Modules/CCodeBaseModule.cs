@@ -4473,7 +4473,7 @@ namespace CCodeGen.Modules {
 					Report.error(type_arg.source_reference, "Delegates with target are not supported as generic type arguments");
 				}
 			} else {
-				Report.error(type_arg.source_reference, "`%s' is not a supported generic type argument, use `?' to box value types".printf(type_arg.ToString()));
+				Report.error(type_arg.source_reference, "`%s' is not a supported generic type argument, use `?' to box value types".printf(type_arg.to_string()));
 			}
 		}
 
@@ -5773,7 +5773,7 @@ namespace CCodeGen.Modules {
 				}
 				var type_id = get_ccode_type_id(type);
 				if (type_id == "") {
-					Report.error(node.source_reference, "GValue boxing of type `%s' is not supported".printf(type.ToString()));
+					Report.error(node.source_reference, "GValue boxing of type `%s' is not supported".printf(type.to_string()));
 				}
 				ccall.add_argument(new CCodeIdentifier(type_id));
 				ccode.add_expression(ccall);
@@ -6657,12 +6657,12 @@ namespace CCodeGen.Modules {
 		}
 
 		public virtual string get_dynamic_property_getter_cname(DynamicProperty node) {
-			Report.error(node.source_reference, "dynamic properties are not supported for %s".printf(node.dynamic_type.ToString()));
+			Report.error(node.source_reference, "dynamic properties are not supported for %s".printf(node.dynamic_type.to_string()));
 			return "";
 		}
 
 		public virtual string get_dynamic_property_setter_cname(DynamicProperty node) {
-			Report.error(node.source_reference, "dynamic properties are not supported for %s".printf(node.dynamic_type.ToString()));
+			Report.error(node.source_reference, "dynamic properties are not supported for %s".printf(node.dynamic_type.to_string()));
 			return "";
 		}
 

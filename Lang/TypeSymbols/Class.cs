@@ -608,14 +608,14 @@ namespace Vala.Lang.TypeSymbols {
 
 				if (!(base_type_reference is ObjectType)) {
 					error = true;
-					Report.error(source_reference, "base type `%s` of class `%s` is not an object type".printf(base_type_reference.ToString(), get_full_name()));
+					Report.error(source_reference, "base type `%s` of class `%s` is not an object type".printf(base_type_reference.to_string(), get_full_name()));
 					return false;
 				}
 
 				// check whether base type is at least as accessible as the class
 				if (!context.analyzer.is_type_accessible(this, base_type_reference)) {
 					error = true;
-					Report.error(source_reference, "base type `%s` is less accessible than class `%s`".printf(base_type_reference.ToString(), get_full_name()));
+					Report.error(source_reference, "base type `%s` is less accessible than class `%s`".printf(base_type_reference.to_string(), get_full_name()));
 					return false;
 				}
 

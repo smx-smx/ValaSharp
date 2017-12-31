@@ -35,7 +35,7 @@ namespace Vala.Lang.Literals {
 			visitor.visit_expression(this);
 		}
 
-		public override string ToString() {
+		public override string to_string() {
 			if (value) {
 				return "true";
 			} else {

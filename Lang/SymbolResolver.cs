@@ -191,7 +191,7 @@ namespace Vala.Lang {
 				ns.namespace_symbol = resolve_symbol(unresolved_symbol);
 				if (!(ns.namespace_symbol is Namespace)) {
 					ns.error = true;
-					Report.error(ns.source_reference, "The namespace name `%s' could not be found".printf(unresolved_symbol.ToString()));
+					Report.error(ns.source_reference, "The namespace name `%s' could not be found".printf(unresolved_symbol.to_string()));
 					return;
 				}
 			}
@@ -291,7 +291,7 @@ namespace Vala.Lang {
 			if (sym == null) {
 				// don't report same error twice
 				if (!unresolved_type.unresolved_symbol.error) {
-					Report.error(unresolved_type.source_reference, "The type name `%s' could not be found".printf(unresolved_type.unresolved_symbol.ToString()));
+					Report.error(unresolved_type.source_reference, "The type name `%s' could not be found".printf(unresolved_type.unresolved_symbol.to_string()));
 				}
 				return new InvalidType();
 			}

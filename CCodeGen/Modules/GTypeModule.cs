@@ -2234,7 +2234,7 @@ namespace CCodeGen.Modules {
 				base.visit_method_call(expr);
 				return;
 			}
-			// ToString() on a gtype enum
+			// to_string() on a gtype enum
 
 			bool is_flags = ((ValaEnum)((EnumValueType)ma.inner.value_type).type_symbol).is_flags;
 

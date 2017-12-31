@@ -75,7 +75,7 @@ namespace Vala.Lang.CodeNodes {
 				}
 				if (!expression.value_type.compatible(switch_statement.expression.value_type)) {
 					error = true;
-					Report.error(expression.source_reference, "Cannot convert from `%s' to `%s'".printf(expression.value_type.ToString(), switch_statement.expression.value_type.ToString()));
+					Report.error(expression.source_reference, "Cannot convert from `%s' to `%s'".printf(expression.value_type.to_string(), switch_statement.expression.value_type.to_string()));
 					return false;
 				}
 			}

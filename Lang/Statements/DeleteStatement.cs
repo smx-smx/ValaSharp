@@ -58,7 +58,7 @@ namespace Vala.Lang.Statements {
 
 			if (!(expression.value_type is PointerType) && !(expression.value_type is ArrayType)) {
 				error = true;
-				Report.error(source_reference, "delete operator not supported for `%s'".printf(expression.value_type.ToString()));
+				Report.error(source_reference, "delete operator not supported for `%s'".printf(expression.value_type.to_string()));
 			}
 
 			return !error;

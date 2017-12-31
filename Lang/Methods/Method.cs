@@ -410,7 +410,7 @@ namespace Vala.Lang.Methods {
 				}
 
 				if (!match) {
-					invalid_match = "incompatible error type `%s'".printf(method_error_type.ToString());
+					invalid_match = "incompatible error type `%s'".printf(method_error_type.to_string());
 					return false;
 				}
 			}
@@ -754,7 +754,7 @@ namespace Vala.Lang.Methods {
 				// check whether error type is at least as accessible as the method
 				if (!context.analyzer.is_type_accessible(this, error_type)) {
 					error = true;
-					Report.error(source_reference, "error type `%s` is less accessible than method `%s`".printf(error_type.ToString(), get_full_name()));
+					Report.error(source_reference, "error type `%s` is less accessible than method `%s`".printf(error_type.to_string(), get_full_name()));
 					return false;
 				}
 			}
@@ -817,7 +817,7 @@ namespace Vala.Lang.Methods {
 			// check whether return type is at least as accessible as the method
 			if (!context.analyzer.is_type_accessible(this, return_type)) {
 				error = true;
-				Report.error(source_reference, "return type `%s` is less accessible than method `%s`".printf(return_type.ToString(), get_full_name()));
+				Report.error(source_reference, "return type `%s` is less accessible than method `%s`".printf(return_type.to_string(), get_full_name()));
 				return false;
 			}
 
@@ -860,7 +860,7 @@ namespace Vala.Lang.Methods {
 					}
 					bool is_dynamic_error = body_error_type is ErrorType && ((ErrorType)body_error_type).dynamic_error;
 					if (!can_propagate_error && !is_dynamic_error) {
-						Report.warning(body_error_type.source_reference, "unhandled error `%s'".printf(body_error_type.ToString()));
+						Report.warning(body_error_type.source_reference, "unhandled error `%s'".printf(body_error_type.to_string()));
 					}
 				}
 			}

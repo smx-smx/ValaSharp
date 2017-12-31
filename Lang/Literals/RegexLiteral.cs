@@ -44,7 +44,7 @@ namespace Vala.Lang.Literals {
 			return true;
 		}
 
-		public override string ToString() {
+		public override string to_string() {
 			return value;
 		}
 

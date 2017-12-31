@@ -523,7 +523,7 @@ namespace CCodeGen.Modules {
 			}
 
 			if (result == null) {
-				Report.error(type.source_reference, "GVariant deserialization of type `%s' is not supported".printf(type.ToString()));
+				Report.error(type.source_reference, "GVariant deserialization of type `%s' is not supported".printf(type.to_string()));
 			}
 
 			return result;
@@ -563,7 +563,7 @@ namespace CCodeGen.Modules {
 			ccode.add_expression(unref);
 		}
 
-		CCodeExpression generate_enum_value_ToString(EnumValueType type, CCodeExpression expr) {
+		CCodeExpression generate_enum_value_to_string(EnumValueType type, CCodeExpression expr) {
 			var en = type.type_symbol as ValaEnum;
 			var to_string_name = "%s_to_string".printf(get_ccode_lower_case_name(en, null));
 
@@ -792,7 +792,7 @@ namespace CCodeGen.Modules {
 			CCodeExpression result = null;
 			if (is_string_marshalled_enum(type.data_type)) {
 				get_basic_type_info("s", out basic_type);
-				result = generate_enum_value_ToString(type as EnumValueType, expr);
+				result = generate_enum_value_to_string(type as EnumValueType, expr);
 				result = serialize_basic(basic_type, result);
 			} else if (get_basic_type_info(get_type_signature(type), out basic_type)) {
 				result = serialize_basic(basic_type, expr);
@@ -815,7 +815,7 @@ namespace CCodeGen.Modules {
 			}
 
 			if (result == null) {
-				Report.error(type.source_reference, "GVariant serialization of type `%s' is not supported".printf(type.ToString()));
+				Report.error(type.source_reference, "GVariant serialization of type `%s' is not supported".printf(type.to_string()));
 			}
 
 			return result;

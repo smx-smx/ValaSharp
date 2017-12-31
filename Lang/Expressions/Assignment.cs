@@ -293,7 +293,7 @@ namespace Vala.Lang.Expressions {
 					var delegate_type = (DelegateType)right.target_type;
 
 					error = true;
-					Report.error(right.source_reference, "method `%s' is incompatible with signal `%s', expected `%s'".printf(right.value_type.ToString(), right.target_type.ToString(), delegate_type.delegate_symbol.get_prototype_string(m.name)));
+					Report.error(right.source_reference, "method `%s' is incompatible with signal `%s', expected `%s'".printf(right.value_type.to_string(), right.target_type.to_string(), delegate_type.delegate_symbol.get_prototype_string(m.name)));
 					return false;
 				} else if (right_ma != null && right_ma.prototype_access) {
 					error = true;
@@ -359,7 +359,7 @@ namespace Vala.Lang.Expressions {
 
 					if (!right.value_type.compatible(left.value_type)) {
 						error = true;
-						Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(right.value_type.ToString(), left.value_type.ToString()));
+						Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(right.value_type.to_string(), left.value_type.to_string()));
 						return false;
 					}
 
@@ -403,7 +403,7 @@ namespace Vala.Lang.Expressions {
 
 				if (!right.value_type.compatible(left.value_type)) {
 					error = true;
-					Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(right.value_type.ToString(), left.value_type.ToString()));
+					Report.error(source_reference, "Assignment: Cannot convert from `%s' to `%s'".printf(right.value_type.to_string(), left.value_type.to_string()));
 					return false;
 				}
 

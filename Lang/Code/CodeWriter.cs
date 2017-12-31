@@ -1134,7 +1134,7 @@ namespace Vala.Lang.Code {
 		}
 
 		public override void visit_catch_clause(CatchClause clause) {
-			var type_name = clause.error_type == null ? "GLib.Error" : clause.error_type.ToString();
+			var type_name = clause.error_type == null ? "GLib.Error" : clause.error_type.to_string();
 			var var_name = clause.variable_name == null ? "_" : clause.variable_name;
 			write_string(" catch (%s %s)".printf(type_name, var_name));
 			clause.body.accept(this);

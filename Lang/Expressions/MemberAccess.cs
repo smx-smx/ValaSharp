@@ -118,12 +118,12 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		public override string ToString() {
+		public override string to_string() {
 			if (symbol_reference == null || symbol_reference.is_instance_member()) {
 				if (inner == null) {
 					return member_name;
 				} else {
-					return "%s.%s".printf(inner.ToString(), member_name);
+					return "%s.%s".printf(inner.to_string(), member_name);
 				}
 			} else {
 				// ensure to always use fully-qualified name
@@ -259,7 +259,7 @@ namespace Vala.Lang.Expressions {
 					symbol_reference = SemanticAnalyzer.symbol_lookup_inherited(sym, member_name);
 
 					if (symbol_reference == null && sym is TypeSymbol && may_access_instance_members) {
-						// used for generated ToString methods in enums
+						// used for generated to_string methods in enums
 						symbol_reference = this_parameter.variable_type.get_member(member_name);
 
 						if (symbol_reference != null && is_instance_symbol(symbol_reference)) {
@@ -444,7 +444,7 @@ namespace Vala.Lang.Expressions {
 
 				string base_type_name = "(null)";
 				if (inner != null && inner.value_type != null) {
-					base_type_name = inner.value_type.ToString();
+					base_type_name = inner.value_type.to_string();
 				} else if (base_symbol != null) {
 					base_type_name = base_symbol.get_full_name();
 				}

@@ -40,11 +40,11 @@ namespace Vala.Lang.Symbols {
 			return null;
 		}
 
-		public override string ToString() {
+		public override string to_string() {
 			if (inner == null) {
 				return name;
 			} else {
-				return "%s.%s".printf(inner.ToString(), name);
+				return "%s.%s".printf(inner.to_string(), name);
 			}
 		}
 
