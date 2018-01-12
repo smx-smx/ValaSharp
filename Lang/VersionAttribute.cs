@@ -193,7 +193,7 @@ namespace Vala.Lang {
 			string[] v2arr = v2str.Split('.');
 			int i = 0;
 
-			while (v1arr[i] != null && v2arr[i] != null) {
+			while (i < v1arr.Length && i < v2arr.Length) {
 				int v1num = int.Parse(v1arr[i]);
 				int v2num = int.Parse(v2arr[i]);
 
@@ -213,11 +213,11 @@ namespace Vala.Lang {
 				i++;
 			}
 
-			if (v1arr[i] != null && v2arr[i] == null) {
+			if (i < v1arr.Length && i >= v2arr.Length) {
 				return 1;
 			}
 
-			if (v1arr[i] == null && v2arr[i] != null) {
+			if (i >= v1arr.Length && i < v2arr.Length) {
 				return -1;
 			}
 
