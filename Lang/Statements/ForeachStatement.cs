@@ -219,7 +219,7 @@ namespace Vala.Lang.Statements {
 
 			var iterator_method = collection_type.get_member("iterator") as Method;
 			if (iterator_method == null) {
-				Report.error(collection.source_reference, "`%s' does not have an `iterator' method".printf(collection_type.to_string()));
+				Report.error(collection.source_reference, "`%s' does not have an `iterator' method".printf(collection_type.ToString()));
 				error = true;
 				return false;
 			}
@@ -277,7 +277,7 @@ namespace Vala.Lang.Statements {
 				}
 				var get_method = iterator_type.get_member("get") as Method;
 				if (get_method == null) {
-					Report.error(collection.source_reference, "`%s' does not have a `get' method".printf(iterator_type.to_string()));
+					Report.error(collection.source_reference, "`%s' does not have a `get' method".printf(iterator_type.ToString()));
 					error = true;
 					return false;
 				}
@@ -304,7 +304,7 @@ namespace Vala.Lang.Statements {
 				var get_call = new MethodCall(new MemberAccess(MemberAccess.simple("_%s_it".printf(variable_name), source_reference), "get", source_reference), source_reference);
 				body.insert_statement(0, new DeclarationStatement(new LocalVariable(type_reference, variable_name, get_call, source_reference), source_reference));
 			} else {
-				Report.error(collection.source_reference, "`%s' does not have a `next_value' or `next' method".printf(iterator_type.to_string()));
+				Report.error(collection.source_reference, "`%s' does not have a `next_value' or `next' method".printf(iterator_type.ToString()));
 				error = true;
 				return false;
 			}
@@ -320,7 +320,7 @@ namespace Vala.Lang.Statements {
 				type_reference = element_type.copy();
 			} else if (!element_type.compatible(type_reference)) {
 				error = true;
-				Report.error(source_reference, "Foreach: Cannot convert from `%s' to `%s'".printf(element_type.to_string(), type_reference.to_string()));
+				Report.error(source_reference, "Foreach: Cannot convert from `%s' to `%s'".printf(element_type.ToString(), type_reference.ToString()));
 				return false;
 			} else if (element_type.is_disposable() && element_type.value_owned && !type_reference.value_owned) {
 				error = true;
@@ -338,7 +338,7 @@ namespace Vala.Lang.Statements {
 				type_reference = element_type.copy();
 			} else if (!element_type.compatible(type_reference)) {
 				error = true;
-				Report.error(source_reference, "Foreach: Cannot convert from `%s' to `%s'".printf(element_type.to_string(), type_reference.to_string()));
+				Report.error(source_reference, "Foreach: Cannot convert from `%s' to `%s'".printf(element_type.ToString(), type_reference.ToString()));
 				return false;
 			}
 

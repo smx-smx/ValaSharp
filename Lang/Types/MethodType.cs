@@ -59,7 +59,7 @@ namespace Vala.Lang.Types {
 		}
 
 		public string to_prototype_string(bool with_type_parameters = false) {
-			var proto = "%s %s (".printf(get_return_type().to_string(), this.to_string());
+			var proto = "%s %s (".printf(get_return_type().ToString(), this.ToString());
 
 			int i = 1;
 			foreach (Parameter param in get_parameters()) {
@@ -90,7 +90,7 @@ namespace Vala.Lang.Types {
 				proto = "%s%s %s".printf(proto, param.variable_type.to_qualified_string(), param.name);
 
 				if (param.initializer != null) {
-					proto = "%s = %s".printf(proto, param.initializer.to_string());
+					proto = "%s = %s".printf(proto, param.initializer.ToString());
 				}
 
 				i++;

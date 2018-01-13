@@ -182,7 +182,7 @@ namespace Vala.Lang.Expressions {
 				}
 
 				error = true;
-				Report.error(source_reference, "The expression `%s' does not denote an array".printf(container.value_type.to_string()));
+				Report.error(source_reference, "The expression `%s' does not denote an array".printf(container.value_type.ToString()));
 			}
 
 			if (index_int_type_check) {

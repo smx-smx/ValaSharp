@@ -118,12 +118,12 @@ namespace Vala.Lang.Expressions {
 			}
 		}
 
-		public override string to_string() {
+		public override string ToString() {
 			if (symbol_reference == null || symbol_reference.is_instance_member()) {
 				if (inner == null) {
 					return member_name;
 				} else {
-					return "%s.%s".printf(inner.to_string(), member_name);
+					return "%s.%s".printf(inner.ToString(), member_name);
 				}
 			} else {
 				// ensure to always use fully-qualified name
@@ -444,7 +444,7 @@ namespace Vala.Lang.Expressions {
 
 				string base_type_name = "(null)";
 				if (inner != null && inner.value_type != null) {
-					base_type_name = inner.value_type.to_string();
+					base_type_name = inner.value_type.ToString();
 				} else if (base_symbol != null) {
 					base_type_name = base_symbol.get_full_name();
 				}

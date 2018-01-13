@@ -456,7 +456,7 @@ namespace Vala.Lang {
 			// check whether property type is at least as accessible as the property
 			if (!context.analyzer.is_type_accessible(this, property_type)) {
 				error = true;
-				Report.error(source_reference, "property type `%s` is less accessible than property `%s`".printf(property_type.to_string(), get_full_name()));
+				Report.error(source_reference, "property type `%s` is less accessible than property `%s`".printf(property_type.ToString(), get_full_name()));
 			}
 
 			if (overrides && base_property == null) {
@@ -477,7 +477,7 @@ namespace Vala.Lang {
 
 			if (initializer != null && !initializer.error && initializer.value_type != null && !(initializer.value_type.compatible(property_type))) {
 				error = true;
-				Report.error(initializer.source_reference, "Expected initializer of type `%s' but got `%s'".printf(property_type.to_string(), initializer.value_type.to_string()));
+				Report.error(initializer.source_reference, "Expected initializer of type `%s' but got `%s'".printf(property_type.ToString(), initializer.value_type.ToString()));
 			}
 
 			context.analyzer.current_source_file = old_source_file;

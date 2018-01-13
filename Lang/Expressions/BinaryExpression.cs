@@ -120,8 +120,8 @@ namespace Vala.Lang.Expressions {
 			return null;
 		}
 
-		public override string to_string() {
-			return _left.to_string() + get_operator_string() + _right.to_string();
+		public override string ToString() {
+			return _left.ToString() + get_operator_string() + _right.ToString();
 		}
 
 		public override bool is_constant() {
@@ -352,10 +352,12 @@ namespace Vala.Lang.Expressions {
 
 				value_type = array_type.copy();
 				value_type.value_owned = true;
-			} else if (Operator == BinaryOperator.PLUS
-|| Operator == BinaryOperator.MINUS
-|| Operator == BinaryOperator.MUL
-|| Operator == BinaryOperator.DIV) {
+			} else if (
+				Operator == BinaryOperator.PLUS ||
+				Operator == BinaryOperator.MINUS ||
+				Operator == BinaryOperator.MUL ||
+				Operator == BinaryOperator.DIV
+			) {
 				// check for pointer arithmetic
 				if (left.value_type is PointerType) {
 					var pointer_type = (PointerType)left.value_type;
@@ -387,12 +389,14 @@ namespace Vala.Lang.Expressions {
 
 				if (value_type == null) {
 					error = true;
-					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					return false;
 				}
-			} else if (Operator == BinaryOperator.MOD
-|| Operator == BinaryOperator.SHIFT_LEFT
-|| Operator == BinaryOperator.SHIFT_RIGHT) {
+			} else if (
+				Operator == BinaryOperator.MOD ||
+				Operator == BinaryOperator.SHIFT_LEFT ||
+				Operator == BinaryOperator.SHIFT_RIGHT
+			) {
 				left.target_type.nullable = false;
 				right.target_type.nullable = false;
 
@@ -400,13 +404,14 @@ namespace Vala.Lang.Expressions {
 
 				if (value_type == null) {
 					error = true;
-					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+					Report.error(source_reference, "Arithmetic operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					return false;
 				}
-			} else if (Operator == BinaryOperator.LESS_THAN
-|| Operator == BinaryOperator.GREATER_THAN
-|| Operator == BinaryOperator.LESS_THAN_OR_EQUAL
-|| Operator == BinaryOperator.GREATER_THAN_OR_EQUAL) {
+			} else if (Operator == BinaryOperator.LESS_THAN ||
+				Operator == BinaryOperator.GREATER_THAN ||
+				Operator == BinaryOperator.LESS_THAN_OR_EQUAL ||
+				Operator == BinaryOperator.GREATER_THAN_OR_EQUAL
+			) {
 				if (left.value_type.compatible(context.analyzer.string_type)
 					&& right.value_type.compatible(context.analyzer.string_type)) {
 					// string comparison
@@ -424,7 +429,7 @@ namespace Vala.Lang.Expressions {
 
 					if (resulting_type == null) {
 						error = true;
-						Report.error(source_reference, "Relational operation not supported for types `%s' and `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+						Report.error(source_reference, "Relational operation not supported for types `%s' and `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 						return false;
 					}
 
@@ -437,13 +442,15 @@ namespace Vala.Lang.Expressions {
 				}
 
 				value_type = context.analyzer.bool_type;
-			} else if (Operator == BinaryOperator.EQUALITY
-|| Operator == BinaryOperator.INEQUALITY) {
+			} else if (
+				Operator == BinaryOperator.EQUALITY ||
+				Operator == BinaryOperator.INEQUALITY
+			) {
 				/* relational operation */
 
 				if (!right.value_type.compatible(left.value_type)
 					&& !left.value_type.compatible(right.value_type)) {
-					Report.error(source_reference, "Equality operation: `%s' and `%s' are incompatible".printf(right.value_type.to_string(), left.value_type.to_string()));
+					Report.error(source_reference, "Equality operation: `%s' and `%s' are incompatible".printf(right.value_type.ToString(), left.value_type.ToString()));
 					error = true;
 					return false;
 				}
@@ -468,16 +475,20 @@ namespace Vala.Lang.Expressions {
 				}
 
 				value_type = context.analyzer.bool_type;
-			} else if (Operator == BinaryOperator.BITWISE_AND
-|| Operator == BinaryOperator.BITWISE_OR
-|| Operator == BinaryOperator.BITWISE_XOR) {
+			} else if (
+				Operator == BinaryOperator.BITWISE_AND ||
+				Operator == BinaryOperator.BITWISE_OR ||
+				Operator == BinaryOperator.BITWISE_XOR
+			) {
 				// integer type or flags type
 				left.target_type.nullable = false;
 				right.target_type.nullable = false;
 
 				value_type = left.target_type.copy();
-			} else if (Operator == BinaryOperator.AND
-|| Operator == BinaryOperator.OR) {
+			} else if (
+				Operator == BinaryOperator.AND ||
+				Operator == BinaryOperator.OR
+			) {
 				if (!left.value_type.compatible(context.analyzer.bool_type) || !right.value_type.compatible(context.analyzer.bool_type)) {
 					error = true;
 					Report.error(source_reference, "Operands must be boolean");
@@ -494,13 +505,13 @@ namespace Vala.Lang.Expressions {
 					right.target_type.nullable = false;
 				} else if (right.value_type is ArrayType) {
 					if (!left.value_type.compatible(((ArrayType)right.value_type).element_type)) {
-						Report.error(source_reference, "Cannot look for `%s' in `%s'".printf(left.value_type.to_string(), right.value_type.to_string()));
+						Report.error(source_reference, "Cannot look for `%s' in `%s'".printf(left.value_type.ToString(), right.value_type.ToString()));
 					}
 				} else {
 					// otherwise require a bool contains () method
 					var contains_method = right.value_type.get_member("contains") as Method;
 					if (contains_method == null) {
-						Report.error(source_reference, "`%s' does not have a `contains' method".printf(right.value_type.to_string()));
+						Report.error(source_reference, "`%s' does not have a `contains' method".printf(right.value_type.ToString()));
 						error = true;
 						return false;
 					}

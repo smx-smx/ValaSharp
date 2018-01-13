@@ -106,7 +106,7 @@ namespace Vala.Lang.CodeNodes {
 
 			if (error_type != null) {
 				if (!(error_type is ErrorType)) {
-					Report.error(source_reference, "clause must catch a valid error type, found `%s' instead".printf(error_type.to_string()));
+					Report.error(source_reference, "clause must catch a valid error type, found `%s' instead".printf(error_type.ToString()));
 					error = true;
 				}
 

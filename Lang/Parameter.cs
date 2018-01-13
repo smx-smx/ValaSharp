@@ -157,11 +157,11 @@ namespace Vala.Lang {
 				if (initializer is NullLiteral
 					&& !variable_type.nullable
 					&& direction != ParameterDirection.OUT) {
-					Report.warning(source_reference, "`null' incompatible with parameter type `%s`".printf(variable_type.to_string()));
+					Report.warning(source_reference, "`null' incompatible with parameter type `%s`".printf(variable_type.ToString()));
 				} else if (!(initializer is NullLiteral) && direction == ParameterDirection.OUT) {
 					Report.error(source_reference, "only `null' is allowed as default value for out parameters");
 				} else if (direction == ParameterDirection.IN && !initializer.value_type.compatible(variable_type)) {
-					Report.error(initializer.source_reference, "Cannot convert from `%s' to `%s'".printf(initializer.value_type.to_string(), variable_type.to_string()));
+					Report.error(initializer.source_reference, "Cannot convert from `%s' to `%s'".printf(initializer.value_type.ToString(), variable_type.ToString()));
 				} else if (direction == ParameterDirection.REF) {
 					Report.error(source_reference, "default value not allowed for ref parameter");
 				} else if (!initializer.is_accessible(this)) {
@@ -173,7 +173,7 @@ namespace Vala.Lang {
 				// check whether parameter type is at least as accessible as the method
 				if (!context.analyzer.is_type_accessible(this, variable_type)) {
 					error = true;
-					Report.error(source_reference, "parameter type `%s` is less accessible than method `%s`".printf(variable_type.to_string(), parent_symbol.get_full_name()));
+					Report.error(source_reference, "parameter type `%s` is less accessible than method `%s`".printf(variable_type.ToString(), parent_symbol.get_full_name()));
 				}
 			}
 
